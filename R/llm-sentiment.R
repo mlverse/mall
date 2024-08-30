@@ -12,20 +12,20 @@ llm_sentiment.character <- function(x,
                                     options = c("positive", "negative", "neutral"),
                                     pred_var = NULL) {
   llm_generate(
-    x = x, 
+    x = x,
     base_prompt = sentiment_prompt(options = options)
-    )
+  )
 }
 
 #' @export
 llm_sentiment.data.frame <- function(x,
-                                    source_var = NULL,
-                                    options = c("positive", "negative", "neutral"),
-                                    pred_var = ".sentiment") {
+                                     source_var = NULL,
+                                     options = c("positive", "negative", "neutral"),
+                                     pred_var = ".sentiment") {
   mutate(
-    .data = x, 
-    !! pred_var := llm_generate({{source_var}}, sentiment_prompt(options))
-    )
+    .data = x,
+    !!pred_var := llm_generate({{ source_var }}, sentiment_prompt(options))
+  )
 }
 
 sentiment_prompt <- function(options) {
@@ -35,5 +35,16 @@ sentiment_prompt <- function(options) {
     "Return only one of the following answers: {options}.",
     "No capitalization. No explanations.",
     "The answer is based on the following text:"
+  )
+}
+
+#' @export
+`llm_sentiment.tbl_Spark SQL` <- function(x,
+                                          source_var = NULL,
+                                          options = NULL,
+                                          pred_var = ".sentiment") {
+  mutate(
+    .data = x,
+    !!pred_var := ai_analyze_sentiment({{ source_var }})
   )
 }
