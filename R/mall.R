@@ -3,4 +3,6 @@
 #' @importFrom ollamar chat
 #' @import glue
 #' @import rlang
-NULL
+
+.env_llm <- new.env()  
+.env_llm$defaults <- list()
