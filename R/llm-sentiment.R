@@ -22,16 +22,11 @@ llm_sentiment.data.frame <- function(x,
                                     source_var = NULL,
                                     options = c("positive", "negative", "neutral"),
                                     pred_var = ".sentiment") {
-  txt <- pull(.data = x, var = {{source_var}})
-  base_prompt <- sentiment_prompt(options = options)
-  pred <- llm_generate(
-    x = txt, 
-    base_prompt = base_prompt
-  )
-  x[, pred_var] <- pred
-  x
+  mutate(
+    .data = x, 
+    !! pred_var := llm_generate({{source_var}}, sentiment_prompt(options))
+    )
 }
-
 
 sentiment_prompt <- function(options) {
   options <- paste0(options, collapse = ", ")
