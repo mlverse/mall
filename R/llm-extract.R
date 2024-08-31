@@ -9,24 +9,40 @@ llm_extract <- function(x,
 #' @export
 llm_extract.character <- function(x,
                                   var = NULL,
-                                  labels,
+                                  labels = c(),
                                   expand_cols = FALSE) {
-  resp <- llm_vec_generate(
-    x = x,
-    base_prompt = extract_prompt(labels)
-  )
-  vec_resp <- purrr::map(resp, ~ map_chr(strsplit(.x, "\\|")[[1]], trimws))
-  as.data.frame(vec_resp, col.names = clean_names(labels))
+  prompt <- extract_prompt(labels)
+  
+  if(expand_cols && length(labels) > 1) {
+    resp <- llm_vec_generate(x, prompt)
+    resp <- purrr::map_df(
+      resp, ~ {
+        x <- trimws(strsplit(.x, "\\|")[[1]])
+        names(x) <- clean_names(labels)
+        x
+      }
+    )
+    resp <- dplyr::bind_cols(x, resp)
+  } else {
+    resp <- llm_custom(
+      x = x,
+      var = var,
+      prompt = prompt
+    )    
+  }
+  resp
 }
 
 extract_prompt <- function(labels) {
+  no_labels <- length(labels)
   labels <- paste0(labels, collapse = ", ")
   glue(
-    "Look for and return the {labels} being ",
-    "referred to in the following text. ",
-    "Do not include explanations. ",
-    "No capitalization. ",
-    "Return the response in a simple pipe separated list, no headers"
+    "You are a helpful text extraction engine.",
+    "Extract the {labels} being referred to on the text. ",
+    "I expect {no_labels} item(s) exactly. ",
+    "No capitalization. No explanations.",
+    "Return the response in a simple pipe separated list, no headers. ",
+    "The answer is based on the following text:"    
   )
 }
 
