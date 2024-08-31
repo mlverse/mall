@@ -12,23 +12,23 @@ llm_extract.character <- function(x,
                                   labels = c(),
                                   expand_cols = FALSE) {
   prompt <- extract_prompt(labels)
-  
-  if(expand_cols && length(labels) > 1) {
+
+  if (expand_cols && length(labels) > 1) {
     resp <- llm_vec_generate(x, prompt)
-    resp <- purrr::map_df(
+    resp <- map_df(
       resp, ~ {
         x <- trimws(strsplit(.x, "\\|")[[1]])
         names(x) <- clean_names(labels)
         x
       }
     )
-    resp <- dplyr::bind_cols(x, resp)
+    resp <- bind_cols(x, resp)
   } else {
     resp <- llm_custom(
       x = x,
       var = var,
       prompt = prompt
-    )    
+    )
   }
   resp
 }
@@ -42,7 +42,7 @@ extract_prompt <- function(labels) {
     "I expect {no_labels} item(s) exactly. ",
     "No capitalization. No explanations.",
     "Return the response in a simple pipe separated list, no headers. ",
-    "The answer is based on the following text:"    
+    "The answer is based on the following text:"
   )
 }
 

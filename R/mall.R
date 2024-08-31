@@ -1,6 +1,6 @@
-#' @importFrom purrr map_chr
-#' @importFrom dplyr mutate tibble
-#' @importFrom ollamar chat
+#' @importFrom purrr map_chr map_df
+#' @importFrom dplyr mutate tibble bind_cols
+#' @importFrom ollamar generate test_connection
 #' @import glue
 #' @import rlang
 
