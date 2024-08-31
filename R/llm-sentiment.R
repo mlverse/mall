@@ -1,6 +1,6 @@
 #' @export
 llm_sentiment <- function(x,
-                          var = NULL,
+                          .var = NULL,
                           options = c("positive", "negative", "neutral"),
                           pred_name = ".sentiment") {
   UseMethod("llm_sentiment")
@@ -8,7 +8,7 @@ llm_sentiment <- function(x,
 
 #' @export
 llm_sentiment.character <- function(x,
-                                    var = NULL,
+                                    .var = NULL,
                                     options = c("positive", "negative", "neutral"),
                                     pred_name = ".sentiment") {
   llm_custom(
@@ -20,12 +20,12 @@ llm_sentiment.character <- function(x,
 
 #' @export
 llm_sentiment.data.frame <- function(x,
-                                     var = NULL,
+                                     .var = NULL,
                                      options = c("positive", "negative", "neutral"),
                                      pred_name = ".sentiment") {
   llm_custom(
-    x = x,
-    var = var,
+    .data = x,
+    x = {{.var}},
     prompt = sentiment_prompt(options = options),
     pred_name = pred_name
   )
@@ -43,13 +43,12 @@ sentiment_prompt <- function(options) {
 
 #' @export
 `llm_sentiment.tbl_Spark SQL` <- function(x,
-                                          var = NULL,
+                                          .var = NULL,
                                           options = NULL,
                                           pred_name = ".sentiment") {
   mutate(
     .data = x,
-    !!pred_name := ai_analyze_sentiment({{ var }})
+    !!pred_name := ai_analyze_sentiment({{ .var }})
   )
 }
 
-globalVariables("ai_analyze_sentiment")

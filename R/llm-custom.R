@@ -1,11 +1,11 @@
 #' @export
-llm_custom <- function(x, var, prompt, pred_name = ".pred", source_name = "text") {
+llm_custom <- function(.data, x, prompt, pred_name = ".pred", source_name = "text") {
   UseMethod("llm_custom")
 }
 
 #' @export
-llm_custom.character <- function(x,
-                                 var = NULL,
+llm_custom.character <- function(.data,
+                                 x = NULL,
                                  prompt,
                                  pred_name = ".pred",
                                  source_name = "text") {
@@ -14,13 +14,14 @@ llm_custom.character <- function(x,
 }
 
 #' @export
-llm_custom.data.frame <- function(x,
-                                  var,
+llm_custom.data.frame <- function(.data,
+                                  x,
                                   prompt,
                                   pred_name = ".pred",
                                   source_name = NULL) {
+  
   mutate(
-    .data = x,
-    !!pred_name := llm_vec_generate({{ var }}, prompt)
+    .data = .data,
+    !!pred_name := llm_vec_generate({{ x }}, prompt)
   )
 }

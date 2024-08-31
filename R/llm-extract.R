@@ -1,6 +1,6 @@
 #' @export
 llm_extract <- function(x,
-                        var = NULL,
+                        .var = NULL,
                         labels,
                         expand_cols = FALSE) {
   UseMethod("llm_extract")
@@ -8,7 +8,7 @@ llm_extract <- function(x,
 
 #' @export
 llm_extract.character <- function(x,
-                                  var = NULL,
+                                  .var = NULL,
                                   labels = c(),
                                   expand_cols = FALSE) {
   prompt <- extract_prompt(labels)
@@ -26,7 +26,7 @@ llm_extract.character <- function(x,
   } else {
     resp <- llm_custom(
       x = x,
-      var = var,
+      .var = .var,
       prompt = prompt
     )
   }
