@@ -11,9 +11,10 @@ llm_sentiment.character <- function(x,
                                     source_var = NULL,
                                     options = c("positive", "negative", "neutral"),
                                     pred_var = ".sentiment") {
-  llm_vec_generate(
+  llm_custom(
     x = x,
-    base_prompt = sentiment_prompt(options = options)
+    prompt = sentiment_prompt(options = options), 
+    pred_name = pred_var
   )
 }
 
@@ -22,9 +23,11 @@ llm_sentiment.data.frame <- function(x,
                                      source_var = NULL,
                                      options = c("positive", "negative", "neutral"),
                                      pred_var = ".sentiment") {
-  mutate(
-    .data = x,
-    !!pred_var := llm_vec_generate({{ source_var }}, sentiment_prompt(options))
+  llm_custom(
+    x = x,
+    var = source_var,
+    prompt = sentiment_prompt(options = options), 
+    pred_name = pred_var
   )
 }
 
