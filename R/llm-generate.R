@@ -1,5 +1,5 @@
 #' @export
-llm_generate <- function(x, base_prompt) {
+llm_vec_generate <- function(x, base_prompt) {
  l_generate(.env_llm$defaults, x, base_prompt)
 }
 

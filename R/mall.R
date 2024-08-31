@@ -1,5 +1,5 @@
 #' @importFrom purrr map_chr
-#' @importFrom dplyr mutate
+#' @importFrom dplyr mutate tibble
 #' @importFrom ollamar chat
 #' @import glue
 #' @import rlang

@@ -1,23 +1,22 @@
 #' @export
 llm_extract <- function(x,
                         source_var = NULL,
-                        labels
-                        ) {
+                        labels,
+                        expand_cols = FALSE) {
   UseMethod("llm_extract")
 }
 
 #' @export
 llm_extract.character <- function(x,
-                        source_var = NULL,
-                        labels
-) {
-  resp <- llm_generate(
+                                  source_var = NULL,
+                                  labels,
+                                  expand_cols = FALSE) {
+  resp <- llm_vec_generate(
     x = x,
     base_prompt = extract_prompt(labels)
   )
-  vec_resp <- map_chr(strsplit(resp, "\\|")[[1]], trimws)
-  names(vec_resp) <- clean_names(labels)
-  vec_resp
+  vec_resp <- purrr::map(resp, ~ map_chr(strsplit(.x, "\\|")[[1]], trimws))
+  as.data.frame(vec_resp, col.names = clean_names(labels))
 }
 
 extract_prompt <- function(labels) {
@@ -34,11 +33,9 @@ extract_prompt <- function(labels) {
 clean_names <- function(x) {
   x <- tolower(x)
   map_chr(
-    x, ~{
+    x, ~ {
       xs <- strsplit(.x, " ")[[1]]
       paste0(xs, collapse = "_")
     }
   )
 }
-
-

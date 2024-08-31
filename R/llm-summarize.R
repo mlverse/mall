@@ -11,7 +11,7 @@ llm_summarize.character <- function(x,
                                     source_var = NULL,
                                     max_words = 100,
                                     pred_var = NULL) {
-  llm_generate(x = x, base_prompt = summary_prompt(max_words))
+  llm_vec_generate(x = x, base_prompt = summary_prompt(max_words))
 }
 
 
@@ -22,7 +22,7 @@ llm_summarize.data.frame <- function(x,
                                      pred_var = ".summary") {
   mutate(
     .data = x,
-    !!pred_var := llm_generate({{ source_var }}, summary_prompt(max_words))
+    !!pred_var := llm_vec_generate({{ source_var }}, summary_prompt(max_words))
   )
 }
 
