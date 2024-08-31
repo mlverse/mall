@@ -1,6 +1,6 @@
 #' @export
 llm_extract <- function(x,
-                        source_var = NULL,
+                        var = NULL,
                         labels,
                         expand_cols = FALSE) {
   UseMethod("llm_extract")
@@ -8,7 +8,7 @@ llm_extract <- function(x,
 
 #' @export
 llm_extract.character <- function(x,
-                                  source_var = NULL,
+                                  var = NULL,
                                   labels,
                                   expand_cols = FALSE) {
   resp <- llm_vec_generate(
