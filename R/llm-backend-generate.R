@@ -6,9 +6,9 @@ llm_backend_generate <- function(backend, x, base_prompt) {
 #' @export
 llm_backend_generate.list <- function(backend, x, base_prompt) {
   try_connection <- ollamar::test_connection()
-  
-  if(try_connection$status_code == 200) {
-    .env_llm$defaults$model <- "llama3.1" 
+
+  if (try_connection$status_code == 200) {
+    .env_llm$defaults$model <- "llama3.1"
     class(.env_llm$defaults) <- "ollama"
     return(llm_backend_generate(.env_llm$defaults, x, base_prompt))
   }

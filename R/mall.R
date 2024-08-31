@@ -4,5 +4,5 @@
 #' @import glue
 #' @import rlang
 
-.env_llm <- new.env()  
+.env_llm <- new.env()
 .env_llm$defaults <- list()
