@@ -10,8 +10,12 @@ llm_summarize <- function(x,
 llm_summarize.character <- function(x,
                                     var = NULL,
                                     max_words = 100,
-                                    pred_var = NULL) {
-  llm_vec_generate(x = x, base_prompt = summary_prompt(max_words))
+                                    pred_var = ".summary") {
+  llm_custom(
+    x = x, 
+    prompt = summarize_prompt(max_words), 
+    pred_name = pred_var
+    )
 }
 
 
@@ -20,13 +24,15 @@ llm_summarize.data.frame <- function(x,
                                      var = NULL,
                                      max_words = 100,
                                      pred_var = ".summary") {
-  mutate(
-    .data = x,
-    !!pred_var := llm_vec_generate({{ var }}, summary_prompt(max_words))
+  llm_custom(
+    x = x, 
+    var = var,
+    prompt = summarize_prompt(max_words), 
+    pred_name = pred_var
   )
 }
 
-summary_prompt <- function(max_words) {
+summarize_prompt <- function(max_words) {
   glue(
     "You are a helpful summarization engine. ",
     "Your answer will contain no no capitalization and no explanations. ",
