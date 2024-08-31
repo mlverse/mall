@@ -6,7 +6,6 @@ llm_extract <- function(x,
   UseMethod("llm_extract")
 }
 
-
 #' @export
 llm_extract.character <- function(x,
                         source_var = NULL,
@@ -17,7 +16,7 @@ llm_extract.character <- function(x,
     base_prompt = extract_prompt(labels)
   )
   vec_resp <- map_chr(strsplit(resp, "\\|")[[1]], trimws)
-  names(vec_resp) <- labels
+  names(vec_resp) <- clean_names(labels)
   vec_resp
 }
 
@@ -32,5 +31,14 @@ extract_prompt <- function(labels) {
   )
 }
 
+clean_names <- function(x) {
+  x <- tolower(x)
+  map_chr(
+    x, ~{
+      xs <- strsplit(.x, " ")[[1]]
+      paste0(xs, collapse = "_")
+    }
+  )
+}
 
 
