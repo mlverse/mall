@@ -42,8 +42,10 @@ reviews |>
   llm_sentiment(review)
 #> Ollama local server running
 #> # A tibble: 3 × 2
-#> 1 This has been the best TV I've ever use… positive
-#> 2 I regret buying this laptop. It is too … negative
+#>   review                                   .sentiment
+#>   <chr>                                    <chr>     
+#> 1 This has been the best TV I've ever use… positive  
+#> 2 I regret buying this laptop. It is too … negative  
 #> 3 Not sure how to feel about my new washi… neutral
 ```
 
@@ -51,8 +53,10 @@ reviews |>
 reviews |>
   llm_sentiment(review, options = c("positive", "negative"))
 #> # A tibble: 3 × 2
-#> 1 This has been the best TV I've ever use… positive
-#> 2 I regret buying this laptop. It is too … negative
+#>   review                                   .sentiment
+#>   <chr>                                    <chr>     
+#> 1 This has been the best TV I've ever use… positive  
+#> 2 I regret buying this laptop. It is too … negative  
 #> 3 Not sure how to feel about my new washi… negative
 ```
 
@@ -60,6 +64,8 @@ reviews |>
 reviews |>
   llm_extract(review, "product")
 #> # A tibble: 3 × 2
+#>   review                                   .pred          
+#>   <chr>                                    <chr>          
 #> 1 This has been the best TV I've ever use… tv             
 #> 2 I regret buying this laptop. It is too … laptop         
 #> 3 Not sure how to feel about my new washi… washing machine
@@ -69,7 +75,9 @@ reviews |>
 reviews |> 
   llm_summarize(review, max_words = 5) 
 #> # A tibble: 3 × 2
-#> 1 This has been the best TV I've ever use… very good tv performance overall
-#> 2 I regret buying this laptop. It is too … laptop is too slow noisy        
-#> 3 Not sure how to feel about my new washi… new washing machine not perfect
+#>   review                                   .summary                         
+#>   <chr>                                    <chr>                            
+#> 1 This has been the best TV I've ever use… very pleased with tv performance.
+#> 2 I regret buying this laptop. It is too … laptop purchase was a mistake    
+#> 3 Not sure how to feel about my new washi… new washer has some issues
 ```

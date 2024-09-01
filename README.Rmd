@@ -65,10 +65,11 @@ ctl_new_pillar.tbl_long <- function(controller, x, width, ...) {
     attr(out$data, "width") <- 40
   }
   new_pillar(list(
-    data = out$data    
+    title = out$title,
+    type = out$type, 
+    data = out$data
   ))
 }
-
 ```
 
 
