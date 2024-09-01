@@ -1,23 +1,10 @@
 #' @export
-llm_summarize <- function(x,
-                          var = NULL,
+llm_summarize <- function(.data,
+                          x = NULL,
                           max_words = 100,
                           pred_name = ".summary") {
   UseMethod("llm_summarize")
 }
-
-#' @export
-llm_summarize.character <- function(x,
-                                    var = NULL,
-                                    max_words = 100,
-                                    pred_name = ".summary") {
-  llm_custom(
-    x = x,
-    prompt = summarize_prompt(max_words),
-    pred_name = pred_name
-  )
-}
-
 
 #' @export
 llm_summarize.data.frame <- function(x,
@@ -25,8 +12,8 @@ llm_summarize.data.frame <- function(x,
                                      max_words = 100,
                                      pred_name = ".summary") {
   llm_custom(
+    .data = .data,
     x = x,
-    var = var,
     prompt = summarize_prompt(max_words),
     pred_name = pred_name
   )
@@ -42,13 +29,13 @@ summarize_prompt <- function(max_words) {
 }
 
 #' @export
-`llm_summarize.tbl_Spark SQL` <- function(x,
-                                          var = NULL,
+`llm_summarize.tbl_Spark SQL` <- function(.data,
+                                          x = NULL,
                                           max_words = 100,
                                           pred_name = ".summary") {
   mutate(
-    .data = x,
-    !!pred_name := ai_summarize({{ var }}, as.integer(max_words))
+    .data = .data,
+    !!pred_name := ai_summarize({{ x }}, as.integer(max_words))
   )
 }
 

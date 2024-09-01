@@ -1,14 +1,14 @@
 #' @export
-llm_extract <- function(x,
-                        .var = NULL,
+llm_extract <- function(.data,
+                        x = NULL,
                         labels,
                         expand_cols = FALSE) {
   UseMethod("llm_extract")
 }
 
 #' @export
-llm_extract.character <- function(x,
-                                  .var = NULL,
+llm_extract.character <- function(.data,
+                                  x = NULL,
                                   labels = c(),
                                   expand_cols = FALSE) {
   prompt <- extract_prompt(labels)
