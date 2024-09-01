@@ -29,20 +29,12 @@ functions.
 library(dplyr)
 library(mall)
 
-reviews  <- dplyr::tribble(
+reviews  <- tribble(
   ~ review,
     "This has been the best TV I've ever used. Great screen, and sound.", 
     "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
     "Not sure how to feel about my new washing machine. Great color, but hard to figure"
   )
-
-reviews
-#> # A tibble: 3 × 1
-#>   review                                                                        
-#>   <chr>                                                                         
-#> 1 This has been the best TV I've ever used. Great screen, and sound.            
-#> 2 I regret buying this laptop. It is too slow and the keyboard is too noisy     
-#> 3 Not sure how to feel about my new washing machine. Great color, but hard to f…
 ```
 
 ``` r
@@ -50,40 +42,34 @@ reviews |>
   llm_sentiment(review)
 #> Ollama local server running
 #> # A tibble: 3 × 2
-#>   review                                                              .sentiment
-#>   <chr>                                                               <chr>     
-#> 1 This has been the best TV I've ever used. Great screen, and sound.  positive  
-#> 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  
-#> 3 Not sure how to feel about my new washing machine. Great color, bu… neutral
+#> 1 This has been the best TV I've ever use… positive
+#> 2 I regret buying this laptop. It is too … negative
+#> 3 Not sure how to feel about my new washi… neutral
 ```
 
 ``` r
 reviews |>
   llm_sentiment(review, options = c("positive", "negative"))
 #> # A tibble: 3 × 2
-#>   review                                                              .sentiment
-#>   <chr>                                                               <chr>     
-#> 1 This has been the best TV I've ever used. Great screen, and sound.  positive  
-#> 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  
-#> 3 Not sure how to feel about my new washing machine. Great color, bu… negative
+#> 1 This has been the best TV I've ever use… positive
+#> 2 I regret buying this laptop. It is too … negative
+#> 3 Not sure how to feel about my new washi… negative
 ```
 
 ``` r
 reviews |>
   llm_extract(review, "product")
 #> # A tibble: 3 × 2
-#>   review                                                                   .pred
-#>   <chr>                                                                    <chr>
-#> 1 This has been the best TV I've ever used. Great screen, and sound.       tv   
-#> 2 I regret buying this laptop. It is too slow and the keyboard is too noi… lapt…
-#> 3 Not sure how to feel about my new washing machine. Great color, but har… wash…
+#> 1 This has been the best TV I've ever use… tv             
+#> 2 I regret buying this laptop. It is too … laptop         
+#> 3 Not sure how to feel about my new washi… washing machine
 ```
 
 ``` r
 reviews |> 
-  llm_summarize(review, max_words = 5) |> 
-  pull()
-#> [1] "good tv experience overall so far"      
-#> [2] "unhappy with laptop purchase experience"
-#> [3] "new washing machine has flaws"
+  llm_summarize(review, max_words = 5) 
+#> # A tibble: 3 × 2
+#> 1 This has been the best TV I've ever use… very good tv performance overall
+#> 2 I regret buying this laptop. It is too … laptop is too slow noisy        
+#> 3 Not sure how to feel about my new washi… new washing machine not perfect
 ```

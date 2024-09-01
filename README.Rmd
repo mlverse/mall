@@ -42,14 +42,33 @@ using with Databricks, `mall` will use SQL to access their AI functions.
 library(dplyr)
 library(mall)
 
-reviews  <- dplyr::tribble(
+reviews  <- tribble(
   ~ review,
     "This has been the best TV I've ever used. Great screen, and sound.", 
     "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
     "Not sure how to feel about my new washing machine. Great color, but hard to figure"
   )
+```
 
-reviews
+```{r, include=FALSE}
+# Customizing print for tibble because the 'review' is too long, and doesn't
+# allow new columns to be read
+
+library(tibble)
+library(pillar)
+
+reviews <- new_tibble(reviews, class = "tbl_long")
+
+ctl_new_pillar.tbl_long <- function(controller, x, width, ...) {
+  out <- NextMethod()
+  if(attr(out$data, "width") > 50) {
+    attr(out$data, "width") <- 40
+  }
+  new_pillar(list(
+    data = out$data    
+  ))
+}
+
 ```
 
 
@@ -70,7 +89,6 @@ reviews |>
 
 ```{r}
 reviews |> 
-  llm_summarize(review, max_words = 5) |> 
-  pull()
+  llm_summarize(review, max_words = 5) 
 ```
 
