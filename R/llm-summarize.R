@@ -13,7 +13,7 @@ llm_summarize.data.frame <- function(x,
                                      pred_name = ".summary") {
   llm_custom(
     .data = .data,
-    x = x,
+    x = {{ x }},
     prompt = summarize_prompt(max_words),
     pred_name = pred_name
   )

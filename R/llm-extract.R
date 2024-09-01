@@ -7,10 +7,10 @@ llm_extract <- function(.data,
 }
 
 #' @export
-llm_extract.character <- function(.data,
-                                  x = NULL,
-                                  labels = c(),
-                                  expand_cols = FALSE) {
+llm_extract.data.frame <- function(.data,
+                                   x = NULL,
+                                   labels = c(),
+                                   expand_cols = FALSE) {
   prompt <- extract_prompt(labels)
 
   if (expand_cols && length(labels) > 1) {
@@ -25,8 +25,8 @@ llm_extract.character <- function(.data,
     resp <- bind_cols(x, resp)
   } else {
     resp <- llm_custom(
-      x = x,
-      .var = .var,
+      .data = .data,
+      x = {{ x }},
       prompt = prompt
     )
   }

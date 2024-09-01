@@ -3,7 +3,7 @@
 S3method(llm_backend_generate,list)
 S3method(llm_backend_generate,ollama)
 S3method(llm_custom,data.frame)
-S3method(llm_extract,character)
+S3method(llm_extract,data.frame)
 S3method(llm_sentiment,"tbl_Spark SQL")
 S3method(llm_sentiment,data.frame)
 S3method(llm_summarize,"tbl_Spark SQL")
