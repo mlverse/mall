@@ -4,22 +4,11 @@ llm_custom <- function(.data, x, prompt, pred_name = ".pred", source_name = "tex
 }
 
 #' @export
-llm_custom.character <- function(.data,
-                                 x = NULL,
-                                 prompt,
-                                 pred_name = ".pred",
-                                 source_name = "text") {
-  resp <- llm_vec_generate(x, prompt)
-  tibble(!!source_name := x, !!pred_name := !!resp)
-}
-
-#' @export
 llm_custom.data.frame <- function(.data,
                                   x,
                                   prompt,
                                   pred_name = ".pred",
                                   source_name = NULL) {
-  
   mutate(
     .data = .data,
     !!pred_name := llm_vec_generate({{ x }}, prompt)
