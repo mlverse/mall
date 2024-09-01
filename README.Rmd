@@ -1,0 +1,76 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+library(dplyr)
+```
+
+# mall
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+Adds the ability to batch LLM predictions that run row wise on the data. The
+predictions made are based on pre-specified prompts that will perform the
+following:
+
+- Sentiment analysis
+- Summarize the text
+- Extract one, or several, specific pieces information from the text
+
+There will be more added in the future.
+
+This package is inspired by the SQL AI functions now offered by vendors such as
+Databricks and Snowflake.
+
+For local data, `mall` uses Ollama to interact with a locally installed LLM. If 
+using with Databricks, `mall` will use SQL to access their AI functions.
+
+
+## Usage
+
+```{r}
+library(dplyr)
+library(mall)
+
+reviews  <- dplyr::tribble(
+  ~ review,
+    "This has been the best TV I've ever used. Great screen, and sound.", 
+    "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
+    "Not sure how to feel about my new washing machine. Great color, but hard to figure"
+  )
+
+reviews
+```
+
+
+```{r}
+reviews |>
+  llm_sentiment(review)
+```
+
+```{r}
+reviews |>
+  llm_sentiment(review, options = c("positive", "negative"))
+```
+
+```{r}
+reviews |>
+  llm_extract(review, "product")
+```
+
+```{r}
+reviews |> 
+  llm_summarize(review, max_words = 5) |> 
+  pull()
+```
+

@@ -7,8 +7,8 @@ llm_summarize <- function(.data,
 }
 
 #' @export
-llm_summarize.data.frame <- function(x,
-                                     var = NULL,
+llm_summarize.data.frame <- function(.data,
+                                     x = NULL,
                                      max_words = 100,
                                      pred_name = ".summary") {
   llm_custom(
