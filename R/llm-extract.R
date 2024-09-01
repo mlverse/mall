@@ -27,7 +27,8 @@ llm_extract.data.frame <- function(.data,
     resp <- llm_custom(
       .data = .data,
       x = {{ x }},
-      prompt = prompt
+      prompt = prompt, 
+      pred_name = clean_names(labels)
     )
   }
   resp
