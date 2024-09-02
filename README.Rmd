@@ -10,9 +10,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  eval = FALSE
+  eval = TRUE
 )
 library(dplyr)
+library(dbplyr)
+library(tictoc)
+library(DBI)
 ```
 
 # `mall`
@@ -190,7 +193,6 @@ data(data_bookReviews)
 
 book_reviews <- data_bookReviews |> 
   head(100) |> 
-  tail(5) |> 
   as_tibble()
 
 glimpse(book_reviews)
@@ -221,7 +223,8 @@ toc()
 As far as **time**, on my Apple M3 machine, it took about 3 minutes to process,
 100 rows, containing 20 thousand words. 
 
-I tried different ways to speed up the process:
+The package uses `purr` to send each prompt individually to the LLM. But, I did
+try a few different ways to speed up the process, unsuccessfully:
 
 - Used `furrr` to send multiple requests at a time. This did not work because 
 either the LLM or Ollama processed all my requests serially. So there was
@@ -248,9 +251,38 @@ reviews_llm |>
   yardstick::accuracy(sentiment, fct_pred)
 ```
 
+## Databricks
 
+This brief example shows how seamless it is to use the same `llm_` functions,
+but against a remote connection:
 
+```{r}
+library(DBI)
 
+con <- dbConnect(
+  odbc::databricks(),
+  HTTPPath = Sys.getenv("DATABRICKS_PATH")
+)
 
+tbl_reviews <- copy_to(con, reviews)
+```
+As mentioned above, using `llm_sentiment()` in Databricks will call that vendor's
+SQL AI function directly:
 
+```{r}
+tbl_reviews |> 
+  llm_sentiment(review)
+```
+
+There are some differences in the arguments, and output of the LLM's. Notice
+that instead of "neutral", the prediction is "mixed".  The AI Sentiment function
+does not allow to change the possible options.
+
+Next, we will try `llm_summarize()`. The `max_words` argument maps to the same
+argument in the AI Summarize function:
+
+```{r}
+tbl_reviews |> 
+  llm_summarize(review, max_words = 5)
+```
 
