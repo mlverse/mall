@@ -15,7 +15,8 @@ llm_sentiment.data.frame <- function(.data,
     .data = .data,
     x = {{ x }},
     prompt = sentiment_prompt(options = options),
-    pred_name = pred_name
+    pred_name = pred_name, 
+    valid_resps = options
   )
 }
 
