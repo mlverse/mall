@@ -6,6 +6,8 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
+## Intro
+
 Run multiple LLM predictions against a table. The predictions run
 row-wise over a specified column. It works using a pre-determined
 one-shot prompt, along with the current row’s content. The prompt that
@@ -19,18 +21,23 @@ included prompts perform the following:
 This package is inspired by the SQL AI functions now offered by vendors
 such as
 [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html)
-and Snowflake. For local data, `mall` uses Ollama to call an LLM.
+and Snowflake. For local data, `mall` uses [Ollama](https://ollama.com/)
+to call an LLM.
 
-If you pass a table connected to **Databricks** via ODBC, `mall` will
+### Databricks integration
+
+If you pass a table connected to **Databricks** via `odbc`, `mall` will
 automatically use Databricks’ LLM instead of Ollama. It will call the
 corresponding SQL AI function.
 
 ## Motivation
 
-We want to help data scientists use LLMs in a new way. Typically, LLMs
-have been used to ask coding questions (chat) or for code completion
-(Copilot). This interface provides an easy way to analyze text data, and
-without having to spend time writing an NLP model.
+We want to new find ways to help data scientists use LLMs in their daily
+work. Unlike the familiar interfaces, such as chatting and code
+completion, this interface runs your text data directly against the LLM.
+The LLM’s flexibility, allows for it to adapt to the subject of your
+data, and provide surprisingly accurate predictions. This saves the data
+scientist the need to write and tune an NLP model.
 
 ## Examples
 
@@ -47,10 +54,10 @@ reviews  <- tribble(
   )
 ```
 
-The main functions in `mall` are verb-like functions that expect a `tbl`
-as their first argument. This allows us to use them in piped operations.
-
 ### Sentiment
+
+Primarily, `mall` provides verb-like functions that expect a `tbl` as
+their first argument. This allows us to use them in piped operations.
 
 For the first example, we’ll asses the sentiment of each review. In
 order to do this we will call `llm_sentiment()`:
@@ -61,7 +68,7 @@ library(mall)
 reviews |>
   llm_sentiment(review)
 #> Ollama local server running
-#> ■■■■■■■■■■■ 33% | ETA: 3s
+#> ■■■■■■■■■■■ 33% | ETA: 12s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 3s
 #> # A tibble: 3 × 2
 #>   review                                   .sentiment
 #>   <chr>                                    <chr>     
@@ -80,7 +87,7 @@ reviews |>
 #>   <chr>                                    <chr>     
 #> 1 This has been the best TV I've ever use… positive  
 #> 2 I regret buying this laptop. It is too … negative  
-#> 3 Not sure how to feel about my new washi… neutral
+#> 3 Not sure how to feel about my new washi… negative
 ```
 
 As mentioned before, by being pipe friendly, the results from the LLM
@@ -90,23 +97,32 @@ prediction can be used in further transformations:
 reviews |>
   llm_sentiment(review, options = c("positive", "negative")) |> 
   filter(.sentiment == "negative")
-#> # A tibble: 2 × 2
+#> # A tibble: 1 × 2
 #>   review                                   .sentiment
 #>   <chr>                                    <chr>     
-#> 1 I regret buying this laptop. It is too … negative  
-#> 2 Not sure how to feel about my new washi… negative
+#> 1 I regret buying this laptop. It is too … negative
 ```
+
+## Summarize
+
+There may be a need to reduce the number of words in a given text.
+Usually, to make it easier to capture its intent. To do this, use
+`llm_summarize()`. This function has an argument to control the maximum
+number of words to output (`max_words`):
 
 ``` r
 reviews |> 
   llm_summarize(review, max_words = 5) 
 #> # A tibble: 3 × 2
-#>   review                                   .summary                        
-#>   <chr>                                    <chr>                           
-#> 1 This has been the best TV I've ever use… very pleased with tv performance
-#> 2 I regret buying this laptop. It is too … laptop purchase turned out bad  
-#> 3 Not sure how to feel about my new washi… mixed emotions about new washer
+#>   review                                   .summary                       
+#>   <chr>                                    <chr>                          
+#> 1 This has been the best TV I've ever use… good tv with great features    
+#> 2 I regret buying this laptop. It is too … laptop is too slow noisy       
+#> 3 Not sure how to feel about my new washi… mixed feelings about the washer
 ```
+
+To control the name of the prediction field, you can change `pred_name`
+argument. This works with the other `llm_` functions as well.
 
 ``` r
 reviews |> 
@@ -114,10 +130,18 @@ reviews |>
 #> # A tibble: 3 × 2
 #>   review                                   review_summary                       
 #>   <chr>                                    <chr>                                
-#> 1 This has been the best TV I've ever use… very good television experience repo…
-#> 2 I regret buying this laptop. It is too … laptop is too slow, noisy            
-#> 3 Not sure how to feel about my new washi… uncertain about new washer purchase
+#> 1 This has been the best TV I've ever use… very good tv experience overall.     
+#> 2 I regret buying this laptop. It is too … laptop is too slow noisy             
+#> 3 Not sure how to feel about my new washi… new washing machine purchase mixed e…
 ```
+
+## Extract
+
+One of the most interesting operations. Using natural language, we can
+tell the LLM to return a specific part of the text. In the following
+example, we request that the LLM return the product being referred to.
+We do this by simply saying “product”. The LLM understands what we
+*mean* by that word, and looks for that in the text.
 
 ``` r
 reviews |>
