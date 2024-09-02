@@ -151,3 +151,64 @@ in the text.
 reviews |>
   llm_extract(review, "product")
 ```
+
+## Key considerations
+
+The main consideration is **cost**. Either, time cost, or money cost.
+
+If using this method with an LLM locally available, the cost will be a long 
+running time. Unless using a very specialized LLM, a given LLM is a general model. 
+It was fitted using a vast amount of data. So determining a response for each 
+row, takes longerthat if using a manually created NLP model. The default model
+used in Ollama is Llama 3.1, which was fitted using 8B parameters. 
+
+If using an external LLM service, the consideration will need to be for the 
+billing costs of using such service. Keep in mind that you will be sending a lot
+of data to be evaluated. 
+
+Another consideration is the novelty of this approach. Early tests are 
+providing encouraging results. But you, as an user, will still need to keep
+in mind that the predictions will not be infalable, so always check the output.
+At this time, I think the best use for this method, is for a quick analysis.
+
+## Performance
+
+```{r}
+library(classmap)
+
+data(data_bookReviews)
+
+book_reviews <- data_bookReviews |> 
+  head(10) |> 
+  as_tibble()
+
+glimpse(book_reviews)
+```
+As per the docs, `sentiment` is a factor indicating the sentiment of the review:
+negative (1) or positive (2)
+
+```{r}
+length(strsplit(paste(book_reviews, collapse = " "), " ")[[1]])
+```
+
+```{r}
+reviews_llm <- book_reviews |> 
+  llm_sentiment(review, pred_name = "predicted")
+
+reviews_llm
+```
+
+```{r}
+library(forcats)
+
+reviews_llm |> 
+  mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |> 
+  yardstick::accuracy(sentiment, fct_pred)
+```
+
+
+
+
+
+
+
