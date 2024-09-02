@@ -67,14 +67,6 @@ library(mall)
 
 reviews |>
   llm_sentiment(review)
-#> Ollama local server running
-#> ■■■■■■■■■■■ 33% | ETA: 3s
-#> # A tibble: 3 × 2
-#>   review                                   .sentiment
-#>   <chr>                                    <chr>     
-#> 1 This has been the best TV I've ever use… positive  
-#> 2 I regret buying this laptop. It is too … negative  
-#> 3 Not sure how to feel about my new washi… neutral
 ```
 
 The function let’s us modify the options to choose from:
@@ -82,12 +74,6 @@ The function let’s us modify the options to choose from:
 ``` r
 reviews |>
   llm_sentiment(review, options = c("positive", "negative"))
-#> # A tibble: 3 × 2
-#>   review                                   .sentiment
-#>   <chr>                                    <chr>     
-#> 1 This has been the best TV I've ever use… positive  
-#> 2 I regret buying this laptop. It is too … negative  
-#> 3 Not sure how to feel about my new washi… negative
 ```
 
 As mentioned before, by being pipe friendly, the results from the LLM
@@ -97,11 +83,6 @@ prediction can be used in further transformations:
 reviews |>
   llm_sentiment(review, options = c("positive", "negative")) |> 
   filter(.sentiment == "negative")
-#> # A tibble: 2 × 2
-#>   review                                   .sentiment
-#>   <chr>                                    <chr>     
-#> 1 I regret buying this laptop. It is too … negative  
-#> 2 Not sure how to feel about my new washi… negative
 ```
 
 ## Summarize
@@ -114,12 +95,6 @@ number of words to output (`max_words`):
 ``` r
 reviews |> 
   llm_summarize(review, max_words = 5) 
-#> # A tibble: 3 × 2
-#>   review                                   .summary                             
-#>   <chr>                                    <chr>                                
-#> 1 This has been the best TV I've ever use… best tv ever used                    
-#> 2 I regret buying this laptop. It is too … disappointing purchase experience wi…
-#> 3 Not sure how to feel about my new washi… mixed feelings about new washer
 ```
 
 To control the name of the prediction field, you can change `pred_name`
@@ -128,12 +103,6 @@ argument. This works with the other `llm_` functions as well.
 ``` r
 reviews |> 
   llm_summarize(review, max_words = 5, pred_name = "review_summary") 
-#> # A tibble: 3 × 2
-#>   review                                   review_summary                       
-#>   <chr>                                    <chr>                                
-#> 1 This has been the best TV I've ever use… very good tv experience reported.    
-#> 2 I regret buying this laptop. It is too … disappointed with new laptop purchase
-#> 3 Not sure how to feel about my new washi… new washing machine is average
 ```
 
 ## Extract
@@ -147,12 +116,6 @@ We do this by simply saying “product”. The LLM understands what we
 ``` r
 reviews |>
   llm_extract(review, "product")
-#> # A tibble: 3 × 2
-#>   review                                   .pred          
-#>   <chr>                                    <chr>          
-#> 1 This has been the best TV I've ever use… tv             
-#> 2 I regret buying this laptop. It is too … laptop         
-#> 3 Not sure how to feel about my new washi… washing machine
 ```
 
 ## Key considerations
@@ -172,11 +135,21 @@ sending a lot of data to be evaluated.
 
 Another consideration is the novelty of this approach. Early tests are
 providing encouraging results. But you, as an user, will still need to
-keep in mind that the predictions will not be infalable, so always check
-the output. At this time, I think the best use for this method, is for a
-quick analysis.
+keep in mind that the predictions will not be infallible, so always
+check the output. At this time, I think the best use for this method, is
+for a quick analysis.
 
 ## Performance
+
+We will briefly cover this methods performance from two perspectives:
+
+- How long the analysis takes to run locally
+
+- How well it predicts
+
+To do so, we will use the `data_bookReviews` data set, provided by the
+`classmap` package. For this exercise, only the first 100, of the total
+1,000, are going to be part of this analysis.
 
 ``` r
 library(classmap)
@@ -184,14 +157,11 @@ library(classmap)
 data(data_bookReviews)
 
 book_reviews <- data_bookReviews |> 
-  head(10) |> 
+  head(100) |> 
+  tail(5) |> 
   as_tibble()
 
 glimpse(book_reviews)
-#> Rows: 10
-#> Columns: 2
-#> $ review    <chr> "i got this as both a book and an audio file. i had waited t…
-#> $ sentiment <fct> 1, 1, 2, 1, 1, 1, 1, 1, 1, 2
 ```
 
 As per the docs, `sentiment` is a factor indicating the sentiment of the
@@ -199,36 +169,46 @@ review: negative (1) or positive (2)
 
 ``` r
 length(strsplit(paste(book_reviews, collapse = " "), " ")[[1]])
-#> [1] 2683
 ```
 
+Just to get an idea of how much data we’re processing, I’m using a very,
+very simple word count. So we’re analyzing a bit over 20 thousand words.
+
 ``` r
+library(tictoc)
+
+tic()
 reviews_llm <- book_reviews |> 
-  llm_sentiment(review, pred_name = "predicted")
-#> ■■■■ 10% | ETA: 18s ■■■■■■■ 20% | ETA: 10s ■■■■■■■■■■ 30% | ETA: 22s
-#> ■■■■■■■■■■■■■ 40% | ETA: 15s ■■■■■■■■■■■■■■■■ 50% | ETA: 10s
-#> ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 6s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% | ETA:
-#> 2s
+  llm_sentiment(
+    x = review,
+    options = c("positive", "negative"), 
+    pred_name = "predicted"
+    )
+toc()
 ```
+
+As far as **time**, on my Apple M3 machine, it took about 3 minutes to
+process, 100 rows, containing 20 thousand words.
+
+I tried different ways to speed up the process:
+
+- Used `furrr` to send multiple requests at a time. This did not work
+  because either the LLM or Ollama processed all my requests serially.
+  So there was no improvement.
+
+- I also tried sending more than one row’s text at a time. This cause
+  instability in the number of results. For example sending 5 at a time,
+  sometimes returned 7 or 8. Even sending 2 was not stable.
+
+This is what the new table looks like:
 
 ``` r
-
 reviews_llm
-#> # A tibble: 10 × 3
-#>    review                                                    sentiment predicted
-#>    <chr>                                                     <fct>     <chr>    
-#>  1 "i got this as both a book and an audio file. i had wait… 1         negative 
-#>  2 "this book places too much emphasis on spending money in… 1         negative 
-#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         positive 
-#>  4 "while i appreciate what tipler was attempting to accomp… 1         negative 
-#>  5 "the others in the series were great, and i really looke… 1         negative 
-#>  6 "a few good things, but she's lost her edge and i find i… 1         negative 
-#>  7 "words cannot describe how ripped off and disappointed i… 1         negative 
-#>  8 "1. the persective of most writers is shaped by their ow… 1         neutral  
-#>  9 "i have been a huge fan of michael crichton for about 25… 1         negative 
-#> 10 "i saw dr. polk on c-span a month or two ago. he was add… 2         positive
 ```
+
+I used `yardstick` to see how well the model performed. Of course, the
+accuracy will not be of the “truth”, but rather the package’s results
+recorded in `sentiment`.
 
 ``` r
 library(forcats)
@@ -236,8 +216,4 @@ library(forcats)
 reviews_llm |> 
   mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |> 
   yardstick::accuracy(sentiment, fct_pred)
-#> # A tibble: 1 × 3
-#>   .metric  .estimator .estimate
-#>   <chr>    <chr>          <dbl>
-#> 1 accuracy binary             1
 ```

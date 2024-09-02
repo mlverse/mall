@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  eval = TRUE
+  eval = FALSE
 )
 library(dplyr)
 ```
@@ -168,10 +168,20 @@ of data to be evaluated.
 
 Another consideration is the novelty of this approach. Early tests are 
 providing encouraging results. But you, as an user, will still need to keep
-in mind that the predictions will not be infalable, so always check the output.
+in mind that the predictions will not be infallible, so always check the output.
 At this time, I think the best use for this method, is for a quick analysis.
 
 ## Performance
+
+We will briefly cover this methods performance from two perspectives: 
+
+- How long the analysis takes to run locally 
+
+- How well it predicts 
+
+To do so, we will use the `data_bookReviews` data set, provided by the `classmap`
+package. For this exercise, only the first 100, of the total 1,000, are going
+to be part of this analysis.
 
 ```{r}
 library(classmap)
@@ -179,7 +189,8 @@ library(classmap)
 data(data_bookReviews)
 
 book_reviews <- data_bookReviews |> 
-  head(10) |> 
+  head(100) |> 
+  tail(5) |> 
   as_tibble()
 
 glimpse(book_reviews)
@@ -191,12 +202,43 @@ negative (1) or positive (2)
 length(strsplit(paste(book_reviews, collapse = " "), " ")[[1]])
 ```
 
-```{r}
-reviews_llm <- book_reviews |> 
-  llm_sentiment(review, pred_name = "predicted")
+Just to get an idea of how much data we're processing, I'm using a very, very 
+simple word count. So we're analyzing a bit over 20 thousand words.
 
+```{r}
+library(tictoc)
+
+tic()
+reviews_llm <- book_reviews |> 
+  llm_sentiment(
+    x = review,
+    options = c("positive", "negative"), 
+    pred_name = "predicted"
+    )
+toc()
+```
+
+As far as **time**, on my Apple M3 machine, it took about 3 minutes to process,
+100 rows, containing 20 thousand words. 
+
+I tried different ways to speed up the process:
+
+- Used `furrr` to send multiple requests at a time. This did not work because 
+either the LLM or Ollama processed all my requests serially. So there was
+no improvement.
+
+- I also tried sending more than one row's text at a time. This cause instability
+in the number of results. For example sending 5 at a time, sometimes returned 7
+or 8. Even sending 2 was not stable. 
+
+This is what the new table looks like:
+
+```{r}
 reviews_llm
 ```
+I used `yardstick` to see how well the model performed. Of course, the accuracy
+will not be of the "truth", but rather the package's results recorded in 
+`sentiment`.
 
 ```{r}
 library(forcats)
