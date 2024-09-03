@@ -6,4 +6,4 @@
 #' @import cli
 
 .env_llm <- new.env()
-.env_llm$defaults <- NULL
+.env_llm$defaults <- list()
