@@ -19,9 +19,7 @@ llm_classify.data.frame <- function(.data,
   )
 }
 
-
 classify_prompt <- function(labels) {
-  no_labels <- length(labels)
   labels <- paste0(labels, collapse = ", ")
   glue(
     "You are a helpful classification engine.",

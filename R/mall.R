@@ -3,6 +3,7 @@
 #' @importFrom ollamar generate test_connection
 #' @import glue
 #' @import rlang
+#' @import cli
 
 .env_llm <- new.env()
-.env_llm$defaults <- list()
+.env_llm$defaults <- NULL
