@@ -40,3 +40,5 @@ sentiment_prompt <- function(options) {
     !!pred_name := ai_analyze_sentiment({{ x }})
   )
 }
+
+globalVariables("ai_analyze_sentiment")

@@ -18,6 +18,10 @@ llm_custom.data.frame <- function(.data,
                                   valid_resps = NULL) {
   mutate(
     .data = .data,
-    !!pred_name := llm_vec_generate({{ x }}, prompt, valid_resps = valid_resps)
+    !!pred_name := llm_vec_generate(
+      x = {{ x }},
+      prompt = prompt,
+      valid_resps = valid_resps
+      )
   )
 }
