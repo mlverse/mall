@@ -16,7 +16,7 @@ llm_custom.data.frame <- function(.data,
                                   prompt,
                                   pred_name = ".pred",
                                   source_name = NULL,
-                                  valid_resps = ""
+                                  valid_resps = NULL
                                   ) {
   mutate(
     .data = .data,
