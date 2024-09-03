@@ -46,12 +46,12 @@ We will start with a very small table with product reviews:
 ``` r
 library(dplyr)
 
-reviews  <- tribble(
-  ~ review,
-    "This has been the best TV I've ever used. Great screen, and sound.", 
-    "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
-    "Not sure how to feel about my new washing machine. Great color, but hard to figure"
-  )
+reviews <- tribble(
+  ~review,
+  "This has been the best TV I've ever used. Great screen, and sound.",
+  "I regret buying this laptop. It is too slow and the keyboard is too noisy",
+  "Not sure how to feel about my new washing machine. Great color, but hard to figure"
+)
 ```
 
 ### Sentiment
@@ -67,7 +67,7 @@ library(mall)
 
 reviews |>
   llm_sentiment(review)
-#> Ollama local server running
+#> ■■■■■■■■■■■ 33% | ETA: 15s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 4s
 #> # A tibble: 3 × 2
 #>   review                                   .sentiment
 #>   <chr>                                    <chr>     
@@ -94,13 +94,12 @@ prediction can be used in further transformations:
 
 ``` r
 reviews |>
-  llm_sentiment(review, options = c("positive", "negative")) |> 
+  llm_sentiment(review, options = c("positive", "negative")) |>
   filter(.sentiment == "negative")
-#> # A tibble: 2 × 2
+#> # A tibble: 1 × 2
 #>   review                                   .sentiment
 #>   <chr>                                    <chr>     
-#> 1 I regret buying this laptop. It is too … negative  
-#> 2 Not sure how to feel about my new washi… negative
+#> 1 I regret buying this laptop. It is too … negative
 ```
 
 ## Summarize
@@ -111,28 +110,43 @@ Usually, to make it easier to capture its intent. To do this, use
 number of words to output (`max_words`):
 
 ``` r
-reviews |> 
-  llm_summarize(review, max_words = 5) 
+reviews |>
+  llm_summarize(review, max_words = 5)
 #> # A tibble: 3 × 2
-#>   review                                   .summary                          
-#>   <chr>                                    <chr>                             
-#> 1 This has been the best TV I've ever use… excellent tv with great quality   
-#> 2 I regret buying this laptop. It is too … slow laptop with annoying keyboard
-#> 3 Not sure how to feel about my new washi… new washing machine mixed emotions
+#>   review                                   .summary                        
+#>   <chr>                                    <chr>                           
+#> 1 This has been the best TV I've ever use… best tv i've ever owned         
+#> 2 I regret buying this laptop. It is too … slow and noisy laptop experience
+#> 3 Not sure how to feel about my new washi… new washer has mixed feelings
 ```
 
 To control the name of the prediction field, you can change `pred_name`
 argument. This works with the other `llm_` functions as well.
 
 ``` r
-reviews |> 
-  llm_summarize(review, max_words = 5, pred_name = "review_summary") 
+reviews |>
+  llm_summarize(review, max_words = 5, pred_name = "review_summary")
 #> # A tibble: 3 × 2
-#>   review                                   review_summary                  
-#>   <chr>                                    <chr>                           
-#> 1 This has been the best TV I've ever use… great tv with good picture sound
-#> 2 I regret buying this laptop. It is too … laptop too slow and noisy       
-#> 3 Not sure how to feel about my new washi… Mixed feelings about new washer.
+#>   review                                   review_summary                    
+#>   <chr>                                    <chr>                             
+#> 1 This has been the best TV I've ever use… best tv i have ever               
+#> 2 I regret buying this laptop. It is too … laptop is too slow and noisy      
+#> 3 Not sure how to feel about my new washi… new washing machine mixed feelings
+```
+
+## Classify
+
+Use the LLM to categorize the text into one of the options you provide:
+
+``` r
+reviews |>
+  llm_classify(review, c("appliance", "computer"))
+#> # A tibble: 3 × 2
+#>   review                                   .classify
+#>   <chr>                                    <chr>    
+#> 1 This has been the best TV I've ever use… appliance
+#> 2 I regret buying this laptop. It is too … computer 
+#> 3 Not sure how to feel about my new washi… appliance
 ```
 
 ## Extract
@@ -147,11 +161,35 @@ We do this by simply saying “product”. The LLM understands what we
 reviews |>
   llm_extract(review, "product")
 #> # A tibble: 3 × 2
-#>   review                                   .pred          
+#>   review                                   product        
 #>   <chr>                                    <chr>          
 #> 1 This has been the best TV I've ever use… tv             
 #> 2 I regret buying this laptop. It is too … laptop         
 #> 3 Not sure how to feel about my new washi… washing machine
+```
+
+## Custom prompt
+
+It is possible to pass your own prompt to the LLM, and have `mall` run
+it against each text entry. Use `llm_custom()` to access this
+functionality:
+
+``` r
+my_prompt <- paste(
+  "Answer a question.",
+  "Return only the answer, no explanation",
+  "Acceptable answers are 'yes', 'no'",
+  "Answer this about the following text, is this a happy customer?:"
+)
+
+reviews |> 
+  llm_custom(review, my_prompt)
+#> # A tibble: 3 × 2
+#>   review                                   .pred
+#>   <chr>                                    <chr>
+#> 1 This has been the best TV I've ever use… Yes. 
+#> 2 I regret buying this laptop. It is too … No   
+#> 3 Not sure how to feel about my new washi… No
 ```
 
 ## Key considerations
@@ -192,8 +230,8 @@ library(classmap)
 
 data(data_bookReviews)
 
-book_reviews <- data_bookReviews |> 
-  head(100) |> 
+book_reviews <- data_bookReviews |>
+  head(100) |>
   as_tibble()
 
 glimpse(book_reviews)
@@ -218,22 +256,22 @@ very simple word count. So we’re analyzing a bit over 20 thousand words.
 library(tictoc)
 
 tic()
-reviews_llm <- book_reviews |> 
+reviews_llm <- book_reviews |>
   llm_sentiment(
     x = review,
-    options = c("positive", "negative"), 
+    options = c("positive", "negative"),
     pred_name = "predicted"
-    )
+  )
 #> ■ 1% | ETA: 3m ■■ 2% | ETA: 2m ■■ 3% | ETA: 5m ■■ 4% | ETA: 4m ■■■ 5% | ETA: 3m
 #> ■■■ 6% | ETA: 3m ■■■ 7% | ETA: 3m ■■■ 8% | ETA: 3m ■■■■ 9% | ETA: 3m ■■■■ 10% |
-#> ETA: 3m ■■■■ 11% | ETA: 3m ■■■■■ 12% | ETA: 3m ■■■■■ 13% | ETA: 3m ■■■■■ 14% |
+#> ETA: 3m ■■■■ 11% | ETA: 3m ■■■■■ 12% | ETA: 3m ■■■■■ 13% | ETA: 2m ■■■■■ 14% |
 #> ETA: 2m ■■■■■ 15% | ETA: 2m ■■■■■■ 16% | ETA: 2m ■■■■■■ 17% | ETA: 2m ■■■■■■
 #> 18% | ETA: 2m ■■■■■■■ 19% | ETA: 2m ■■■■■■■ 20% | ETA: 2m ■■■■■■■ 21% | ETA: 2m
 #> ■■■■■■■■ 22% | ETA: 2m ■■■■■■■■ 23% | ETA: 2m ■■■■■■■■ 24% | ETA: 2m ■■■■■■■■■
 #> 25% | ETA: 2m ■■■■■■■■■ 26% | ETA: 2m ■■■■■■■■■ 27% | ETA: 2m ■■■■■■■■■ 28% |
 #> ETA: 2m ■■■■■■■■■■ 29% | ETA: 2m ■■■■■■■■■■ 30% | ETA: 2m ■■■■■■■■■■ 31% | ETA:
 #> 2m ■■■■■■■■■■■ 32% | ETA: 2m ■■■■■■■■■■■ 33% | ETA: 2m ■■■■■■■■■■■ 34% | ETA:
-#> 1m ■■■■■■■■■■■ 35% | ETA: 1m ■■■■■■■■■■■■ 36% | ETA: 1m ■■■■■■■■■■■■ 37% | ETA:
+#> 2m ■■■■■■■■■■■ 35% | ETA: 1m ■■■■■■■■■■■■ 36% | ETA: 1m ■■■■■■■■■■■■ 37% | ETA:
 #> 1m ■■■■■■■■■■■■ 38% | ETA: 1m ■■■■■■■■■■■■■ 39% | ETA: 1m ■■■■■■■■■■■■■ 40% |
 #> ETA: 1m ■■■■■■■■■■■■■ 41% | ETA: 1m ■■■■■■■■■■■■■■ 42% | ETA: 1m ■■■■■■■■■■■■■■
 #> 43% | ETA: 1m ■■■■■■■■■■■■■■ 44% | ETA: 1m ■■■■■■■■■■■■■■■ 45% | ETA: 1m
@@ -246,32 +284,32 @@ reviews_llm <- book_reviews |>
 #> ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 1m ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 1m
 #> ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 1m
 #> ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 49s ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 48s
-#> ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 46s ■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 44s
-#> ■■■■■■■■■■■■■■■■■■■■■■ 69% | ETA: 42s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 41s
-#> ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 39s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 38s
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 36s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 35s
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 33s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 32s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 31s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 30s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 28s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA:
-#> 27s ■■■■■■■■■■■■■■■■■■■■■■■■■ 81% | ETA: 26s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 82% |
-#> ETA: 24s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA: 23s ■■■■■■■■■■■■■■■■■■■■■■■■■■
-#> 84% | ETA: 21s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% | ETA: 20s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 19s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 87% |
-#> ETA: 18s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 16s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 15s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
-#> ETA: 13s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 12s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 11s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93%
-#> | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 94% | ETA: 8s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96%
-#> | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97% | ETA: 5s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+#> ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 1m
+#> ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 48s ■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 47s
+#> ■■■■■■■■■■■■■■■■■■■■■■ 69% | ETA: 45s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 44s
+#> ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 42s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 40s
+#> ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 39s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 37s
+#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 36s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 35s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 35s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 34s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 32s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA:
+#> 31s ■■■■■■■■■■■■■■■■■■■■■■■■■ 81% | ETA: 30s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 82% |
+#> ETA: 29s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA: 27s ■■■■■■■■■■■■■■■■■■■■■■■■■■
+#> 84% | ETA: 26s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% | ETA: 24s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 25s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 87% |
+#> ETA: 23s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 22s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 20s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
+#> ETA: 18s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 16s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 14s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93%
+#> | ETA: 13s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 94% | ETA: 11s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96%
+#> | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97% | ETA: 7s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 #> 99% | ETA: 2s
 ```
 
 ``` r
 toc()
-#> 175.745 sec elapsed
+#> 235.153 sec elapsed
 ```
 
 As far as **time**, on my Apple M3 machine, it took about 3 to 4 minutes
@@ -298,7 +336,7 @@ reviews_llm
 #>    <chr>                                                     <fct>     <chr>    
 #>  1 "i got this as both a book and an audio file. i had wait… 1         negative 
 #>  2 "this book places too much emphasis on spending money in… 1         negative 
-#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         negative 
+#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         positive 
 #>  4 "while i appreciate what tipler was attempting to accomp… 1         negative 
 #>  5 "the others in the series were great, and i really looke… 1         negative 
 #>  6 "a few good things, but she's lost her edge and i find i… 1         negative 
@@ -316,13 +354,13 @@ recorded in `sentiment`.
 ``` r
 library(forcats)
 
-reviews_llm |> 
-  mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |> 
+reviews_llm |>
+  mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |>
   yardstick::accuracy(sentiment, fct_pred)
 #> # A tibble: 1 × 3
 #>   .metric  .estimator .estimate
 #>   <chr>    <chr>          <dbl>
-#> 1 accuracy binary          0.95
+#> 1 accuracy binary          0.94
 ```
 
 ## Databricks
@@ -345,7 +383,7 @@ As mentioned above, using `llm_sentiment()` in Databricks will call that
 vendor’s SQL AI function directly:
 
 ``` r
-tbl_reviews |> 
+tbl_reviews |>
   llm_sentiment(review)
 #> # Source:   SQL [3 x 2]
 #> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]
@@ -364,7 +402,7 @@ Next, we will try `llm_summarize()`. The `max_words` argument maps to
 the same argument in the AI Summarize function:
 
 ``` r
-tbl_reviews |> 
+tbl_reviews |>
   llm_summarize(review, max_words = 5)
 #> # Source:   SQL [3 x 2]
 #> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]

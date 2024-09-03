@@ -15,7 +15,7 @@ llm_sentiment.data.frame <- function(.data,
     .data = .data,
     x = {{ x }},
     prompt = sentiment_prompt(options = options),
-    pred_name = pred_name, 
+    pred_name = pred_name,
     valid_resps = options
   )
 }
@@ -40,3 +40,5 @@ sentiment_prompt <- function(options) {
     !!pred_name := ai_analyze_sentiment({{ x }})
   )
 }
+
+globalVariables("ai_analyze_sentiment")
