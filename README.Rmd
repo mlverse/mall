@@ -220,7 +220,7 @@ reviews_llm <- book_reviews |>
 toc()
 ```
 
-As far as **time**, on my Apple M3 machine, it took about 3 minutes to process,
+As far as **time**, on my Apple M3 machine, it took about 3 to 4 minutes to process,
 100 rows, containing 20 thousand words. 
 
 The package uses `purr` to send each prompt individually to the LLM. But, I did

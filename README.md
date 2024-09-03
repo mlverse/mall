@@ -114,11 +114,11 @@ number of words to output (`max_words`):
 reviews |> 
   llm_summarize(review, max_words = 5) 
 #> # A tibble: 3 × 2
-#>   review                                   .summary                             
-#>   <chr>                                    <chr>                                
-#> 1 This has been the best TV I've ever use… excellent tv performance overall qua…
-#> 2 I regret buying this laptop. It is too … laptop too slow and noisy            
-#> 3 Not sure how to feel about my new washi… new washing machine's mixed reviews
+#>   review                                   .summary                          
+#>   <chr>                                    <chr>                             
+#> 1 This has been the best TV I've ever use… excellent tv with great quality   
+#> 2 I regret buying this laptop. It is too … slow laptop with annoying keyboard
+#> 3 Not sure how to feel about my new washi… new washing machine mixed emotions
 ```
 
 To control the name of the prediction field, you can change `pred_name`
@@ -128,11 +128,11 @@ argument. This works with the other `llm_` functions as well.
 reviews |> 
   llm_summarize(review, max_words = 5, pred_name = "review_summary") 
 #> # A tibble: 3 × 2
-#>   review                                   review_summary                    
-#>   <chr>                                    <chr>                             
-#> 1 This has been the best TV I've ever use… great tv with good quality        
-#> 2 I regret buying this laptop. It is too … laptop is too slow, noisy         
-#> 3 Not sure how to feel about my new washi… new washing machine mixed emotions
+#>   review                                   review_summary                  
+#>   <chr>                                    <chr>                           
+#> 1 This has been the best TV I've ever use… great tv with good picture sound
+#> 2 I regret buying this laptop. It is too … laptop too slow and noisy       
+#> 3 Not sure how to feel about my new washi… Mixed feelings about new washer.
 ```
 
 ## Extract
@@ -226,7 +226,7 @@ reviews_llm <- book_reviews |>
     )
 #> ■ 1% | ETA: 3m ■■ 2% | ETA: 2m ■■ 3% | ETA: 5m ■■ 4% | ETA: 4m ■■■ 5% | ETA: 3m
 #> ■■■ 6% | ETA: 3m ■■■ 7% | ETA: 3m ■■■ 8% | ETA: 3m ■■■■ 9% | ETA: 3m ■■■■ 10% |
-#> ETA: 3m ■■■■ 11% | ETA: 3m ■■■■■ 12% | ETA: 3m ■■■■■ 13% | ETA: 2m ■■■■■ 14% |
+#> ETA: 3m ■■■■ 11% | ETA: 3m ■■■■■ 12% | ETA: 3m ■■■■■ 13% | ETA: 3m ■■■■■ 14% |
 #> ETA: 2m ■■■■■ 15% | ETA: 2m ■■■■■■ 16% | ETA: 2m ■■■■■■ 17% | ETA: 2m ■■■■■■
 #> 18% | ETA: 2m ■■■■■■■ 19% | ETA: 2m ■■■■■■■ 20% | ETA: 2m ■■■■■■■ 21% | ETA: 2m
 #> ■■■■■■■■ 22% | ETA: 2m ■■■■■■■■ 23% | ETA: 2m ■■■■■■■■ 24% | ETA: 2m ■■■■■■■■■
@@ -246,36 +246,36 @@ reviews_llm <- book_reviews |>
 #> ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 1m ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 1m
 #> ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 1m
 #> ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 49s
-#> ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 47s ■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 46s
-#> ■■■■■■■■■■■■■■■■■■■■■■ 69% | ETA: 44s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 43s
-#> ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 41s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 39s
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 38s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 36s
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 35s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 34s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 34s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 33s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 31s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA:
-#> 30s ■■■■■■■■■■■■■■■■■■■■■■■■■ 81% | ETA: 29s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 82% |
-#> ETA: 27s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA: 26s ■■■■■■■■■■■■■■■■■■■■■■■■■■
-#> 84% | ETA: 25s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% | ETA: 23s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 24s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 87% |
-#> ETA: 22s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 20s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 19s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
-#> ETA: 17s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 15s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 14s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93%
-#> | ETA: 12s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 94% | ETA: 10s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96%
-#> | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97% | ETA: 7s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+#> ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 49s ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 48s
+#> ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 46s ■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 44s
+#> ■■■■■■■■■■■■■■■■■■■■■■ 69% | ETA: 42s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 41s
+#> ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 39s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 38s
+#> ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 36s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 35s
+#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 33s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 32s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 31s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 30s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 28s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA:
+#> 27s ■■■■■■■■■■■■■■■■■■■■■■■■■ 81% | ETA: 26s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 82% |
+#> ETA: 24s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA: 23s ■■■■■■■■■■■■■■■■■■■■■■■■■■
+#> 84% | ETA: 21s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% | ETA: 20s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 19s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 87% |
+#> ETA: 18s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 16s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 15s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
+#> ETA: 13s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 12s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 11s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93%
+#> | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 94% | ETA: 8s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96%
+#> | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97% | ETA: 5s
+#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 #> 99% | ETA: 2s
 ```
 
 ``` r
 toc()
-#> 235.829 sec elapsed
+#> 175.745 sec elapsed
 ```
 
-As far as **time**, on my Apple M3 machine, it took about 3 minutes to
-process, 100 rows, containing 20 thousand words.
+As far as **time**, on my Apple M3 machine, it took about 3 to 4 minutes
+to process, 100 rows, containing 20 thousand words.
 
 The package uses `purr` to send each prompt individually to the LLM.
 But, I did try a few different ways to speed up the process,
@@ -298,7 +298,7 @@ reviews_llm
 #>    <chr>                                                     <fct>     <chr>    
 #>  1 "i got this as both a book and an audio file. i had wait… 1         negative 
 #>  2 "this book places too much emphasis on spending money in… 1         negative 
-#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         positive 
+#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         negative 
 #>  4 "while i appreciate what tipler was attempting to accomp… 1         negative 
 #>  5 "the others in the series were great, and i really looke… 1         negative 
 #>  6 "a few good things, but she's lost her edge and i find i… 1         negative 
@@ -322,7 +322,7 @@ reviews_llm |>
 #> # A tibble: 1 × 3
 #>   .metric  .estimator .estimate
 #>   <chr>    <chr>          <dbl>
-#> 1 accuracy binary          0.96
+#> 1 accuracy binary          0.95
 ```
 
 ## Databricks
