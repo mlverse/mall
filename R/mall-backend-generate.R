@@ -9,7 +9,7 @@ mall_backend_generate.ollama <- function(backend, x, base_prompt) {
   args$backend <- NULL
   map_chr(x, ~ {
     .args <- c(
-      prompt = glue("{base_prompt} {.x}"),
+      prompt = glue("{base_prompt}\n{.x}"),
       output = "text",
       args
     )

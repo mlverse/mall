@@ -2,7 +2,8 @@
 llm_extract <- function(.data,
                         x = NULL,
                         labels,
-                        expand_cols = FALSE) {
+                        expand_cols = FALSE,
+                        additional_prompt = "") {
   UseMethod("llm_extract")
 }
 
@@ -10,8 +11,9 @@ llm_extract <- function(.data,
 llm_extract.data.frame <- function(.data,
                                    x = NULL,
                                    labels = c(),
-                                   expand_cols = FALSE) {
-  prompt <- get_prompt("extract", labels)
+                                   expand_cols = FALSE,
+                                   additional_prompt = "") {
+  prompt <- get_prompt("extract", labels, .additional = additional_prompt)
 
   if (expand_cols && length(labels) > 1) {
     resp <- llm_vec_generate(x, prompt)
