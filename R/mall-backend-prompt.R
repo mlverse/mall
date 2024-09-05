@@ -1,10 +1,10 @@
 #' @export
-llm_backend_prompt <- function(backend) {
-  UseMethod("llm_backend_prompt")
+mall_backend_prompt <- function(backend) {
+  UseMethod("mall_backend_prompt")
 }
 
 #' @export
-llm_backend_prompt.mall_defaults <- function(backend) {
+mall_backend_prompt.mall_defaults <- function(backend) {
   list(
     sentiment = function(options) {
       options <- paste0(options, collapse = ", ")
@@ -48,7 +48,7 @@ llm_backend_prompt.mall_defaults <- function(backend) {
 }
 
 get_prompt <- function(label, ...) {
-  defaults <- llm_backend_prompt(defaults_get())
+  defaults <- mall_backend_prompt(defaults_get())
   fn <- defaults[[label]]
   fn(...)
 }
