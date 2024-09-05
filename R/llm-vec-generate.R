@@ -7,7 +7,8 @@ llm_vec_generate <- function(x, prompt, valid_resps = NULL) {
     resp[errors] <- NA
     if(any(errors)) {
       cli_alert_warning(
-        "There were {sum(errors)} predictions with invalid output, they were coerced to NA"
+        c("There were {sum(errors)} predictions with ",
+          "invalid output, they were coerced to NA")
       )  
     }
   }

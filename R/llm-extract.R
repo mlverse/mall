@@ -46,13 +46,3 @@ extract_prompt <- function(labels) {
     "The answer is based on the following text:"
   )
 }
-
-clean_names <- function(x) {
-  x <- tolower(x)
-  map_chr(
-    x, ~ {
-      xs <- strsplit(.x, " ")[[1]]
-      paste0(xs, collapse = "_")
-    }
-  )
-}
