@@ -2,7 +2,8 @@
 llm_sentiment <- function(.data,
                           x = NULL,
                           options = c("positive", "negative", "neutral"),
-                          pred_name = ".sentiment") {
+                          pred_name = ".sentiment",
+                          additional_prompt = ""){
   UseMethod("llm_sentiment")
 }
 
@@ -10,23 +11,14 @@ llm_sentiment <- function(.data,
 llm_sentiment.data.frame <- function(.data,
                                      x = NULL,
                                      options = c("positive", "negative", "neutral"),
-                                     pred_name = ".sentiment") {
+                                     pred_name = ".sentiment",
+                                     additional_prompt = "") {
   llm_custom(
     .data = .data,
     x = {{ x }},
-    prompt = sentiment_prompt(options = options),
+    prompt = get_prompt("sentiment", options, .additional = additional_prompt),
     pred_name = pred_name,
     valid_resps = options
-  )
-}
-
-sentiment_prompt <- function(options) {
-  options <- paste0(options, collapse = ", ")
-  glue(
-    "You are a helpful sentiment engine.",
-    "Return only one of the following answers: {options}.",
-    "No capitalization. No explanations.",
-    "The answer is based on the following text:"
   )
 }
 
@@ -34,7 +26,8 @@ sentiment_prompt <- function(options) {
 `llm_sentiment.tbl_Spark SQL` <- function(.data,
                                           x = NULL,
                                           options = NULL,
-                                          pred_name = ".sentiment") {
+                                          pred_name = ".sentiment",
+                                          additional_prompt = NULL) {
   mutate(
     .data = .data,
     !!pred_name := ai_analyze_sentiment({{ x }})

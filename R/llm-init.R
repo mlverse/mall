@@ -1,24 +1,29 @@
 #' @export
-llm_init <- function(backend = NULL, model = NULL, ...) {
-  args <- list(...)
-  if (is.null(backend) && inherits(.env_llm$defaults, "list")) {
-    try_connection <- test_connection()
-    if (try_connection$status_code == 200) {
-      backend <- "ollama"
-      model <- "llama3.1"
+llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force = TRUE) {
+  not_init <- inherits(defaults_get(), "list")
+
+  if (not_init | .force) {
+    args <- list(...)
+    if (is.null(backend)) {
+      try_connection <- test_connection()
+      if (try_connection$status_code == 200) {
+        backend <- "ollama"
+        model <- "llama3.1"
+      }
     }
+    if (is.null(backend)) {
+      cli_abort("No backend was selected, and Ollama is not available")
+    }
+    defaults_set(
+      backend = backend,
+      model = model,
+      ...
+    )
   }
-  if (is.null(backend)) {
-    cli_abort("No backend was selected, and Ollama is not available")
+  if (!.silent | not_init) {
+    defaults <- defaults_get()
+    cli_inform(glue("{col_green('Provider:')} {defaults$backend}"))
+    cli_inform(glue("{col_green('Model:')} {defaults$model}"))
   }
-  defaults <- list(
-    backend = backend,
-    model = model,
-    ...
-  )
-  class(defaults) <- backend
-  .env_llm$defaults <- defaults
-  cli_inform(glue("{col_green('Provider:')} {defaults$backend}"))
-  cli_inform(glue("{col_green('Model:')} {defaults$model}"))
   invisible()
 }

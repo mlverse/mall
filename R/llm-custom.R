@@ -22,6 +22,6 @@ llm_custom.data.frame <- function(.data,
       x = {{ x }},
       prompt = prompt,
       valid_resps = valid_resps
-      )
+    )
   )
 }
