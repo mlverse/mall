@@ -2,7 +2,8 @@
 llm_sentiment <- function(.data,
                           x = NULL,
                           options = c("positive", "negative", "neutral"),
-                          pred_name = ".sentiment") {
+                          pred_name = ".sentiment",
+                          additional_prompt = ""){
   UseMethod("llm_sentiment")
 }
 
@@ -10,11 +11,12 @@ llm_sentiment <- function(.data,
 llm_sentiment.data.frame <- function(.data,
                                      x = NULL,
                                      options = c("positive", "negative", "neutral"),
-                                     pred_name = ".sentiment") {
+                                     pred_name = ".sentiment",
+                                     additional_prompt = "") {
   llm_custom(
     .data = .data,
     x = {{ x }},
-    prompt = get_prompt("sentiment", options),
+    prompt = get_prompt("sentiment", options, .additional = additional_prompt),
     pred_name = pred_name,
     valid_resps = options
   )
@@ -24,7 +26,8 @@ llm_sentiment.data.frame <- function(.data,
 `llm_sentiment.tbl_Spark SQL` <- function(.data,
                                           x = NULL,
                                           options = NULL,
-                                          pred_name = ".sentiment") {
+                                          pred_name = ".sentiment",
+                                          additional_prompt = NULL) {
   mutate(
     .data = .data,
     !!pred_name := ai_analyze_sentiment({{ x }})
