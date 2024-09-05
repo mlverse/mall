@@ -17,6 +17,7 @@ defaults_set <- function(..., .quiet = TRUE) {
     nm <- names(new_args[i])
     .env_llm$defaults[[nm]] <- new_args[[i]]
   }
+  class(.env_llm$defaults) <- .env_llm$defaults[["backend"]]
   if (!.quiet) {
     return(defaults_get())
   } else {
