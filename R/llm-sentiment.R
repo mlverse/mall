@@ -14,19 +14,9 @@ llm_sentiment.data.frame <- function(.data,
   llm_custom(
     .data = .data,
     x = {{ x }},
-    prompt = sentiment_prompt(options = options),
+    prompt = get_prompt("sentiment", options),
     pred_name = pred_name,
     valid_resps = options
-  )
-}
-
-sentiment_prompt <- function(options) {
-  options <- paste0(options, collapse = ", ")
-  glue(
-    "You are a helpful sentiment engine.",
-    "Return only one of the following answers: {options}.",
-    "No capitalization. No explanations.",
-    "The answer is based on the following text:"
   )
 }
 
