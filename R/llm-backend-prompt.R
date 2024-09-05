@@ -43,7 +43,7 @@ llm_backend_prompt.mall_defaults <- function(backend) {
         "Return the response in a simple pipe separated list, no headers. ",
         "The answer is based on the following text:"
       )
-    }    
+    }
   )
 }
 

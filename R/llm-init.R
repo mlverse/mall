@@ -1,9 +1,8 @@
 #' @export
 llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force = TRUE) {
-  
   not_init <- inherits(defaults_get(), "list")
-  
-  if(not_init | .force) {
+
+  if (not_init | .force) {
     args <- list(...)
     if (is.null(backend)) {
       try_connection <- test_connection()
@@ -19,9 +18,9 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force 
       backend = backend,
       model = model,
       ...
-    )    
+    )
   }
-  if(!.silent | not_init) {
+  if (!.silent | not_init) {
     defaults <- defaults_get()
     cli_inform(glue("{col_green('Provider:')} {defaults$backend}"))
     cli_inform(glue("{col_green('Model:')} {defaults$model}"))

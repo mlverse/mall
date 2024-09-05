@@ -28,7 +28,7 @@ clean_names <- function(x, replace_periods = FALSE) {
     x, ~ {
       xs <- strsplit(.x, " ")[[1]]
       x <- paste0(xs, collapse = "_")
-      if(replace_periods) {
+      if (replace_periods) {
         xs <- strsplit(.x, "\\.")[[1]]
         x <- paste0(xs, collapse = "_")
       }
