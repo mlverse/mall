@@ -4,13 +4,6 @@ llm_backend_generate <- function(backend, x, base_prompt) {
 }
 
 #' @export
-llm_backend_generate.list <- function(backend, x, base_prompt) {
-  llm_init()
-  llm_backend_generate(.env_llm$defaults, x, base_prompt)
-  invisible()
-}
-
-#' @export
 llm_backend_generate.ollama <- function(backend, x, base_prompt) {
   args <- as.list(backend)
   args$backend <- NULL
