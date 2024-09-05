@@ -14,17 +14,8 @@ llm_summarize.data.frame <- function(.data,
   llm_custom(
     .data = .data,
     x = {{ x }},
-    prompt = summarize_prompt(max_words),
+    prompt = get_prompt("summarize", max_words),
     pred_name = pred_name
-  )
-}
-
-summarize_prompt <- function(max_words) {
-  glue(
-    "You are a helpful summarization engine. ",
-    "Your answer will contain no no capitalization and no explanations. ",
-    "Return no more than {max_words} words. ",
-    "The answer is the summary of the following text:"
   )
 }
 

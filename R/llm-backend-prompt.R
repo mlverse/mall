@@ -14,6 +14,14 @@ llm_backend_prompt.mall_defaults <- function(backend) {
         "No capitalization. No explanations.",
         "The answer is based on the following text:"
       )
+    },
+    summarize = function(max_words) {
+      glue(
+        "You are a helpful summarization engine. ",
+        "Your answer will contain no no capitalization and no explanations. ",
+        "Return no more than {max_words} words. ",
+        "The answer is the summary of the following text:"
+      )
     }
   )
 }
