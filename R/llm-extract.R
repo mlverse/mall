@@ -35,3 +35,13 @@ llm_extract.data.frame <- function(.data,
   }
   resp
 }
+
+#' @export
+llm_vec_extract <- function(x,
+                            labels = c(),
+                            additional_prompt = "") {
+  llm_vec_custom(
+    x = x,
+    prompt = get_prompt("extract", labels, .additional = additional_prompt)
+  )
+}
