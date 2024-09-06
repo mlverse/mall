@@ -1,18 +1,30 @@
 #' @export
 llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force = TRUE) {
+  args <- list(...)
+  models <- list()
   not_init <- inherits(defaults_get(), "list")
-
   if (not_init | .force) {
-    args <- list(...)
     if (is.null(backend)) {
       try_connection <- test_connection()
       if (try_connection$status_code == 200) {
-        backend <- "ollama"
-        model <- "llama3.1"
+        ollama_models <- list_models()
+        for(model in ollama_models$name) {
+          models <- c(models, list(list(backend = "Ollama", model = model)))
+        }
       }
     }
-    if (is.null(backend)) {
+    if (length(models) == 0) {
       cli_abort("No backend was selected, and Ollama is not available")
+    }
+    if(length(models) == 1) {
+      backend <- models[[1]]$backend
+      model <- models[[1]]$model
+    } else {
+      mu <- map_chr(models, \(x) glue("{x$backend} - {x$model}"))
+      sel_model <- menu(mu)
+      backend <- models[[sel_model]]$backend
+      model <- models[[sel_model]]$model
+      cli_inform("") 
     }
     defaults_set(
       backend = backend,

@@ -27,13 +27,17 @@ clean_names <- function(x, replace_periods = FALSE) {
   map_chr(
     x,
     \(x) {
-      xs <- strsplit(x, " ")[[1]]
-      out <- paste0(xs, collapse = "_")
+      out <- str_replace_clean(x, " ")
+      out <- str_replace_clean(out, "\\:")
       if (replace_periods) {
-        xs <- strsplit(out, "\\.")[[1]]
-        out <- paste0(xs, collapse = "_")
+        out <- str_replace_clean(out, "\\.")
       }
       out
     }
   )
+}
+
+str_replace_clean <- function(x, y, z = "_") {
+  xs <- strsplit(x, y)[[1]]
+  paste0(xs, collapse = z)
 }
