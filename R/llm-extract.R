@@ -16,7 +16,7 @@ llm_extract.data.frame <- function(.data,
   prompt <- get_prompt("extract", labels, .additional = additional_prompt)
 
   if (expand_cols && length(labels) > 1) {
-    resp <- llm_vec_generate(x, prompt)
+    resp <- llm_vec_custom(x, prompt)
     resp <- map_df(
       resp, ~ {
         x <- trimws(strsplit(.x, "\\|")[[1]])
@@ -34,4 +34,14 @@ llm_extract.data.frame <- function(.data,
     )
   }
   resp
+}
+
+#' @export
+llm_vec_extract <- function(x,
+                            labels = c(),
+                            additional_prompt = "") {
+  llm_vec_custom(
+    x = x,
+    prompt = get_prompt("extract", labels, .additional = additional_prompt)
+  )
 }

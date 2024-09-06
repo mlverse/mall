@@ -34,3 +34,14 @@ llm_summarize.data.frame <- function(.data,
 }
 
 globalVariables("ai_summarize")
+
+
+#' @export
+llm_vec_summarize <- function(x,
+                              max_words = 100,
+                              additional_prompt = "") {
+  llm_vec_custom(
+    x = x,
+    prompt = get_prompt("summarize", max_words, .additional = additional_prompt)
+  )
+}

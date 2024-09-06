@@ -47,7 +47,16 @@ mall_backend_prompt.mall_defaults <- function(backend, additional = "") {
         additional,
         "The answer is based on the following text:"
       )
-    }
+    },
+    translate = function(language) {
+        glue(
+          "You are a helpful translation engine. ",
+          "You will return only the translation text, no explanations. ",
+          "The target language to translate to is: {language}. ",
+          additional, 
+          "The answer is the summary of the following text: "
+        )
+    }    
   )
 }
 
