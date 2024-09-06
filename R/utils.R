@@ -25,14 +25,15 @@ defaults_set <- function(..., .quiet = TRUE) {
 clean_names <- function(x, replace_periods = FALSE) {
   x <- tolower(x)
   map_chr(
-    x, ~ {
-      xs <- strsplit(.x, " ")[[1]]
-      x <- paste0(xs, collapse = "_")
+    x,
+    \(x) {
+      xs <- strsplit(x, " ")[[1]]
+      out <- paste0(xs, collapse = "_")
       if (replace_periods) {
-        xs <- strsplit(.x, "\\.")[[1]]
-        x <- paste0(xs, collapse = "_")
+        xs <- strsplit(out, "\\.")[[1]]
+        out <- paste0(xs, collapse = "_")
       }
-      x
+      out
     }
   )
 }
