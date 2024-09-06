@@ -12,11 +12,11 @@ llm_custom <- function(
 llm_custom.data.frame <- function(.data,
                                   x,
                                   prompt,
-                                  pred_name = ".pred", 
+                                  pred_name = ".pred",
                                   valid_resps = NULL) {
   mutate(
     .data = .data,
-    !!pred_name := llm_custom(
+    !!pred_name := llm_vec_custom(
       x = {{ x }},
       prompt = prompt,
       valid_resps = valid_resps
@@ -42,4 +42,3 @@ llm_vec_custom <- function(x, prompt, valid_resps = NULL) {
   }
   resp
 }
-

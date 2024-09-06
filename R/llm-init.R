@@ -8,7 +8,7 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force 
       try_connection <- test_connection()
       if (try_connection$status_code == 200) {
         ollama_models <- list_models()
-        for(model in ollama_models$name) {
+        for (model in ollama_models$name) {
           models <- c(models, list(list(backend = "Ollama", model = model)))
         }
       }
@@ -17,10 +17,10 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force 
       cli_abort("No backend was selected, and Ollama is not available")
     }
     sel_model <- 1
-    if(length(models) > 1) {
+    if (length(models) > 1) {
       mu <- map_chr(models, \(x) glue("{x$backend} - {x$model}"))
       sel_model <- menu(mu)
-      cli_inform("") 
+      cli_inform("")
     }
     backend <- models[[sel_model]]$backend
     model <- models[[sel_model]]$model
