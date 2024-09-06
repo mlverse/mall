@@ -16,16 +16,14 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force 
     if (length(models) == 0) {
       cli_abort("No backend was selected, and Ollama is not available")
     }
-    if(length(models) == 1) {
-      backend <- models[[1]]$backend
-      model <- models[[1]]$model
-    } else {
+    sel_model <- 1
+    if(length(models) > 1) {
       mu <- map_chr(models, \(x) glue("{x$backend} - {x$model}"))
       sel_model <- menu(mu)
-      backend <- models[[sel_model]]$backend
-      model <- models[[sel_model]]$model
       cli_inform("") 
     }
+    backend <- models[[sel_model]]$backend
+    model <- models[[sel_model]]$model
     defaults_set(
       backend = backend,
       model = model,
