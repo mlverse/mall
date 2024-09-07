@@ -1,10 +1,12 @@
 Package: mall
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9001
+Title: Run multiple 'Large Language Model' predictions against a table
+Version: 0.0.0.9002
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    person("Edgar", "Ruiz", , "first.last@example.com", role = c("aut", "cre"))
+Description: Run multiple 'Large Language Model' predictions against a table. The
+    predictions run row-wise over a specified column. It works using a pre-determined
+    one-shot prompt, along with the current row's content. The prompt that is use 
+    will depend of the type of analysis needed.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
