@@ -4,7 +4,7 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force =
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(defaults_get(), "list")
-  if(supplied == 2) {
+  if (supplied == 2) {
     not_init <- FALSE
   }
   if (not_init | force) {
@@ -29,12 +29,12 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force =
     backend <- models[[sel_model]]$backend
     model <- models[[sel_model]]$model
   }
-  if(!is.null(backend) && !is.null(model)) {
+  if (!is.null(backend) && !is.null(model)) {
     defaults_set(
       backend = backend,
       model = model,
       ...
-    )    
+    )
   }
   if (!.silent | not_init) {
     defaults <- defaults_get()
