@@ -25,6 +25,31 @@ mall::llm_init()
 <!-- badges: start -->
 <!-- badges: end -->
 
+```{r, eval = FALSE, echo = FALSE}
+source("utils/table_of_contents.R")
+table_of_contents()
+```
+
+
+<!-- toc: start -->
+- [Intro](#intro)
+    - [Databricks integration](#databricks-integration)
+- [Motivation](#motivation)
+- [Examples](#examples)
+    - [Sentiment](#sentiment)
+    - [Summarize](#summarize)
+    - [Classify](#classify)
+    - [Extract ](#extract-)
+    - [Translate](#translate)
+    - [Custom prompt](#custom-prompt)
+    - [Init](#init)
+- [Key considerations](#key-considerations)
+- [Performance](#performance)
+- [Vector functions](#vector-functions)
+- [Databricks](#databricks)
+
+<!-- toc: end -->
+
 ## Intro
 
 Run multiple LLM predictions against a table. The predictions run row-wise
@@ -123,7 +148,7 @@ reviews |>
   filter(.sentiment == "negative")
 ```
 
-## Summarize
+### Summarize
 
 There may be a need to reduce the number of words in a given text. Usually, to 
 make it easier to capture its intent. To do this, use `llm_summarize()`. This
@@ -143,7 +168,7 @@ reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
 ```
 
-## Classify
+### Classify
 
 Use the LLM to categorize the text into one of the options you provide: 
 
@@ -152,7 +177,7 @@ reviews |>
   llm_classify(review, c("appliance", "computer"))
 ```
 
-## Extract 
+### Extract 
 
 One of the most interesting operations. Using natural language, we can tell the 
 LLM to return a specific part of the text. In the following example, we request
@@ -166,7 +191,7 @@ reviews |>
   llm_extract(review, "product")
 ```
 
-## Translate
+### Translate
 
 As the title implies, this function will translate the text into a specified 
 language. What is really nice, it is that you don't need to specify the language
@@ -174,12 +199,12 @@ of the source text. Only the target language needs to be defined.  The translati
 accuracy will depend on the LLM
 
 ```{r}
-reviews |> 
+reviews |>
   llm_translate(review, "spanish")
 ```
 
 
-## Custom prompt
+### Custom prompt
 
 It is possible to pass your own prompt to the LLM, and have `mall` run it 
 against each text entry. Use `llm_custom()` to access this functionality: 
@@ -192,11 +217,11 @@ my_prompt <- paste(
   "Answer this about the following text, is this a happy customer?:"
 )
 
-reviews |> 
+reviews |>
   llm_custom(review, my_prompt)
 ```
 
-## Init
+### Init
 
 Invoking an `llm_` function will automatically initialize a model selection
 if you don't have one selected yet. If there is only one option, it will 
@@ -212,7 +237,6 @@ is [`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html).
 ```{r}
 llm_init("ollama", "llama3.1", seed = 100, temperature = 0.2)
 ```
-
 
 ## Key considerations
 
@@ -279,7 +303,7 @@ reviews_llm <- book_reviews |>
 toc()
 ```
 
-As far as **time**, on my Apple M3 machine, it took about 3 to process,
+As far as **time**, on my Apple M3 machine, it took about 3 minutes to process,
 100 rows, containing 20 thousand words. Setting `temp` to 0.2 in `llm_init()`, 
 made the model run a bit faster.
 
@@ -299,6 +323,7 @@ This is what the new table looks like:
 ```{r}
 reviews_llm
 ```
+
 I used `yardstick` to see how well the model performed. Of course, the accuracy
 will not be of the "truth", but rather the package's results recorded in 
 `sentiment`.
@@ -325,8 +350,6 @@ llm_vec_sentiment("I am happy")
 ```{r}
 llm_vec_translate("Este es el mejor dia!", "english")
 ```
-
-
 
 ## Databricks
 
@@ -362,4 +385,3 @@ argument in the AI Summarize function:
 tbl_reviews |>
   llm_summarize(review, max_words = 5)
 ```
-
