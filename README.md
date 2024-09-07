@@ -67,7 +67,7 @@ library(mall)
 
 reviews |>
   llm_sentiment(review)
-#> ■■■■■■■■■■■ 33% | ETA: 15s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 4s
+#> ■■■■■■■■■■■ 33% | ETA: 3s
 #> # A tibble: 3 × 2
 #>   review                                   .sentiment
 #>   <chr>                                    <chr>     
@@ -96,10 +96,11 @@ prediction can be used in further transformations:
 reviews |>
   llm_sentiment(review, options = c("positive", "negative")) |>
   filter(.sentiment == "negative")
-#> # A tibble: 1 × 2
+#> # A tibble: 2 × 2
 #>   review                                   .sentiment
 #>   <chr>                                    <chr>     
-#> 1 I regret buying this laptop. It is too … negative
+#> 1 I regret buying this laptop. It is too … negative  
+#> 2 Not sure how to feel about my new washi… negative
 ```
 
 ## Summarize
@@ -115,9 +116,9 @@ reviews |>
 #> # A tibble: 3 × 2
 #>   review                                   .summary                        
 #>   <chr>                                    <chr>                           
-#> 1 This has been the best TV I've ever use… best tv i've ever owned         
-#> 2 I regret buying this laptop. It is too … slow and noisy laptop experience
-#> 3 Not sure how to feel about my new washi… new washer has mixed feelings
+#> 1 This has been the best TV I've ever use… very satisfied with tv purchase.
+#> 2 I regret buying this laptop. It is too … laptop is too slow and noisy    
+#> 3 Not sure how to feel about my new washi… washing machine mixed emotions
 ```
 
 To control the name of the prediction field, you can change `pred_name`
@@ -127,11 +128,11 @@ argument. This works with the other `llm_` functions as well.
 reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
 #> # A tibble: 3 × 2
-#>   review                                   review_summary                    
-#>   <chr>                                    <chr>                             
-#> 1 This has been the best TV I've ever use… best tv i have ever               
-#> 2 I regret buying this laptop. It is too … laptop is too slow and noisy      
-#> 3 Not sure how to feel about my new washi… new washing machine mixed feelings
+#>   review                                   review_summary                     
+#>   <chr>                                    <chr>                              
+#> 1 This has been the best TV I've ever use… great tv with good picture sound   
+#> 2 I regret buying this laptop. It is too … slow and noisy laptop purchase     
+#> 3 Not sure how to feel about my new washi… uncertain feelings about new washer
 ```
 
 ## Classify
@@ -168,6 +169,25 @@ reviews |>
 #> 3 Not sure how to feel about my new washi… washing machine
 ```
 
+## Translate
+
+As the title implies, this function will translate the text into a
+specified language. What is really nice, it is that you don’t need to
+specify the language of the source text. Only the target language needs
+to be defined. The translation accuracy will depend on the LLM
+
+``` r
+reviews |> 
+  llm_translate(review, "spanish")
+#> ■■■■■■■■■■■ 33% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 1s
+#> # A tibble: 3 × 2
+#>   review                                   .translation                         
+#>   <chr>                                    <chr>                                
+#> 1 This has been the best TV I've ever use… Ha sido la mejor televisión que he u…
+#> 2 I regret buying this laptop. It is too … Lamento haber comprado este portátil…
+#> 3 Not sure how to feel about my new washi… No estoy seguro de cómo sentirme ace…
+```
+
 ## Custom prompt
 
 It is possible to pass your own prompt to the LLM, and have `mall` run
@@ -187,9 +207,29 @@ reviews |>
 #> # A tibble: 3 × 2
 #>   review                                   .pred
 #>   <chr>                                    <chr>
-#> 1 This has been the best TV I've ever use… Yes. 
+#> 1 This has been the best TV I've ever use… Yes  
 #> 2 I regret buying this laptop. It is too … No   
 #> 3 Not sure how to feel about my new washi… No
+```
+
+## Init
+
+Invoking an `llm_` function will automatically initialize a model
+selection if you don’t have one selected yet. If there is only one
+option, it will pre-select it for you. If there are more than one
+available models, then `mall` will present you as menu selection so you
+can select which model you wish to use.
+
+Calling `llm_init()` directly will let you specify the model and backend
+to use. You can also setup additional arguments that will be passed down
+to the function that actually runs the prediction. In the case of
+Ollama, that function is
+[`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html).
+
+``` r
+llm_init("ollama", "llama3.1", seed = 100, temperature = 0.2)
+#> Provider: ollama
+#> Model: llama3.1
 ```
 
 ## Key considerations
@@ -199,7 +239,7 @@ The main consideration is **cost**. Either, time cost, or money cost.
 If using this method with an LLM locally available, the cost will be a
 long running time. Unless using a very specialized LLM, a given LLM is a
 general model. It was fitted using a vast amount of data. So determining
-a response for each row, takes longerthat if using a manually created
+a response for each row, takes longer than if using a manually created
 NLP model. The default model used in Ollama is Llama 3.1, which was
 fitted using 8B parameters.
 
@@ -262,60 +302,19 @@ reviews_llm <- book_reviews |>
     options = c("positive", "negative"),
     pred_name = "predicted"
   )
-#> ■ 1% | ETA: 3m ■■ 2% | ETA: 2m ■■ 3% | ETA: 5m ■■ 4% | ETA: 4m ■■■ 5% | ETA: 3m
-#> ■■■ 6% | ETA: 3m ■■■ 7% | ETA: 3m ■■■ 8% | ETA: 3m ■■■■ 9% | ETA: 3m ■■■■ 10% |
-#> ETA: 3m ■■■■ 11% | ETA: 3m ■■■■■ 12% | ETA: 3m ■■■■■ 13% | ETA: 2m ■■■■■ 14% |
-#> ETA: 2m ■■■■■ 15% | ETA: 2m ■■■■■■ 16% | ETA: 2m ■■■■■■ 17% | ETA: 2m ■■■■■■
-#> 18% | ETA: 2m ■■■■■■■ 19% | ETA: 2m ■■■■■■■ 20% | ETA: 2m ■■■■■■■ 21% | ETA: 2m
-#> ■■■■■■■■ 22% | ETA: 2m ■■■■■■■■ 23% | ETA: 2m ■■■■■■■■ 24% | ETA: 2m ■■■■■■■■■
-#> 25% | ETA: 2m ■■■■■■■■■ 26% | ETA: 2m ■■■■■■■■■ 27% | ETA: 2m ■■■■■■■■■ 28% |
-#> ETA: 2m ■■■■■■■■■■ 29% | ETA: 2m ■■■■■■■■■■ 30% | ETA: 2m ■■■■■■■■■■ 31% | ETA:
-#> 2m ■■■■■■■■■■■ 32% | ETA: 2m ■■■■■■■■■■■ 33% | ETA: 2m ■■■■■■■■■■■ 34% | ETA:
-#> 2m ■■■■■■■■■■■ 35% | ETA: 1m ■■■■■■■■■■■■ 36% | ETA: 1m ■■■■■■■■■■■■ 37% | ETA:
-#> 1m ■■■■■■■■■■■■ 38% | ETA: 1m ■■■■■■■■■■■■■ 39% | ETA: 1m ■■■■■■■■■■■■■ 40% |
-#> ETA: 1m ■■■■■■■■■■■■■ 41% | ETA: 1m ■■■■■■■■■■■■■■ 42% | ETA: 1m ■■■■■■■■■■■■■■
-#> 43% | ETA: 1m ■■■■■■■■■■■■■■ 44% | ETA: 1m ■■■■■■■■■■■■■■■ 45% | ETA: 1m
-#> ■■■■■■■■■■■■■■■ 46% | ETA: 1m ■■■■■■■■■■■■■■■ 47% | ETA: 1m ■■■■■■■■■■■■■■■ 48%
-#> | ETA: 1m ■■■■■■■■■■■■■■■■ 49% | ETA: 1m ■■■■■■■■■■■■■■■■ 50% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■ 51% | ETA: 1m ■■■■■■■■■■■■■■■■■ 52% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■ 53% | ETA: 1m ■■■■■■■■■■■■■■■■■ 54% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■ 55% | ETA: 1m ■■■■■■■■■■■■■■■■■■ 56% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■ 57% | ETA: 1m ■■■■■■■■■■■■■■■■■■ 58% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 1m ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 1m ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 1m
-#> ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 48s ■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 47s
-#> ■■■■■■■■■■■■■■■■■■■■■■ 69% | ETA: 45s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 44s
-#> ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 42s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 40s
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 39s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 37s
-#> ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 36s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 35s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 35s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 34s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 32s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA:
-#> 31s ■■■■■■■■■■■■■■■■■■■■■■■■■ 81% | ETA: 30s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 82% |
-#> ETA: 29s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA: 27s ■■■■■■■■■■■■■■■■■■■■■■■■■■
-#> 84% | ETA: 26s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% | ETA: 24s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 25s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 87% |
-#> ETA: 23s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 22s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 20s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
-#> ETA: 18s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 16s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 14s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93%
-#> | ETA: 13s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 94% | ETA: 11s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96%
-#> | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97% | ETA: 7s
-#> ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-#> 99% | ETA: 2s
+#>  ■                                  1% |  ETA:  3m ■■                                 2% |  ETA:  2m ■■                                 3% |  ETA:  5m ■■                                 4% |  ETA:  4m ■■■                                5% |  ETA:  3m ■■■                                6% |  ETA:  3m ■■■                                7% |  ETA:  3m ■■■                                8% |  ETA:  3m ■■■■                               9% |  ETA:  3m ■■■■                              10% |  ETA:  3m ■■■■                              11% |  ETA:  3m ■■■■■                             12% |  ETA:  3m ■■■■■                             13% |  ETA:  2m ■■■■■                             14% |  ETA:  2m ■■■■■                             15% |  ETA:  2m ■■■■■■                            16% |  ETA:  2m ■■■■■■                            17% |  ETA:  2m ■■■■■■                            18% |  ETA:  2m ■■■■■■■                           19% |  ETA:  2m ■■■■■■■                           20% |  ETA:  2m ■■■■■■■                           21% |  ETA:  2m ■■■■■■■■                          22% |  ETA:  2m ■■■■■■■■                          23% |  ETA:  2m ■■■■■■■■                          24% |  ETA:  2m ■■■■■■■■■                         25% |  ETA:  2m ■■■■■■■■■                         26% |  ETA:  2m ■■■■■■■■■                         27% |  ETA:  2m ■■■■■■■■■                         28% |  ETA:  2m ■■■■■■■■■■                        29% |  ETA:  2m ■■■■■■■■■■                        30% |  ETA:  2m ■■■■■■■■■■                        31% |  ETA:  2m ■■■■■■■■■■■                       32% |  ETA:  2m ■■■■■■■■■■■                       33% |  ETA:  2m ■■■■■■■■■■■                       34% |  ETA:  1m ■■■■■■■■■■■                       35% |  ETA:  1m ■■■■■■■■■■■■                      36% |  ETA:  1m ■■■■■■■■■■■■                      37% |  ETA:  1m ■■■■■■■■■■■■                      38% |  ETA:  1m ■■■■■■■■■■■■■                     39% |  ETA:  1m ■■■■■■■■■■■■■                     40% |  ETA:  1m ■■■■■■■■■■■■■                     41% |  ETA:  1m ■■■■■■■■■■■■■■                    42% |  ETA:  1m ■■■■■■■■■■■■■■                    43% |  ETA:  1m ■■■■■■■■■■■■■■                    44% |  ETA:  1m ■■■■■■■■■■■■■■■                   45% |  ETA:  1m ■■■■■■■■■■■■■■■                   46% |  ETA:  1m ■■■■■■■■■■■■■■■                   47% |  ETA:  1m ■■■■■■■■■■■■■■■                   48% |  ETA:  1m ■■■■■■■■■■■■■■■■                  49% |  ETA:  1m ■■■■■■■■■■■■■■■■                  50% |  ETA:  1m ■■■■■■■■■■■■■■■■                  51% |  ETA:  1m ■■■■■■■■■■■■■■■■■                 52% |  ETA:  1m ■■■■■■■■■■■■■■■■■                 53% |  ETA:  1m ■■■■■■■■■■■■■■■■■                 54% |  ETA:  1m ■■■■■■■■■■■■■■■■■                 55% |  ETA:  1m ■■■■■■■■■■■■■■■■■■                56% |  ETA:  1m ■■■■■■■■■■■■■■■■■■                57% |  ETA:  1m ■■■■■■■■■■■■■■■■■■                58% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■               59% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■               60% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■               61% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■■              62% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■■              63% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■■              64% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■■■             65% |  ETA:  1m ■■■■■■■■■■■■■■■■■■■■■             66% |  ETA: 48s ■■■■■■■■■■■■■■■■■■■■■             67% |  ETA: 47s ■■■■■■■■■■■■■■■■■■■■■             68% |  ETA: 45s ■■■■■■■■■■■■■■■■■■■■■■            69% |  ETA: 43s ■■■■■■■■■■■■■■■■■■■■■■            70% |  ETA: 42s ■■■■■■■■■■■■■■■■■■■■■■            71% |  ETA: 40s ■■■■■■■■■■■■■■■■■■■■■■■           72% |  ETA: 38s ■■■■■■■■■■■■■■■■■■■■■■■           73% |  ETA: 37s ■■■■■■■■■■■■■■■■■■■■■■■           74% |  ETA: 35s ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA: 34s ■■■■■■■■■■■■■■■■■■■■■■■■          76% |  ETA: 33s ■■■■■■■■■■■■■■■■■■■■■■■■          77% |  ETA: 32s ■■■■■■■■■■■■■■■■■■■■■■■■          78% |  ETA: 30s ■■■■■■■■■■■■■■■■■■■■■■■■■         79% |  ETA: 29s ■■■■■■■■■■■■■■■■■■■■■■■■■         80% |  ETA: 27s ■■■■■■■■■■■■■■■■■■■■■■■■■         81% |  ETA: 26s ■■■■■■■■■■■■■■■■■■■■■■■■■■        82% |  ETA: 25s ■■■■■■■■■■■■■■■■■■■■■■■■■■        83% |  ETA: 23s ■■■■■■■■■■■■■■■■■■■■■■■■■■        84% |  ETA: 22s ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% |  ETA: 20s ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% |  ETA: 20s ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% |  ETA: 18s ■■■■■■■■■■■■■■■■■■■■■■■■■■■       88% |  ETA: 17s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      89% |  ETA: 15s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      90% |  ETA: 14s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% |  ETA: 12s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     92% |  ETA: 11s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     93% |  ETA: 10s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     94% |  ETA:  8s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% |  ETA:  7s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% |  ETA:  5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    97% |  ETA:  5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% |  ETA:  3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   99% |  ETA:  2s                                                   ! There were 1 predictions with invalid output, they were coerced to NA
 ```
 
 ``` r
 toc()
-#> 235.153 sec elapsed
+#> 167.405 sec elapsed
 ```
 
-As far as **time**, on my Apple M3 machine, it took about 3 to 4 minutes
-to process, 100 rows, containing 20 thousand words.
+As far as **time**, on my Apple M3 machine, it took about 3 to process,
+100 rows, containing 20 thousand words. Setting `temp` to 0.2 in
+`llm_init()`, made the model run a bit faster.
 
-The package uses `purr` to send each prompt individually to the LLM.
+The package uses `purrr` to send each prompt individually to the LLM.
 But, I did try a few different ways to speed up the process,
 unsuccessfully:
 
@@ -336,7 +335,7 @@ reviews_llm
 #>    <chr>                                                     <fct>     <chr>    
 #>  1 "i got this as both a book and an audio file. i had wait… 1         negative 
 #>  2 "this book places too much emphasis on spending money in… 1         negative 
-#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         positive 
+#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         negative 
 #>  4 "while i appreciate what tipler was attempting to accomp… 1         negative 
 #>  5 "the others in the series were great, and i really looke… 1         negative 
 #>  6 "a few good things, but she's lost her edge and i find i… 1         negative 
@@ -360,7 +359,24 @@ reviews_llm |>
 #> # A tibble: 1 × 3
 #>   .metric  .estimator .estimate
 #>   <chr>    <chr>          <dbl>
-#> 1 accuracy binary          0.94
+#> 1 accuracy binary         0.939
+```
+
+## Vector functions
+
+`mall` includes functions that expect a vector, instead of a table, to
+run the predictions. This should make it easier to test things, such as
+custom prompts or results of specific text. Each `llm_` function has a
+corresponding `llm_vec_` function:
+
+``` r
+llm_vec_sentiment("I am happy")
+#> [1] "positive"
+```
+
+``` r
+llm_vec_translate("Este es el mejor dia!", "english")
+#> [1] "This is the best day!"
 ```
 
 ## Databricks
