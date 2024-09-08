@@ -19,7 +19,7 @@ llm_extract.data.frame <- function(.data,
       labels = labels,
       additional_prompt = additional_prompt
       )
-    resp <- map_df(
+    resp <- purrr::map(
       resp,
       \(x) ({
         x <- trimws(strsplit(x, "\\|")[[1]])
@@ -27,7 +27,13 @@ llm_extract.data.frame <- function(.data,
         x
       })
     )
-    resp <- bind_cols(.data, resp)
+    resp <- purrr::transpose(resp)
+    for(i in seq_along(resp)) {
+      vals <- as.character(resp[[i]])
+      var_name <- names(resp[i])
+      .data <- mutate(.data, !!var_name  := vals)
+    }
+    resp <- .data
   } else {
     resp <- mutate(
       .data = .data,
