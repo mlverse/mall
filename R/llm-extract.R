@@ -13,25 +13,30 @@ llm_extract.data.frame <- function(.data,
                                    labels = c(),
                                    expand_cols = FALSE,
                                    additional_prompt = "") {
-  prompt <- get_prompt("extract", labels, .additional = additional_prompt)
-
   if (expand_cols && length(labels) > 1) {
-    resp <- llm_vec_custom(x, prompt)
+    resp <- llm_vec_extract(
+      x = .data$x, 
+      labels = labels,
+      additional_prompt = additional_prompt
+      )
     resp <- map_df(
-      resp, ~ {
-        x <- trimws(strsplit(.x, "\\|")[[1]])
+      resp,
+      \(x) ({
+        x <- trimws(strsplit(x, "\\|")[[1]])
         names(x) <- clean_names(labels)
         x
-      }
+      })
     )
-    resp <- bind_cols(x, resp)
+    resp <- bind_cols(.data, resp)
   } else {
-    resp <- llm_custom(
+    resp <- mutate(
       .data = .data,
-      x = {{ x }},
-      prompt = prompt,
-      pred_name = clean_names(labels)
-    )
+       labels := llm_vec_extract(
+        x = {{ x }},
+        labels = labels, 
+        additional_prompt = additional_prompt
+      )
+    )  
   }
   resp
 }
@@ -40,8 +45,10 @@ llm_extract.data.frame <- function(.data,
 llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "") {
-  llm_vec_custom(
-    x = x,
-    prompt = get_prompt("extract", labels, .additional = additional_prompt)
+  llm_vec_prompt(
+    x = x, 
+    prompt_label = "extract", 
+    labels = labels, 
+    additional_prompt = additional_prompt
   )
 }
