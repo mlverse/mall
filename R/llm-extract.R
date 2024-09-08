@@ -28,10 +28,17 @@ llm_extract.data.frame <- function(.data,
       })
     )
     resp <- purrr::transpose(resp)
+    var_names <- names(labels)
+    resp_names <- names(resp)
+    if(!is.null(var_names)) {
+      var_names[var_names == ""] <-  resp_names[var_names == ""]
+    } else {
+      var_names <- resp_names
+    }
+    var_names <- clean_names(var_names)
     for(i in seq_along(resp)) {
       vals <- as.character(resp[[i]])
-      var_name <- names(resp[i])
-      .data <- mutate(.data, !!var_name  := vals)
+      .data <- mutate(.data, !!var_names[[i]] := vals)
     }
     resp <- .data
   } else {
