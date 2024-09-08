@@ -13,13 +13,14 @@ llm_sentiment.data.frame <- function(.data,
                                      options = c("positive", "negative", "neutral"),
                                      pred_name = ".sentiment",
                                      additional_prompt = "") {
-  llm_custom(
+  mutate(
     .data = .data,
-    x = {{ x }},
-    prompt = get_prompt("sentiment", options, .additional = additional_prompt),
-    pred_name = pred_name,
-    valid_resps = options
-  )
+    !!pred_name := llm_vec_sentiment(
+      x = {{ x }},
+      options = options, 
+      additional_prompt = additional_prompt
+    )
+  )  
 }
 
 #' @export
@@ -39,10 +40,13 @@ globalVariables("ai_analyze_sentiment")
 #' @export
 llm_vec_sentiment <- function(x,
                               options = c("positive", "negative", "neutral"),
-                              additional_prompt = "") {
-  llm_vec_custom(
-    x = x,
-    prompt = get_prompt("sentiment", options, .additional = additional_prompt),
-    valid_resps = options
-  )
+                              additional_prompt = ""
+                              ) {
+  llm_vec_prompt(
+    x = x, 
+    prompt_label = "sentiment", 
+    additional_prompt = additional_prompt, 
+    valid_resps = options,
+    options = options
+    )
 }
