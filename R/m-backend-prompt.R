@@ -67,9 +67,9 @@ get_prompt <- function(label, ..., .additional = "") {
 }
 
 
-llm_vec_prompt <- function(x, 
-                           prompt_label = "", 
-                           additional_prompt = "", 
+llm_vec_prompt <- function(x,
+                           prompt_label = "",
+                           additional_prompt = "",
                            valid_resps = NULL,
                            ...) {
   mall_init()

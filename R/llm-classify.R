@@ -17,20 +17,19 @@ llm_classify.data.frame <- function(.data,
     .data = .data,
     !!pred_name := llm_vec_classify(
       x = {{ x }},
-      labels = labels, 
+      labels = labels,
       additional_prompt = additional_prompt
     )
-  )  
+  )
 }
 
 #' @export
 llm_vec_classify <- function(x = NULL,
                              labels,
-                             additional_prompt = ""
-                             ) {
+                             additional_prompt = "") {
   llm_vec_prompt(
-    x = x,prompt_label = "classify", 
-    additional_prompt = additional_prompt, 
+    x = x, prompt_label = "classify",
+    additional_prompt = additional_prompt,
     labels = labels,
     valid_resps = labels
   )

@@ -17,10 +17,10 @@ llm_translate.data.frame <- function(.data,
     .data = .data,
     !!pred_name := llm_vec_translate(
       x = {{ x }},
-      language = language, 
+      language = language,
       additional_prompt = additional_prompt
     )
-  )  
+  )
 }
 
 #' @export
@@ -29,9 +29,9 @@ llm_vec_translate <- function(
     language,
     additional_prompt = "") {
   llm_vec_prompt(
-    x = x, 
-    prompt_label = "translate", 
-    additional_prompt = additional_prompt, 
+    x = x,
+    prompt_label = "translate",
+    additional_prompt = additional_prompt,
     language = language
   )
 }

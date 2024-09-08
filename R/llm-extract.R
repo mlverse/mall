@@ -17,10 +17,10 @@ llm_extract.data.frame <- function(.data,
                                    pred_name = ".extract") {
   if (expand_cols && length(labels) > 1) {
     resp <- llm_vec_extract(
-      x = .data$x, 
+      x = .data$x,
       labels = labels,
       additional_prompt = additional_prompt
-      )
+    )
     resp <- purrr::map(
       resp,
       \(x) ({
@@ -32,13 +32,13 @@ llm_extract.data.frame <- function(.data,
     resp <- purrr::transpose(resp)
     var_names <- names(labels)
     resp_names <- names(resp)
-    if(!is.null(var_names)) {
-      var_names[var_names == ""] <-  resp_names[var_names == ""]
+    if (!is.null(var_names)) {
+      var_names[var_names == ""] <- resp_names[var_names == ""]
     } else {
       var_names <- resp_names
     }
     var_names <- clean_names(var_names)
-    for(i in seq_along(resp)) {
+    for (i in seq_along(resp)) {
       vals <- as.character(resp[[i]])
       .data <- mutate(.data, !!var_names[[i]] := vals)
     }
@@ -46,12 +46,12 @@ llm_extract.data.frame <- function(.data,
   } else {
     resp <- mutate(
       .data = .data,
-       !!pred_name := llm_vec_extract(
+      !!pred_name := llm_vec_extract(
         x = {{ x }},
-        labels = labels, 
+        labels = labels,
         additional_prompt = additional_prompt
       )
-    )  
+    )
   }
   resp
 }
@@ -61,9 +61,9 @@ llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "") {
   llm_vec_prompt(
-    x = x, 
-    prompt_label = "extract", 
-    labels = labels, 
+    x = x,
+    prompt_label = "extract",
+    labels = labels,
     additional_prompt = additional_prompt
   )
 }

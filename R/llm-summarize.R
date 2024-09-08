@@ -17,10 +17,10 @@ llm_summarize.data.frame <- function(.data,
     .data = .data,
     !!pred_name := llm_vec_summarize(
       x = {{ x }},
-      max_words = max_words, 
+      max_words = max_words,
       additional_prompt = additional_prompt
     )
-  )  
+  )
 }
 
 #' @export
@@ -43,9 +43,9 @@ llm_vec_summarize <- function(x,
                               max_words = 100,
                               additional_prompt = "") {
   llm_vec_prompt(
-    x = x, 
-    prompt_label = "summarize", 
-    additional_prompt = additional_prompt, 
+    x = x,
+    prompt_label = "summarize",
+    additional_prompt = additional_prompt,
     max_words = max_words
   )
 }
