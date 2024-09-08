@@ -65,3 +65,14 @@ get_prompt <- function(label, ..., .additional = "") {
   fn <- defaults[[label]]
   fn(...)
 }
+
+
+llm_vec_prompt <- function(x, 
+                           prompt_label = "", 
+                           additional_prompt = "", 
+                           valid_resps = NULL,
+                           ...) {
+  mall_init()
+  prompt <- get_prompt(prompt_label, ..., .additional = additional_prompt)
+  llm_vec_custom(x, prompt, valid_resps)
+}
