@@ -17,7 +17,7 @@ library(dbplyr)
 library(tictoc)
 library(DBI)
 
-mall::mall_init()
+mall::mall_init("ollama", "llama3.1", seed = 100)
 ```
 
 # `mall`
