@@ -239,14 +239,14 @@ option, it will pre-select it for you. If there are more than one
 available models, then `mall` will present you as menu selection so you
 can select which model you wish to use.
 
-Calling `llm_init()` directly will let you specify the model and backend
+Calling `mall_init()` directly will let you specify the model and backend
 to use. You can also setup additional arguments that will be passed down
 to the function that actually runs the prediction. In the case of
 Ollama, that function is
 [`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html).
 
 ``` r
-llm_init("ollama", "llama3.1", seed = 100, temperature = 0.2)
+mall_init("ollama", "llama3.1", seed = 100, temperature = 0.2)
 #> Provider: ollama
 #> Model: llama3.1
 ```
@@ -331,7 +331,7 @@ toc()
 
 As far as **time**, on my Apple M3 machine, it took about 3 minutes to
 process, 100 rows, containing 20 thousand words. Setting `temp` to 0.2
-in `llm_init()`, made the model run a bit faster.
+in `mall_init()`, made the model run a bit faster.
 
 The package uses `purrr` to send each prompt individually to the LLM.
 But, I did try a few different ways to speed up the process,

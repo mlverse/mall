@@ -1,5 +1,5 @@
 #' @export
-llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
+mall_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
   args <- list(...)
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
