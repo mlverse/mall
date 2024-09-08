@@ -1,5 +1,5 @@
 #' @export
-llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
+mall_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
   args <- list(...)
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
@@ -37,9 +37,7 @@ llm_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force =
     )
   }
   if (!.silent | not_init) {
-    defaults <- defaults_get()
-    cli_inform(glue("{col_green('Provider:')} {defaults$backend}"))
-    cli_inform(glue("{col_green('Model:')} {defaults$model}"))
+    return(defaults_get())
   }
   invisible()
 }

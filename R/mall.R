@@ -7,3 +7,4 @@
 #' @import cli
 
 .env_llm <- new.env()
+.env_llm$defaults <- list()

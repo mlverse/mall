@@ -1,10 +1,10 @@
 #' @export
-mall_backend_generate <- function(backend, x, base_prompt) {
-  UseMethod("mall_backend_generate")
+m_backend_generate <- function(backend, x, base_prompt) {
+  UseMethod("m_backend_generate")
 }
 
 #' @export
-mall_backend_generate.ollama <- function(backend, x, base_prompt) {
+m_backend_generate.ollama <- function(backend, x, base_prompt) {
   args <- as.list(backend)
   args$backend <- NULL
   map_chr(x,

@@ -13,12 +13,13 @@ llm_classify.data.frame <- function(.data,
                                     labels,
                                     pred_name = ".classify",
                                     additional_prompt = "") {
-  llm_custom(
+  mutate(
     .data = .data,
-    x = {{ x }},
-    prompt = get_prompt("classify", labels, .additional = additional_prompt),
-    pred_name = pred_name,
-    valid_resps = labels
+    !!pred_name := llm_vec_classify(
+      x = {{ x }},
+      labels = labels,
+      additional_prompt = additional_prompt
+    )
   )
 }
 
@@ -26,9 +27,10 @@ llm_classify.data.frame <- function(.data,
 llm_vec_classify <- function(x = NULL,
                              labels,
                              additional_prompt = "") {
-  llm_vec_custom(
-    x = x,
-    prompt = get_prompt("classify", labels, .additional = additional_prompt),
+  llm_vec_prompt(
+    x = x, prompt_label = "classify",
+    additional_prompt = additional_prompt,
+    labels = labels,
     valid_resps = labels
   )
 }

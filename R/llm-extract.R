@@ -3,7 +3,8 @@ llm_extract <- function(.data,
                         x = NULL,
                         labels,
                         expand_cols = FALSE,
-                        additional_prompt = "") {
+                        additional_prompt = "",
+                        pred_name = ".extract") {
   UseMethod("llm_extract")
 }
 
@@ -12,25 +13,44 @@ llm_extract.data.frame <- function(.data,
                                    x = NULL,
                                    labels = c(),
                                    expand_cols = FALSE,
-                                   additional_prompt = "") {
-  prompt <- get_prompt("extract", labels, .additional = additional_prompt)
-
+                                   additional_prompt = "",
+                                   pred_name = ".extract") {
   if (expand_cols && length(labels) > 1) {
-    resp <- llm_vec_custom(x, prompt)
-    resp <- map_df(
-      resp, ~ {
-        x <- trimws(strsplit(.x, "\\|")[[1]])
+    resp <- llm_vec_extract(
+      x = .data$x,
+      labels = labels,
+      additional_prompt = additional_prompt
+    )
+    resp <- purrr::map(
+      resp,
+      \(x) ({
+        x <- trimws(strsplit(x, "\\|")[[1]])
         names(x) <- clean_names(labels)
         x
-      }
+      })
     )
-    resp <- bind_cols(x, resp)
+    resp <- purrr::transpose(resp)
+    var_names <- names(labels)
+    resp_names <- names(resp)
+    if (!is.null(var_names)) {
+      var_names[var_names == ""] <- resp_names[var_names == ""]
+    } else {
+      var_names <- resp_names
+    }
+    var_names <- clean_names(var_names)
+    for (i in seq_along(resp)) {
+      vals <- as.character(resp[[i]])
+      .data <- mutate(.data, !!var_names[[i]] := vals)
+    }
+    resp <- .data
   } else {
-    resp <- llm_custom(
+    resp <- mutate(
       .data = .data,
-      x = {{ x }},
-      prompt = prompt,
-      pred_name = clean_names(labels)
+      !!pred_name := llm_vec_extract(
+        x = {{ x }},
+        labels = labels,
+        additional_prompt = additional_prompt
+      )
     )
   }
   resp
@@ -40,8 +60,10 @@ llm_extract.data.frame <- function(.data,
 llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "") {
-  llm_vec_custom(
+  llm_vec_prompt(
     x = x,
-    prompt = get_prompt("extract", labels, .additional = additional_prompt)
+    prompt_label = "extract",
+    labels = labels,
+    additional_prompt = additional_prompt
   )
 }
