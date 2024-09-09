@@ -1,7 +1,17 @@
+#' Summarize text
+#'
+#' @description
+#' Use a Large Language Model (LLM) to summarize text
+#'
+#' @inheritParams llm_classify
+#' @param max_words The maximum number of words that the LLM should use in the
+#' summary. Defaults to 10.
+#' @returns `llm_sentiment` returns a `data.frame` or `tbl` object.
+#' `llm_vec_sentiment` returns a vector that is the same length as `x`.
 #' @export
 llm_summarize <- function(.data,
-                          x = NULL,
-                          max_words = 100,
+                          col,
+                          max_words = 10,
                           pred_name = ".summary",
                           additional_prompt = "") {
   UseMethod("llm_summarize")
@@ -9,8 +19,8 @@ llm_summarize <- function(.data,
 
 #' @export
 llm_summarize.data.frame <- function(.data,
-                                     x = NULL,
-                                     max_words = 100,
+                                     col,
+                                     max_words = 10,
                                      pred_name = ".summary",
                                      additional_prompt = "") {
   mutate(
@@ -25,8 +35,8 @@ llm_summarize.data.frame <- function(.data,
 
 #' @export
 `llm_summarize.tbl_Spark SQL` <- function(.data,
-                                          x = NULL,
-                                          max_words = 100,
+                                          col,
+                                          max_words = 10,
                                           pred_name = ".summary",
                                           additional_prompt = NULL) {
   mutate(
@@ -40,7 +50,7 @@ globalVariables("ai_summarize")
 
 #' @export
 llm_vec_summarize <- function(x,
-                              max_words = 100,
+                              max_words = 10,
                               additional_prompt = "") {
   llm_vec_prompt(
     x = x,
