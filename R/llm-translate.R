@@ -33,6 +33,7 @@ llm_translate.data.frame <- function(.data,
   )
 }
 
+#' @rdname llm_translate
 #' @export
 llm_vec_translate <- function(
     x,

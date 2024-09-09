@@ -2,6 +2,7 @@
 % Please edit documentation in R/llm-summarize.R
 \name{llm_summarize}
 \alias{llm_summarize}
+\alias{llm_vec_summarize}
 \title{Summarize text}
 \usage{
 llm_summarize(
@@ -11,6 +12,8 @@ llm_summarize(
   pred_name = ".summary",
   additional_prompt = ""
 )
+
+llm_vec_summarize(x, max_words = 10, additional_prompt = "")
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
@@ -24,6 +27,8 @@ summary. Defaults to 10.}
 prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
+
+\item{x}{A vector that contains the text to be analyzed}
 }
 \value{
 \code{llm_summarize} returns a \code{data.frame} or \code{tbl} object.

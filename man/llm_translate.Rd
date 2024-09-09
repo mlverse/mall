@@ -2,6 +2,7 @@
 % Please edit documentation in R/llm-translate.R
 \name{llm_translate}
 \alias{llm_translate}
+\alias{llm_vec_translate}
 \title{Translates text to a specific language}
 \usage{
 llm_translate(
@@ -11,6 +12,8 @@ llm_translate(
   pred_name = ".translation",
   additional_prompt = ""
 )
+
+llm_vec_translate(x, language, additional_prompt = "")
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
@@ -23,6 +26,8 @@ llm_translate(
 prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
+
+\item{x}{A vector that contains the text to be analyzed}
 }
 \value{
 \code{llm_translate} returns a \code{data.frame} or \code{tbl} object.

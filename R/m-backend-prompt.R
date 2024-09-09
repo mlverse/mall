@@ -1,3 +1,4 @@
+#' @rdname m_backend_generate
 #' @export
 m_backend_prompt <- function(backend, additional) {
   UseMethod("m_backend_prompt")

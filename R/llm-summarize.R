@@ -26,7 +26,7 @@ llm_summarize.data.frame <- function(.data,
   mutate(
     .data = .data,
     !!pred_name := llm_vec_summarize(
-      x = {{ x }},
+      x = {{ col }},
       max_words = max_words,
       additional_prompt = additional_prompt
     )
@@ -41,13 +41,13 @@ llm_summarize.data.frame <- function(.data,
                                           additional_prompt = NULL) {
   mutate(
     .data = .data,
-    !!pred_name := ai_summarize({{ x }}, as.integer(max_words))
+    !!pred_name := ai_summarize({{ col }}, as.integer(max_words))
   )
 }
 
 globalVariables("ai_summarize")
 
-
+#' @rdname llm_summarize
 #' @export
 llm_vec_summarize <- function(x,
                               max_words = 10,
