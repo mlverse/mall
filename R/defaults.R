@@ -2,7 +2,7 @@ defaults_get <- function() {
   .env_llm$defaults
 }
 
-defaults_set <- function(..., .quiet = TRUE) {
+defaults_set <- function(...) {
   new_args <- list(...)
   for (i in seq_along(new_args)) {
     nm <- names(new_args[i])
@@ -14,11 +14,7 @@ defaults_set <- function(..., .quiet = TRUE) {
     "defaults"
   ))
   class(.env_llm$defaults) <- paste0("mall_", obj_class)
-  if (!.quiet) {
-    return(defaults_get())
-  } else {
-    invisible()
-  }
+  defaults_get()
 }
 
 #' @export

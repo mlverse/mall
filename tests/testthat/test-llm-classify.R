@@ -1,19 +1,27 @@
-test_that("Classify - vector function works", {
-  # llm_use("simulate_llm", "echo", .silent = TRUE)
+test_that("Classify works", {
+  test_text <- "this is a test"
+   llm_use("simulate_llm", "echo", .silent = TRUE)
   expect_equal(
-    llm_vec_classify("this is a test", labels = "this is a test"),
-    "this is a test"
+    llm_vec_classify(test_text, labels = test_text),
+    test_text
   )
   expect_message(
-    x <- llm_vec_classify("this is a test", labels = "different test")
+    x <- llm_vec_classify(test_text, labels = "different test")
   )
   expect_equal(x, as.character(NA))
-})
 
-test_that("Classify - tbl function works", {
-  llm_use("simulate_llm", "echo", .silent = TRUE)
   expect_equal(
-    llm_classify(data.frame(x = "this is a test"), x, labels = "this is a test"),
-    data.frame(x = "this is a test", .classify = "this is a test")
+    llm_classify(data.frame(x = test_text), x, labels = test_text),
+    data.frame(x = test_text, .classify = test_text)
+  )
+  
+  expect_equal(
+    llm_classify(
+      data.frame(x = test_text), 
+      x, 
+      labels = test_text, 
+      pred_name = "new"
+      ),
+    data.frame(x = test_text, new = test_text)
   )
 })
