@@ -9,6 +9,8 @@
 #' @param valid_resps If the response from the LLM is not open, but deterministic,
 #' provide the options in a vector. This function will set to `NA` any response
 #' not in the options
+#' @returns `llm_custom` returns a `data.frame` or `tbl` object. `llm_vec_custom`
+#' returns a vector that is the same length as `x`.
 #' @export
 llm_custom <- function(
     .data,

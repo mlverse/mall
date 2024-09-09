@@ -1,6 +1,21 @@
+#' Extract entities from text
+#'
+#' @description
+#' Use a Large Language Model (LLM) to extract specific entity, or entities,
+#' from the provided text
+#'
+#' @inheritParams llm_classify
+#' @param labels A vector with the entities to extract from the text
+#' @param expand_cols If multiple `labels` are passed, this is a flag that
+#' tells the function to create a new column per item in `labels`. If
+#' `labels` is a named vector, this function will use those names as the
+#' new column names, if not, the function will use a sanitized version of
+#' the content as the name.
+#' @returns `llm_extract` returns a `data.frame` or `tbl` object. `llm_vec_extract`
+#' returns a vector that is the same length as `x`.
 #' @export
 llm_extract <- function(.data,
-                        x = NULL,
+                        col,
                         labels,
                         expand_cols = FALSE,
                         additional_prompt = "",
@@ -10,14 +25,14 @@ llm_extract <- function(.data,
 
 #' @export
 llm_extract.data.frame <- function(.data,
-                                   x = NULL,
+                                   col,
                                    labels = c(),
                                    expand_cols = FALSE,
                                    additional_prompt = "",
                                    pred_name = ".extract") {
   if (expand_cols && length(labels) > 1) {
     resp <- llm_vec_extract(
-      x = .data$x,
+      x = .data$col,
       labels = labels,
       additional_prompt = additional_prompt
     )
@@ -47,7 +62,7 @@ llm_extract.data.frame <- function(.data,
     resp <- mutate(
       .data = .data,
       !!pred_name := llm_vec_extract(
-        x = {{ x }},
+        x = {{ col }},
         labels = labels,
         additional_prompt = additional_prompt
       )
@@ -56,6 +71,7 @@ llm_extract.data.frame <- function(.data,
   resp
 }
 
+#' @rdname llm_extract
 #' @export
 llm_vec_extract <- function(x,
                             labels = c(),

@@ -25,6 +25,10 @@ not in the options}
 
 \item{x}{A vector that contains the text to be analyzed}
 }
+\value{
+\code{llm_custom} returns a \code{data.frame} or \code{tbl} object. \code{llm_vec_custom}
+returns a vector that is the same length as \code{x}.
+}
 \description{
 Use a Large Language Model (LLM) to process the provided text using the
 instructions from \code{prompt}
