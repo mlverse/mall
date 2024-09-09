@@ -10,6 +10,12 @@ llm_use(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE)
 \item{backend}{The name of an supported back-end provider. Currently only
 'ollama' is supported.}
 
+\item{model}{The name of model supported by the back-end provider}
+
+\item{...}{Additional arguments that this function will pass down to the
+integrating function. In the case of Ollama, it will pass those argument to
+\code{ollamar::generate()}.}
+
 \item{.silent}{Avoids console output}
 
 \item{force}{Flag that tell the function to reset all of the settings in the
