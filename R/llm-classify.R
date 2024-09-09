@@ -1,6 +1,6 @@
 #' Categorize data as one of options given
 #'
-#' @details
+#' @description
 #' Use a Large Language Model (LLM) to classify the provided text as one of the
 #' options provided via the `labels` argument.
 #' 
@@ -9,7 +9,7 @@
 #' @param x A vector that contains the text to be analyzed
 #' @param additional_prompt Inserts this text into the prompt sent to the LLM
 #' @param pred_name A character vector with the name of the new column where the
-#' prediction will be placed. Defaults to `.classify`
+#' prediction will be placed
 #' @param labels A character vector with at least 2 labels to classify the text
 #' as
 #' @returns `llm_classify` returns a `data.frame` or `tbl` object. `llm_vec_classify`

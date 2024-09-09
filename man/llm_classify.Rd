@@ -24,7 +24,7 @@ llm_vec_classify(x, labels, additional_prompt = "")
 as}
 
 \item{pred_name}{A character vector with the name of the new column where the
-prediction will be placed. Defaults to \code{.classify}}
+prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
 
@@ -35,9 +35,6 @@ prediction will be placed. Defaults to \code{.classify}}
 returns a vector that is the same length as \code{x}.
 }
 \description{
-Categorize data as one of options given
-}
-\details{
 Use a Large Language Model (LLM) to classify the provided text as one of the
 options provided via the \code{labels} argument.
 }

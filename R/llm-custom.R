@@ -1,7 +1,18 @@
+#' Send a custom prompt to the LLM
+#'
+#' @description
+#' Use a Large Language Model (LLM) to process the provided text using the
+#' instructions from `prompt`
+#'
+#' @inheritParams llm_classify
+#' @param prompt The prompt to append to each record sent to the LLM
+#' @param valid_resps If the response from the LLM is not open, but deterministic,
+#' provide the options in a vector. This function will set to `NA` any response
+#' not in the options
 #' @export
 llm_custom <- function(
     .data,
-    x,
+    col,
     prompt,
     pred_name = ".pred",
     valid_resps = "") {
@@ -10,7 +21,7 @@ llm_custom <- function(
 
 #' @export
 llm_custom.data.frame <- function(.data,
-                                  x,
+                                  col,
                                   prompt,
                                   pred_name = ".pred",
                                   valid_resps = NULL) {
