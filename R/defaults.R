@@ -2,22 +2,19 @@ defaults_get <- function() {
   .env_llm$defaults
 }
 
-defaults_set <- function(..., .quiet = TRUE) {
+defaults_set <- function(...) {
   new_args <- list(...)
   for (i in seq_along(new_args)) {
     nm <- names(new_args[i])
     .env_llm$defaults[[nm]] <- new_args[[i]]
   }
-  class(.env_llm$defaults) <- c(
-    clean_names(.env_llm$defaults[["model"]], TRUE),
-    clean_names(.env_llm$defaults[["backend"]], TRUE),
-    "mall_defaults"
-  )
-  if (!.quiet) {
-    return(defaults_get())
-  } else {
-    invisible()
-  }
+  obj_class <- clean_names(c(
+    .env_llm$defaults[["model"]],
+    .env_llm$defaults[["backend"]],
+    "defaults"
+  ))
+  class(.env_llm$defaults) <- paste0("mall_", obj_class)
+  defaults_get()
 }
 
 #' @export
