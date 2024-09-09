@@ -36,16 +36,17 @@ m_backend_generate.mall_simulate_llm <- function(backend, x, base_prompt) {
   args <- backend
   class(args) <- "list"
   if (args$model == "pipe") {
-    trimws(strsplit(x, "\\|")[[1]][[2]])
+    out <- trimws(strsplit(x, "\\|")[[1]][[2]])
   } else if (args$model == "prompt") {
-    glue("{base_prompt}\n{x}")
+    out <- base_prompt
   } else if (args$model == "echo") {
-    x
+    out <- x
   } else {
-    list(
+    out <- list(
       x = x,
       base_prompt = base_prompt,
       backend = args
     )
   }
+  out
 }
