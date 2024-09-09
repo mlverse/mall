@@ -15,7 +15,7 @@ m_backend_generate <- function(backend, x, base_prompt) {
 }
 
 #' @export
-m_backend_generate.ollama <- function(backend, x, base_prompt) {
+m_backend_generate.mall_ollama <- function(backend, x, base_prompt) {
   args <- as.list(backend)
   args$backend <- NULL
   map_chr(x,

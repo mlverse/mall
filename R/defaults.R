@@ -8,11 +8,12 @@ defaults_set <- function(..., .quiet = TRUE) {
     nm <- names(new_args[i])
     .env_llm$defaults[[nm]] <- new_args[[i]]
   }
-  class(.env_llm$defaults) <- c(
-    clean_names(.env_llm$defaults[["model"]], TRUE),
-    clean_names(.env_llm$defaults[["backend"]], TRUE),
-    "mall_defaults"
-  )
+  obj_class <- clean_names(c(
+    .env_llm$defaults[["model"]],
+    .env_llm$defaults[["backend"]],
+    "defaults"
+  ))
+  class(.env_llm$defaults) <- paste0("mall_", obj_class)
   if (!.quiet) {
     return(defaults_get())
   } else {
