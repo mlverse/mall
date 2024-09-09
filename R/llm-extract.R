@@ -21,7 +21,7 @@ llm_extract.data.frame <- function(.data,
       labels = labels,
       additional_prompt = additional_prompt
     )
-    resp <- purrr::map(
+    resp <- map(
       resp,
       \(x) ({
         x <- trimws(strsplit(x, "\\|")[[1]])
@@ -29,7 +29,7 @@ llm_extract.data.frame <- function(.data,
         x
       })
     )
-    resp <- purrr::transpose(resp)
+    resp <- transpose(resp)
     var_names <- names(labels)
     resp_names <- names(resp)
     if (!is.null(var_names)) {
