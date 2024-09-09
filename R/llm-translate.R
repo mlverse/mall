@@ -1,6 +1,16 @@
+#' Translates text to a specific language
+#'
+#' @description
+#' Use a Large Language Model (LLM) to translate a text to a specific 
+#' language
+#'
+#' @inheritParams llm_classify
+#' @param language Target language to translate the text to
+#' @returns `llm_translate` returns a `data.frame` or `tbl` object.
+#' `llm_vec_translate` returns a vector that is the same length as `x`.
 #' @export
 llm_translate <- function(.data,
-                          x,
+                          col,
                           language,
                           pred_name = ".translation",
                           additional_prompt = "") {
@@ -9,14 +19,14 @@ llm_translate <- function(.data,
 
 #' @export
 llm_translate.data.frame <- function(.data,
-                                     x,
+                                     col,
                                      language,
                                      pred_name = ".translation",
                                      additional_prompt = "") {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_translate(
-      x = {{ x }},
+      x = {{ col }},
       language = language,
       additional_prompt = additional_prompt
     )

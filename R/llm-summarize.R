@@ -6,8 +6,8 @@
 #' @inheritParams llm_classify
 #' @param max_words The maximum number of words that the LLM should use in the
 #' summary. Defaults to 10.
-#' @returns `llm_sentiment` returns a `data.frame` or `tbl` object.
-#' `llm_vec_sentiment` returns a vector that is the same length as `x`.
+#' @returns `llm_summarize` returns a `data.frame` or `tbl` object.
+#' `llm_vec_summarize` returns a vector that is the same length as `x`.
 #' @export
 llm_summarize <- function(.data,
                           col,
