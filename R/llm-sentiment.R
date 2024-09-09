@@ -1,6 +1,17 @@
+#' Sentiment analysis
+#'
+#' @description
+#' Use a Large Language Model (LLM) to perform sentiment analysis
+#' from the provided text
+#'
+#' @inheritParams llm_classify
+#' @param options A vector with the options that the LLM should use to assign
+#' a sentiment to the text. Defaults to: 'positive', 'negative', 'neutral'
+#' @returns `llm_sentiment` returns a `data.frame` or `tbl` object. 
+#' `llm_vec_sentiment` returns a vector that is the same length as `x`.
 #' @export
 llm_sentiment <- function(.data,
-                          x = NULL,
+                          col,
                           options = c("positive", "negative", "neutral"),
                           pred_name = ".sentiment",
                           additional_prompt = "") {
@@ -9,14 +20,14 @@ llm_sentiment <- function(.data,
 
 #' @export
 llm_sentiment.data.frame <- function(.data,
-                                     x = NULL,
+                                     col,
                                      options = c("positive", "negative", "neutral"),
                                      pred_name = ".sentiment",
                                      additional_prompt = "") {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_sentiment(
-      x = {{ x }},
+      x = {{ col }},
       options = options,
       additional_prompt = additional_prompt
     )
@@ -25,18 +36,19 @@ llm_sentiment.data.frame <- function(.data,
 
 #' @export
 `llm_sentiment.tbl_Spark SQL` <- function(.data,
-                                          x = NULL,
+                                          col,
                                           options = NULL,
                                           pred_name = ".sentiment",
                                           additional_prompt = NULL) {
   mutate(
     .data = .data,
-    !!pred_name := ai_analyze_sentiment({{ x }})
+    !!pred_name := ai_analyze_sentiment({{ col }})
   )
 }
 
 globalVariables("ai_analyze_sentiment")
 
+#' @rdname llm_sentiment
 #' @export
 llm_vec_sentiment <- function(x,
                               options = c("positive", "negative", "neutral"),
