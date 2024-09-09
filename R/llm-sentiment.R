@@ -7,7 +7,7 @@
 #' @inheritParams llm_classify
 #' @param options A vector with the options that the LLM should use to assign
 #' a sentiment to the text. Defaults to: 'positive', 'negative', 'neutral'
-#' @returns `llm_sentiment` returns a `data.frame` or `tbl` object. 
+#' @returns `llm_sentiment` returns a `data.frame` or `tbl` object.
 #' `llm_vec_sentiment` returns a vector that is the same length as `x`.
 #' @export
 llm_sentiment <- function(.data,

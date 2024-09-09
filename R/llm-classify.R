@@ -3,7 +3,7 @@
 #' @description
 #' Use a Large Language Model (LLM) to classify the provided text as one of the
 #' options provided via the `labels` argument.
-#' 
+#'
 #' @param .data A `data.frame` or `tbl` object that contains the text to be analyzed
 #' @param col The name of the field to analyze, supports `tidy-eval`
 #' @param x A vector that contains the text to be analyzed

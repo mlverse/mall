@@ -3,7 +3,7 @@
 #' Allows us to specify the back-end provider, model to use during the current
 #' R session
 #' @param backend The name of an supported back-end provider. Currently only
-#' 'ollama' is supported. 
+#' 'ollama' is supported.
 #' @param .silent Avoids console output
 #' @param model The name of model supported by the back-end provider
 #' @param ... Additional arguments that this function will pass down to the
@@ -11,9 +11,9 @@
 #' `ollamar::generate()`.
 #' @param force Flag that tell the function to reset all of the settings in the
 #' R session
-#' 
+#'
 #' @returns A `mall_defaults` object
-#' 
+#'
 #' @export
 llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
   args <- list(...)

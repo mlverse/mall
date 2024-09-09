@@ -1,7 +1,7 @@
 #' Translates text to a specific language
 #'
 #' @description
-#' Use a Large Language Model (LLM) to translate a text to a specific 
+#' Use a Large Language Model (LLM) to translate a text to a specific
 #' language
 #'
 #' @inheritParams llm_classify
