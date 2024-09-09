@@ -29,3 +29,22 @@ m_backend_generate.mall_ollama <- function(backend, x, base_prompt) {
     }
   )
 }
+
+#' @export
+m_backend_generate.mall_simulate_llm <- function(backend, x, base_prompt) {
+  args <- backend
+  class(args) <- "list"
+  if(args$model == "pipe") {
+    trimws(strsplit(x, "\\|")[[1]][[1]])
+  } else if(args$model == "prompt") {
+    paste(base_prompt, x)
+  } else if(args$model == "echo") {
+    x
+  } else {
+    list(
+      x = x, 
+      base_prompt = base_prompt,
+      backend = args
+    )
+  }
+}
