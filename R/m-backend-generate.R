@@ -15,7 +15,6 @@ m_backend_generate.ollama <- function(backend, x, base_prompt) {
         args
       )
       exec("generate", !!!.args)
-    },
-    .progress = TRUE
+    }
   )
 }
