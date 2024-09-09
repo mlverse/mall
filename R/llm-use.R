@@ -1,5 +1,17 @@
+#' Specify the model to use
+#' @description
+#' Allows us to specify the back-end provider, model to use during the current
+#' R session
+#' @param backend The name of an supported back-end provider. Currently only
+#' 'ollama' is supported. 
+#' @param .silent Avoids console output
+#' @param force Flag that tell the function to reset all of the settings in the
+#' R session
+#' 
+#' @returns A `mall_defaults` object
+#' 
 #' @export
-mall_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
+llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
   args <- list(...)
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
@@ -37,7 +49,7 @@ mall_init <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force 
     )
   }
   if (!.silent | not_init) {
-    return(defaults_get())
+    print(defaults_get())
   }
-  invisible()
+  invisible(defaults_get())
 }

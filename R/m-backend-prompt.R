@@ -73,7 +73,7 @@ llm_vec_prompt <- function(x,
                            additional_prompt = "",
                            valid_resps = NULL,
                            ...) {
-  mall_init()
+  llm_use()
   prompt <- get_prompt(prompt_label, ..., .additional = additional_prompt)
   llm_vec_custom(x, prompt, valid_resps)
 }
