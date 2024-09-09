@@ -28,13 +28,14 @@ llm_custom.data.frame <- function(.data,
   mutate(
     .data = .data,
     !!pred_name := llm_vec_custom(
-      x = {{ x }},
+      x = {{ col }},
       prompt = prompt,
       valid_resps = valid_resps
     )
   )
 }
 
+#' @rdname llm_custom
 #' @export
 llm_vec_custom <- function(x, prompt, valid_resps = NULL) {
   mall_init(.silent = TRUE, force = FALSE)

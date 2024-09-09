@@ -1,6 +1,7 @@
 Package: mall
-Title: Run multiple 'Large Language Model' predictions against a table
-Version: 0.0.0.9002
+Title: Run multiple 'Large Language Model' predictions against a table, or 
+    vectors
+Version: 0.0.0.9003
 Authors@R: 
     person("Edgar", "Ruiz", , "first.last@example.com", role = c("aut", "cre"))
 Description: Run multiple 'Large Language Model' predictions against a table. The
@@ -16,5 +17,4 @@ Imports:
     dplyr,
     glue,
     ollamar,
-    purrr,
     rlang

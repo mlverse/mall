@@ -2,9 +2,12 @@
 % Please edit documentation in R/llm-custom.R
 \name{llm_custom}
 \alias{llm_custom}
+\alias{llm_vec_custom}
 \title{Send a custom prompt to the LLM}
 \usage{
 llm_custom(.data, col, prompt, pred_name = ".pred", valid_resps = "")
+
+llm_vec_custom(x, prompt, valid_resps = NULL)
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
@@ -19,6 +22,8 @@ prediction will be placed}
 \item{valid_resps}{If the response from the LLM is not open, but deterministic,
 provide the options in a vector. This function will set to \code{NA} any response
 not in the options}
+
+\item{x}{A vector that contains the text to be analyzed}
 }
 \description{
 Use a Large Language Model (LLM) to process the provided text using the
