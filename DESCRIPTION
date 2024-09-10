@@ -16,6 +16,7 @@ Imports:
     cli,
     dplyr,
     glue,
+    jsonlite,
     ollamar,
     rlang
 Suggests: 

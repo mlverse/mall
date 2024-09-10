@@ -44,7 +44,7 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
         "Extract the {labels} being referred to on the text.",
         "I expect {no_labels} item(s) exactly.",
         "No capitalization. No explanations.",
-        "Return the response in a simple pipe separated list, no headers.",
+        "Return the response in pure JSON format, no code decorators.",
         additional,
         "The answer is based on the following text:"
       ))
