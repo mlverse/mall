@@ -20,7 +20,7 @@ library(DBI)
 mall::llm_use("ollama", "llama3.1", seed = 100)
 ```
 
-# `mall`
+# mall
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -32,17 +32,15 @@ table_of_contents()
 
 
 <!-- toc: start -->
-- [Intro](#intro)
-    - [Databricks integration](#databricks-integration)
 - [Motivation](#motivation)
-- [Examples](#examples)
+- [LLM functions](#llm-functions)
     - [Sentiment](#sentiment)
     - [Summarize](#summarize)
     - [Classify](#classify)
-    - [Extract ](#extract-)
+    - [Extract ](#extract)
     - [Translate](#translate)
     - [Custom prompt](#custom-prompt)
-    - [Init](#init)
+- [Initialize session](#initialize-session)
 - [Key considerations](#key-considerations)
 - [Performance](#performance)
 - [Vector functions](#vector-functions)
@@ -80,7 +78,7 @@ runs your text data directly against the LLM.  The LLM's flexibility, allows for
 it to adapt to the subject of your data, and provide surprisingly accurate predictions. 
 This saves the data scientist the need to write and tune an NLP model. 
 
-## Examples
+## LLM functions
 
 We will start with a very small table with product reviews:
 
@@ -221,7 +219,7 @@ reviews |>
   llm_custom(review, my_prompt)
 ```
 
-### Init
+## Initialize session
 
 Invoking an `llm_` function will automatically initialize a model selection
 if you don't have one selected yet. If there is only one option, it will 
@@ -296,7 +294,7 @@ library(tictoc)
 tic()
 reviews_llm <- book_reviews |>
   llm_sentiment(
-    x = review,
+    col = review,
     options = c("positive", "negative"),
     pred_name = "predicted"
   )
