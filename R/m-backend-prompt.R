@@ -16,7 +16,6 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
         additional,
         "The answer is based on the following text:"
       ))
-      print(options)
     },
     summarize = function(max_words) {
       glue(paste(
