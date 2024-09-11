@@ -18,7 +18,6 @@ m_backend_submit <- function(backend, x, prompt) {
 m_backend_submit.mall_ollama <- function(backend, x, prompt) {
   args <- as.list(backend)
   args$backend <- NULL
-  
   map_chr(
     x,
     \(x) {

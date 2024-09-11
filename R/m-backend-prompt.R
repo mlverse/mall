@@ -38,20 +38,22 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
     },
     extract = function(labels) {
       no_labels <- length(labels)
-      labels <- paste0(labels, collapse = ", ")
+      col_labels <- paste0(labels, collapse = ", ")
+      json_labels <- paste0("\"", labels,"\":your answer", collapse = ",")
+      json_labels <- paste0("{{", json_labels, "}}")  
       list(
         list(
           role = "system",
-          content = paste("You are an assistant that only speak JSON.",
-                          "Do not write normal text")
+          content = "You only speak simple JSON. Do not write normal text. You will avoid extraneous white spaces "
         ),
         list(
           role = "user", 
           content = glue(paste(
             "You are a helpful text extraction engine.",
-            "Extract the {labels} being referred to on the text.",
+            "Extract the {col_labels} being referred to on the text.",
             "I expect {no_labels} item(s) exactly.",
             "No capitalization. No explanations.",
+            "You will use this JSON this format exclusively: {json_labels} .",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
           ))          
