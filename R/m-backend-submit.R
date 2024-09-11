@@ -2,7 +2,7 @@
 #'
 #' @param backend An `mall_defaults` object
 #' @param x The body of the text to be submitted to the LLM
-#' @param prompt The additional information to add to the submission 
+#' @param prompt The additional information to add to the submission
 #' @param additional Additional text to insert to the `base_prompt`
 #'
 #' @returns `m_backend_submit` does not return an object. `m_backend_prompt`

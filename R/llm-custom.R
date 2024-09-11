@@ -41,9 +41,9 @@ llm_custom.data.frame <- function(.data,
 #' @export
 llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   llm_use(.silent = TRUE, force = FALSE)
-  if(!inherits(prompt, "list")) {
+  if (!inherits(prompt, "list")) {
     p_split <- strsplit(prompt, "\\{\\{x\\}\\}")[[1]]
-    if(length(p_split) == 1 && p_split == prompt) {
+    if (length(p_split) == 1 && p_split == prompt) {
       content <- glue("{prompt}\n{{x}}")
     } else {
       content <- prompt

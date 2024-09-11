@@ -83,7 +83,7 @@ llm_vec_extract <- function(x,
     additional_prompt = additional_prompt
   )
   map_chr(
-    resp, 
+    resp,
     \(x) paste0(as.character(fromJSON(x, flatten = TRUE)), collapse = "|")
-    )
+  )
 }
