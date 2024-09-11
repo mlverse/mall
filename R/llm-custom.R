@@ -41,7 +41,7 @@ llm_custom.data.frame <- function(.data,
 #' @export
 llm_vec_custom <- function(x, prompt, valid_resps = NULL) {
   llm_use(.silent = TRUE, force = FALSE)
-  resp <- m_backend_generate(defaults_get(), x, prompt)
+  resp <- m_backend_submit(defaults_get(), x, prompt)
   if (!is.null(valid_resps)) {
     errors <- !resp %in% valid_resps
     resp[errors] <- NA

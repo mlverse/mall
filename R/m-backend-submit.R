@@ -5,17 +5,17 @@
 #' @param base_prompt The instructions to the LLM about what to do with `x`
 #' @param additional Additional text to insert to the `base_prompt`
 #'
-#' @returns `m_backend_generate` does not return an object. `m_backend_prompt`
+#' @returns `m_backend_submit` does not return an object. `m_backend_prompt`
 #' returns a list of functions that contain the base prompts.
 #'
 #' @keywords internal
 #' @export
-m_backend_generate <- function(backend, x, base_prompt) {
-  UseMethod("m_backend_generate")
+m_backend_submit <- function(backend, x, base_prompt) {
+  UseMethod("m_backend_submit")
 }
 
 #' @export
-m_backend_generate.mall_ollama <- function(backend, x, base_prompt) {
+m_backend_submit.mall_ollama <- function(backend, x, base_prompt) {
   args <- as.list(backend)
   args$backend <- NULL
   map_chr(
@@ -33,7 +33,7 @@ m_backend_generate.mall_ollama <- function(backend, x, base_prompt) {
 }
 
 #' @export
-m_backend_generate.mall_simulate_llm <- function(backend, x, base_prompt) {
+m_backend_submit.mall_simulate_llm <- function(backend, x, base_prompt) {
   args <- backend
   class(args) <- "list"
   if (args$model == "pipe") {
