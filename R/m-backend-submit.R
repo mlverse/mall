@@ -32,12 +32,14 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
 }
 
 #' @export
-m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
+m_backend_submit.mall_simulate_llm <- function(backend, x, base_prompt) {
   args <- backend
   class(args) <- "list"
   if (args$model == "pipe") {
     out <- trimws(strsplit(x, "\\|")[[1]][[2]])
   } else if (args$model == "prompt") {
+    out <- glue("{base_prompt}\n{x}")
+  } else if (args$model == "echo") {
     out <- x
   } else {
     out <- list(
