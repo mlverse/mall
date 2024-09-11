@@ -5,16 +5,16 @@ m_backend_prompt <- function(backend, additional) {
 }
 
 #' @export
-m_backend_prompt.mall_defaults <- function(backend, additional = "") {
+m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
   list(
     sentiment = function(options) {
       options <- paste0(options, collapse = ", ")
-      x <- glue(paste(
+      glue(paste(
         "You are a helpful sentiment engine.",
         "Return only one of the following answers: {options}.",
         "No capitalization. No explanations.",
-        additional,
-        "The answer is based on the following text:"
+        "{additional}",
+        "The answer is based on the following text:\n{x}"
       ))
     },
     summarize = function(max_words) {
@@ -22,8 +22,8 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
         "You are a helpful summarization engine.",
         "Your answer will contain no no capitalization and no explanations.",
         "Return no more than {max_words} words.",
-        additional,
-        "The answer is the summary of the following text:"
+        "{additional}",
+        "The answer is the summary of the following text:\n{x}"
       ))
     },
     classify = function(labels) {
@@ -32,8 +32,8 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
         "You are a helpful classification engine.",
         "Determine if the text refers to one of the following: {labels}.",
         "No capitalization. No explanations.",
-        additional,
-        "The answer is based on the following text:"
+        "{additional}",
+        "The answer is based on the following text:\n{x}"
       ))
     },
     extract = function(labels) {
@@ -53,7 +53,7 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
             "I expect {no_labels} item(s) exactly.",
             "No capitalization. No explanations.",
             "{additional}",
-            "The answer is based on the following text:"
+            "The answer is based on the following text:\n{x}"
           ))          
         )
       )
@@ -63,8 +63,8 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
         "You are a helpful translation engine.",
         "You will return only the translation text, no explanations.",
         "The target language to translate to is: {language}.",
-        additional,
-        "The answer is the summary of the following text:"
+        "{additional}",
+        "The answer is the summary of the following text:\n{x}"
       ))
     }
   )
