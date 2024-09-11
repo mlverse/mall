@@ -24,6 +24,7 @@ m_backend_generate.mall_ollama <- function(backend, x, base_prompt) {
       .args <- c(
         prompt = glue("{base_prompt}\n{x}"),
         output = "text",
+        system = "You are an assistant that only speak JSON. Do not write normal text",
         args
       )
       exec("generate", !!!.args)
