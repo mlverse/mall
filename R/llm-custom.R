@@ -41,15 +41,7 @@ llm_custom.data.frame <- function(.data,
 #' @export
 llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   llm_use(.silent = TRUE, force = FALSE)
-  if(inherits(x, "list")) {
-    to_llm <- x
-  } else {
-    to_llm <- list(
-      role = "user", 
-      content = glue("{prompt}\n{x}")
-    )
-  }
-  resp <- m_backend_submit(defaults_get(), to_llm)
+  resp <- m_backend_submit(defaults_get(), x, prompt)
   if (!is.null(valid_resps)) {
     errors <- !resp %in% valid_resps
     resp[errors] <- NA

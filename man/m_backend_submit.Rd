@@ -5,16 +5,18 @@
 \alias{m_backend_submit}
 \title{Functions to integrate different back-ends}
 \usage{
-m_backend_prompt(backend, x, additional)
+m_backend_prompt(backend, additional)
 
-m_backend_submit(backend, x)
+m_backend_submit(backend, x, prompt)
 }
 \arguments{
 \item{backend}{An \code{mall_defaults} object}
 
+\item{additional}{Additional text to insert to the \code{base_prompt}}
+
 \item{x}{The body of the text to be submitted to the LLM}
 
-\item{additional}{Additional text to insert to the \code{base_prompt}}
+\item{prompt}{The additional information to add to the submission}
 }
 \value{
 \code{m_backend_submit} does not return an object. \code{m_backend_prompt}

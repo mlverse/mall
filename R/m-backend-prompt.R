@@ -1,11 +1,11 @@
 #' @rdname m_backend_submit
 #' @export
-m_backend_prompt <- function(backend, x, additional) {
+m_backend_prompt <- function(backend, additional) {
   UseMethod("m_backend_prompt")
 }
 
 #' @export
-m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
+m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
       options <- paste0(options, collapse = ", ")
@@ -14,7 +14,7 @@ m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
         "Return only one of the following answers: {options}.",
         "No capitalization. No explanations.",
         "{additional}",
-        "The answer is based on the following text:\n{x}"
+        "The answer is based on the following text:\n{{x}}"
       ))
     },
     summarize = function(max_words) {
@@ -23,7 +23,7 @@ m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
         "Your answer will contain no no capitalization and no explanations.",
         "Return no more than {max_words} words.",
         "{additional}",
-        "The answer is the summary of the following text:\n{x}"
+        "The answer is the summary of the following text:\n{{x}}"
       ))
     },
     classify = function(labels) {
@@ -33,7 +33,7 @@ m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
         "Determine if the text refers to one of the following: {labels}.",
         "No capitalization. No explanations.",
         "{additional}",
-        "The answer is based on the following text:\n{x}"
+        "The answer is based on the following text:\n{{x}}"
       ))
     },
     extract = function(labels) {
@@ -53,7 +53,7 @@ m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
             "I expect {no_labels} item(s) exactly.",
             "No capitalization. No explanations.",
             "{additional}",
-            "The answer is based on the following text:\n{x}"
+            "The answer is based on the following text:\n{{x}}"
           ))          
         )
       )
@@ -64,14 +64,14 @@ m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
         "You will return only the translation text, no explanations.",
         "The target language to translate to is: {language}.",
         "{additional}",
-        "The answer is the summary of the following text:\n{x}"
+        "The answer is the summary of the following text:\n{{x}}"
       ))
     }
   )
 }
 
-get_prompt <- function(label, x, ..., .additional = "") {
-  defaults <- m_backend_prompt(defaults_get(), x =  x, additional = .additional)
+get_prompt <- function(label, ..., .additional = "") {
+  defaults <- m_backend_prompt(defaults_get(), additional = .additional)
   fn <- defaults[[label]]
   fn(...)
 }
@@ -83,6 +83,6 @@ llm_vec_prompt <- function(x,
                            valid_resps = NULL,
                            ...) {
   llm_use(.silent = TRUE, force = FALSE)
-  x <- get_prompt(prompt_label, x = x, ..., .additional = additional_prompt)
-  llm_vec_custom(x = x, valid_resps = valid_resps)
+  prompt <- get_prompt(prompt_label, ..., .additional = additional_prompt)
+  llm_vec_custom(x, prompt, valid_resps = valid_resps)
 }
