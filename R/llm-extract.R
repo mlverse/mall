@@ -39,7 +39,7 @@ llm_extract.data.frame <- function(.data,
     resp <- map(
       resp,
       \(x) ({
-        x <- trimws(strsplit(x, "\\|")[[1]])
+        x <- strsplit(x, "\\|")[[1]]
         names(x) <- clean_names(labels)
         x
       })
@@ -76,10 +76,14 @@ llm_extract.data.frame <- function(.data,
 llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "") {
-  llm_vec_prompt(
+  resp <- llm_vec_prompt(
     x = x,
     prompt_label = "extract",
     labels = labels,
     additional_prompt = additional_prompt
+  )
+  map_chr(
+    resp,
+    \(x) paste0(as.character(fromJSON(x, flatten = TRUE)), collapse = "|")
   )
 }

@@ -45,7 +45,8 @@ llm_vec_classify <- function(x,
                              labels,
                              additional_prompt = "") {
   llm_vec_prompt(
-    x = x, prompt_label = "classify",
+    x = x,
+    prompt_label = "classify",
     additional_prompt = additional_prompt,
     labels = labels,
     valid_resps = labels

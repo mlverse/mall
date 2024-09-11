@@ -5,9 +5,9 @@
 \alias{llm_vec_custom}
 \title{Send a custom prompt to the LLM}
 \usage{
-llm_custom(.data, col, prompt, pred_name = ".pred", valid_resps = "")
+llm_custom(.data, col, prompt = "", pred_name = ".pred", valid_resps = "")
 
-llm_vec_custom(x, prompt, valid_resps = NULL)
+llm_vec_custom(x, prompt = "", valid_resps = NULL)
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
