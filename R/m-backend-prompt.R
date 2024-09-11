@@ -39,14 +39,24 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
     extract = function(labels) {
       no_labels <- length(labels)
       labels <- paste0(labels, collapse = ", ")
-      glue(paste(
-        "You are a helpful text extraction engine.",
-        "Extract the {labels} being referred to on the text.",
-        "I expect {no_labels} item(s) exactly.",
-        "No capitalization. No explanations.",
-        additional,
-        "The answer is based on the following text:"
-      ))
+      list(
+        list(
+          role = "system",
+          content = paste("You are an assistant that only speak JSON.",
+                          "Do not write normal text")
+        ),
+        list(
+          role = "user", 
+          content = glue(paste(
+            "You are a helpful text extraction engine.",
+            "Extract the {labels} being referred to on the text.",
+            "I expect {no_labels} item(s) exactly.",
+            "No capitalization. No explanations.",
+            "{additional}",
+            "The answer is based on the following text:"
+          ))          
+        )
+      )
     },
     translate = function(language) {
       glue(paste(

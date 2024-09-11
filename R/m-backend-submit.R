@@ -27,7 +27,7 @@ m_backend_submit.mall_ollama <- function(backend, x, base_prompt) {
         system = "You are an assistant that only speak JSON. Do not write normal text",
         args
       )
-      exec("generate", !!!.args)
+      exec("chat", !!!.args)
     }
   )
 }
