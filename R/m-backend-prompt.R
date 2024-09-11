@@ -44,14 +44,14 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
       list(
         list(
           role = "system",
-          content = "You only speak simple JSON. Do not write normal text. You will avoid extraneous white spaces "
+          content = "You only speak simple JSON. Do not write normal text."
         ),
         list(
           role = "user", 
           content = glue(paste(
             "You are a helpful text extraction engine.",
             "Extract the {col_labels} being referred to on the text.",
-            "I expect {no_labels} item(s) exactly.",
+            "I expect {no_labels} item{ifelse(no_labels > 1, 's', '')} exactly.",
             "No capitalization. No explanations.",
             "You will use this JSON this format exclusively: {json_labels} .",
             "{additional}",
