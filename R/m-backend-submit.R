@@ -23,12 +23,10 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
     x,
     \(x) {
       .args <- c(
-        #messages = map(prompt, \(i) map(i, \(j) glue(j, x = x))),
-        messages = prompt,
+        messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
         output = "text",
         args
       )
-      print(.args)
       exec("chat", !!!.args)
     }
   )
