@@ -1,6 +1,6 @@
 #' @rdname m_backend_submit
 #' @export
-m_backend_prompt <- function(backend, additional) {
+m_backend_prompt <- function(backend, x, additional) {
   UseMethod("m_backend_prompt")
 }
 
@@ -70,8 +70,8 @@ m_backend_prompt.mall_defaults <- function(backend, x = "", additional = "") {
   )
 }
 
-get_prompt <- function(label, ..., .additional = "") {
-  defaults <- m_backend_prompt(defaults_get(), .additional)
+get_prompt <- function(label, x, ..., .additional = "") {
+  defaults <- m_backend_prompt(defaults_get(), x =  x, additional = .additional)
   fn <- defaults[[label]]
   fn(...)
 }
@@ -83,6 +83,6 @@ llm_vec_prompt <- function(x,
                            valid_resps = NULL,
                            ...) {
   llm_use(.silent = TRUE, force = FALSE)
-  prompt <- get_prompt(prompt_label, ..., .additional = additional_prompt)
-  llm_vec_custom(x, prompt, valid_resps)
+  x <- get_prompt(prompt_label, x = x, ..., .additional = additional_prompt)
+  llm_vec_custom(x = x, valid_resps = valid_resps)
 }

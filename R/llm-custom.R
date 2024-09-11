@@ -15,7 +15,7 @@
 llm_custom <- function(
     .data,
     col,
-    prompt,
+    prompt = "",
     pred_name = ".pred",
     valid_resps = "") {
   UseMethod("llm_custom")
@@ -24,7 +24,7 @@ llm_custom <- function(
 #' @export
 llm_custom.data.frame <- function(.data,
                                   col,
-                                  prompt,
+                                  prompt = "",
                                   pred_name = ".pred",
                                   valid_resps = NULL) {
   mutate(
@@ -39,9 +39,17 @@ llm_custom.data.frame <- function(.data,
 
 #' @rdname llm_custom
 #' @export
-llm_vec_custom <- function(x, prompt, valid_resps = NULL) {
+llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   llm_use(.silent = TRUE, force = FALSE)
-  resp <- m_backend_submit(defaults_get(), x, prompt)
+  if(inherits(x, "list")) {
+    to_llm <- x
+  } else {
+    to_llm <- list(
+      role = "user", 
+      content = glue("{prompt}\n{x}")
+    )
+  }
+  resp <- m_backend_submit(defaults_get(), to_llm)
   if (!is.null(valid_resps)) {
     errors <- !resp %in% valid_resps
     resp[errors] <- NA
