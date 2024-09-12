@@ -100,12 +100,12 @@ l_vec_prompt <- function(x,
                          prompt = NULL,
                          ...) {
   # Initializes session LLM
-  llm_use(.silent = TRUE, force = FALSE)
+  backend <- llm_use(.silent = TRUE, force = FALSE)
   # If there is no 'prompt', then assumes that we're looking for a
   # prompt label (sentiment, classify, etc) to set 'prompt'
   if (is.null(prompt)) {
     defaults <- m_backend_prompt(
-      backend = defaults_get(),
+      backend = backend,
       additional = additional_prompt
     )
     fn <- defaults[[prompt_label]]
@@ -126,7 +126,7 @@ l_vec_prompt <- function(x,
   }
   # Submits final prompt to the LLM
   resp <- m_backend_submit(
-    backend = defaults_get(),
+    backend = backend,
     x = x,
     prompt = prompt
   )
