@@ -37,16 +37,8 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
   class(args) <- "list"
   if (args$model == "pipe") {
     out <- map_chr(x, \(x) trimws(strsplit(x, "\\|")[[1]][[2]]))
-  } else if (args$model == "prompt") {
-    out <- glue("{prompt}\n{x}")
   } else if (args$model == "echo") {
     out <- x
-  } else {
-    out <- list(
-      x = x,
-      base_prompt = base_prompt,
-      backend = args
-    )
   }
   out
 }
