@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  eval = FALSE
+  eval = TRUE
 )
 library(dplyr)
 library(dbplyr)
@@ -23,9 +23,9 @@ mall::llm_use("ollama", "llama3.1", seed = 100)
 # mall
 
 <!-- badges: start -->
-[![Codecov test coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/edgararuiz/mall?branch=main)
 [![R-CMD-check](https://github.com/edgararuiz/mall/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/edgararuiz/mall/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Codecov test coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/edgararuiz/mall?branch=main)
 <!-- badges: end -->
 
 ```{r, eval = FALSE, echo = FALSE}
