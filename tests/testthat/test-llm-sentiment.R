@@ -19,3 +19,23 @@ test_that("Sentiment works", {
     data.frame(x = entries, new = c("positive", "negative"))
   )
 })
+
+test_that("Sentiment on Ollama works", {
+  skip_if_no_ollama()
+  vec_reviews <- reviews_vec()
+  llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+  expect_snapshot(llm_vec_sentiment(vec_reviews))
+  expect_snapshot(
+    llm_vec_sentiment(
+      vec_reviews,
+      options = c("positive", "negative")
+    )
+  )
+  expect_snapshot(
+    llm_vec_sentiment(
+      vec_reviews,
+      options = c("positive", "negative"),
+      additional_prompt = "Consider someone not sure as a positive comment."
+    )
+  )
+})
