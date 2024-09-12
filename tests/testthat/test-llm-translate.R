@@ -15,7 +15,7 @@ test_that("Translate works", {
     llm_translate(
       data.frame(x = test_text),
       x,
-      pred_name = "new", 
+      pred_name = "new",
       language = "other"
     ),
     data.frame(x = test_text, new = test_text)

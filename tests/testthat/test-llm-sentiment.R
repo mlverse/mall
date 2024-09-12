@@ -8,7 +8,7 @@ test_that("Sentiment works", {
     x <- llm_vec_sentiment("this is a test|notvalid")
   )
   expect_equal(x, as.character(NA))
-  
+
   entries <- c("a|positive", "b|negative")
   expect_equal(
     llm_sentiment(data.frame(x = entries), x),

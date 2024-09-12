@@ -42,7 +42,7 @@ llm_custom.data.frame <- function(.data,
 llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   l_vec_prompt(
     x = x,
-    prompt = prompt, 
+    prompt = prompt,
     valid_resps = valid_resps
   )
 }
