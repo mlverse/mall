@@ -7,8 +7,8 @@
 #' @param .silent Avoids console output
 #' @param model The name of model supported by the back-end provider
 #' @param ... Additional arguments that this function will pass down to the
-#' integrating function. In the case of Ollama, it will pass those argument to
-#' `ollamar::generate()`.
+#' integrating function. In the case of Ollama, it will pass those arguments to
+#' `ollamar::chat()`.
 #' @param force Flag that tell the function to reset all of the settings in the
 #' R session
 #'

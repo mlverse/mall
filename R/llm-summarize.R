@@ -52,7 +52,7 @@ globalVariables("ai_summarize")
 llm_vec_summarize <- function(x,
                               max_words = 10,
                               additional_prompt = "") {
-  llm_vec_prompt(
+  l_vec_prompt(
     x = x,
     prompt_label = "summarize",
     additional_prompt = additional_prompt,

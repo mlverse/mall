@@ -13,8 +13,8 @@ llm_use(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE)
 \item{model}{The name of model supported by the back-end provider}
 
 \item{...}{Additional arguments that this function will pass down to the
-integrating function. In the case of Ollama, it will pass those argument to
-\code{ollamar::generate()}.}
+integrating function. In the case of Ollama, it will pass those arguments to
+\code{ollamar::chat()}.}
 
 \item{.silent}{Avoids console output}
 

@@ -31,8 +31,9 @@ llm_extract.data.frame <- function(.data,
                                    additional_prompt = "",
                                    pred_name = ".extract") {
   if (expand_cols && length(labels) > 1) {
+    text <- pull(.data, {{ col }})
     resp <- llm_vec_extract(
-      x = .data$col,
+      x = text,
       labels = labels,
       additional_prompt = additional_prompt
     )
@@ -76,7 +77,7 @@ llm_extract.data.frame <- function(.data,
 llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "") {
-  resp <- llm_vec_prompt(
+  resp <- l_vec_prompt(
     x = x,
     prompt_label = "extract",
     labels = labels,

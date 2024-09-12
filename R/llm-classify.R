@@ -44,7 +44,7 @@ llm_classify.data.frame <- function(.data,
 llm_vec_classify <- function(x,
                              labels,
                              additional_prompt = "") {
-  llm_vec_prompt(
+  l_vec_prompt(
     x = x,
     prompt_label = "classify",
     additional_prompt = additional_prompt,
