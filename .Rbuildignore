@@ -7,3 +7,4 @@ utils/
 ^docs$
 ^pkgdown$
 ^\.github$
+^codecov\.yml$
