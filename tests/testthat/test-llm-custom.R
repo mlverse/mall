@@ -20,3 +20,14 @@ test_that("Custom works", {
     data.frame(x = test_text, new = test_text)
   )
 })
+
+test_that("Custom on Ollama works",{
+  skip_if_no_ollama()
+  my_prompt <- paste(
+    "Answer a question.",
+    "Return only the answer, no explanation",
+    "Acceptable answers are 'yes', 'no'",
+    "Answer this about the following text, is this a happy customer?:"
+  )
+  expect_snapshot(llm_custom(reviews_table(), review, my_prompt))
+})

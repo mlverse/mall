@@ -21,3 +21,8 @@ test_that("Translate works", {
     data.frame(x = test_text, new = test_text)
   )
 })
+
+test_that("Translate on Ollama works",{
+  skip_if_no_ollama()
+  expect_snapshot(llm_translate(reviews_table(), review, "spanish"))
+})

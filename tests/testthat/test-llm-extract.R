@@ -38,3 +38,8 @@ test_that("Extract works", {
     data.frame(x = entries2, y = "toaster", z = "TV")
   )
 })
+
+test_that("Extract on Ollama works",{
+  skip_if_no_ollama()
+  expect_snapshot(llm_extract(reviews_table(), review, "product"))
+})

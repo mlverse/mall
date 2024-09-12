@@ -20,3 +20,8 @@ test_that("Summarize works", {
     data.frame(x = test_text, new = test_text)
   )
 })
+
+test_that("Summarize on Ollama works",{
+  skip_if_no_ollama()
+  expect_snapshot(llm_summarize(reviews_table(), review, max_words = 5))
+})
