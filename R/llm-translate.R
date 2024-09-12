@@ -39,7 +39,7 @@ llm_vec_translate <- function(
     x,
     language,
     additional_prompt = "") {
-  llm_vec_prompt(
+  l_vec_prompt(
     x = x,
     prompt_label = "translate",
     additional_prompt = additional_prompt,

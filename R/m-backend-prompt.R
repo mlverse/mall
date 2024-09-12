@@ -93,19 +93,14 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   )
 }
 
-get_prompt <- function(label, ..., .additional = "") {
-  defaults <- m_backend_prompt(defaults_get(), additional = .additional)
-  fn <- defaults[[label]]
-  fn(...)
-}
-
-
-llm_vec_prompt <- function(x,
+l_vec_prompt <- function(x,
                            prompt_label = "",
                            additional_prompt = "",
                            valid_resps = NULL,
                            ...) {
   llm_use(.silent = TRUE, force = FALSE)
-  prompt <- get_prompt(prompt_label, ..., .additional = additional_prompt)
+  defaults <- m_backend_prompt(defaults_get(), additional = additional_prompt)
+  fn <- defaults[[prompt_label]]
+  prompt <- fn(...)
   llm_vec_custom(x, prompt, valid_resps = valid_resps)
 }
