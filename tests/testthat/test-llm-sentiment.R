@@ -1,5 +1,4 @@
 test_that("Sentiment works", {
-  test_text <- "this is a test"
   llm_use("simulate_llm", "pipe", .silent = TRUE)
   expect_equal(
     llm_vec_sentiment("this is a test|positive"),
