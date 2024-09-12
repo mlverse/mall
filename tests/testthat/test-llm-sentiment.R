@@ -23,7 +23,7 @@ test_that("Sentiment works", {
 test_that("Sentiment on Ollama works", {
   skip_if_no_ollama()
   vec_reviews <- reviews_vec()
-  llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+  reviews <- reviews_table()
   expect_snapshot(llm_vec_sentiment(vec_reviews))
   expect_snapshot(
     llm_vec_sentiment(
@@ -38,4 +38,6 @@ test_that("Sentiment on Ollama works", {
       additional_prompt = "Consider someone not sure as a positive comment."
     )
   )
+  expect_snapshot(llm_sentiment(reviews, review))
+  expect_snapshot(llm_sentiment(reviews, review, pred_name = "new"))
 })

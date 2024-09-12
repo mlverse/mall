@@ -2,6 +2,8 @@ skip_if_no_ollama <- function() {
   con <- ollamar::test_connection()
   if (con$status_code != 200) {
     skip("No Ollama found")
+  } else {
+    llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)  
   }
 }
 
@@ -14,5 +16,5 @@ reviews_vec <- function() {
 }
 
 reviews_table <- function() {
-  data.frame(reviews = reviews_vec())
+  data.frame(review = reviews_vec())
 }
