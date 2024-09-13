@@ -26,7 +26,9 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
         output = "text",
         args
       )
-      exec("chat", !!!.args)
+      res <- exec("chat", !!!.args)
+      m_results_record(.args, res)
+      res
     }
   )
 }
@@ -41,4 +43,17 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
     out <- x
   }
   out
+}
+
+m_results_record <- function(.args, .response) {
+  folder_root <- "_mall_cache"
+  try(dir_create(folder_root))
+  hash_args <- hash(.args)
+  content <- list(
+    request = .args,
+    response = .response
+  )
+  folder_sub <- substr(hash_args, 1, 2)
+  try(dir_create(path(folder_root, folder_sub)))
+  write_json(content, path(folder_root, folder_sub, hash_args, ext = "json"))
 }
