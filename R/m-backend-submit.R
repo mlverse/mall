@@ -16,7 +16,6 @@ m_backend_submit <- function(backend, x, prompt) {
 
 #' @export
 m_backend_submit.mall_ollama <- function(backend, x, prompt) {
-  mall_results <- m_results_directory()
   args <- as.list(backend)
   args$backend <- NULL
   map_chr(
@@ -28,16 +27,10 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
         args
       )
       hash_args <- hash(.args)
-      folder_sub <- substr(hash_args, 1, 2)
-      folder_root <- "_mall_cache"
-      if(hash_args %in% mall_results) {
-        jres <- read_json(
-          path(folder_root, folder_sub, hash_args, ext = "json")
-        )
-        res <- jres$response[[1]]
-      } else {
+      res <- m_cache_check(hash_args)
+      if (is.null(res)) {
         res <- exec("chat", !!!.args)
-        m_results_record(.args, res, hash_args)
+        m_cache_record(.args, res, hash_args)
       }
       res
     }
@@ -56,7 +49,7 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
   out
 }
 
-m_results_record <- function(.args, .response, hash_args) {
+m_cache_record <- function(.args, .response, hash_args) {
   folder_root <- "_mall_cache"
   try(dir_create(folder_root))
   content <- list(
@@ -65,14 +58,21 @@ m_results_record <- function(.args, .response, hash_args) {
   )
   folder_sub <- substr(hash_args, 1, 2)
   try(dir_create(path(folder_root, folder_sub)))
-  write_json(content, path(folder_root, folder_sub, hash_args, ext = "json"))
+  write_json(content, m_cache_file(hash_args))
 }
 
-m_results_directory <- function() {
+m_cache_file <- function(hash_args) {
   folder_root <- "_mall_cache"
-  json_files <- dir_ls(folder_root, recurse = TRUE, type = "file", glob = "*.json")
-  path_ext_remove(path_file(json_files))
+  folder_sub <- substr(hash_args, 1, 2)
+  path(folder_root, folder_sub, hash_args, ext = "json")
 }
 
-
-
+m_cache_check <- function(hash_args) {
+  resp <- suppressWarnings(try(read_json(m_cache_file(hash_args)), TRUE))
+  if (inherits(resp, "try-error")) {
+    out <- NULL
+  } else {
+    out <- resp$response[[1]]
+  }
+  out
+}
