@@ -5,9 +5,16 @@
 \alias{llm_vec_custom}
 \title{Send a custom prompt to the LLM}
 \usage{
-llm_custom(.data, col, prompt = "", pred_name = ".pred", valid_resps = "")
+llm_custom(
+  .data,
+  col,
+  prompt = "",
+  pred_name = ".pred",
+  valid_resps = "",
+  cache = TRUE
+)
 
-llm_vec_custom(x, prompt = "", valid_resps = NULL)
+llm_vec_custom(x, prompt = "", valid_resps = NULL, cache = TRUE)
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
@@ -22,6 +29,10 @@ prediction will be placed}
 \item{valid_resps}{If the response from the LLM is not open, but deterministic,
 provide the options in a vector. This function will set to \code{NA} any response
 not in the options}
+
+\item{cache}{To save and re-use results from previous runs. The results are
+saved to a folder called '_mall_cache' in your project folder. Defaults to
+TRUE.}
 
 \item{x}{A vector that contains the text to be analyzed}
 }
