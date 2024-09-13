@@ -10,12 +10,12 @@
 #'
 #' @keywords internal
 #' @export
-m_backend_submit <- function(backend, x, prompt) {
+m_backend_submit <- function(backend, x, prompt, cache = TRUE) {
   UseMethod("m_backend_submit")
 }
 
 #' @export
-m_backend_submit.mall_ollama <- function(backend, x, prompt) {
+m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = TRUE) {
   args <- as.list(backend)
   args$backend <- NULL
   map_chr(
@@ -26,11 +26,16 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
         output = "text",
         args
       )
-      hash_args <- hash(.args)
-      res <- m_cache_check(hash_args)
+      res <- NULL
+      if(cache) {
+        hash_args <- hash(.args)
+        res <- m_cache_check(hash_args)
+      }
       if (is.null(res)) {
         res <- exec("chat", !!!.args)
-        m_cache_record(.args, res, hash_args)
+        if(cache) {
+          m_cache_record(.args, res, hash_args)  
+        }
       }
       res
     }
@@ -38,7 +43,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
 }
 
 #' @export
-m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
+m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = TRUE) {
   args <- backend
   class(args) <- "list"
   if (args$model == "pipe") {
