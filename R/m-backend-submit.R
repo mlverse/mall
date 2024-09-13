@@ -16,6 +16,11 @@ m_backend_submit <- function(backend, x, prompt, cache = TRUE) {
 
 #' @export
 m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = TRUE) {
+  if(cache) {
+    args_prompt <- as.list(environment())
+    args_prompt$x <- NULL
+    hash_prompt <- hash(args_prompt)  
+  }
   args <- as.list(backend)
   args$backend <- NULL
   map_chr(
@@ -29,12 +34,13 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = TRUE) {
       res <- NULL
       if(cache) {
         hash_args <- hash(.args)
-        res <- m_cache_check(hash_args)
+        res <- m_cache_check(hash_args, hash_prompt)
       }
+      print(res)
       if (is.null(res)) {
         res <- exec("chat", !!!.args)
         if(cache) {
-          m_cache_record(.args, res, hash_args)  
+          m_cache_record(.args, res, hash_args, hash_prompt)  
         }
       }
       res
@@ -54,7 +60,7 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = TRUE)
   out
 }
 
-m_cache_record <- function(.args, .response, hash_args) {
+m_cache_record <- function(.args, .response, hash_args, hash_prompt) {
   folder_root <- "_mall_cache"
   try(dir_create(folder_root))
   content <- list(
@@ -62,18 +68,21 @@ m_cache_record <- function(.args, .response, hash_args) {
     response = .response
   )
   folder_sub <- substr(hash_args, 1, 2)
-  try(dir_create(path(folder_root, folder_sub)))
-  write_json(content, m_cache_file(hash_args))
+  try(dir_create(path(folder_root, hash_prompt)))
+  try(dir_create(path(folder_root, hash_prompt, folder_sub)))
+  write_json(content, m_cache_file(hash_args, hash_prompt))
 }
 
-m_cache_file <- function(hash_args) {
+m_cache_file <- function(hash_args, hash_prompt) {
   folder_root <- "_mall_cache"
   folder_sub <- substr(hash_args, 1, 2)
-  path(folder_root, folder_sub, hash_args, ext = "json")
+  path(folder_root, hash_prompt, folder_sub, hash_args, ext = "json")
 }
 
-m_cache_check <- function(hash_args) {
-  resp <- suppressWarnings(try(read_json(m_cache_file(hash_args)), TRUE))
+m_cache_check <- function(hash_args, hash_prompt) {
+  resp <- suppressWarnings(
+    try(read_json(m_cache_file(hash_args, hash_prompt)), TRUE)
+    )
   if (inherits(resp, "try-error")) {
     out <- NULL
   } else {
