@@ -10,13 +10,15 @@ llm_sentiment(
   col,
   options = c("positive", "negative", "neutral"),
   pred_name = ".sentiment",
-  additional_prompt = ""
+  additional_prompt = "",
+  cache = TRUE
 )
 
 llm_vec_sentiment(
   x,
   options = c("positive", "negative", "neutral"),
-  additional_prompt = ""
+  additional_prompt = "",
+  cache = TRUE
 )
 }
 \arguments{
@@ -31,6 +33,10 @@ a sentiment to the text. Defaults to: 'positive', 'negative', 'neutral'}
 prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
+
+\item{cache}{To save and re-use results from previous runs. The results are
+saved to a folder called '_mall_cache' in your project folder. Defaults to
+TRUE.}
 
 \item{x}{A vector that contains the text to be analyzed}
 }

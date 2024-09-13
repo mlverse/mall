@@ -8,3 +8,4 @@ utils/
 ^pkgdown$
 ^\.github$
 ^codecov\.yml$
+^_mall_cache/

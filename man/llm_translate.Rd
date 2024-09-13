@@ -10,10 +10,11 @@ llm_translate(
   col,
   language,
   pred_name = ".translation",
-  additional_prompt = ""
+  additional_prompt = "",
+  cache = TRUE
 )
 
-llm_vec_translate(x, language, additional_prompt = "")
+llm_vec_translate(x, language, additional_prompt = "", cache = TRUE)
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
@@ -26,6 +27,10 @@ llm_vec_translate(x, language, additional_prompt = "")
 prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
+
+\item{cache}{To save and re-use results from previous runs. The results are
+saved to a folder called '_mall_cache' in your project folder. Defaults to
+TRUE.}
 
 \item{x}{A vector that contains the text to be analyzed}
 }
