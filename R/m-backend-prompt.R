@@ -98,6 +98,7 @@ l_vec_prompt <- function(x,
                          additional_prompt = "",
                          valid_resps = NULL,
                          prompt = NULL,
+                         cache = TRUE,
                          ...) {
   # Initializes session LLM
   backend <- llm_use(.silent = TRUE, force = FALSE)
@@ -128,7 +129,8 @@ l_vec_prompt <- function(x,
   resp <- m_backend_submit(
     backend = backend,
     x = x,
-    prompt = prompt
+    prompt = prompt, 
+    cache = cache
   )
   # Checks for invalid output and marks them as NA
   if (!is.null(valid_resps)) {
