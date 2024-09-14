@@ -7,7 +7,7 @@
 \usage{
 m_backend_prompt(backend, additional)
 
-m_backend_submit(backend, x, prompt, cache = TRUE)
+m_backend_submit(backend, x, prompt, cache = "_mall_cache")
 }
 \arguments{
 \item{backend}{An \code{mall_defaults} object}

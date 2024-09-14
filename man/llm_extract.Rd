@@ -12,10 +12,10 @@ llm_extract(
   expand_cols = FALSE,
   additional_prompt = "",
   pred_name = ".extract",
-  cache = TRUE
+  cache = "_mall_cache"
 )
 
-llm_vec_extract(x, labels = c(), additional_prompt = "", cache = TRUE)
+llm_vec_extract(x, labels = c(), additional_prompt = "", cache = "_mall_cache")
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
@@ -35,9 +35,9 @@ the content as the name.}
 \item{pred_name}{A character vector with the name of the new column where the
 prediction will be placed}
 
-\item{cache}{To save and re-use results from previous runs. The results are
-saved to a folder called '_mall_cache' in your project folder. Defaults to
-TRUE.}
+\item{cache}{The path to save model results, so that they can be re-used if
+the same operation is ran again. Leave empty, or NULL to turn off this feature.
+It defaults to '_mall_cache'.}
 
 \item{x}{A vector that contains the text to be analyzed}
 }

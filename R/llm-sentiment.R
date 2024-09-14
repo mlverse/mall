@@ -15,7 +15,7 @@ llm_sentiment <- function(.data,
                           options = c("positive", "negative", "neutral"),
                           pred_name = ".sentiment",
                           additional_prompt = "", 
-                          cache = TRUE) {
+                          cache = "_mall_cache") {
   UseMethod("llm_sentiment")
 }
 
@@ -25,7 +25,7 @@ llm_sentiment.data.frame <- function(.data,
                                      options = c("positive", "negative", "neutral"),
                                      pred_name = ".sentiment",
                                      additional_prompt = "", 
-                                     cache = TRUE) {
+                                     cache = "_mall_cache") {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_sentiment(
@@ -57,7 +57,7 @@ globalVariables("ai_analyze_sentiment")
 llm_vec_sentiment <- function(x,
                               options = c("positive", "negative", "neutral"),
                               additional_prompt = "", 
-                              cache = TRUE) {
+                              cache = "_mall_cache") {
   l_vec_prompt(
     x = x,
     prompt_label = "sentiment",

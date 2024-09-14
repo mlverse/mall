@@ -10,13 +10,15 @@
 #'
 #' @keywords internal
 #' @export
-m_backend_submit <- function(backend, x, prompt, cache = TRUE) {
+m_backend_submit <- function(backend, x, prompt, cache = "_mall_cache") {
   UseMethod("m_backend_submit")
 }
 
 #' @export
-m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = TRUE) {
-  if(cache) {
+m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cache") {
+  cache_flag <- !is.null(cache) 
+  cache_flag <- ifelse(cache_flag && cache != "", FALSE, TRUE) 
+  if(cache_flag) {
     args_prompt <- as.list(environment())
     args_prompt$x <- NULL
     hash_prompt <- hash(args_prompt)  
@@ -32,16 +34,13 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = TRUE) {
         args
       )
       res <- NULL
-      if(cache) {
+      if(cache_flag) {
         hash_args <- hash(.args)
-        res <- m_cache_check(hash_args, hash_prompt)
+        res <- m_cache_check(hash_args, hash_prompt, cache)
       }
-      print(res)
       if (is.null(res)) {
         res <- exec("chat", !!!.args)
-        if(cache) {
-          m_cache_record(.args, res, hash_args, hash_prompt)  
-        }
+        m_cache_record(.args, res, hash_args, hash_prompt, cache)  
       }
       res
     }
@@ -49,7 +48,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = TRUE) {
 }
 
 #' @export
-m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = TRUE) {
+m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = "_mall_cache") {
   args <- backend
   class(args) <- "list"
   if (args$model == "pipe") {
@@ -60,8 +59,10 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = TRUE)
   out
 }
 
-m_cache_record <- function(.args, .response, hash_args, hash_prompt) {
-  folder_root <- "_mall_cache"
+m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root) {
+  if(is.null(folder_root) | folder_root == "") {
+    return(invisible())
+  }
   try(dir_create(folder_root))
   content <- list(
     request = .args,
@@ -70,18 +71,15 @@ m_cache_record <- function(.args, .response, hash_args, hash_prompt) {
   folder_sub <- substr(hash_args, 1, 2)
   try(dir_create(path(folder_root, hash_prompt)))
   try(dir_create(path(folder_root, hash_prompt, folder_sub)))
-  write_json(content, m_cache_file(hash_args, hash_prompt))
+  write_json(content, m_cache_file(hash_args, hash_prompt, folder_root))
 }
 
-m_cache_file <- function(hash_args, hash_prompt) {
-  folder_root <- "_mall_cache"
-  folder_sub <- substr(hash_args, 1, 2)
-  path(folder_root, hash_prompt, folder_sub, hash_args, ext = "json")
-}
-
-m_cache_check <- function(hash_args, hash_prompt) {
+m_cache_check <- function(hash_args, hash_prompt, folder_root) {
+  if(is.null(folder_root) | folder_root == "") {
+    return(invisible())
+  }
   resp <- suppressWarnings(
-    try(read_json(m_cache_file(hash_args, hash_prompt)), TRUE)
+    try(read_json(m_cache_file(hash_args, hash_prompt, folder_root)), TRUE)
     )
   if (inherits(resp, "try-error")) {
     out <- NULL
@@ -89,4 +87,9 @@ m_cache_check <- function(hash_args, hash_prompt) {
     out <- resp$response[[1]]
   }
   out
+}
+
+m_cache_file <- function(hash_args, hash_prompt, folder_root) {
+  folder_sub <- substr(hash_args, 1, 2)
+  path(folder_root, hash_prompt, folder_sub, hash_args, ext = "json")
 }

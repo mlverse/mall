@@ -11,14 +11,14 @@ llm_sentiment(
   options = c("positive", "negative", "neutral"),
   pred_name = ".sentiment",
   additional_prompt = "",
-  cache = TRUE
+  cache = "_mall_cache"
 )
 
 llm_vec_sentiment(
   x,
   options = c("positive", "negative", "neutral"),
   additional_prompt = "",
-  cache = TRUE
+  cache = "_mall_cache"
 )
 }
 \arguments{
@@ -34,9 +34,9 @@ prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
 
-\item{cache}{To save and re-use results from previous runs. The results are
-saved to a folder called '_mall_cache' in your project folder. Defaults to
-TRUE.}
+\item{cache}{The path to save model results, so that they can be re-used if
+the same operation is ran again. Leave empty, or NULL to turn off this feature.
+It defaults to '_mall_cache'.}
 
 \item{x}{A vector that contains the text to be analyzed}
 }

@@ -20,7 +20,7 @@ llm_extract <- function(.data,
                         expand_cols = FALSE,
                         additional_prompt = "",
                         pred_name = ".extract", 
-                        cache = TRUE) {
+                        cache = "_mall_cache") {
   UseMethod("llm_extract")
 }
 
@@ -31,7 +31,7 @@ llm_extract.data.frame <- function(.data,
                                    expand_cols = FALSE,
                                    additional_prompt = "",
                                    pred_name = ".extract", 
-                                   cache = TRUE) {
+                                   cache = "_mall_cache") {
   if (expand_cols && length(labels) > 1) {
     text <- pull(.data, {{ col }})
     resp <- llm_vec_extract(
@@ -80,7 +80,7 @@ llm_extract.data.frame <- function(.data,
 llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "", 
-                            cache = TRUE) {
+                            cache = "_mall_cache") {
   resp <- l_vec_prompt(
     x = x,
     prompt_label = "extract",
