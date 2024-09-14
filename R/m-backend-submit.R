@@ -16,8 +16,8 @@ m_backend_submit <- function(backend, x, prompt, cache = "_mall_cache") {
 
 #' @export
 m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cache") {
-  cache_flag <- !is.null(cache) 
-  cache_flag <- ifelse(cache_flag && cache != "", FALSE, TRUE) 
+  cache <- cache %||% ""
+  cache_flag <- cache != ""
   if(cache_flag) {
     args_prompt <- as.list(environment())
     args_prompt$x <- NULL
@@ -60,9 +60,7 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = "_mal
 }
 
 m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root) {
-  if(is.null(folder_root) | folder_root == "") {
-    return(invisible())
-  }
+  if(folder_root == "") return(invisible())
   try(dir_create(folder_root))
   content <- list(
     request = .args,
@@ -75,9 +73,7 @@ m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root
 }
 
 m_cache_check <- function(hash_args, hash_prompt, folder_root) {
-  if(is.null(folder_root) | folder_root == "") {
-    return(invisible())
-  }
+  if(folder_root == "") return(invisible())
   resp <- suppressWarnings(
     try(read_json(m_cache_file(hash_args, hash_prompt, folder_root)), TRUE)
     )
