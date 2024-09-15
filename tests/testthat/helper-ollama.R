@@ -3,7 +3,7 @@ skip_if_no_ollama <- function() {
   if (con$status_code != 200) {
     skip("No Ollama found")
   } else {
-    llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)  
+    llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
   }
 }
 

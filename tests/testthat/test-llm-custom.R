@@ -21,7 +21,7 @@ test_that("Custom works", {
   )
 })
 
-test_that("Custom on Ollama works",{
+test_that("Custom on Ollama works", {
   skip_if_no_ollama()
   my_prompt <- paste(
     "Answer a question.",

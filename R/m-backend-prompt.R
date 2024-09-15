@@ -129,7 +129,7 @@ l_vec_prompt <- function(x,
   resp <- m_backend_submit(
     backend = backend,
     x = x,
-    prompt = prompt, 
+    prompt = prompt,
     cache = cache
   )
   # Checks for invalid output and marks them as NA

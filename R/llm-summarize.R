@@ -13,7 +13,7 @@ llm_summarize <- function(.data,
                           col,
                           max_words = 10,
                           pred_name = ".summary",
-                          additional_prompt = "", 
+                          additional_prompt = "",
                           cache = "_mall_cache") {
   UseMethod("llm_summarize")
 }
@@ -23,7 +23,7 @@ llm_summarize.data.frame <- function(.data,
                                      col,
                                      max_words = 10,
                                      pred_name = ".summary",
-                                     additional_prompt = "", 
+                                     additional_prompt = "",
                                      cache = "_mall_cache") {
   mutate(
     .data = .data,
@@ -40,7 +40,7 @@ llm_summarize.data.frame <- function(.data,
                                           col,
                                           max_words = 10,
                                           pred_name = ".summary",
-                                          additional_prompt = NULL, 
+                                          additional_prompt = NULL,
                                           cache = NULL) {
   mutate(
     .data = .data,
@@ -54,7 +54,7 @@ globalVariables("ai_summarize")
 #' @export
 llm_vec_summarize <- function(x,
                               max_words = 10,
-                              additional_prompt = "", 
+                              additional_prompt = "",
                               cache = "_mall_cache") {
   l_vec_prompt(
     x = x,

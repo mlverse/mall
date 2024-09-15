@@ -39,7 +39,7 @@ test_that("Extract works", {
   )
 })
 
-test_that("Extract on Ollama works",{
+test_that("Extract on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_extract(reviews_table(), review, "product"))
 })

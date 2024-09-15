@@ -18,10 +18,10 @@ m_backend_submit <- function(backend, x, prompt, cache = "_mall_cache") {
 m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cache") {
   cache <- cache %||% ""
   cache_flag <- cache != ""
-  if(cache_flag) {
+  if (cache_flag) {
     args_prompt <- as.list(environment())
     args_prompt$x <- NULL
-    hash_prompt <- hash(args_prompt)  
+    hash_prompt <- hash(args_prompt)
   }
   map_chr(
     x,
@@ -32,14 +32,14 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cach
         backend
       )
       res <- NULL
-      if(cache_flag) {
+      if (cache_flag) {
         hash_args <- hash(.args)
         res <- m_cache_check(hash_args, hash_prompt, cache)
       }
       if (is.null(res)) {
         .args$backend <- NULL
         res <- exec("chat", !!!.args)
-        m_cache_record(.args, res, hash_args, hash_prompt, cache)  
+        m_cache_record(.args, res, hash_args, hash_prompt, cache)
       }
       res
     }
@@ -59,7 +59,9 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = "_mal
 }
 
 m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root) {
-  if(folder_root == "") return(invisible())
+  if (folder_root == "") {
+    return(invisible())
+  }
   try(dir_create(folder_root))
   content <- list(
     request = .args,
@@ -72,10 +74,12 @@ m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root
 }
 
 m_cache_check <- function(hash_args, hash_prompt, folder_root) {
-  if(folder_root == "") return(invisible())
+  if (folder_root == "") {
+    return(invisible())
+  }
   resp <- suppressWarnings(
     try(read_json(m_cache_file(hash_args, hash_prompt, folder_root)), TRUE)
-    )
+  )
   if (inherits(resp, "try-error")) {
     out <- NULL
   } else {

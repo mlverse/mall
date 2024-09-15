@@ -17,7 +17,7 @@ llm_custom <- function(
     col,
     prompt = "",
     pred_name = ".pred",
-    valid_resps = "", 
+    valid_resps = "",
     cache = "_mall_cache") {
   UseMethod("llm_custom")
 }
@@ -27,7 +27,7 @@ llm_custom.data.frame <- function(.data,
                                   col,
                                   prompt = "",
                                   pred_name = ".pred",
-                                  valid_resps = NULL, 
+                                  valid_resps = NULL,
                                   cache = "_mall_cache") {
   mutate(
     .data = .data,

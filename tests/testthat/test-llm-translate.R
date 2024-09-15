@@ -22,7 +22,7 @@ test_that("Translate works", {
   )
 })
 
-test_that("Translate on Ollama works",{
+test_that("Translate on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_translate(reviews_table(), review, "spanish"))
 })

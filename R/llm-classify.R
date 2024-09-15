@@ -22,7 +22,7 @@ llm_classify <- function(.data,
                          col,
                          labels,
                          pred_name = ".classify",
-                         additional_prompt = "", 
+                         additional_prompt = "",
                          cache = "_mall_cache") {
   UseMethod("llm_classify")
 }
@@ -32,7 +32,7 @@ llm_classify.data.frame <- function(.data,
                                     col,
                                     labels,
                                     pred_name = ".classify",
-                                    additional_prompt = "", 
+                                    additional_prompt = "",
                                     cache = "_mall_cache") {
   mutate(
     .data = .data,
@@ -49,7 +49,7 @@ llm_classify.data.frame <- function(.data,
 #' @export
 llm_vec_classify <- function(x,
                              labels,
-                             additional_prompt = "", 
+                             additional_prompt = "",
                              cache = "_mall_cache") {
   l_vec_prompt(
     x = x,
