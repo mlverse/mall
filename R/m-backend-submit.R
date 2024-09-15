@@ -23,15 +23,13 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cach
     args_prompt$x <- NULL
     hash_prompt <- hash(args_prompt)  
   }
-  args <- as.list(backend)
-  args$backend <- NULL
   map_chr(
     x,
     \(x) {
       .args <- c(
         messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
         output = "text",
-        args
+        backend
       )
       res <- NULL
       if(cache_flag) {
@@ -39,6 +37,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cach
         res <- m_cache_check(hash_args, hash_prompt, cache)
       }
       if (is.null(res)) {
+        .args$backend <- NULL
         res <- exec("chat", !!!.args)
         m_cache_record(.args, res, hash_args, hash_prompt, cache)  
       }
