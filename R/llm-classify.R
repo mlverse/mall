@@ -12,9 +12,6 @@
 #' prediction will be placed
 #' @param labels A character vector with at least 2 labels to classify the text
 #' as
-#' @param cache The path to save model results, so that they can be re-used if
-#' the same operation is ran again. Leave empty, or NULL to turn off this feature.
-#' It defaults to '_mall_cache'.
 #' @returns `llm_classify` returns a `data.frame` or `tbl` object. `llm_vec_classify`
 #' returns a vector that is the same length as `x`.
 #' @export
@@ -22,8 +19,7 @@ llm_classify <- function(.data,
                          col,
                          labels,
                          pred_name = ".classify",
-                         additional_prompt = "",
-                         cache = "_mall_cache") {
+                         additional_prompt = "") {
   UseMethod("llm_classify")
 }
 
@@ -32,15 +28,13 @@ llm_classify.data.frame <- function(.data,
                                     col,
                                     labels,
                                     pred_name = ".classify",
-                                    additional_prompt = "",
-                                    cache = "_mall_cache") {
+                                    additional_prompt = "") {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_classify(
       x = {{ col }},
       labels = labels,
-      additional_prompt = additional_prompt,
-      cache = cache
+      additional_prompt = additional_prompt
     )
   )
 }
@@ -49,14 +43,12 @@ llm_classify.data.frame <- function(.data,
 #' @export
 llm_vec_classify <- function(x,
                              labels,
-                             additional_prompt = "",
-                             cache = "_mall_cache") {
+                             additional_prompt = "") {
   l_vec_prompt(
     x = x,
     prompt_label = "classify",
     additional_prompt = additional_prompt,
     labels = labels,
-    valid_resps = labels,
-    cache = cache
+    valid_resps = labels
   )
 }

@@ -17,8 +17,7 @@ llm_custom <- function(
     col,
     prompt = "",
     pred_name = ".pred",
-    valid_resps = "",
-    cache = "_mall_cache") {
+    valid_resps = "") {
   UseMethod("llm_custom")
 }
 
@@ -27,15 +26,13 @@ llm_custom.data.frame <- function(.data,
                                   col,
                                   prompt = "",
                                   pred_name = ".pred",
-                                  valid_resps = NULL,
-                                  cache = "_mall_cache") {
+                                  valid_resps = NULL) {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_custom(
       x = {{ col }},
       prompt = prompt,
-      valid_resps = valid_resps,
-      cache = cache
+      valid_resps = valid_resps
     )
   )
 }
@@ -46,7 +43,6 @@ llm_vec_custom <- function(x, prompt = "", valid_resps = NULL, cache = "_mall_ca
   l_vec_prompt(
     x = x,
     prompt = prompt,
-    valid_resps = valid_resps,
-    cache = cache
+    valid_resps = valid_resps
   )
 }

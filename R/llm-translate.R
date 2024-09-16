@@ -23,15 +23,13 @@ llm_translate.data.frame <- function(.data,
                                      col,
                                      language,
                                      pred_name = ".translation",
-                                     additional_prompt = "",
-                                     cache = "_mall_cache") {
+                                     additional_prompt = "") {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_translate(
       x = {{ col }},
       language = language,
-      additional_prompt = additional_prompt,
-      cache = cache
+      additional_prompt = additional_prompt
     )
   )
 }
@@ -47,7 +45,6 @@ llm_vec_translate <- function(
     x = x,
     prompt_label = "translate",
     additional_prompt = additional_prompt,
-    language = language,
-    cache = cache
+    language = language
   )
 }

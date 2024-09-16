@@ -28,10 +28,6 @@ prediction will be placed}
 
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
 
-\item{cache}{The path to save model results, so that they can be re-used if
-the same operation is ran again. Leave empty, or NULL to turn off this feature.
-It defaults to '_mall_cache'.}
-
 \item{x}{A vector that contains the text to be analyzed}
 }
 \value{
