@@ -9,13 +9,13 @@
 #' @param ... Additional arguments that this function will pass down to the
 #' integrating function. In the case of Ollama, it will pass those arguments to
 #' `ollamar::chat()`.
-#' @param force Flag that tell the function to reset all of the settings in the
+#' @param .force Flag that tell the function to reset all of the settings in the
 #' R session
-#'
+#' 
 #' @returns A `mall_defaults` object
 #'
 #' @export
-llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
+llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force = FALSE) {
   args <- list(...)
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
@@ -23,7 +23,7 @@ llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = 
   if (supplied == 2) {
     not_init <- FALSE
   }
-  if (not_init | force) {
+  if (not_init | .force) {
     if (is.null(backend)) {
       try_connection <- test_connection()
       if (try_connection$status_code == 200) {

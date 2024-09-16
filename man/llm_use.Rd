@@ -4,7 +4,7 @@
 \alias{llm_use}
 \title{Specify the model to use}
 \usage{
-llm_use(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE)
+llm_use(backend = NULL, model = NULL, ..., .silent = FALSE, .force = FALSE)
 }
 \arguments{
 \item{backend}{The name of an supported back-end provider. Currently only
@@ -18,7 +18,7 @@ integrating function. In the case of Ollama, it will pass those arguments to
 
 \item{.silent}{Avoids console output}
 
-\item{force}{Flag that tell the function to reset all of the settings in the
+\item{.force}{Flag that tell the function to reset all of the settings in the
 R session}
 }
 \value{
