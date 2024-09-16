@@ -34,12 +34,12 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, cache = "_mall_cach
       res <- NULL
       if (cache_flag) {
         hash_args <- hash(.args)
-        res <- m_cache_check(hash_args, hash_prompt, cache)
+        res <- m_cache_check(hash_args, hash_prompt)
       }
       if (is.null(res)) {
         .args$backend <- NULL
         res <- exec("chat", !!!.args)
-        m_cache_record(.args, res, hash_args, hash_prompt, cache)
+        m_cache_record(.args, res, hash_args, hash_prompt)
       }
       res
     }
@@ -58,7 +58,8 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt, cache = "_mal
   out
 }
 
-m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root) {
+m_cache_record <- function(.args, .response, hash_args, hash_prompt) {
+  folder_root <- m_cache_use()
   if (folder_root == "") {
     return(invisible())
   }
@@ -70,15 +71,16 @@ m_cache_record <- function(.args, .response, hash_args, hash_prompt, folder_root
   folder_sub <- substr(hash_args, 1, 2)
   try(dir_create(path(folder_root, hash_prompt)))
   try(dir_create(path(folder_root, hash_prompt, folder_sub)))
-  write_json(content, m_cache_file(hash_args, hash_prompt, folder_root))
+  write_json(content, m_cache_file(hash_args, hash_prompt))
 }
 
-m_cache_check <- function(hash_args, hash_prompt, folder_root) {
+m_cache_check <- function(hash_args, hash_prompt) {
+  folder_root <- m_cache_use()
   if (folder_root == "") {
     return(invisible())
   }
   resp <- suppressWarnings(
-    try(read_json(m_cache_file(hash_args, hash_prompt, folder_root)), TRUE)
+    try(read_json(m_cache_file(hash_args, hash_prompt)), TRUE)
   )
   if (inherits(resp, "try-error")) {
     out <- NULL
@@ -88,7 +90,12 @@ m_cache_check <- function(hash_args, hash_prompt, folder_root) {
   out
 }
 
-m_cache_file <- function(hash_args, hash_prompt, folder_root) {
+m_cache_file <- function(hash_args, hash_prompt) {
+  folder_root <- m_cache_use()
   folder_sub <- substr(hash_args, 1, 2)
   path(folder_root, hash_prompt, folder_sub, hash_args, ext = "json")
+}
+
+m_cache_use <- function() {
+  .env_llm$cache
 }

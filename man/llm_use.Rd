@@ -4,7 +4,14 @@
 \alias{llm_use}
 \title{Specify the model to use}
 \usage{
-llm_use(backend = NULL, model = NULL, ..., .silent = FALSE, .force = FALSE)
+llm_use(
+  backend = NULL,
+  model = NULL,
+  ...,
+  .silent = FALSE,
+  .cache = "_mall_cache",
+  .force = FALSE
+)
 }
 \arguments{
 \item{backend}{The name of an supported back-end provider. Currently only
@@ -17,6 +24,10 @@ integrating function. In the case of Ollama, it will pass those arguments to
 \code{ollamar::chat()}.}
 
 \item{.silent}{Avoids console output}
+
+\item{.cache}{The path to save model results, so that they can be re-used if
+the same operation is ran again. Set to an empty character, or NULL to turn
+off this feature. It defaults to '_mall_cache'.}
 
 \item{.force}{Flag that tell the function to reset all of the settings in the
 R session}

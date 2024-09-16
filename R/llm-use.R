@@ -11,11 +11,22 @@
 #' `ollamar::chat()`.
 #' @param .force Flag that tell the function to reset all of the settings in the
 #' R session
+#' @param .cache The path to save model results, so that they can be re-used if
+#' the same operation is ran again. Set to an empty character, or NULL to turn 
+#' off this feature. It defaults to '_mall_cache'.
+
 #' 
 #' @returns A `mall_defaults` object
 #'
 #' @export
-llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force = FALSE) {
+llm_use <- function(
+    backend = NULL, 
+    model = NULL, 
+    ..., 
+    .silent = FALSE,
+    .cache = "_mall_cache",
+    .force = FALSE
+    ) {
   args <- list(...)
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
@@ -51,6 +62,7 @@ llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, .force =
       model = model,
       ...
     )
+    .env_llm$cache <- .cache
   }
   if (!.silent | not_init) {
     print(defaults_get())
