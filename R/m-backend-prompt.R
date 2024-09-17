@@ -58,9 +58,10 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
       json_labels <- paste0("{{", json_labels, "}}")
       plural <- ifelse(no_labels > 1, "s", "")
       text_multi <- ifelse(
-        no_labels > 1, 
+        no_labels > 1,
         "Return the response in a simple list, pipe separated, and no headers. ",
-        "")
+        ""
+      )
       list(
         list(
           role = "user",
