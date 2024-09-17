@@ -10,11 +10,10 @@ llm_translate(
   col,
   language,
   pred_name = ".translation",
-  additional_prompt = "",
-  cache = "_mall_cache"
+  additional_prompt = ""
 )
 
-llm_vec_translate(x, language, additional_prompt = "", cache = "_mall_cache")
+llm_vec_translate(x, language, additional_prompt = "")
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}

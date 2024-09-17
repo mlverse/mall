@@ -39,7 +39,7 @@ llm_custom.data.frame <- function(.data,
 
 #' @rdname llm_custom
 #' @export
-llm_vec_custom <- function(x, prompt = "", valid_resps = NULL, cache = "_mall_cache") {
+llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   l_vec_prompt(
     x = x,
     prompt = prompt,
