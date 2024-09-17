@@ -1,5 +1,5 @@
 test_that("Sentiment works", {
-  llm_use("simulate_llm", "pipe", .silent = TRUE, .force = TRUE)
+  llm_use("simulate_llm", "pipe", .silent = TRUE, .force = TRUE, .cache = "_sentiment_cache")
   expect_equal(
     llm_vec_sentiment("this is a test|positive"),
     "positive"
