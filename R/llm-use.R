@@ -33,8 +33,7 @@ llm_use <- function(
   if (supplied == 2) {
     not_init <- FALSE
   }
-  if (not_init | .force) {
-    .env_llm$cache <- .cache %||% "_mall_cache"
+  if (not_init) {
     if (is.null(backend)) {
       try_connection <- test_connection()
       if (try_connection$status_code == 200) {
@@ -56,7 +55,14 @@ llm_use <- function(
     backend <- models[[sel_model]]$backend
     model <- models[[sel_model]]$model
   }
-  .env_llm$cache <- .cache %||% .env_llm$cache
+  
+  if(.force) {
+    .env_llm$cache <- .cache %||% "_mall_cache"
+    .env_llm$defaults <- list()
+  } else {
+    .env_llm$cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
+  }
+  
   if (!is.null(backend) && !is.null(model)) {
     defaults_set(
       backend = backend,
