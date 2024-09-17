@@ -1,6 +1,6 @@
 test_that("Classify works", {
   test_text <- "this is a test"
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
   expect_equal(
     llm_vec_classify(test_text, labels = test_text),
     test_text

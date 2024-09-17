@@ -1,5 +1,5 @@
 test_that("Extract works", {
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
 
   expect_equal(
     llm_vec_extract("{\"product\":\"toaster\"}", labels = "product"),

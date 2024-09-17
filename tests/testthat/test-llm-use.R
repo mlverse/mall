@@ -8,5 +8,6 @@ test_that("Init code is covered", {
     list_models = function() data.frame(name = c("model1", "model2")),
     menu = function(...) 1
   )
-  expect_message(llm_use(force = TRUE))
+  .env_llm$defaults <- list()
+  expect_message(llm_use())
 })

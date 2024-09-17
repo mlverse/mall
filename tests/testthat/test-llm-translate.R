@@ -1,6 +1,6 @@
 test_that("Translate works", {
   test_text <- "this is a test"
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
   expect_equal(
     llm_vec_translate(test_text, language = "other"),
     test_text
