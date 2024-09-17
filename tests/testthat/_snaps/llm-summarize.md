@@ -1,3 +1,21 @@
+# Summarize translates expected Spark SQL
+
+    Code
+      llm_summarize(df_spark, x)
+    Output
+      <SQL>
+      SELECT `df`.*, ai_summarize(`x`, CAST(10.0 AS INT)) AS `.summary`
+      FROM `df`
+
+---
+
+    Code
+      llm_summarize(df_spark, x, max_words = 50)
+    Output
+      <SQL>
+      SELECT `df`.*, ai_summarize(`x`, CAST(50.0 AS INT)) AS `.summary`
+      FROM `df`
+
 # Summarize on Ollama works
 
     Code

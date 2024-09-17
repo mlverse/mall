@@ -20,6 +20,13 @@ test_that("Sentiment works", {
   )
 })
 
+test_that("Sentiment translates expected Spark SQL", {
+  suppressPackageStartupMessages(library(dbplyr))
+  df <- data.frame(x = 1)
+  df_spark <- tbl_lazy(df, con = simulate_spark_sql())
+  expect_snapshot(llm_sentiment(df_spark, x))
+})
+
 test_that("Sentiment on Ollama works", {
   skip_if_no_ollama()
   vec_reviews <- reviews_vec()
