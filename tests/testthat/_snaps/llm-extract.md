@@ -27,3 +27,10 @@
       2          laptop
       3 washing machine
 
+---
+
+    Code
+      llm_vec_extract("bob smith, 105 2nd street", c("name", "address"))
+    Output
+      [1] "bob smith | 105 2nd street"
+

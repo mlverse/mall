@@ -37,4 +37,7 @@ test_that("Extract works", {
 test_that("Extract on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_extract(reviews_table(), review, "product"))
+  expect_snapshot(
+    llm_vec_extract("bob smith, 105 2nd street", c("name", "address"))
+    )
 })
