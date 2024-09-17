@@ -9,21 +9,30 @@
 #' @param ... Additional arguments that this function will pass down to the
 #' integrating function. In the case of Ollama, it will pass those arguments to
 #' `ollamar::chat()`.
-#' @param force Flag that tell the function to reset all of the settings in the
+#' @param .force Flag that tell the function to reset all of the settings in the
 #' R session
+#' @param .cache The path to save model results, so they can be re-used if
+#' the same operation is ran again. To turn off, set this argument to an empty
+#' character: `""`. 'It defaults to '_mall_cache'. If this argument is left `NULL`
+#' when calling this function, no changes to the path will be made.
 #'
 #' @returns A `mall_defaults` object
 #'
 #' @export
-llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = FALSE) {
-  args <- list(...)
+llm_use <- function(
+    backend = NULL,
+    model = NULL,
+    ...,
+    .silent = FALSE,
+    .cache = NULL,
+    .force = FALSE) {
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(defaults_get(), "list")
   if (supplied == 2) {
     not_init <- FALSE
   }
-  if (not_init | force) {
+  if (not_init) {
     if (is.null(backend)) {
       try_connection <- test_connection()
       if (try_connection$status_code == 200) {
@@ -45,6 +54,14 @@ llm_use <- function(backend = NULL, model = NULL, ..., .silent = FALSE, force = 
     backend <- models[[sel_model]]$backend
     model <- models[[sel_model]]$model
   }
+
+  if (.force) {
+    .env_llm$cache <- .cache %||% "_mall_cache"
+    .env_llm$defaults <- list()
+  } else {
+    .env_llm$cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
+  }
+
   if (!is.null(backend) && !is.null(model)) {
     defaults_set(
       backend = backend,

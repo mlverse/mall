@@ -17,7 +17,7 @@ library(dbplyr)
 library(tictoc)
 library(DBI)
 
-mall::llm_use("ollama", "llama3.1", seed = 100)
+mall::llm_use("ollama", "llama3.1", seed = 100, .cache = "_readme_cache")
 ```
 
 # mall
@@ -235,7 +235,7 @@ You can also setup additional arguments that will be passed down to the
 function that actually runs the prediction. In the case of Ollama, that function
 is [`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html). 
 
-```{r}
+```{r, eval = FALSE}
 llm_use("ollama", "llama3.1", seed = 100, temperature = 0.2)
 ```
 
@@ -292,16 +292,12 @@ Just to get an idea of how much data we're processing, I'm using a very, very
 simple word count. So we're analyzing a bit over 20 thousand words.
 
 ```{r}
-library(tictoc)
-
-tic()
 reviews_llm <- book_reviews |>
   llm_sentiment(
     col = review,
     options = c("positive", "negative"),
     pred_name = "predicted"
   )
-toc()
 ```
 
 As far as **time**, on my Apple M3 machine, it took about 3 minutes to process,

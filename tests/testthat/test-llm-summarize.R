@@ -1,6 +1,6 @@
 test_that("Summarize works", {
   test_text <- "this is a test"
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
   expect_equal(
     llm_vec_summarize(test_text),
     test_text
@@ -21,7 +21,7 @@ test_that("Summarize works", {
   )
 })
 
-test_that("Summarize on Ollama works",{
+test_that("Summarize on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_summarize(reviews_table(), review, max_words = 5))
 })

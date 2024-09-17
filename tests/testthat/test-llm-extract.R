@@ -1,5 +1,5 @@
 test_that("Extract works", {
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
 
   expect_equal(
     llm_vec_extract("{\"product\":\"toaster\"}", labels = "product"),
@@ -39,7 +39,7 @@ test_that("Extract works", {
   )
 })
 
-test_that("Extract on Ollama works",{
+test_that("Extract on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_extract(reviews_table(), review, "product"))
 })

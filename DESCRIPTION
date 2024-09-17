@@ -1,7 +1,7 @@
 Package: mall
 Title: Run multiple 'Large Language Model' predictions against a table, or 
     vectors
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 Authors@R: 
     person("Edgar", "Ruiz", , "first.last@example.com", role = c("aut", "cre"))
 Description: Run multiple 'Large Language Model' predictions against a table. The
@@ -15,6 +15,7 @@ RoxygenNote: 7.3.1
 Imports: 
     cli,
     dplyr,
+    fs,
     glue,
     jsonlite,
     ollamar,

@@ -1,6 +1,6 @@
 test_that("Custom works", {
   test_text <- "this is a test"
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
   expect_equal(
     llm_vec_custom(test_text, "this is a test: "),
     test_text
@@ -21,7 +21,7 @@ test_that("Custom works", {
   )
 })
 
-test_that("Custom on Ollama works",{
+test_that("Custom on Ollama works", {
   skip_if_no_ollama()
   my_prompt <- paste(
     "Answer a question.",

@@ -1,9 +1,32 @@
-skip_if_no_ollama <- function() {
-  con <- ollamar::test_connection()
-  if (con$status_code != 200) {
-    skip("No Ollama found")
+.mall_test <- new.env()
+.mall_test$ollama_present <- FALSE
+.mall_test$ollama_checked <- FALSE
+
+ollama_is_present <- function() {
+  if (.mall_test$ollama_checked) {
+    ollama_present <- .mall_test$ollama_present
   } else {
-    llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)  
+    con <- ollamar::test_connection()
+    ollama_present <- con$status_code == 200
+    .mall_test$ollama_present <- ollama_present
+    .mall_test$ollama_checked <- TRUE
+  }
+  ollama_present
+}
+
+skip_if_no_ollama <- function() {
+  if (!ollama_is_present()) {
+    skip("Ollama not found")
+  } else {
+    .mall_test$ollama_present <- TRUE
+    llm_use(
+      backend = "ollama",
+      model = "llama3.1",
+      seed = 100,
+      .silent = TRUE,
+      .force = TRUE,
+      .cache = "_ollama_cache"
+    )
   }
 }
 

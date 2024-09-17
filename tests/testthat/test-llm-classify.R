@@ -1,6 +1,6 @@
 test_that("Classify works", {
   test_text <- "this is a test"
-  llm_use("simulate_llm", "echo", .silent = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
   expect_equal(
     llm_vec_classify(test_text, labels = test_text),
     test_text
@@ -31,26 +31,26 @@ test_that("Classify on Ollama works", {
   reviews <- reviews_table()
   expect_snapshot(
     llm_classify(
-      reviews, 
+      reviews,
       review,
       labels = c("appliance", "computer")
-      )
     )
+  )
   expect_snapshot(
     llm_classify(
-      reviews, 
-      review, 
+      reviews,
+      review,
       pred_name = "new",
       labels = c("appliance", "computer")
-      )
     )
+  )
   expect_snapshot(
     llm_classify(
-      reviews, 
-      review, 
-      pred_name = "new", 
-      labels = c("appliance", "computer"), 
+      reviews,
+      review,
+      pred_name = "new",
+      labels = c("appliance", "computer"),
       additional_prompt = "Consider all laptops as appliances."
-      )
     )
+  )
 })
