@@ -57,11 +57,11 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
       json_labels <- paste0("\"", labels, "\":your answer", collapse = ",")
       json_labels <- paste0("{{", json_labels, "}}")
       plural <- ifelse(no_labels > 1, "s", "")
+      text_multi <- ifelse(
+        no_labels > 1, 
+        "Return the response in a simple list, pipe separated, and no headers. ",
+        "")
       list(
-        list(
-          role = "system",
-          content = "You only speak simple JSON. Do not write normal text."
-        ),
         list(
           role = "user",
           content = glue(paste(
@@ -69,7 +69,7 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
             "Extract the {col_labels} being referred to on the text.",
             "I expect {no_labels} item{plural} exactly.",
             "No capitalization. No explanations.",
-            "You will use this JSON this format exclusively: {json_labels} .",
+            "{text_multi}",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
           ))
@@ -100,7 +100,7 @@ l_vec_prompt <- function(x,
                          prompt = NULL,
                          ...) {
   # Initializes session LLM
-  backend <- llm_use(.silent = TRUE, force = FALSE)
+  backend <- llm_use(.silent = TRUE, .force = FALSE)
   # If there is no 'prompt', then assumes that we're looking for a
   # prompt label (sentiment, classify, etc) to set 'prompt'
   if (is.null(prompt)) {
