@@ -3,10 +3,10 @@
 .mall_test$ollama_checked <- FALSE
 
 ollama_is_present <- function() {
-  if(.mall_test$ollama_checked) {
-    ollama_present <- .mall_test$ollama_present 
+  if (.mall_test$ollama_checked) {
+    ollama_present <- .mall_test$ollama_present
   } else {
-    con <- ollamar::test_connection()  
+    con <- ollamar::test_connection()
     ollama_present <- con$status_code == 200
     .mall_test$ollama_present <- ollama_present
     .mall_test$ollama_checked <- TRUE
@@ -21,12 +21,12 @@ skip_if_no_ollama <- function() {
     .mall_test$ollama_present <- TRUE
     llm_use(
       backend = "ollama",
-      model =  "llama3.1", 
+      model = "llama3.1",
       seed = 100,
-      .silent = TRUE, 
+      .silent = TRUE,
       .force = TRUE,
       .cache = "_ollama_cache"
-      )
+    )
   }
 }
 

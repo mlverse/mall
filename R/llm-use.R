@@ -15,18 +15,17 @@
 #' the same operation is ran again. To turn off, set this argument to an empty
 #' character: `""`. 'It defaults to '_mall_cache'. If this argument is left `NULL`
 #' when calling this function, no changes to the path will be made.
-#' 
+#'
 #' @returns A `mall_defaults` object
 #'
 #' @export
 llm_use <- function(
-    backend = NULL, 
-    model = NULL, 
-    ..., 
+    backend = NULL,
+    model = NULL,
+    ...,
     .silent = FALSE,
     .cache = NULL,
-    .force = FALSE
-    ) {
+    .force = FALSE) {
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(defaults_get(), "list")
@@ -55,14 +54,14 @@ llm_use <- function(
     backend <- models[[sel_model]]$backend
     model <- models[[sel_model]]$model
   }
-  
-  if(.force) {
+
+  if (.force) {
     .env_llm$cache <- .cache %||% "_mall_cache"
     .env_llm$defaults <- list()
   } else {
     .env_llm$cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
   }
-  
+
   if (!is.null(backend) && !is.null(model)) {
     defaults_set(
       backend = backend,

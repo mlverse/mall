@@ -102,7 +102,7 @@ m_cache_folder <- function() {
   .env_llm$cache
 }
 
-m_cache_use  <- function() {
+m_cache_use <- function() {
   folder <- m_cache_folder() %||% ""
   out <- FALSE
   if (folder != "") {
