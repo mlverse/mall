@@ -1,13 +1,10 @@
-clean_names <- function(x, replace_periods = FALSE) {
+clean_names <- function(x) {
   x <- tolower(x)
   map_chr(
     x,
     \(x) {
       out <- str_replace_clean(x, " ")
       out <- str_replace_clean(out, "\\:")
-      if (replace_periods) {
-        out <- str_replace_clean(out, "\\.")
-      }
       out
     }
   )

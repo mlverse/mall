@@ -1,3 +1,15 @@
+test_that("Ollama not found error", {
+  local_mocked_bindings(
+    test_connection = function() {
+      x <- list()
+      x$status_code <- 400
+      x
+    }
+  )
+  .env_llm$defaults <- list()
+  expect_error(llm_use())
+})
+
 test_that("Init code is covered", {
   local_mocked_bindings(
     test_connection = function() {
@@ -11,3 +23,4 @@ test_that("Init code is covered", {
   .env_llm$defaults <- list()
   expect_message(llm_use())
 })
+
