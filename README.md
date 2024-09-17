@@ -250,8 +250,6 @@ Ollama, that function is
 
 ``` r
 llm_use("ollama", "llama3.1", seed = 100, temperature = 0.2)
-#> Provider: ollama
-#> Model: llama3.1
 ```
 
 ## Key considerations
@@ -315,9 +313,6 @@ Just to get an idea of how much data we’re processing, I’m using a very,
 very simple word count. So we’re analyzing a bit over 20 thousand words.
 
 ``` r
-library(tictoc)
-
-tic()
 reviews_llm <- book_reviews |>
   llm_sentiment(
     col = review,
@@ -325,11 +320,6 @@ reviews_llm <- book_reviews |>
     pred_name = "predicted"
   )
 #> ! There were 1 predictions with invalid output, they were coerced to NA
-```
-
-``` r
-toc()
-#> 171.074 sec elapsed
 ```
 
 As far as **time**, on my Apple M3 machine, it took about 3 minutes to
