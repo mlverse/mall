@@ -9,7 +9,7 @@ R session"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">mall</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,14 @@ R session</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">llm_use</span><span class="op">(</span>backend <span class="op">=</span> <span class="cn">NULL</span>, model <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span>, .silent <span class="op">=</span> <span class="cn">FALSE</span>, force <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">llm_use</span><span class="op">(</span></span>
+<span>  backend <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  .silent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .cache <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  .force <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -73,7 +80,14 @@ integrating function. In the case of Ollama, it will pass those arguments to
 <dd><p>Avoids console output</p></dd>
 
 
-<dt id="arg-force">force<a class="anchor" aria-label="anchor" href="#arg-force"></a></dt>
+<dt id="arg--cache">.cache<a class="anchor" aria-label="anchor" href="#arg--cache"></a></dt>
+<dd><p>The path to save model results, so they can be re-used if
+the same operation is ran again. To turn off, set this argument to an empty
+character: <code>""</code>. 'It defaults to '_mall_cache'. If this argument is left <code>NULL</code>
+when calling this function, no changes to the path will be made.</p></dd>
+
+
+<dt id="arg--force">.force<a class="anchor" aria-label="anchor" href="#arg--force"></a></dt>
 <dd><p>Flag that tell the function to reset all of the settings in the
 R session</p></dd>
 
