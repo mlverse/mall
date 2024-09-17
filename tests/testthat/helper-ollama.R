@@ -14,14 +14,19 @@ ollama_is_present <- function() {
   ollama_present
 }
 
-ollama_is_present()  
-
 skip_if_no_ollama <- function() {
   if (!ollama_is_present()) {
     skip("Ollama not found")
   } else {
     .mall_test$ollama_present <- TRUE
-    llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE, .force = TRUE)
+    llm_use(
+      backend = "ollama",
+      model =  "llama3.1", 
+      seed = 100,
+      .silent = TRUE, 
+      .force = TRUE,
+      .cache = "_ollama_cache"
+      )
   }
 }
 

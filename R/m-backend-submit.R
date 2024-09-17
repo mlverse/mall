@@ -40,12 +40,22 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt) {
 
 #' @export
 m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
+  .args <- as.list(environment())
   args <- backend
   class(args) <- "list"
   if (args$model == "pipe") {
     out <- map_chr(x, \(x) trimws(strsplit(x, "\\|")[[1]][[2]]))
   } else if (args$model == "echo") {
     out <- x
+  }
+  res <- NULL
+  if (m_cache_use()) {
+    hash_args <- hash(.args)
+    res <- m_cache_check(hash_args)
+  }
+  if (is.null(res)) {
+    .args$backend <- NULL
+    m_cache_record(.args, out, hash_args)
   }
   out
 }
