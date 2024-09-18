@@ -8,23 +8,17 @@ m_backend_prompt <- function(backend, additional) {
 m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
-      if (all_formula(options)) {
-        options_mapped <- map_chr(
-          options, \(x){
-            paste0("- If the text is ", f_lhs(x), ", return ", f_rhs(x))
-          }
-        )
-        options_return <- paste0(options_mapped, collapse = ", ")
-      } else {
-        options <- paste0(options, collapse = ", ")
-        options_return <- glue("Return only one of the following answers: {options}")
-      }
+      options <- process_labels(
+        x = options,
+        if_character = "Return only one of the following answers: {x}",
+        if_formula = "- If the text is {f_lhs(x)}, return {f_rhs(x)}"
+      )
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful sentiment engine.",
-            "{options_return}.",
+            "{options}.",
             "No capitalization. No explanations.",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
@@ -165,4 +159,15 @@ l_vec_prompt <- function(x,
 
 all_formula <- function(x) {
   all(map_lgl(x, inherits, "formula"))
+}
+
+process_labels <- function(x, if_character = "", if_formula = "") {
+  if (all_formula(x)) {
+    labels_mapped <- map_chr(x, \(x) glue(if_formula))
+    out <- paste0(labels_mapped, collapse = ", ")
+  } else {
+    x <- paste0(x, collapse = ", ")
+    out <- glue(if_character)
+  }
+  out
 }
