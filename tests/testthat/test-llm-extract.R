@@ -1,45 +1,44 @@
 test_that("Extract works", {
+  llm_use("simulate_llm", "prompt", .silent = TRUE, .force = TRUE)
+
+  expect_snapshot(
+    llm_vec_extract("toaster", labels = "product")
+  )
+})
+
+test_that("Extract data frame works", {
   llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
 
   expect_equal(
-    llm_vec_extract("{\"product\":\"toaster\"}", labels = "product"),
-    "toaster"
+    llm_extract(data.frame(x = "test"), x, labels = "product"),
+    data.frame(x = "test", .extract = "test")
   )
 
-  entries2 <- "{\"product\":\"toaster\", \"product\":\"TV\"}"
-  entries2_result <- "toaster|TV"
-  expect_equal(
-    llm_vec_extract(
-      entries2,
-      labels = "product"
-    ),
-    entries2_result
-  )
-  expect_equal(
-    llm_extract(data.frame(x = entries2), x, labels = "product"),
-    data.frame(x = entries2, .extract = entries2_result)
-  )
   expect_equal(
     llm_extract(
-      .data = data.frame(x = entries2),
+      .data = data.frame(x = "test1|test2"),
       col = x,
       labels = c("product1", "product2"),
       expand_cols = TRUE
     ),
-    data.frame(x = entries2, product1 = "toaster", product2 = "TV")
+    data.frame(x = "test1|test2", product1 = "test1", product2 = "test2")
   )
+
   expect_equal(
     llm_extract(
-      .data = data.frame(x = entries2),
+      .data = data.frame(x = "test1|test2"),
       col = x,
       labels = c(y = "product1", z = "product2"),
       expand_cols = TRUE
     ),
-    data.frame(x = entries2, y = "toaster", z = "TV")
+    data.frame(x = "test1|test2", y = "test1", z = "test2")
   )
 })
 
 test_that("Extract on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_extract(reviews_table(), review, "product"))
+  expect_snapshot(
+    llm_vec_extract("bob smith, 105 2nd street", c("name", "address"))
+  )
 })

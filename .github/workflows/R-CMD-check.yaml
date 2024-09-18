@@ -43,9 +43,16 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck
-          needs: check
+          extra-packages: |
+            any::rcmdcheck
+          needs: |
+            check
 
+      - name: Installing dbplyr
+        run: |
+          pak::pak("dbplyr")
+        shell: Rscript {0}            
+            
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true

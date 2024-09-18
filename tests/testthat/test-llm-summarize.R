@@ -21,6 +21,14 @@ test_that("Summarize works", {
   )
 })
 
+test_that("Summarize translates expected Spark SQL", {
+  suppressPackageStartupMessages(library(dbplyr))
+  df <- data.frame(x = 1)
+  df_spark <- tbl_lazy(df, con = simulate_spark_sql())
+  expect_snapshot(llm_summarize(df_spark, x))
+  expect_snapshot(llm_summarize(df_spark, x, max_words = 50))
+})
+
 test_that("Summarize on Ollama works", {
   skip_if_no_ollama()
   expect_snapshot(llm_summarize(reviews_table(), review, max_words = 5))

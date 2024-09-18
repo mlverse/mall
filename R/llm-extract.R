@@ -77,14 +77,10 @@ llm_extract.data.frame <- function(.data,
 llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "") {
-  resp <- l_vec_prompt(
+  l_vec_prompt(
     x = x,
     prompt_label = "extract",
     labels = labels,
     additional_prompt = additional_prompt
-  )
-  map_chr(
-    resp,
-    \(x) paste0(as.character(fromJSON(x, flatten = TRUE)), collapse = "|")
   )
 }

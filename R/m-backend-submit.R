@@ -47,6 +47,8 @@ m_backend_submit.mall_simulate_llm <- function(backend, x, prompt) {
     out <- map_chr(x, \(x) trimws(strsplit(x, "\\|")[[1]][[2]]))
   } else if (args$model == "echo") {
     out <- x
+  } else if (args$model == "prompt") {
+    out <- prompt
   }
   res <- NULL
   if (m_cache_use()) {
@@ -77,9 +79,6 @@ m_cache_record <- function(.args, .response, hash_args) {
 }
 
 m_cache_check <- function(hash_args) {
-  if (!m_cache_use()) {
-    return(invisible())
-  }
   folder_root <- m_cache_folder()
   resp <- suppressWarnings(
     try(read_json(m_cache_file(hash_args)), TRUE)

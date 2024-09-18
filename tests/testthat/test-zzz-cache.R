@@ -8,7 +8,7 @@ test_that("Ollama cache exists and delete", {
   skip_if_no_ollama()
   expect_equal(
     length(fs::dir_ls("_ollama_cache", recurse = TRUE)),
-    53
+    55
   )
   fs::dir_delete("_ollama_cache")
 })
