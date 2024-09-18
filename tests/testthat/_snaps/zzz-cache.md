@@ -3,30 +3,30 @@
     Code
       fs::dir_ls("_mall_cache", recurse = TRUE)
     Output
-      _mall_cache/65
-      _mall_cache/65/654ffcb598cbbdeb0c1c7ebd05239ed4.json
-      _mall_cache/72
-      _mall_cache/72/72433745387c1c32b53ec05a77fa3b97.json
-      _mall_cache/76
-      _mall_cache/76/768d2519acbc4cce84d8069f665ee0b2.json
-      _mall_cache/7a
-      _mall_cache/7a/7a500c559374fe68cf6cf57605d9de46.json
-      _mall_cache/7d
-      _mall_cache/7d/7d2911f2710df85c421e40c2991a6cac.json
-      _mall_cache/7e
-      _mall_cache/7e/7e20b6c382a19b95ea3e43d76af92b0f.json
-      _mall_cache/83
-      _mall_cache/83/83dafa73c6187bf2156f4f07d6fdfc36.json
-      _mall_cache/ab
-      _mall_cache/ab/abcd4e05a8a4cf61e0053a7a7bed1360.json
-      _mall_cache/ad
-      _mall_cache/ad/ad37d26f759f41c5817fdf5d99a71891.json
+      _mall_cache/47
+      _mall_cache/47/4719ddcccab04eee3f2355a53cc27219.json
+      _mall_cache/55
+      _mall_cache/55/55616b50a571c2246950e9a2179e3ae0.json
+      _mall_cache/6f
+      _mall_cache/6f/6f5cffa79bde9ec4d56472204d4f49c2.json
+      _mall_cache/71
+      _mall_cache/71/71690a76540d567abe0bf76b8be7b3f0.json
+      _mall_cache/8c
+      _mall_cache/8c/8cc0fb726002ccec0345938877129357.json
+      _mall_cache/8d
+      _mall_cache/8d/8db41f08bc77b48e4387babc74ad3fd3.json
+      _mall_cache/9c
+      _mall_cache/9c/9c2d6c1858e9e0e03cfee5411de6e1ca.json
+      _mall_cache/9d
+      _mall_cache/9d/9d859cbfb2855ce7b13c63037ff27351.json
+      _mall_cache/a0
+      _mall_cache/a0/a00cf53bede87a270fb59b2199745037.json
+      _mall_cache/a3
+      _mall_cache/a3/a3bd49c839ea6ca5d4013c1dbe77e65c.json
+      _mall_cache/a5
+      _mall_cache/a5/a597588456064a215c11791442be6587.json
+      _mall_cache/d9
+      _mall_cache/d9/d90e4685e9fd358bccf99751b3eee3e3.json
       _mall_cache/df
       _mall_cache/df/dfe963014849a2dbd09171246c45c511.json
-      _mall_cache/e6
-      _mall_cache/e6/e624d61d6a9dab8052ff6053b5be2f62.json
-      _mall_cache/f4
-      _mall_cache/f4/f47435d14c52e6a5c07400fb5f43db58.json
-      _mall_cache/f7
-      _mall_cache/f7/f7f0532b13e4f50fd3ea97add1fda624.json
 

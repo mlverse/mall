@@ -19,8 +19,11 @@ m_backend_submit <- function(backend, x, prompt, preview = FALSE) {
 m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
   if (preview) {
     x <- head(x, 1)
+    map_here <- map
+  } else {
+    map_here <- map_chr
   }
-  map(
+  map_here(
     x,
     \(x) {
       .args <- c(
