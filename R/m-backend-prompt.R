@@ -105,7 +105,7 @@ l_vec_prompt <- function(x,
                          additional_prompt = "",
                          valid_resps = NULL,
                          prompt = NULL,
-                         preview = TRUE,
+                         preview = FALSE,
                          ...) {
   # Initializes session LLM
   backend <- llm_use(.silent = TRUE, .force = FALSE)
