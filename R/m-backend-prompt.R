@@ -17,7 +17,7 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
         options_return <- paste0(options_mapped, collapse = ", ")
       } else {
         options <- paste0(options, collapse = ", ")
-        options_return <- glue("Return only one of the following answers: {options_return}.")
+        options_return <- glue("Return only one of the following answers: {options}")
       }
       list(
         list(
