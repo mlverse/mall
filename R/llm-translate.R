@@ -38,11 +38,13 @@ llm_translate.data.frame <- function(.data,
 llm_vec_translate <- function(
     x,
     language,
-    additional_prompt = "") {
+    additional_prompt = "",
+    preview = FALSE) {
   l_vec_prompt(
     x = x,
     prompt_label = "translate",
     additional_prompt = additional_prompt,
-    language = language
+    language = language,
+    preview = preview
   )
 }
