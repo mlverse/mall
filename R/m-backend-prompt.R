@@ -8,10 +8,10 @@ m_backend_prompt <- function(backend, additional) {
 m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
-      if(all_formula(options)) {
+      if (all_formula(options)) {
         options_mapped <- map_chr(
           options, \(x){
-            paste0("- If the text is ",f_lhs(x), ", return ", f_rhs(x))
+            paste0("- If the text is ", f_lhs(x), ", return ", f_rhs(x))
           }
         )
         options_return <- paste0(options_mapped, collapse = ", ")
@@ -142,7 +142,7 @@ l_vec_prompt <- function(x,
     prompt = prompt
   )
   # Checks for invalid output and marks them as NA
-  if(all_formula(valid_resps)) {
+  if (all_formula(valid_resps)) {
     valid_resps <- list_c(map(valid_resps, f_rhs))
   }
   if (!is.null(valid_resps)) {
@@ -156,6 +156,9 @@ l_vec_prompt <- function(x,
         )
       )
     }
+  }
+  if (is.numeric(valid_resps)) {
+    resp <- as.numeric(resp)
   }
   resp
 }
