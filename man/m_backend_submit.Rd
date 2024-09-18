@@ -7,7 +7,7 @@
 \usage{
 m_backend_prompt(backend, additional)
 
-m_backend_submit(backend, x, prompt)
+m_backend_submit(backend, x, prompt, preview = FALSE)
 }
 \arguments{
 \item{backend}{An \code{mall_defaults} object}
@@ -17,6 +17,9 @@ m_backend_submit(backend, x, prompt)
 \item{x}{The body of the text to be submitted to the LLM}
 
 \item{prompt}{The additional information to add to the submission}
+
+\item{preview}{If \code{TRUE}, it will display the resulting R call of the
+first text in \code{x}}
 }
 \value{
 \code{m_backend_submit} does not return an object. \code{m_backend_prompt}

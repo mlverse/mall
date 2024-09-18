@@ -8,13 +8,17 @@ m_backend_prompt <- function(backend, additional) {
 m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
-      options <- paste0(options, collapse = ", ")
+      options <- process_labels(
+        x = options,
+        if_character = "Return only one of the following answers: {x}",
+        if_formula = "- If the text is {f_lhs(x)}, return {f_rhs(x)}"
+      )
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful sentiment engine.",
-            "Return only one of the following answers: {options}.",
+            "{options}.",
             "No capitalization. No explanations.",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
@@ -37,13 +41,17 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
       )
     },
     classify = function(labels) {
-      labels <- paste0(labels, collapse = ", ")
+      labels <- process_labels(
+        x = labels,
+        if_character = "Determine if the text refers to one of the following: {x}",
+        if_formula = "- For {f_lhs(x)}, return {f_rhs(x)}"
+      )
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful classification engine.",
-            "Determine if the text refers to one of the following: {labels}.",
+            "{labels}.",
             "No capitalization. No explanations.",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
@@ -54,8 +62,6 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
     extract = function(labels) {
       no_labels <- length(labels)
       col_labels <- paste0(labels, collapse = ", ")
-      json_labels <- paste0("\"", labels, "\":your answer", collapse = ",")
-      json_labels <- paste0("{{", json_labels, "}}")
       plural <- ifelse(no_labels > 1, "s", "")
       text_multi <- ifelse(
         no_labels > 1,
@@ -94,55 +100,17 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   )
 }
 
-l_vec_prompt <- function(x,
-                         prompt_label = "",
-                         additional_prompt = "",
-                         valid_resps = NULL,
-                         prompt = NULL,
-                         ...) {
-  # Initializes session LLM
-  backend <- llm_use(.silent = TRUE, .force = FALSE)
-  # If there is no 'prompt', then assumes that we're looking for a
-  # prompt label (sentiment, classify, etc) to set 'prompt'
-  if (is.null(prompt)) {
-    defaults <- m_backend_prompt(
-      backend = backend,
-      additional = additional_prompt
-    )
-    fn <- defaults[[prompt_label]]
-    prompt <- fn(...)
+all_formula <- function(x) {
+  all(map_lgl(x, inherits, "formula"))
+}
+
+process_labels <- function(x, if_character = "", if_formula = "") {
+  if (all_formula(x)) {
+    labels_mapped <- map_chr(x, \(x) glue(if_formula))
+    out <- paste0(labels_mapped, collapse = ", ")
+  } else {
+    x <- paste0(x, collapse = ", ")
+    out <- glue(if_character)
   }
-  # If the prompt is a character, it will convert it to
-  # a list so it can be processed
-  if (!inherits(prompt, "list")) {
-    p_split <- strsplit(prompt, "\\{\\{x\\}\\}")[[1]]
-    if (length(p_split) == 1 && p_split == prompt) {
-      content <- glue("{prompt}\n{{x}}")
-    } else {
-      content <- prompt
-    }
-    prompt <- list(
-      list(role = "user", content = content)
-    )
-  }
-  # Submits final prompt to the LLM
-  resp <- m_backend_submit(
-    backend = backend,
-    x = x,
-    prompt = prompt
-  )
-  # Checks for invalid output and marks them as NA
-  if (!is.null(valid_resps)) {
-    errors <- !resp %in% valid_resps
-    resp[errors] <- NA
-    if (any(errors)) {
-      cli_alert_warning(
-        c(
-          "There were {sum(errors)} predictions with ",
-          "invalid output, they were coerced to NA"
-        )
-      )
-    }
-  }
-  resp
+  out
 }

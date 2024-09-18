@@ -52,12 +52,14 @@ globalVariables("ai_analyze_sentiment")
 #' @export
 llm_vec_sentiment <- function(x,
                               options = c("positive", "negative", "neutral"),
-                              additional_prompt = "") {
-  l_vec_prompt(
+                              additional_prompt = "",
+                              preview = FALSE) {
+  m_vec_prompt(
     x = x,
     prompt_label = "sentiment",
     additional_prompt = additional_prompt,
     valid_resps = options,
-    options = options
+    options = options,
+    preview = preview
   )
 }

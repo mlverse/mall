@@ -4,6 +4,10 @@ test_that("Sentiment works", {
     llm_vec_sentiment("this is a test|positive"),
     "positive"
   )
+  expect_equal(
+    llm_vec_sentiment("this is a test|1", options = c("positive" ~ 1)),
+    1
+  )
   expect_message(
     x <- llm_vec_sentiment("this is a test|notvalid")
   )

@@ -16,11 +16,13 @@ llm_sentiment(
 llm_vec_sentiment(
   x,
   options = c("positive", "negative", "neutral"),
-  additional_prompt = ""
+  additional_prompt = "",
+  preview = FALSE
 )
 }
 \arguments{
-\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
+\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be
+analyzed}
 
 \item{col}{The name of the field to analyze, supports \code{tidy-eval}}
 
@@ -33,6 +35,10 @@ prediction will be placed}
 \item{additional_prompt}{Inserts this text into the prompt sent to the LLM}
 
 \item{x}{A vector that contains the text to be analyzed}
+
+\item{preview}{It returns the R call that would have been used to run the
+prediction. It only returns the first record in \code{x}. Defaults to \code{FALSE}
+Applies to vector function only.}
 }
 \value{
 \code{llm_sentiment} returns a \code{data.frame} or \code{tbl} object.

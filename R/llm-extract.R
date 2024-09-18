@@ -11,8 +11,8 @@
 #' `labels` is a named vector, this function will use those names as the
 #' new column names, if not, the function will use a sanitized version of
 #' the content as the name.
-#' @returns `llm_extract` returns a `data.frame` or `tbl` object. `llm_vec_extract`
-#' returns a vector that is the same length as `x`.
+#' @returns `llm_extract` returns a `data.frame` or `tbl` object.
+#' `llm_vec_extract` returns a vector that is the same length as `x`.
 #' @export
 llm_extract <- function(.data,
                         col,
@@ -76,11 +76,13 @@ llm_extract.data.frame <- function(.data,
 #' @export
 llm_vec_extract <- function(x,
                             labels = c(),
-                            additional_prompt = "") {
-  l_vec_prompt(
+                            additional_prompt = "",
+                            preview = FALSE) {
+  m_vec_prompt(
     x = x,
     prompt_label = "extract",
     labels = labels,
-    additional_prompt = additional_prompt
+    additional_prompt = additional_prompt,
+    preview = preview
   )
 }

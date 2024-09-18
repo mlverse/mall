@@ -13,8 +13,8 @@
 #' R session
 #' @param .cache The path to save model results, so they can be re-used if
 #' the same operation is ran again. To turn off, set this argument to an empty
-#' character: `""`. 'It defaults to '_mall_cache'. If this argument is left `NULL`
-#' when calling this function, no changes to the path will be made.
+#' character: `""`. 'It defaults to '_mall_cache'. If this argument is left
+#' `NULL` when calling this function, no changes to the path will be made.
 #'
 #' @returns A `mall_defaults` object
 #'
@@ -69,7 +69,7 @@ llm_use <- function(
       ...
     )
   }
-  if (!.silent | not_init) {
+  if (!.silent || not_init) {
     print(defaults_get())
   }
   invisible(defaults_get())
