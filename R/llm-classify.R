@@ -4,7 +4,7 @@
 #' Use a Large Language Model (LLM) to classify the provided text as one of the
 #' options provided via the `labels` argument.
 #'
-#' @param .data A `data.frame` or `tbl` object that contains the text to be 
+#' @param .data A `data.frame` or `tbl` object that contains the text to be
 #' analyzed
 #' @param col The name of the field to analyze, supports `tidy-eval`
 #' @param x A vector that contains the text to be analyzed
@@ -16,7 +16,7 @@
 #' @param preview It returns the R call that would have been used to run the
 #' prediction. It only returns the first record in `x`. Defaults to `FALSE`
 #' Applies to vector function only.
-#' @returns `llm_classify` returns a `data.frame` or `tbl` object. 
+#' @returns `llm_classify` returns a `data.frame` or `tbl` object.
 #' `llm_vec_classify` returns a vector that is the same length as `x`.
 #' @export
 llm_classify <- function(.data,
@@ -33,14 +33,14 @@ llm_classify.data.frame <- function(.data,
                                     labels,
                                     pred_name = ".classify",
                                     additional_prompt = "") {
-    mutate(
-      .data = .data,
-      !!pred_name := llm_vec_classify(
-        x = {{ col }},
-        labels = labels,
-        additional_prompt = additional_prompt
-      )
+  mutate(
+    .data = .data,
+    !!pred_name := llm_vec_classify(
+      x = {{ col }},
+      labels = labels,
+      additional_prompt = additional_prompt
     )
+  )
 }
 
 #' @rdname llm_classify

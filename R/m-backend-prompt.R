@@ -139,9 +139,9 @@ l_vec_prompt <- function(x,
     prompt = prompt,
     preview = preview
   )
-  if(preview) {
+  if (preview) {
     return(resp[[1]])
-  } 
+  }
   # Checks for invalid output and marks them as NA
   if (all_formula(valid_resps)) {
     valid_resps <- list_c(map(valid_resps, f_rhs))
