@@ -9,3 +9,5 @@ utils/
 ^\.github$
 ^codecov\.yml$
 ^_mall_cache/
+^_readme_cache/
+^_prompt_cache/
