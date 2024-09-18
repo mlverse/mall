@@ -41,13 +41,17 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
       )
     },
     classify = function(labels) {
-      labels <- paste0(labels, collapse = ", ")
+      labels <- process_labels(
+        x = labels,
+        if_character = "Determine if the text refers to one of the following: {x}",
+        if_formula = "- For {f_lhs(x)}, return {f_rhs(x)}"
+      )
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful classification engine.",
-            "Determine if the text refers to one of the following: {labels}.",
+            "{labels}.",
             "No capitalization. No explanations.",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
