@@ -62,8 +62,6 @@ m_backend_prompt.mall_defaults <- function(backend, additional = "") {
     extract = function(labels) {
       no_labels <- length(labels)
       col_labels <- paste0(labels, collapse = ", ")
-      json_labels <- paste0("\"", labels, "\":your answer", collapse = ",")
-      json_labels <- paste0("{{", json_labels, "}}")
       plural <- ifelse(no_labels > 1, "s", "")
       text_multi <- ifelse(
         no_labels > 1,
