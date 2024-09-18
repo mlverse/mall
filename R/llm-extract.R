@@ -76,11 +76,13 @@ llm_extract.data.frame <- function(.data,
 #' @export
 llm_vec_extract <- function(x,
                             labels = c(),
-                            additional_prompt = "") {
+                            additional_prompt = "", 
+                            preview = FALSE) {
   l_vec_prompt(
     x = x,
     prompt_label = "extract",
     labels = labels,
-    additional_prompt = additional_prompt
+    additional_prompt = additional_prompt,
+    preview = preview
   )
 }
