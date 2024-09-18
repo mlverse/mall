@@ -8,13 +8,23 @@ m_backend_prompt <- function(backend, additional) {
 m_backend_prompt.mall_defaults <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
-      options <- paste0(options, collapse = ", ")
+      if(all_formula(options)) {
+        options_mapped <- map_chr(
+          options, \(x){
+            paste0("- If the text is ",f_lhs(x), ", return ", f_rhs(x))
+          }
+        )
+        options_return <- paste0(options_mapped, collapse = ", ")
+      } else {
+        options <- paste0(options, collapse = ", ")
+        options_return <- glue("Return only one of the following answers: {options_return}.")
+      }
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful sentiment engine.",
-            "Return only one of the following answers: {options}.",
+            "{options_return}.",
             "No capitalization. No explanations.",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
@@ -132,6 +142,9 @@ l_vec_prompt <- function(x,
     prompt = prompt
   )
   # Checks for invalid output and marks them as NA
+  if(all_formula(valid_resps)) {
+    valid_resps <- list_c(map(valid_resps, f_rhs))
+  }
   if (!is.null(valid_resps)) {
     errors <- !resp %in% valid_resps
     resp[errors] <- NA
@@ -145,4 +158,8 @@ l_vec_prompt <- function(x,
     }
   }
   resp
+}
+
+all_formula <- function(x) {
+  all(map_lgl(x, inherits, "formula"))
 }
