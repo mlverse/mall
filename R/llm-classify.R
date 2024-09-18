@@ -49,7 +49,7 @@ llm_vec_classify <- function(x,
                              labels,
                              additional_prompt = "",
                              preview = FALSE) {
-  l_vec_prompt(
+  m_vec_prompt(
     x = x,
     prompt_label = "classify",
     additional_prompt = additional_prompt,

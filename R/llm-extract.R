@@ -78,7 +78,7 @@ llm_vec_extract <- function(x,
                             labels = c(),
                             additional_prompt = "",
                             preview = FALSE) {
-  l_vec_prompt(
+  m_vec_prompt(
     x = x,
     prompt_label = "extract",
     labels = labels,

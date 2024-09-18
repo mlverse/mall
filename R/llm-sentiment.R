@@ -54,7 +54,7 @@ llm_vec_sentiment <- function(x,
                               options = c("positive", "negative", "neutral"),
                               additional_prompt = "",
                               preview = FALSE) {
-  l_vec_prompt(
+  m_vec_prompt(
     x = x,
     prompt_label = "sentiment",
     additional_prompt = additional_prompt,
