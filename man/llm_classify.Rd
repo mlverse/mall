@@ -16,7 +16,8 @@ llm_classify(
 llm_vec_classify(x, labels, additional_prompt = "")
 }
 \arguments{
-\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
+\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be
+analyzed}
 
 \item{col}{The name of the field to analyze, supports \code{tidy-eval}}
 
@@ -31,8 +32,8 @@ prediction will be placed}
 \item{x}{A vector that contains the text to be analyzed}
 }
 \value{
-\code{llm_classify} returns a \code{data.frame} or \code{tbl} object. \code{llm_vec_classify}
-returns a vector that is the same length as \code{x}.
+\code{llm_classify} returns a \code{data.frame} or \code{tbl} object.
+\code{llm_vec_classify} returns a vector that is the same length as \code{x}.
 }
 \description{
 Use a Large Language Model (LLM) to classify the provided text as one of the

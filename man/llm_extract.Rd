@@ -17,7 +17,8 @@ llm_extract(
 llm_vec_extract(x, labels = c(), additional_prompt = "")
 }
 \arguments{
-\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
+\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be
+analyzed}
 
 \item{col}{The name of the field to analyze, supports \code{tidy-eval}}
 
@@ -37,8 +38,8 @@ prediction will be placed}
 \item{x}{A vector that contains the text to be analyzed}
 }
 \value{
-\code{llm_extract} returns a \code{data.frame} or \code{tbl} object. \code{llm_vec_extract}
-returns a vector that is the same length as \code{x}.
+\code{llm_extract} returns a \code{data.frame} or \code{tbl} object.
+\code{llm_vec_extract} returns a vector that is the same length as \code{x}.
 }
 \description{
 Use a Large Language Model (LLM) to extract specific entity, or entities,

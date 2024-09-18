@@ -4,7 +4,8 @@
 #' Use a Large Language Model (LLM) to classify the provided text as one of the
 #' options provided via the `labels` argument.
 #'
-#' @param .data A `data.frame` or `tbl` object that contains the text to be analyzed
+#' @param .data A `data.frame` or `tbl` object that contains the text to be 
+#' analyzed
 #' @param col The name of the field to analyze, supports `tidy-eval`
 #' @param x A vector that contains the text to be analyzed
 #' @param additional_prompt Inserts this text into the prompt sent to the LLM
@@ -12,8 +13,8 @@
 #' prediction will be placed
 #' @param labels A character vector with at least 2 labels to classify the text
 #' as
-#' @returns `llm_classify` returns a `data.frame` or `tbl` object. `llm_vec_classify`
-#' returns a vector that is the same length as `x`.
+#' @returns `llm_classify` returns a `data.frame` or `tbl` object. 
+#' `llm_vec_classify` returns a vector that is the same length as `x`.
 #' @export
 llm_classify <- function(.data,
                          col,

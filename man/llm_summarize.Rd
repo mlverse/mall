@@ -16,7 +16,8 @@ llm_summarize(
 llm_vec_summarize(x, max_words = 10, additional_prompt = "")
 }
 \arguments{
-\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
+\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be
+analyzed}
 
 \item{col}{The name of the field to analyze, supports \code{tidy-eval}}
 

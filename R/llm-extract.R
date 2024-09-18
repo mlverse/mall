@@ -11,8 +11,8 @@
 #' `labels` is a named vector, this function will use those names as the
 #' new column names, if not, the function will use a sanitized version of
 #' the content as the name.
-#' @returns `llm_extract` returns a `data.frame` or `tbl` object. `llm_vec_extract`
-#' returns a vector that is the same length as `x`.
+#' @returns `llm_extract` returns a `data.frame` or `tbl` object. 
+#' `llm_vec_extract` returns a vector that is the same length as `x`.
 #' @export
 llm_extract <- function(.data,
                         col,

@@ -10,7 +10,8 @@ llm_custom(.data, col, prompt = "", pred_name = ".pred", valid_resps = "")
 llm_vec_custom(x, prompt = "", valid_resps = NULL)
 }
 \arguments{
-\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be analyzed}
+\item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be
+analyzed}
 
 \item{col}{The name of the field to analyze, supports \code{tidy-eval}}
 
@@ -19,15 +20,15 @@ llm_vec_custom(x, prompt = "", valid_resps = NULL)
 \item{pred_name}{A character vector with the name of the new column where the
 prediction will be placed}
 
-\item{valid_resps}{If the response from the LLM is not open, but deterministic,
-provide the options in a vector. This function will set to \code{NA} any response
-not in the options}
+\item{valid_resps}{If the response from the LLM is not open, but
+deterministic, provide the options in a vector. This function will set to
+\code{NA} any response not in the options}
 
 \item{x}{A vector that contains the text to be analyzed}
 }
 \value{
-\code{llm_custom} returns a \code{data.frame} or \code{tbl} object. \code{llm_vec_custom}
-returns a vector that is the same length as \code{x}.
+\code{llm_custom} returns a \code{data.frame} or \code{tbl} object.
+\code{llm_vec_custom} returns a vector that is the same length as \code{x}.
 }
 \description{
 Use a Large Language Model (LLM) to process the provided text using the

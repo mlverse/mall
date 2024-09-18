@@ -27,8 +27,8 @@ integrating function. In the case of Ollama, it will pass those arguments to
 
 \item{.cache}{The path to save model results, so they can be re-used if
 the same operation is ran again. To turn off, set this argument to an empty
-character: \code{""}. 'It defaults to '_mall_cache'. If this argument is left \code{NULL}
-when calling this function, no changes to the path will be made.}
+character: \code{""}. 'It defaults to '_mall_cache'. If this argument is left
+\code{NULL} when calling this function, no changes to the path will be made.}
 
 \item{.force}{Flag that tell the function to reset all of the settings in the
 R session}
