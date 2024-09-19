@@ -1,0 +1,47 @@
+---
+title: "Extract entities from text"
+---
+
+*R/llm-extract.R*
+
+## llm_extract
+
+## Description
+ Use a Large Language Model (LLM) to extract specific entity, or entities, from the provided text 
+
+
+## Usage
+```r
+ 
+llm_extract( 
+  .data, 
+  col, 
+  labels, 
+  expand_cols = FALSE, 
+  additional_prompt = "", 
+  pred_name = ".extract" 
+) 
+ 
+llm_vec_extract(x, labels = c(), additional_prompt = "", preview = FALSE) 
+```
+
+## Arguments
+|Arguments|Description|
+|---|---|
+| .data | A `data.frame` or `tbl` object that contains the text to be analyzed |
+| col | The name of the field to analyze, supports `tidy-eval` |
+| labels | A vector with the entities to extract from the text |
+| expand_cols | If multiple `labels` are passed, this is a flag that tells the function to create a new column per item in `labels`. If `labels` is a named vector, this function will use those names as the new column names, if not, the function will use a sanitized version of the content as the name. |
+| additional_prompt | Inserts this text into the prompt sent to the LLM |
+| pred_name | A character vector with the name of the new column where the prediction will be placed |
+| x | A vector that contains the text to be analyzed |
+| preview | It returns the R call that would have been used to run the prediction. It only returns the first record in `x`. Defaults to `FALSE` Applies to vector function only. |
+
+
+
+## Value
+ `llm_extract` returns a `data.frame` or `tbl` object. `llm_vec_extract` returns a vector that is the same length as `x`. 
+
+
+
+

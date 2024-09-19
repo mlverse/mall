@@ -1,0 +1,43 @@
+---
+title: "Specify the model to use"
+---
+
+*R/llm-use.R*
+
+## llm_use
+
+## Description
+ Allows us to specify the back-end provider, model to use during the current R session 
+
+
+## Usage
+```r
+ 
+llm_use( 
+  backend = NULL, 
+  model = NULL, 
+  ..., 
+  .silent = FALSE, 
+  .cache = NULL, 
+  .force = FALSE 
+) 
+```
+
+## Arguments
+|Arguments|Description|
+|---|---|
+| backend | The name of an supported back-end provider. Currently only 'ollama' is supported. |
+| model | The name of model supported by the back-end provider |
+| ... | Additional arguments that this function will pass down to the integrating function. In the case of Ollama, it will pass those arguments to `ollamar::chat()`. |
+| .silent | Avoids console output |
+| .cache | The path to save model results, so they can be re-used if the same operation is ran again. To turn off, set this argument to an empty character: `""`. 'It defaults to '_mall_cache'. If this argument is left `NULL` when calling this function, no changes to the path will be made. |
+| .force | Flag that tell the function to reset all of the settings in the R session |
+
+
+
+## Value
+ A `mall_session` object 
+
+
+
+

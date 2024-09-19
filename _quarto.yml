@@ -1,0 +1,9 @@
+project:
+  type: website
+  output-dir: docs
+
+format:
+  html:
+    toc: true
+    code-copy: true
+    code-overflow: wrap

@@ -1,0 +1,38 @@
+---
+title: "Send a custom prompt to the LLM"
+---
+
+*R/llm-custom.R*
+
+## llm_custom
+
+## Description
+ Use a Large Language Model (LLM) to process the provided text using the instructions from `prompt` 
+
+
+## Usage
+```r
+ 
+llm_custom(.data, col, prompt = "", pred_name = ".pred", valid_resps = "") 
+ 
+llm_vec_custom(x, prompt = "", valid_resps = NULL) 
+```
+
+## Arguments
+|Arguments|Description|
+|---|---|
+| .data | A `data.frame` or `tbl` object that contains the text to be analyzed |
+| col | The name of the field to analyze, supports `tidy-eval` |
+| prompt | The prompt to append to each record sent to the LLM |
+| pred_name | A character vector with the name of the new column where the prediction will be placed |
+| valid_resps | If the response from the LLM is not open, but deterministic, provide the options in a vector. This function will set to `NA` any response not in the options |
+| x | A vector that contains the text to be analyzed |
+
+
+
+## Value
+ `llm_custom` returns a `data.frame` or `tbl` object. `llm_vec_custom` returns a vector that is the same length as `x`. 
+
+
+
+
