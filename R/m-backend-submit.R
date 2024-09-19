@@ -29,11 +29,10 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       .args <- c(
         messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
         output = "text",
-        backend
+        m_defaults_args()
       )
       res <- NULL
       if (preview) {
-        .args$backend <- NULL
         res <- expr(ollamar::chat(!!!.args))
       }
       if (m_cache_use() && is.null(res)) {
@@ -41,7 +40,6 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
         res <- m_cache_check(hash_args)
       }
       if (is.null(res)) {
-        .args$backend <- NULL
         res <- exec("chat", !!!.args)
         m_cache_record(.args, res, hash_args)
       }

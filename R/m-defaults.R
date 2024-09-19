@@ -45,6 +45,10 @@ m_defaults_reset <- function() {
   .env_llm$session <- list()
 }
 
+m_defaults_args <- function(x = m_defaults_get()) {
+  x$args
+}
+
 #' @export
 print.mall_session <- function(x, ...) {
   cli_h3("{col_cyan('mall')} session object")
