@@ -62,14 +62,20 @@ llm_use <- function(
     cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
   }
 
-  if (!is.null(backend) && !is.null(model)) {
-    defaults_set(
-      backend = backend,
-      model = model,
-      .cache = cache,
-      ...
-    )
+  if (is.null(backend)) {
+    backend <- .env_llm$defaults$backend
   }
+
+  if (is.null(model)) {
+    model <- .env_llm$defaults$model
+  }
+
+  defaults_set(
+    backend = backend,
+    model = model,
+    .cache = cache,
+    ...
+  )
   if (!.silent || not_init) {
     print(defaults_get())
   }
