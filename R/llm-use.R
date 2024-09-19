@@ -57,19 +57,14 @@ llm_use <- function(
 
   if (.force) {
     cache <- .cache %||% "_mall_cache"
-    .env_llm$defaults <- list()
+    m_defaults_reset()
   } else {
-    cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
+    cache <- .cache %||% m_defaults_cache() %||% "_mall_cache"
   }
-
-  if (is.null(backend)) {
-    backend <- .env_llm$defaults$backend
-  }
-
-  if (is.null(model)) {
-    model <- .env_llm$defaults$model
-  }
-
+  
+  backend <- backend %||% m_defaults_backend()
+  model <- model %||% m_defaults_model()
+  
   defaults_set(
     backend = backend,
     model = model,

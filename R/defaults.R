@@ -28,6 +28,23 @@ defaults_set <- function(...) {
   defaults_get()
 }
 
+m_defaults_backend <- function() {
+  .env_llm$session$name
+}
+
+m_defaults_model <- function() {
+  .env_llm$session$args$model
+}
+
+m_defaults_cache <- function() {
+  .env_llm$session$session$cache_folder
+}
+
+m_defaults_reset <- function() {
+  .env_llm$defaults <- list()
+  .env_llm$session <- list()
+}
+
 #' @export
 print.mall_session <- function(x, ...) {
   cli_h3("{col_cyan('mall')} session object")

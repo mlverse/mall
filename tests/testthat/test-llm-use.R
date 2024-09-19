@@ -6,7 +6,7 @@ test_that("Ollama not found error", {
       x
     }
   )
-  .env_llm$defaults <- list()
+  m_defaults_reset()
   expect_error(llm_use())
 })
 
@@ -20,6 +20,6 @@ test_that("Init code is covered", {
     list_models = function() data.frame(name = c("model1", "model2")),
     menu = function(...) 1
   )
-  .env_llm$defaults <- list()
+  m_defaults_reset()
   expect_message(llm_use())
 })
