@@ -28,7 +28,7 @@ llm_use <- function(
     .force = FALSE) {
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
-  not_init <- inherits(defaults_get(), "list")
+  not_init <- inherits(m_defaults_get(), "list")
   if (supplied == 2) {
     not_init <- FALSE
   }
@@ -65,14 +65,14 @@ llm_use <- function(
   backend <- backend %||% m_defaults_backend()
   model <- model %||% m_defaults_model()
   
-  defaults_set(
+  m_defaults_set(
     backend = backend,
     model = model,
     .cache = cache,
     ...
   )
   if (!.silent || not_init) {
-    print(defaults_get())
+    print(m_defaults_get())
   }
-  invisible(defaults_get())
+  invisible(m_defaults_get())
 }

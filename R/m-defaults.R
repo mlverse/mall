@@ -1,8 +1,4 @@
-defaults_get <- function() {
-  .env_llm$session
-}
-
-defaults_set <- function(...) {
+m_defaults_set <- function(...) {
   new_args <- list2(...)
   defaults <- .env_llm$defaults
   for (i in seq_along(new_args)) {
@@ -25,7 +21,11 @@ defaults_set <- function(...) {
     ),
     class = paste0("mall_", obj_class)
   )
-  defaults_get()
+  m_defaults_get()
+}
+
+m_defaults_get <- function() {
+  .env_llm$session
 }
 
 m_defaults_backend <- function() {
