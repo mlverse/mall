@@ -34,7 +34,7 @@ character: \code{""}. 'It defaults to '_mall_cache'. If this argument is left
 R session}
 }
 \value{
-A \code{mall_defaults} object
+A \code{mall_session} object
 }
 \description{
 Allows us to specify the back-end provider, model to use during the current

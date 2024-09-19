@@ -16,7 +16,7 @@
 #' character: `""`. 'It defaults to '_mall_cache'. If this argument is left
 #' `NULL` when calling this function, no changes to the path will be made.
 #'
-#' @returns A `mall_defaults` object
+#' @returns A `mall_session` object
 #'
 #' @export
 llm_use <- function(
@@ -56,16 +56,17 @@ llm_use <- function(
   }
 
   if (.force) {
-    .env_llm$cache <- .cache %||% "_mall_cache"
+    cache <- .cache %||% "_mall_cache"
     .env_llm$defaults <- list()
   } else {
-    .env_llm$cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
+    cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
   }
 
   if (!is.null(backend) && !is.null(model)) {
     defaults_set(
       backend = backend,
       model = model,
+      .cache = cache,
       ...
     )
   }

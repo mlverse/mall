@@ -9,4 +9,5 @@
 
 .env_llm <- new.env()
 .env_llm$defaults <- list()
+.env_llm$session <- list()
 .env_llm$cache <- NULL

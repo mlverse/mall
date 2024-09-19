@@ -1,6 +1,6 @@
 #' Functions to integrate different back-ends
 #'
-#' @param backend An `mall_defaults` object
+#' @param backend An `mall_session` object
 #' @param x The body of the text to be submitted to the LLM
 #' @param prompt The additional information to add to the submission
 #' @param additional Additional text to insert to the `base_prompt`
