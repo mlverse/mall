@@ -29,7 +29,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       .args <- c(
         messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
         output = "text",
-        m_defaults_args()
+        m_defaults_args(backend)
       )
       res <- NULL
       if (preview) {
@@ -54,8 +54,7 @@ m_backend_submit.mall_simulate_llm <- function(backend,
                                                prompt,
                                                preview = FALSE) {
   .args <- as.list(environment())
-  args <- backend
-  class(args) <- "list"
+  args <- m_defaults_args(backend)
   if (args$model == "pipe") {
     out <- map_chr(x, \(x) trimws(strsplit(x, "\\|")[[1]][[2]]))
   } else if (args$model == "echo") {
