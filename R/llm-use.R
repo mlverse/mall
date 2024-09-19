@@ -61,10 +61,10 @@ llm_use <- function(
   } else {
     cache <- .cache %||% m_defaults_cache() %||% "_mall_cache"
   }
-  
+
   backend <- backend %||% m_defaults_backend()
   model <- model %||% m_defaults_model()
-  
+
   m_defaults_set(
     backend = backend,
     model = model,
