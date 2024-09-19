@@ -1,6 +1,6 @@
 #' Functions to integrate different back-ends
 #'
-#' @param backend An `mall_defaults` object
+#' @param backend An `mall_session` object
 #' @param x The body of the text to be submitted to the LLM
 #' @param prompt The additional information to add to the submission
 #' @param additional Additional text to insert to the `base_prompt`
@@ -29,11 +29,10 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       .args <- c(
         messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
         output = "text",
-        backend
+        m_defaults_args(backend)
       )
       res <- NULL
       if (preview) {
-        .args$backend <- NULL
         res <- expr(ollamar::chat(!!!.args))
       }
       if (m_cache_use() && is.null(res)) {
@@ -41,7 +40,6 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
         res <- m_cache_check(hash_args)
       }
       if (is.null(res)) {
-        .args$backend <- NULL
         res <- exec("chat", !!!.args)
         m_cache_record(.args, res, hash_args)
       }
@@ -56,8 +54,7 @@ m_backend_submit.mall_simulate_llm <- function(backend,
                                                prompt,
                                                preview = FALSE) {
   .args <- as.list(environment())
-  args <- backend
-  class(args) <- "list"
+  args <- m_defaults_args(backend)
   if (args$model == "pipe") {
     out <- map_chr(x, \(x) trimws(strsplit(x, "\\|")[[1]][[2]]))
   } else if (args$model == "echo") {

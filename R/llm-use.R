@@ -16,7 +16,7 @@
 #' character: `""`. 'It defaults to '_mall_cache'. If this argument is left
 #' `NULL` when calling this function, no changes to the path will be made.
 #'
-#' @returns A `mall_defaults` object
+#' @returns A `mall_session` object
 #'
 #' @export
 llm_use <- function(
@@ -28,7 +28,7 @@ llm_use <- function(
     .force = FALSE) {
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
-  not_init <- inherits(defaults_get(), "list")
+  not_init <- inherits(m_defaults_get(), "list")
   if (supplied == 2) {
     not_init <- FALSE
   }
@@ -56,21 +56,23 @@ llm_use <- function(
   }
 
   if (.force) {
-    .env_llm$cache <- .cache %||% "_mall_cache"
-    .env_llm$defaults <- list()
+    cache <- .cache %||% "_mall_cache"
+    m_defaults_reset()
   } else {
-    .env_llm$cache <- .cache %||% .env_llm$cache %||% "_mall_cache"
+    cache <- .cache %||% m_defaults_cache() %||% "_mall_cache"
   }
 
-  if (!is.null(backend) && !is.null(model)) {
-    defaults_set(
-      backend = backend,
-      model = model,
-      ...
-    )
-  }
+  backend <- backend %||% m_defaults_backend()
+  model <- model %||% m_defaults_model()
+
+  m_defaults_set(
+    backend = backend,
+    model = model,
+    .cache = cache,
+    ...
+  )
   if (!.silent || not_init) {
-    print(defaults_get())
+    print(m_defaults_get())
   }
-  invisible(defaults_get())
+  invisible(m_defaults_get())
 }

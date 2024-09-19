@@ -10,7 +10,7 @@ m_backend_prompt(backend, additional)
 m_backend_submit(backend, x, prompt, preview = FALSE)
 }
 \arguments{
-\item{backend}{An \code{mall_defaults} object}
+\item{backend}{An \code{mall_session} object}
 
 \item{additional}{Additional text to insert to the \code{base_prompt}}
 

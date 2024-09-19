@@ -5,7 +5,7 @@ m_backend_prompt <- function(backend, additional) {
 }
 
 #' @export
-m_backend_prompt.mall_defaults <- function(backend, additional = "") {
+m_backend_prompt.mall_session <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
       options <- process_labels(
