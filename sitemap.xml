@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://edgararuiz.github.io/mall/reference/llm_summarize.html</loc>
-    <lastmod>2024-09-20T21:19:41.879Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/reference/llm_custom.html</loc>
-    <lastmod>2024-09-20T21:19:41.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/reference/llm_sentiment.html</loc>
-    <lastmod>2024-09-20T21:19:41.879Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/reference/index.html</loc>
-    <lastmod>2024-09-20T21:19:41.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/reference/llm_translate.html</loc>
-    <lastmod>2024-09-20T21:19:41.879Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/utils/qmd-reference/reference.html</loc>
-    <lastmod>2024-09-20T21:19:41.881Z</lastmod>
-  </url>
-  <url>
     <loc>https://edgararuiz.github.io/mall/LICENSE.html</loc>
-    <lastmod>2024-08-30T16:50:38.917Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/articles/databricks.html</loc>
-    <lastmod>2024-09-20T21:19:41.862Z</lastmod>
+    <lastmod>2024-09-20T22:25:35.499Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/index.html</loc>
-    <lastmod>2024-09-20T21:19:41.878Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/reference/m_backend_submit.html</loc>
-    <lastmod>2024-09-20T21:19:41.880Z</lastmod>
+    <lastmod>2024-09-20T22:25:35.501Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_extract.html</loc>
-    <lastmod>2024-09-20T21:19:41.879Z</lastmod>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_use.html</loc>
-    <lastmod>2024-09-20T21:19:41.880Z</lastmod>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/llm_summarize.html</loc>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_classify.html</loc>
-    <lastmod>2024-09-20T21:19:41.878Z</lastmod>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/articles/databricks.html</loc>
+    <lastmod>2024-09-20T22:25:35.501Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/index.html</loc>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/m_backend_submit.html</loc>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/llm_sentiment.html</loc>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/llm_translate.html</loc>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/llm_custom.html</loc>
+    <lastmod>2024-09-20T22:25:35.502Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/utils/qmd-reference/reference.html</loc>
+    <lastmod>2024-09-20T22:25:35.504Z</lastmod>
   </url>
 </urlset>

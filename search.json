@@ -1,219 +1,10 @@
 [
   {
-    "objectID": "reference/llm_summarize.html",
-    "href": "reference/llm_summarize.html",
-    "title": "Summarize text",
-    "section": "",
-    "text": "R/llm-summarize.R"
-  },
-  {
-    "objectID": "reference/llm_summarize.html#llm_summarize",
-    "href": "reference/llm_summarize.html#llm_summarize",
-    "title": "Summarize text",
-    "section": "llm_summarize",
-    "text": "llm_summarize"
-  },
-  {
-    "objectID": "reference/llm_summarize.html#description",
-    "href": "reference/llm_summarize.html#description",
-    "title": "Summarize text",
-    "section": "Description",
-    "text": "Description\nUse a Large Language Model (LLM) to summarize text"
-  },
-  {
-    "objectID": "reference/llm_summarize.html#usage",
-    "href": "reference/llm_summarize.html#usage",
-    "title": "Summarize text",
-    "section": "Usage",
-    "text": "Usage\n \nllm_summarize( \n  .data, \n  col, \n  max_words = 10, \n  pred_name = \".summary\", \n  additional_prompt = \"\" \n) \n \nllm_vec_summarize(x, max_words = 10, additional_prompt = \"\", preview = FALSE)"
-  },
-  {
-    "objectID": "reference/llm_summarize.html#arguments",
-    "href": "reference/llm_summarize.html#arguments",
-    "title": "Summarize text",
-    "section": "Arguments",
-    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nmax_words\nThe maximum number of words that the LLM should use in the summary. Defaults to 10.\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
-  },
-  {
-    "objectID": "reference/llm_summarize.html#value",
-    "href": "reference/llm_summarize.html#value",
-    "title": "Summarize text",
-    "section": "Value",
-    "text": "Value\nllm_summarize returns a data.frame or tbl object. llm_vec_summarize returns a vector that is the same length as x."
-  },
-  {
-    "objectID": "reference/llm_custom.html",
-    "href": "reference/llm_custom.html",
-    "title": "Send a custom prompt to the LLM",
-    "section": "",
-    "text": "R/llm-custom.R"
-  },
-  {
-    "objectID": "reference/llm_custom.html#llm_custom",
-    "href": "reference/llm_custom.html#llm_custom",
-    "title": "Send a custom prompt to the LLM",
-    "section": "llm_custom",
-    "text": "llm_custom"
-  },
-  {
-    "objectID": "reference/llm_custom.html#description",
-    "href": "reference/llm_custom.html#description",
-    "title": "Send a custom prompt to the LLM",
-    "section": "Description",
-    "text": "Description\nUse a Large Language Model (LLM) to process the provided text using the instructions from prompt"
-  },
-  {
-    "objectID": "reference/llm_custom.html#usage",
-    "href": "reference/llm_custom.html#usage",
-    "title": "Send a custom prompt to the LLM",
-    "section": "Usage",
-    "text": "Usage\n \nllm_custom(.data, col, prompt = \"\", pred_name = \".pred\", valid_resps = \"\") \n \nllm_vec_custom(x, prompt = \"\", valid_resps = NULL)"
-  },
-  {
-    "objectID": "reference/llm_custom.html#arguments",
-    "href": "reference/llm_custom.html#arguments",
-    "title": "Send a custom prompt to the LLM",
-    "section": "Arguments",
-    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nprompt\nThe prompt to append to each record sent to the LLM\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nvalid_resps\nIf the response from the LLM is not open, but deterministic, provide the options in a vector. This function will set to NA any response not in the options\n\n\nx\nA vector that contains the text to be analyzed"
-  },
-  {
-    "objectID": "reference/llm_custom.html#value",
-    "href": "reference/llm_custom.html#value",
-    "title": "Send a custom prompt to the LLM",
-    "section": "Value",
-    "text": "Value\nllm_custom returns a data.frame or tbl object. llm_vec_custom returns a vector that is the same length as x."
-  },
-  {
-    "objectID": "reference/llm_sentiment.html",
-    "href": "reference/llm_sentiment.html",
-    "title": "Sentiment analysis",
-    "section": "",
-    "text": "R/llm-sentiment.R"
-  },
-  {
-    "objectID": "reference/llm_sentiment.html#llm_sentiment",
-    "href": "reference/llm_sentiment.html#llm_sentiment",
-    "title": "Sentiment analysis",
-    "section": "llm_sentiment",
-    "text": "llm_sentiment"
-  },
-  {
-    "objectID": "reference/llm_sentiment.html#description",
-    "href": "reference/llm_sentiment.html#description",
-    "title": "Sentiment analysis",
-    "section": "Description",
-    "text": "Description\nUse a Large Language Model (LLM) to perform sentiment analysis from the provided text"
-  },
-  {
-    "objectID": "reference/llm_sentiment.html#usage",
-    "href": "reference/llm_sentiment.html#usage",
-    "title": "Sentiment analysis",
-    "section": "Usage",
-    "text": "Usage\n \nllm_sentiment( \n  .data, \n  col, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  pred_name = \".sentiment\", \n  additional_prompt = \"\" \n) \n \nllm_vec_sentiment( \n  x, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  additional_prompt = \"\", \n  preview = FALSE \n)"
-  },
-  {
-    "objectID": "reference/llm_sentiment.html#arguments",
-    "href": "reference/llm_sentiment.html#arguments",
-    "title": "Sentiment analysis",
-    "section": "Arguments",
-    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\noptions\nA vector with the options that the LLM should use to assign a sentiment to the text. Defaults to: ‘positive’, ‘negative’, ‘neutral’\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
-  },
-  {
-    "objectID": "reference/llm_sentiment.html#value",
-    "href": "reference/llm_sentiment.html#value",
-    "title": "Sentiment analysis",
-    "section": "Value",
-    "text": "Value\nllm_sentiment returns a data.frame or tbl object. llm_vec_sentiment returns a vector that is the same length as x."
-  },
-  {
-    "objectID": "reference/index.html",
-    "href": "reference/index.html",
-    "title": "mall",
-    "section": "",
-    "text": "Function(s)\nDescription\n\n\n\n\nllm_classify() | llm_vec_classify()\nCategorize data as one of options given\n\n\nllm_custom() | llm_vec_custom()\nSend a custom prompt to the LLM\n\n\nllm_extract() | llm_vec_extract()\nExtract entities from text\n\n\nllm_sentiment() | llm_vec_sentiment()\nSentiment analysis\n\n\nllm_summarize() | llm_vec_summarize()\nSummarize text\n\n\nllm_translate() | llm_vec_translate()\nTranslates text to a specific language\n\n\nllm_use()\nSpecify the model to use\n\n\nm_backend_prompt() | m_backend_submit()\nFunctions to integrate different back-ends"
-  },
-  {
-    "objectID": "reference/llm_translate.html",
-    "href": "reference/llm_translate.html",
-    "title": "Translates text to a specific language",
-    "section": "",
-    "text": "R/llm-translate.R"
-  },
-  {
-    "objectID": "reference/llm_translate.html#llm_translate",
-    "href": "reference/llm_translate.html#llm_translate",
-    "title": "Translates text to a specific language",
-    "section": "llm_translate",
-    "text": "llm_translate"
-  },
-  {
-    "objectID": "reference/llm_translate.html#description",
-    "href": "reference/llm_translate.html#description",
-    "title": "Translates text to a specific language",
-    "section": "Description",
-    "text": "Description\nUse a Large Language Model (LLM) to translate a text to a specific language"
-  },
-  {
-    "objectID": "reference/llm_translate.html#usage",
-    "href": "reference/llm_translate.html#usage",
-    "title": "Translates text to a specific language",
-    "section": "Usage",
-    "text": "Usage\n \nllm_translate( \n  .data, \n  col, \n  language, \n  pred_name = \".translation\", \n  additional_prompt = \"\" \n) \n \nllm_vec_translate(x, language, additional_prompt = \"\", preview = FALSE)"
-  },
-  {
-    "objectID": "reference/llm_translate.html#arguments",
-    "href": "reference/llm_translate.html#arguments",
-    "title": "Translates text to a specific language",
-    "section": "Arguments",
-    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nlanguage\nTarget language to translate the text to\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
-  },
-  {
-    "objectID": "reference/llm_translate.html#value",
-    "href": "reference/llm_translate.html#value",
-    "title": "Translates text to a specific language",
-    "section": "Value",
-    "text": "Value\nllm_translate returns a data.frame or tbl object. llm_vec_translate returns a vector that is the same length as x."
-  },
-  {
-    "objectID": "utils/qmd-reference/reference.html",
-    "href": "utils/qmd-reference/reference.html",
-    "title": "{{{{notitle.title}}}}",
-    "section": "",
-    "text": "{{{{notitle.source}}}}"
-  },
-  {
-    "objectID": "utils/qmd-reference/reference.html#notitle.alias",
-    "href": "utils/qmd-reference/reference.html#notitle.alias",
-    "title": "{{{{notitle.title}}}}",
-    "section": "{{{{notitle.alias}}}}",
-    "text": "{{{{notitle.alias}}}}\n{{{{title.description}}}}\n{{{{title.format}}}}\n{{{{title.usage}}}}\n{{{{title.arguments}}}}\n{{{{title.details}}}}\n{{{{title.section}}}}\n{{{{title.value}}}}\n{{{{title.note}}}}\n{{{{title.examples}}}}\n{{{{title.seealso}}}}\n{{{{title.author}}}}"
-  },
-  {
     "objectID": "LICENSE.html",
     "href": "LICENSE.html",
     "title": "MIT License",
     "section": "",
     "text": "MIT License\nCopyright (c) 2024 mall authors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
-  },
-  {
-    "objectID": "articles/databricks.html",
-    "href": "articles/databricks.html",
-    "title": "Databricks",
-    "section": "",
-    "text": "This brief example shows how seamless it is to use the same functions, but against a remote database connection. Today, it works with the following functions:",
-    "crumbs": [
-      "Databricks"
-    ]
-  },
-  {
-    "objectID": "articles/databricks.html#examples",
-    "href": "articles/databricks.html#examples",
-    "title": "Databricks",
-    "section": "Examples",
-    "text": "Examples\nWe will start by connecting to the Databricks Warehouse\n\nlibrary(mall)\nlibrary(DBI)\n\ncon &lt;- dbConnect(\n  odbc::databricks(),\n  HTTPPath = Sys.getenv(\"DATABRICKS_PATH\")\n)\n\nNext, we will create a small reviews table\n\nlibrary(dplyr)\n\nreviews &lt;- tribble(\n  ~review,\n  \"This has been the best TV I've ever used. Great screen, and sound.\",\n  \"I regret buying this laptop. It is too slow and the keyboard is too noisy\",\n  \"Not sure how to feel about my new washing machine. Great color, but hard to figure\"\n)\n\ntbl_reviews &lt;- copy_to(con, reviews)\n\nUsing llm_sentiment() in Databricks will call that vendor’s SQL AI function directly:\n\ntbl_reviews |&gt;\n  llm_sentiment(review)\n\nThere are some differences in the arguments, and output of the LLM’s. Notice that instead of “neutral”, the prediction is “mixed”. The AI Sentiment function does not allow to change the possible options.\nNext, we will try llm_summarize(). The max_words argument maps to the same argument in the AI Summarize function:\n\ntbl_reviews |&gt;\n  llm_summarize(review, max_words = 5)",
-    "crumbs": [
-      "Databricks"
-    ]
   },
   {
     "objectID": "index.html",
@@ -270,48 +61,6 @@
     "title": "mall",
     "section": "",
     "text": "mall includes functions that expect a vector, instead of a table, to run the predictions. This should make it easier to test things, such as custom prompts or results of specific text. Each llm_ function has a corresponding llm_vec_ function:\nllm_vec_sentiment(\"I am happy\")\n#&gt; [1] \"positive\"\nllm_vec_translate(\"Este es el mejor dia!\", \"english\")\n#&gt; [1] \"This is the best day!\""
-  },
-  {
-    "objectID": "reference/m_backend_submit.html",
-    "href": "reference/m_backend_submit.html",
-    "title": "Functions to integrate different back-ends",
-    "section": "",
-    "text": "R/m-backend-prompt.R, R/m-backend-submit.R"
-  },
-  {
-    "objectID": "reference/m_backend_submit.html#m_backend_prompt",
-    "href": "reference/m_backend_submit.html#m_backend_prompt",
-    "title": "Functions to integrate different back-ends",
-    "section": "m_backend_prompt",
-    "text": "m_backend_prompt"
-  },
-  {
-    "objectID": "reference/m_backend_submit.html#description",
-    "href": "reference/m_backend_submit.html#description",
-    "title": "Functions to integrate different back-ends",
-    "section": "Description",
-    "text": "Description\nFunctions to integrate different back-ends"
-  },
-  {
-    "objectID": "reference/m_backend_submit.html#usage",
-    "href": "reference/m_backend_submit.html#usage",
-    "title": "Functions to integrate different back-ends",
-    "section": "Usage",
-    "text": "Usage\n \nm_backend_prompt(backend, additional) \n \nm_backend_submit(backend, x, prompt, preview = FALSE)"
-  },
-  {
-    "objectID": "reference/m_backend_submit.html#arguments",
-    "href": "reference/m_backend_submit.html#arguments",
-    "title": "Functions to integrate different back-ends",
-    "section": "Arguments",
-    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\nbackend\nAn mall_session object\n\n\nadditional\nAdditional text to insert to the base_prompt\n\n\nx\nThe body of the text to be submitted to the LLM\n\n\nprompt\nThe additional information to add to the submission\n\n\npreview\nIf TRUE, it will display the resulting R call of the first text in x"
-  },
-  {
-    "objectID": "reference/m_backend_submit.html#value",
-    "href": "reference/m_backend_submit.html#value",
-    "title": "Functions to integrate different back-ends",
-    "section": "Value",
-    "text": "Value\nm_backend_submit does not return an object. m_backend_prompt returns a list of functions that contain the base prompts."
   },
   {
     "objectID": "reference/llm_extract.html",
@@ -398,6 +147,48 @@
     "text": "Value\nA mall_session object"
   },
   {
+    "objectID": "reference/llm_summarize.html",
+    "href": "reference/llm_summarize.html",
+    "title": "Summarize text",
+    "section": "",
+    "text": "R/llm-summarize.R"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#llm_summarize",
+    "href": "reference/llm_summarize.html#llm_summarize",
+    "title": "Summarize text",
+    "section": "llm_summarize",
+    "text": "llm_summarize"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#description",
+    "href": "reference/llm_summarize.html#description",
+    "title": "Summarize text",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to summarize text"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#usage",
+    "href": "reference/llm_summarize.html#usage",
+    "title": "Summarize text",
+    "section": "Usage",
+    "text": "Usage\n \nllm_summarize( \n  .data, \n  col, \n  max_words = 10, \n  pred_name = \".summary\", \n  additional_prompt = \"\" \n) \n \nllm_vec_summarize(x, max_words = 10, additional_prompt = \"\", preview = FALSE)"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#arguments",
+    "href": "reference/llm_summarize.html#arguments",
+    "title": "Summarize text",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nmax_words\nThe maximum number of words that the LLM should use in the summary. Defaults to 10.\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_summarize.html#value",
+    "href": "reference/llm_summarize.html#value",
+    "title": "Summarize text",
+    "section": "Value",
+    "text": "Value\nllm_summarize returns a data.frame or tbl object. llm_vec_summarize returns a vector that is the same length as x."
+  },
+  {
     "objectID": "reference/llm_classify.html",
     "href": "reference/llm_classify.html",
     "title": "Categorize data as one of options given",
@@ -438,5 +229,214 @@
     "title": "Categorize data as one of options given",
     "section": "Value",
     "text": "Value\nllm_classify returns a data.frame or tbl object. llm_vec_classify returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "articles/databricks.html",
+    "href": "articles/databricks.html",
+    "title": "Databricks",
+    "section": "",
+    "text": "This brief example shows how seamless it is to use the same functions, but against a remote database connection. Today, it works with the following functions:",
+    "crumbs": [
+      "Databricks"
+    ]
+  },
+  {
+    "objectID": "articles/databricks.html#examples",
+    "href": "articles/databricks.html#examples",
+    "title": "Databricks",
+    "section": "Examples",
+    "text": "Examples\nWe will start by connecting to the Databricks Warehouse\n\nlibrary(mall)\nlibrary(DBI)\n\ncon &lt;- dbConnect(\n  odbc::databricks(),\n  HTTPPath = Sys.getenv(\"DATABRICKS_PATH\")\n)\n\nNext, we will create a small reviews table\n\nlibrary(dplyr)\n\nreviews &lt;- tribble(\n  ~review,\n  \"This has been the best TV I've ever used. Great screen, and sound.\",\n  \"I regret buying this laptop. It is too slow and the keyboard is too noisy\",\n  \"Not sure how to feel about my new washing machine. Great color, but hard to figure\"\n)\n\ntbl_reviews &lt;- copy_to(con, reviews)\n\nUsing llm_sentiment() in Databricks will call that vendor’s SQL AI function directly:\n\ntbl_reviews |&gt;\n  llm_sentiment(review)\n#&gt; # Source:   SQL [3 x 2]\n#&gt; # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]\n#&gt;   review                                                              .sentiment\n#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     \n#&gt; 1 This has been the best TV Ive ever used. Great screen, and sound.   positive  \n#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  \n#&gt; 3 Not sure how to feel about my new washing machine. Great color, bu… mixed\n\nThere are some differences in the arguments, and output of the LLM’s. Notice that instead of “neutral”, the prediction is “mixed”. The AI Sentiment function does not allow to change the possible options.\nNext, we will try llm_summarize(). The max_words argument maps to the same argument in the AI Summarize function:\n\ntbl_reviews |&gt;\n  llm_summarize(review, max_words = 5)\n#&gt; # Source:   SQL [3 x 2]\n#&gt; # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]\n#&gt;   review                                                                .summary\n#&gt;   &lt;chr&gt;                                                                 &lt;chr&gt;   \n#&gt; 1 This has been the best TV Ive ever used. Great screen, and sound.     Superio…\n#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too … Slow, n…\n#&gt; 3 Not sure how to feel about my new washing machine. Great color, but … Initial…",
+    "crumbs": [
+      "Databricks"
+    ]
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "mall",
+    "section": "",
+    "text": "Function(s)\nDescription\n\n\n\n\nllm_classify() | llm_vec_classify()\nCategorize data as one of options given\n\n\nllm_custom() | llm_vec_custom()\nSend a custom prompt to the LLM\n\n\nllm_extract() | llm_vec_extract()\nExtract entities from text\n\n\nllm_sentiment() | llm_vec_sentiment()\nSentiment analysis\n\n\nllm_summarize() | llm_vec_summarize()\nSummarize text\n\n\nllm_translate() | llm_vec_translate()\nTranslates text to a specific language\n\n\nllm_use()\nSpecify the model to use\n\n\nm_backend_prompt() | m_backend_submit()\nFunctions to integrate different back-ends"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html",
+    "href": "reference/m_backend_submit.html",
+    "title": "Functions to integrate different back-ends",
+    "section": "",
+    "text": "R/m-backend-prompt.R, R/m-backend-submit.R"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#m_backend_prompt",
+    "href": "reference/m_backend_submit.html#m_backend_prompt",
+    "title": "Functions to integrate different back-ends",
+    "section": "m_backend_prompt",
+    "text": "m_backend_prompt"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#description",
+    "href": "reference/m_backend_submit.html#description",
+    "title": "Functions to integrate different back-ends",
+    "section": "Description",
+    "text": "Description\nFunctions to integrate different back-ends"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#usage",
+    "href": "reference/m_backend_submit.html#usage",
+    "title": "Functions to integrate different back-ends",
+    "section": "Usage",
+    "text": "Usage\n \nm_backend_prompt(backend, additional) \n \nm_backend_submit(backend, x, prompt, preview = FALSE)"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#arguments",
+    "href": "reference/m_backend_submit.html#arguments",
+    "title": "Functions to integrate different back-ends",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\nbackend\nAn mall_session object\n\n\nadditional\nAdditional text to insert to the base_prompt\n\n\nx\nThe body of the text to be submitted to the LLM\n\n\nprompt\nThe additional information to add to the submission\n\n\npreview\nIf TRUE, it will display the resulting R call of the first text in x"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#value",
+    "href": "reference/m_backend_submit.html#value",
+    "title": "Functions to integrate different back-ends",
+    "section": "Value",
+    "text": "Value\nm_backend_submit does not return an object. m_backend_prompt returns a list of functions that contain the base prompts."
+  },
+  {
+    "objectID": "reference/llm_sentiment.html",
+    "href": "reference/llm_sentiment.html",
+    "title": "Sentiment analysis",
+    "section": "",
+    "text": "R/llm-sentiment.R"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#llm_sentiment",
+    "href": "reference/llm_sentiment.html#llm_sentiment",
+    "title": "Sentiment analysis",
+    "section": "llm_sentiment",
+    "text": "llm_sentiment"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#description",
+    "href": "reference/llm_sentiment.html#description",
+    "title": "Sentiment analysis",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to perform sentiment analysis from the provided text"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#usage",
+    "href": "reference/llm_sentiment.html#usage",
+    "title": "Sentiment analysis",
+    "section": "Usage",
+    "text": "Usage\n \nllm_sentiment( \n  .data, \n  col, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  pred_name = \".sentiment\", \n  additional_prompt = \"\" \n) \n \nllm_vec_sentiment( \n  x, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  additional_prompt = \"\", \n  preview = FALSE \n)"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#arguments",
+    "href": "reference/llm_sentiment.html#arguments",
+    "title": "Sentiment analysis",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\noptions\nA vector with the options that the LLM should use to assign a sentiment to the text. Defaults to: ‘positive’, ‘negative’, ‘neutral’\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#value",
+    "href": "reference/llm_sentiment.html#value",
+    "title": "Sentiment analysis",
+    "section": "Value",
+    "text": "Value\nllm_sentiment returns a data.frame or tbl object. llm_vec_sentiment returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "reference/llm_translate.html",
+    "href": "reference/llm_translate.html",
+    "title": "Translates text to a specific language",
+    "section": "",
+    "text": "R/llm-translate.R"
+  },
+  {
+    "objectID": "reference/llm_translate.html#llm_translate",
+    "href": "reference/llm_translate.html#llm_translate",
+    "title": "Translates text to a specific language",
+    "section": "llm_translate",
+    "text": "llm_translate"
+  },
+  {
+    "objectID": "reference/llm_translate.html#description",
+    "href": "reference/llm_translate.html#description",
+    "title": "Translates text to a specific language",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to translate a text to a specific language"
+  },
+  {
+    "objectID": "reference/llm_translate.html#usage",
+    "href": "reference/llm_translate.html#usage",
+    "title": "Translates text to a specific language",
+    "section": "Usage",
+    "text": "Usage\n \nllm_translate( \n  .data, \n  col, \n  language, \n  pred_name = \".translation\", \n  additional_prompt = \"\" \n) \n \nllm_vec_translate(x, language, additional_prompt = \"\", preview = FALSE)"
+  },
+  {
+    "objectID": "reference/llm_translate.html#arguments",
+    "href": "reference/llm_translate.html#arguments",
+    "title": "Translates text to a specific language",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nlanguage\nTarget language to translate the text to\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_translate.html#value",
+    "href": "reference/llm_translate.html#value",
+    "title": "Translates text to a specific language",
+    "section": "Value",
+    "text": "Value\nllm_translate returns a data.frame or tbl object. llm_vec_translate returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "reference/llm_custom.html",
+    "href": "reference/llm_custom.html",
+    "title": "Send a custom prompt to the LLM",
+    "section": "",
+    "text": "R/llm-custom.R"
+  },
+  {
+    "objectID": "reference/llm_custom.html#llm_custom",
+    "href": "reference/llm_custom.html#llm_custom",
+    "title": "Send a custom prompt to the LLM",
+    "section": "llm_custom",
+    "text": "llm_custom"
+  },
+  {
+    "objectID": "reference/llm_custom.html#description",
+    "href": "reference/llm_custom.html#description",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to process the provided text using the instructions from prompt"
+  },
+  {
+    "objectID": "reference/llm_custom.html#usage",
+    "href": "reference/llm_custom.html#usage",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Usage",
+    "text": "Usage\n \nllm_custom(.data, col, prompt = \"\", pred_name = \".pred\", valid_resps = \"\") \n \nllm_vec_custom(x, prompt = \"\", valid_resps = NULL)"
+  },
+  {
+    "objectID": "reference/llm_custom.html#arguments",
+    "href": "reference/llm_custom.html#arguments",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nprompt\nThe prompt to append to each record sent to the LLM\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nvalid_resps\nIf the response from the LLM is not open, but deterministic, provide the options in a vector. This function will set to NA any response not in the options\n\n\nx\nA vector that contains the text to be analyzed"
+  },
+  {
+    "objectID": "reference/llm_custom.html#value",
+    "href": "reference/llm_custom.html#value",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Value",
+    "text": "Value\nllm_custom returns a data.frame or tbl object. llm_vec_custom returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "utils/qmd-reference/reference.html",
+    "href": "utils/qmd-reference/reference.html",
+    "title": "{{{{notitle.title}}}}",
+    "section": "",
+    "text": "{{{{notitle.source}}}}"
+  },
+  {
+    "objectID": "utils/qmd-reference/reference.html#notitle.alias",
+    "href": "utils/qmd-reference/reference.html#notitle.alias",
+    "title": "{{{{notitle.title}}}}",
+    "section": "{{{{notitle.alias}}}}",
+    "text": "{{{{notitle.alias}}}}\n{{{{title.description}}}}\n{{{{title.format}}}}\n{{{{title.usage}}}}\n{{{{title.arguments}}}}\n{{{{title.details}}}}\n{{{{title.section}}}}\n{{{{title.value}}}}\n{{{{title.note}}}}\n{{{{title.examples}}}}\n{{{{title.seealso}}}}\n{{{{title.author}}}}"
   }
 ]
