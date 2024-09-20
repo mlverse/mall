@@ -35,7 +35,7 @@ find_in_script <- function(x, pkg) {
         if(length(find_func)) out <- find_func[[1]]
         out
       }) %>% 
-      flatten() %>% 
+      list_c() %>% 
       as.numeric()
     
     if(length(res) > 0) out <- res[[1]]
@@ -275,7 +275,7 @@ tag_single <- function(x, rm_return = TRUE) {
 tag_flatten <-  function(x) {
   x %>%
     map(tag_single) %>% 
-    flatten() %>% 
+    list_c() %>% 
     c(., new_paragraph_symbol)  
 }
 
@@ -313,7 +313,7 @@ tag_LIST <- function(x) {
 
 tag_describe <- function(x) {
   out <- x %>%  
-    flatten() %>% 
+    list_c() %>% 
     map(~.x[[1]]) %>% 
     map(tag_single)
   out_nulls <- !map_lgl(out, is.null)
@@ -325,7 +325,7 @@ tag_describe <- function(x) {
 tag_dontrun <- function(x) {
   x %>% 
     map(tag_single) %>% 
-    flatten() %>% 
+    list_c() %>% 
     c(do_not_run_symbol, .)
 }
 
@@ -338,7 +338,7 @@ tag_sub_section <- function(x) {
   }
 
   out %>% 
-    flatten() %>% 
+    list_c() %>% 
     map(remove_return) %>% 
     c(., new_paragraph_symbol)
 }
@@ -346,7 +346,7 @@ tag_sub_section <- function(x) {
 tag_itemize1 <- function(x) {
   x %>% 
     map(tag_single, FALSE) %>% 
-    flatten() %>% 
+    list_c() %>% 
     map(remove_return) %>% 
     c(., new_paragraph_symbol)
 }

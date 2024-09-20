@@ -12,9 +12,9 @@ reference_to_qmd<- function(file_in, pkg, template = NULL) {
   
   template <- readLines(template_path)
   
-  template %>% 
+  template |> 
     map(parse_line_tag, con) %>% 
-    flatten() %>% 
+    list_c() %>% 
     as.character()
 }
 
@@ -32,7 +32,7 @@ parse_line_tag <- function(line, con) {
     
     parsed <- start_half %>% 
       strsplit(end_tag) %>% 
-      flatten()
+      list_c()
     
     pm <-map(parsed, ~ {
       yes_title <- substr(.x, 1, 6) == "title."
@@ -187,7 +187,7 @@ reference_convert <- function(x, output = "qmd") {
     if(curr_name == "section") {
       out <- curr %>% 
         map(~ c(paste("##", .x$title), .x$contents)) %>% 
-        flatten() %>% 
+        list_c() %>% 
         reduce(function(x, y) c(x, "", y), .init = NULL)
     }
     
