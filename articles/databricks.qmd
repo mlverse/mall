@@ -1,7 +1,5 @@
 ---
 title: "Databricks"
-execute:
-  eval: false
 ---
 
 

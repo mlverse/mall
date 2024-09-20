@@ -1,14 +1,17 @@
 project:
   type: website
   output-dir: docs
+  
+execute: 
+  freeze: true  
 
 website:
   title: mall
   navbar:
     left:
+      - sidebar:articles    
       - href: reference/index.qmd
         text: Reference
-      - sidebar:articles
   sidebar:
     - id: articles
       title: "Articles"
@@ -24,3 +27,8 @@ format:
     toc: true
     code-copy: true
     code-overflow: wrap
+
+knitr:
+  opts_chunk: 
+    collapse: true
+    comment: "#>"    
