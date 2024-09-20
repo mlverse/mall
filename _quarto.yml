@@ -8,6 +8,16 @@ website:
     left:
       - href: reference/index.qmd
         text: Reference
+      - sidebar:articles
+  sidebar:
+    - id: articles
+      title: "Articles"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents: 
+      - text: "Databricks"
+        href: articles/databricks.qmd
 
 format:
   html:
