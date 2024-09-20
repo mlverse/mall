@@ -2,16 +2,16 @@ on:
   push:
     branches: main
 name: Quarto site
+
+permissions: read-all
+
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Render project
-        uses: quarto-dev/quarto-actions/render@v2
-        with:
-          to: html
-      - name: Publish project
-          uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
-          render: false
+    - name: Publish to GitHub Pages (and render)
+      uses: quarto-dev/quarto-actions/publish@v2
+      with:
+        target: gh-pages
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
