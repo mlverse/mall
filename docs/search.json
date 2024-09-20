@@ -1,0 +1,442 @@
+[
+  {
+    "objectID": "reference/llm_summarize.html",
+    "href": "reference/llm_summarize.html",
+    "title": "Summarize text",
+    "section": "",
+    "text": "R/llm-summarize.R"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#llm_summarize",
+    "href": "reference/llm_summarize.html#llm_summarize",
+    "title": "Summarize text",
+    "section": "llm_summarize",
+    "text": "llm_summarize"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#description",
+    "href": "reference/llm_summarize.html#description",
+    "title": "Summarize text",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to summarize text"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#usage",
+    "href": "reference/llm_summarize.html#usage",
+    "title": "Summarize text",
+    "section": "Usage",
+    "text": "Usage\n \nllm_summarize( \n  .data, \n  col, \n  max_words = 10, \n  pred_name = \".summary\", \n  additional_prompt = \"\" \n) \n \nllm_vec_summarize(x, max_words = 10, additional_prompt = \"\", preview = FALSE)"
+  },
+  {
+    "objectID": "reference/llm_summarize.html#arguments",
+    "href": "reference/llm_summarize.html#arguments",
+    "title": "Summarize text",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nmax_words\nThe maximum number of words that the LLM should use in the summary. Defaults to 10.\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_summarize.html#value",
+    "href": "reference/llm_summarize.html#value",
+    "title": "Summarize text",
+    "section": "Value",
+    "text": "Value\nllm_summarize returns a data.frame or tbl object. llm_vec_summarize returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "reference/llm_custom.html",
+    "href": "reference/llm_custom.html",
+    "title": "Send a custom prompt to the LLM",
+    "section": "",
+    "text": "R/llm-custom.R"
+  },
+  {
+    "objectID": "reference/llm_custom.html#llm_custom",
+    "href": "reference/llm_custom.html#llm_custom",
+    "title": "Send a custom prompt to the LLM",
+    "section": "llm_custom",
+    "text": "llm_custom"
+  },
+  {
+    "objectID": "reference/llm_custom.html#description",
+    "href": "reference/llm_custom.html#description",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to process the provided text using the instructions from prompt"
+  },
+  {
+    "objectID": "reference/llm_custom.html#usage",
+    "href": "reference/llm_custom.html#usage",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Usage",
+    "text": "Usage\n \nllm_custom(.data, col, prompt = \"\", pred_name = \".pred\", valid_resps = \"\") \n \nllm_vec_custom(x, prompt = \"\", valid_resps = NULL)"
+  },
+  {
+    "objectID": "reference/llm_custom.html#arguments",
+    "href": "reference/llm_custom.html#arguments",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nprompt\nThe prompt to append to each record sent to the LLM\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nvalid_resps\nIf the response from the LLM is not open, but deterministic, provide the options in a vector. This function will set to NA any response not in the options\n\n\nx\nA vector that contains the text to be analyzed"
+  },
+  {
+    "objectID": "reference/llm_custom.html#value",
+    "href": "reference/llm_custom.html#value",
+    "title": "Send a custom prompt to the LLM",
+    "section": "Value",
+    "text": "Value\nllm_custom returns a data.frame or tbl object. llm_vec_custom returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "reference/llm_sentiment.html",
+    "href": "reference/llm_sentiment.html",
+    "title": "Sentiment analysis",
+    "section": "",
+    "text": "R/llm-sentiment.R"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#llm_sentiment",
+    "href": "reference/llm_sentiment.html#llm_sentiment",
+    "title": "Sentiment analysis",
+    "section": "llm_sentiment",
+    "text": "llm_sentiment"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#description",
+    "href": "reference/llm_sentiment.html#description",
+    "title": "Sentiment analysis",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to perform sentiment analysis from the provided text"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#usage",
+    "href": "reference/llm_sentiment.html#usage",
+    "title": "Sentiment analysis",
+    "section": "Usage",
+    "text": "Usage\n \nllm_sentiment( \n  .data, \n  col, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  pred_name = \".sentiment\", \n  additional_prompt = \"\" \n) \n \nllm_vec_sentiment( \n  x, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  additional_prompt = \"\", \n  preview = FALSE \n)"
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#arguments",
+    "href": "reference/llm_sentiment.html#arguments",
+    "title": "Sentiment analysis",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\noptions\nA vector with the options that the LLM should use to assign a sentiment to the text. Defaults to: ‘positive’, ‘negative’, ‘neutral’\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_sentiment.html#value",
+    "href": "reference/llm_sentiment.html#value",
+    "title": "Sentiment analysis",
+    "section": "Value",
+    "text": "Value\nllm_sentiment returns a data.frame or tbl object. llm_vec_sentiment returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "mall",
+    "section": "",
+    "text": "Function(s)\nDescription\n\n\n\n\nllm_classify() | llm_vec_classify()\nCategorize data as one of options given\n\n\nllm_custom() | llm_vec_custom()\nSend a custom prompt to the LLM\n\n\nllm_extract() | llm_vec_extract()\nExtract entities from text\n\n\nllm_sentiment() | llm_vec_sentiment()\nSentiment analysis\n\n\nllm_summarize() | llm_vec_summarize()\nSummarize text\n\n\nllm_translate() | llm_vec_translate()\nTranslates text to a specific language\n\n\nllm_use()\nSpecify the model to use\n\n\nm_backend_prompt() | m_backend_submit()\nFunctions to integrate different back-ends"
+  },
+  {
+    "objectID": "reference/llm_translate.html",
+    "href": "reference/llm_translate.html",
+    "title": "Translates text to a specific language",
+    "section": "",
+    "text": "R/llm-translate.R"
+  },
+  {
+    "objectID": "reference/llm_translate.html#llm_translate",
+    "href": "reference/llm_translate.html#llm_translate",
+    "title": "Translates text to a specific language",
+    "section": "llm_translate",
+    "text": "llm_translate"
+  },
+  {
+    "objectID": "reference/llm_translate.html#description",
+    "href": "reference/llm_translate.html#description",
+    "title": "Translates text to a specific language",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to translate a text to a specific language"
+  },
+  {
+    "objectID": "reference/llm_translate.html#usage",
+    "href": "reference/llm_translate.html#usage",
+    "title": "Translates text to a specific language",
+    "section": "Usage",
+    "text": "Usage\n \nllm_translate( \n  .data, \n  col, \n  language, \n  pred_name = \".translation\", \n  additional_prompt = \"\" \n) \n \nllm_vec_translate(x, language, additional_prompt = \"\", preview = FALSE)"
+  },
+  {
+    "objectID": "reference/llm_translate.html#arguments",
+    "href": "reference/llm_translate.html#arguments",
+    "title": "Translates text to a specific language",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nlanguage\nTarget language to translate the text to\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_translate.html#value",
+    "href": "reference/llm_translate.html#value",
+    "title": "Translates text to a specific language",
+    "section": "Value",
+    "text": "Value\nllm_translate returns a data.frame or tbl object. llm_vec_translate returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "utils/qmd-reference/reference.html",
+    "href": "utils/qmd-reference/reference.html",
+    "title": "{{{{notitle.title}}}}",
+    "section": "",
+    "text": "{{{{notitle.source}}}}"
+  },
+  {
+    "objectID": "utils/qmd-reference/reference.html#notitle.alias",
+    "href": "utils/qmd-reference/reference.html#notitle.alias",
+    "title": "{{{{notitle.title}}}}",
+    "section": "{{{{notitle.alias}}}}",
+    "text": "{{{{notitle.alias}}}}\n{{{{title.description}}}}\n{{{{title.format}}}}\n{{{{title.usage}}}}\n{{{{title.arguments}}}}\n{{{{title.details}}}}\n{{{{title.section}}}}\n{{{{title.value}}}}\n{{{{title.note}}}}\n{{{{title.examples}}}}\n{{{{title.seealso}}}}\n{{{{title.author}}}}"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "MIT License",
+    "section": "",
+    "text": "MIT License\nCopyright (c) 2024 mall authors\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\nTHE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+  },
+  {
+    "objectID": "articles/databricks.html",
+    "href": "articles/databricks.html",
+    "title": "Databricks",
+    "section": "",
+    "text": "This brief example shows how seamless it is to use the same functions, but against a remote database connection. Today, it works with the following functions:",
+    "crumbs": [
+      "Databricks"
+    ]
+  },
+  {
+    "objectID": "articles/databricks.html#examples",
+    "href": "articles/databricks.html#examples",
+    "title": "Databricks",
+    "section": "Examples",
+    "text": "Examples\nWe will start by connecting to the Databricks Warehouse\n\nlibrary(mall)\nlibrary(DBI)\n\ncon &lt;- dbConnect(\n  odbc::databricks(),\n  HTTPPath = Sys.getenv(\"DATABRICKS_PATH\")\n)\n\nNext, we will create a small reviews table\n\nlibrary(dplyr)\n\nreviews &lt;- tribble(\n  ~review,\n  \"This has been the best TV I've ever used. Great screen, and sound.\",\n  \"I regret buying this laptop. It is too slow and the keyboard is too noisy\",\n  \"Not sure how to feel about my new washing machine. Great color, but hard to figure\"\n)\n\ntbl_reviews &lt;- copy_to(con, reviews)\n\nUsing llm_sentiment() in Databricks will call that vendor’s SQL AI function directly:\n\ntbl_reviews |&gt;\n  llm_sentiment(review)\n#&gt; # Source:   SQL [3 x 2]\n#&gt; # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]\n#&gt;   review                                                              .sentiment\n#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     \n#&gt; 1 This has been the best TV Ive ever used. Great screen, and sound.   positive  \n#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  \n#&gt; 3 Not sure how to feel about my new washing machine. Great color, bu… mixed\n\nThere are some differences in the arguments, and output of the LLM’s. Notice that instead of “neutral”, the prediction is “mixed”. The AI Sentiment function does not allow to change the possible options.\nNext, we will try llm_summarize(). The max_words argument maps to the same argument in the AI Summarize function:\n\ntbl_reviews |&gt;\n  llm_summarize(review, max_words = 5)\n#&gt; # Source:   SQL [3 x 2]\n#&gt; # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]\n#&gt;   review                                                                .summary\n#&gt;   &lt;chr&gt;                                                                 &lt;chr&gt;   \n#&gt; 1 This has been the best TV Ive ever used. Great screen, and sound.     Superio…\n#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too … Slow, n…\n#&gt; 3 Not sure how to feel about my new washing machine. Great color, but … Initial…",
+    "crumbs": [
+      "Databricks"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "mall",
+    "section": "",
+    "text": "Run multiple LLM predictions against a table. The predictions run row-wise over a specified column. It works using a pre-determined one-shot prompt, along with the current row’s content. The prompt that is use will depend of the type of analysis needed. Currently, the included prompts perform the following:\n\nSentiment analysis\nSummarize the text\nExtract one, or several, specific pieces information from the text\n\nThis package is inspired by the SQL AI functions now offered by vendors such as Databricks and Snowflake. For local data, mall uses Ollama to call an LLM.\n\n\nIf you pass a table connected to Databricks via odbc, mall will automatically use Databricks’ LLM instead of Ollama. It will call the corresponding SQL AI function.\n\n\n\n\nWe want to new find ways to help data scientists use LLMs in their daily work. Unlike the familiar interfaces, such as chatting and code completion, this interface runs your text data directly against the LLM. The LLM’s flexibility, allows for it to adapt to the subject of your data, and provide surprisingly accurate predictions. This saves the data scientist the need to write and tune an NLP model.\n\n\n\nWe will start with a very small table with product reviews:\nlibrary(dplyr)\n\nreviews &lt;- tribble(\n  ~review,\n  \"This has been the best TV I've ever used. Great screen, and sound.\",\n  \"I regret buying this laptop. It is too slow and the keyboard is too noisy\",\n  \"Not sure how to feel about my new washing machine. Great color, but hard to figure\"\n)\n\n\nPrimarily, mall provides verb-like functions that expect a tbl as their first argument. This allows us to use them in piped operations.\nFor the first example, we’ll asses the sentiment of each review. In order to do this we will call llm_sentiment():\nlibrary(mall)\n\nreviews |&gt;\n  llm_sentiment(review)\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .sentiment\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;     \n#&gt; 1 This has been the best TV I've ever use… positive  \n#&gt; 2 I regret buying this laptop. It is too … negative  \n#&gt; 3 Not sure how to feel about my new washi… neutral\nThe function let’s us modify the options to choose from:\nreviews |&gt;\n  llm_sentiment(review, options = c(\"positive\", \"negative\"))\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .sentiment\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;     \n#&gt; 1 This has been the best TV I've ever use… positive  \n#&gt; 2 I regret buying this laptop. It is too … negative  \n#&gt; 3 Not sure how to feel about my new washi… negative\nAs mentioned before, by being pipe friendly, the results from the LLM prediction can be used in further transformations:\nreviews |&gt;\n  llm_sentiment(review, options = c(\"positive\", \"negative\")) |&gt;\n  filter(.sentiment == \"negative\")\n#&gt; # A tibble: 2 × 2\n#&gt;   review                                   .sentiment\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;     \n#&gt; 1 I regret buying this laptop. It is too … negative  \n#&gt; 2 Not sure how to feel about my new washi… negative\n\n\n\nThere may be a need to reduce the number of words in a given text. Usually, to make it easier to capture its intent. To do this, use llm_summarize(). This function has an argument to control the maximum number of words to output (max_words):\nreviews |&gt;\n  llm_summarize(review, max_words = 5)\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .summary                       \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;                          \n#&gt; 1 This has been the best TV I've ever use… very good tv experience overall\n#&gt; 2 I regret buying this laptop. It is too … slow and noisy laptop purchase \n#&gt; 3 Not sure how to feel about my new washi… mixed feelings about new washer\nTo control the name of the prediction field, you can change pred_name argument. This works with the other llm_ functions as well.\nreviews |&gt;\n  llm_summarize(review, max_words = 5, pred_name = \"review_summary\")\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   review_summary                 \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;                          \n#&gt; 1 This has been the best TV I've ever use… very good tv experience overall\n#&gt; 2 I regret buying this laptop. It is too … slow and noisy laptop purchase \n#&gt; 3 Not sure how to feel about my new washi… mixed feelings about new washer\n\n\n\nUse the LLM to categorize the text into one of the options you provide:\nreviews |&gt;\n  llm_classify(review, c(\"appliance\", \"computer\"))\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .classify\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;    \n#&gt; 1 This has been the best TV I've ever use… appliance\n#&gt; 2 I regret buying this laptop. It is too … computer \n#&gt; 3 Not sure how to feel about my new washi… appliance\n\n\n\nOne of the most interesting operations. Using natural language, we can tell the LLM to return a specific part of the text. In the following example, we request that the LLM return the product being referred to. We do this by simply saying “product”. The LLM understands what we mean by that word, and looks for that in the text.\nreviews |&gt;\n  llm_extract(review, \"product\")\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .extract       \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;          \n#&gt; 1 This has been the best TV I've ever use… tv             \n#&gt; 2 I regret buying this laptop. It is too … laptop         \n#&gt; 3 Not sure how to feel about my new washi… washing machine\n\n\n\nAs the title implies, this function will translate the text into a specified language. What is really nice, it is that you don’t need to specify the language of the source text. Only the target language needs to be defined. The translation accuracy will depend on the LLM\nreviews |&gt;\n  llm_translate(review, \"spanish\")\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .translation                         \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;                                \n#&gt; 1 This has been the best TV I've ever use… Este ha sido el mejor televisor que …\n#&gt; 2 I regret buying this laptop. It is too … Lamento haber comprado esta laptop. …\n#&gt; 3 Not sure how to feel about my new washi… No estoy seguro de cómo sentirme sob…\n\n\n\nIt is possible to pass your own prompt to the LLM, and have mall run it against each text entry. Use llm_custom() to access this functionality:\nmy_prompt &lt;- paste(\n  \"Answer a question.\",\n  \"Return only the answer, no explanation\",\n  \"Acceptable answers are 'yes', 'no'\",\n  \"Answer this about the following text, is this a happy customer?:\"\n)\n\nreviews |&gt;\n  llm_custom(review, my_prompt)\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .pred\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;\n#&gt; 1 This has been the best TV I've ever use… Yes  \n#&gt; 2 I regret buying this laptop. It is too … No   \n#&gt; 3 Not sure how to feel about my new washi… No\n\n\n\n\nInvoking an llm_ function will automatically initialize a model selection if you don’t have one selected yet. If there is only one option, it will pre-select it for you. If there are more than one available models, then mall will present you as menu selection so you can select which model you wish to use.\nCalling llm_use() directly will let you specify the model and backend to use. You can also setup additional arguments that will be passed down to the function that actually runs the prediction. In the case of Ollama, that function is generate().\nllm_use(\"ollama\", \"llama3.1\", seed = 100, temperature = 0.2)\n\n\n\nThe main consideration is cost. Either, time cost, or money cost.\nIf using this method with an LLM locally available, the cost will be a long running time. Unless using a very specialized LLM, a given LLM is a general model. It was fitted using a vast amount of data. So determining a response for each row, takes longer than if using a manually created NLP model. The default model used in Ollama is Llama 3.1, which was fitted using 8B parameters.\nIf using an external LLM service, the consideration will need to be for the billing costs of using such service. Keep in mind that you will be sending a lot of data to be evaluated.\nAnother consideration is the novelty of this approach. Early tests are providing encouraging results. But you, as an user, will still need to keep in mind that the predictions will not be infallible, so always check the output. At this time, I think the best use for this method, is for a quick analysis.\n\n\n\nWe will briefly cover this methods performance from two perspectives:\n\nHow long the analysis takes to run locally\nHow well it predicts\n\nTo do so, we will use the data_bookReviews data set, provided by the classmap package. For this exercise, only the first 100, of the total 1,000, are going to be part of this analysis.\nlibrary(classmap)\n\ndata(data_bookReviews)\n\nbook_reviews &lt;- data_bookReviews |&gt;\n  head(100) |&gt;\n  as_tibble()\n\nglimpse(book_reviews)\n#&gt; Rows: 100\n#&gt; Columns: 2\n#&gt; $ review    &lt;chr&gt; \"i got this as both a book and an audio file. i had waited t…\n#&gt; $ sentiment &lt;fct&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, …\nAs per the docs, sentiment is a factor indicating the sentiment of the review: negative (1) or positive (2)\nlength(strsplit(paste(book_reviews, collapse = \" \"), \" \")[[1]])\n#&gt; [1] 20571\nJust to get an idea of how much data we’re processing, I’m using a very, very simple word count. So we’re analyzing a bit over 20 thousand words.\nreviews_llm &lt;- book_reviews |&gt;\n  llm_sentiment(\n    col = review,\n    options = c(\"positive\", \"negative\"),\n    pred_name = \"predicted\"\n  )\n#&gt; ! There were 1 predictions with invalid output, they were coerced to NA\nAs far as time, on my Apple M3 machine, it took about 3 minutes to process, 100 rows, containing 20 thousand words. Setting temp to 0.2 in llm_use(), made the model run a bit faster.\nThe package uses purrr to send each prompt individually to the LLM. But, I did try a few different ways to speed up the process, unsuccessfully:\n\nUsed furrr to send multiple requests at a time. This did not work because either the LLM or Ollama processed all my requests serially. So there was no improvement.\nI also tried sending more than one row’s text at a time. This cause instability in the number of results. For example sending 5 at a time, sometimes returned 7 or 8. Even sending 2 was not stable.\n\nThis is what the new table looks like:\nreviews_llm\n#&gt; # A tibble: 100 × 3\n#&gt;    review                                                    sentiment predicted\n#&gt;    &lt;chr&gt;                                                     &lt;fct&gt;     &lt;chr&gt;    \n#&gt;  1 \"i got this as both a book and an audio file. i had wait… 1         negative \n#&gt;  2 \"this book places too much emphasis on spending money in… 1         negative \n#&gt;  3 \"remember the hollywood blacklist? the hollywood ten? i'… 2         negative \n#&gt;  4 \"while i appreciate what tipler was attempting to accomp… 1         negative \n#&gt;  5 \"the others in the series were great, and i really looke… 1         negative \n#&gt;  6 \"a few good things, but she's lost her edge and i find i… 1         negative \n#&gt;  7 \"words cannot describe how ripped off and disappointed i… 1         negative \n#&gt;  8 \"1. the persective of most writers is shaped by their ow… 1         negative \n#&gt;  9 \"i have been a huge fan of michael crichton for about 25… 1         negative \n#&gt; 10 \"i saw dr. polk on c-span a month or two ago. he was add… 2         positive \n#&gt; # ℹ 90 more rows\nI used yardstick to see how well the model performed. Of course, the accuracy will not be of the “truth”, but rather the package’s results recorded in sentiment.\nlibrary(forcats)\n\nreviews_llm |&gt;\n  mutate(fct_pred = as.factor(ifelse(predicted == \"positive\", 2, 1))) |&gt;\n  yardstick::accuracy(sentiment, fct_pred)\n#&gt; # A tibble: 1 × 3\n#&gt;   .metric  .estimator .estimate\n#&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n#&gt; 1 accuracy binary         0.939\n\n\n\nmall includes functions that expect a vector, instead of a table, to run the predictions. This should make it easier to test things, such as custom prompts or results of specific text. Each llm_ function has a corresponding llm_vec_ function:\nllm_vec_sentiment(\"I am happy\")\n#&gt; [1] \"positive\"\nllm_vec_translate(\"Este es el mejor dia!\", \"english\")\n#&gt; [1] \"This is the best day!\""
+  },
+  {
+    "objectID": "index.html#intro",
+    "href": "index.html#intro",
+    "title": "mall",
+    "section": "",
+    "text": "Run multiple LLM predictions against a table. The predictions run row-wise over a specified column. It works using a pre-determined one-shot prompt, along with the current row’s content. The prompt that is use will depend of the type of analysis needed. Currently, the included prompts perform the following:\n\nSentiment analysis\nSummarize the text\nExtract one, or several, specific pieces information from the text\n\nThis package is inspired by the SQL AI functions now offered by vendors such as Databricks and Snowflake. For local data, mall uses Ollama to call an LLM.\n\n\nIf you pass a table connected to Databricks via odbc, mall will automatically use Databricks’ LLM instead of Ollama. It will call the corresponding SQL AI function."
+  },
+  {
+    "objectID": "index.html#motivation",
+    "href": "index.html#motivation",
+    "title": "mall",
+    "section": "",
+    "text": "We want to new find ways to help data scientists use LLMs in their daily work. Unlike the familiar interfaces, such as chatting and code completion, this interface runs your text data directly against the LLM. The LLM’s flexibility, allows for it to adapt to the subject of your data, and provide surprisingly accurate predictions. This saves the data scientist the need to write and tune an NLP model."
+  },
+  {
+    "objectID": "index.html#llm-functions",
+    "href": "index.html#llm-functions",
+    "title": "mall",
+    "section": "",
+    "text": "We will start with a very small table with product reviews:\nlibrary(dplyr)\n\nreviews &lt;- tribble(\n  ~review,\n  \"This has been the best TV I've ever used. Great screen, and sound.\",\n  \"I regret buying this laptop. It is too slow and the keyboard is too noisy\",\n  \"Not sure how to feel about my new washing machine. Great color, but hard to figure\"\n)\n\n\nPrimarily, mall provides verb-like functions that expect a tbl as their first argument. This allows us to use them in piped operations.\nFor the first example, we’ll asses the sentiment of each review. In order to do this we will call llm_sentiment():\nlibrary(mall)\n\nreviews |&gt;\n  llm_sentiment(review)\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .sentiment\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;     \n#&gt; 1 This has been the best TV I've ever use… positive  \n#&gt; 2 I regret buying this laptop. It is too … negative  \n#&gt; 3 Not sure how to feel about my new washi… neutral\nThe function let’s us modify the options to choose from:\nreviews |&gt;\n  llm_sentiment(review, options = c(\"positive\", \"negative\"))\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .sentiment\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;     \n#&gt; 1 This has been the best TV I've ever use… positive  \n#&gt; 2 I regret buying this laptop. It is too … negative  \n#&gt; 3 Not sure how to feel about my new washi… negative\nAs mentioned before, by being pipe friendly, the results from the LLM prediction can be used in further transformations:\nreviews |&gt;\n  llm_sentiment(review, options = c(\"positive\", \"negative\")) |&gt;\n  filter(.sentiment == \"negative\")\n#&gt; # A tibble: 2 × 2\n#&gt;   review                                   .sentiment\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;     \n#&gt; 1 I regret buying this laptop. It is too … negative  \n#&gt; 2 Not sure how to feel about my new washi… negative\n\n\n\nThere may be a need to reduce the number of words in a given text. Usually, to make it easier to capture its intent. To do this, use llm_summarize(). This function has an argument to control the maximum number of words to output (max_words):\nreviews |&gt;\n  llm_summarize(review, max_words = 5)\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .summary                       \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;                          \n#&gt; 1 This has been the best TV I've ever use… very good tv experience overall\n#&gt; 2 I regret buying this laptop. It is too … slow and noisy laptop purchase \n#&gt; 3 Not sure how to feel about my new washi… mixed feelings about new washer\nTo control the name of the prediction field, you can change pred_name argument. This works with the other llm_ functions as well.\nreviews |&gt;\n  llm_summarize(review, max_words = 5, pred_name = \"review_summary\")\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   review_summary                 \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;                          \n#&gt; 1 This has been the best TV I've ever use… very good tv experience overall\n#&gt; 2 I regret buying this laptop. It is too … slow and noisy laptop purchase \n#&gt; 3 Not sure how to feel about my new washi… mixed feelings about new washer\n\n\n\nUse the LLM to categorize the text into one of the options you provide:\nreviews |&gt;\n  llm_classify(review, c(\"appliance\", \"computer\"))\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .classify\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;    \n#&gt; 1 This has been the best TV I've ever use… appliance\n#&gt; 2 I regret buying this laptop. It is too … computer \n#&gt; 3 Not sure how to feel about my new washi… appliance\n\n\n\nOne of the most interesting operations. Using natural language, we can tell the LLM to return a specific part of the text. In the following example, we request that the LLM return the product being referred to. We do this by simply saying “product”. The LLM understands what we mean by that word, and looks for that in the text.\nreviews |&gt;\n  llm_extract(review, \"product\")\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .extract       \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;          \n#&gt; 1 This has been the best TV I've ever use… tv             \n#&gt; 2 I regret buying this laptop. It is too … laptop         \n#&gt; 3 Not sure how to feel about my new washi… washing machine\n\n\n\nAs the title implies, this function will translate the text into a specified language. What is really nice, it is that you don’t need to specify the language of the source text. Only the target language needs to be defined. The translation accuracy will depend on the LLM\nreviews |&gt;\n  llm_translate(review, \"spanish\")\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .translation                         \n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;                                \n#&gt; 1 This has been the best TV I've ever use… Este ha sido el mejor televisor que …\n#&gt; 2 I regret buying this laptop. It is too … Lamento haber comprado esta laptop. …\n#&gt; 3 Not sure how to feel about my new washi… No estoy seguro de cómo sentirme sob…\n\n\n\nIt is possible to pass your own prompt to the LLM, and have mall run it against each text entry. Use llm_custom() to access this functionality:\nmy_prompt &lt;- paste(\n  \"Answer a question.\",\n  \"Return only the answer, no explanation\",\n  \"Acceptable answers are 'yes', 'no'\",\n  \"Answer this about the following text, is this a happy customer?:\"\n)\n\nreviews |&gt;\n  llm_custom(review, my_prompt)\n#&gt; # A tibble: 3 × 2\n#&gt;   review                                   .pred\n#&gt;   &lt;chr&gt;                                    &lt;chr&gt;\n#&gt; 1 This has been the best TV I've ever use… Yes  \n#&gt; 2 I regret buying this laptop. It is too … No   \n#&gt; 3 Not sure how to feel about my new washi… No"
+  },
+  {
+    "objectID": "index.html#initialize-session",
+    "href": "index.html#initialize-session",
+    "title": "mall",
+    "section": "",
+    "text": "Invoking an llm_ function will automatically initialize a model selection if you don’t have one selected yet. If there is only one option, it will pre-select it for you. If there are more than one available models, then mall will present you as menu selection so you can select which model you wish to use.\nCalling llm_use() directly will let you specify the model and backend to use. You can also setup additional arguments that will be passed down to the function that actually runs the prediction. In the case of Ollama, that function is generate().\nllm_use(\"ollama\", \"llama3.1\", seed = 100, temperature = 0.2)"
+  },
+  {
+    "objectID": "index.html#key-considerations",
+    "href": "index.html#key-considerations",
+    "title": "mall",
+    "section": "",
+    "text": "The main consideration is cost. Either, time cost, or money cost.\nIf using this method with an LLM locally available, the cost will be a long running time. Unless using a very specialized LLM, a given LLM is a general model. It was fitted using a vast amount of data. So determining a response for each row, takes longer than if using a manually created NLP model. The default model used in Ollama is Llama 3.1, which was fitted using 8B parameters.\nIf using an external LLM service, the consideration will need to be for the billing costs of using such service. Keep in mind that you will be sending a lot of data to be evaluated.\nAnother consideration is the novelty of this approach. Early tests are providing encouraging results. But you, as an user, will still need to keep in mind that the predictions will not be infallible, so always check the output. At this time, I think the best use for this method, is for a quick analysis."
+  },
+  {
+    "objectID": "index.html#performance",
+    "href": "index.html#performance",
+    "title": "mall",
+    "section": "",
+    "text": "We will briefly cover this methods performance from two perspectives:\n\nHow long the analysis takes to run locally\nHow well it predicts\n\nTo do so, we will use the data_bookReviews data set, provided by the classmap package. For this exercise, only the first 100, of the total 1,000, are going to be part of this analysis.\nlibrary(classmap)\n\ndata(data_bookReviews)\n\nbook_reviews &lt;- data_bookReviews |&gt;\n  head(100) |&gt;\n  as_tibble()\n\nglimpse(book_reviews)\n#&gt; Rows: 100\n#&gt; Columns: 2\n#&gt; $ review    &lt;chr&gt; \"i got this as both a book and an audio file. i had waited t…\n#&gt; $ sentiment &lt;fct&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, …\nAs per the docs, sentiment is a factor indicating the sentiment of the review: negative (1) or positive (2)\nlength(strsplit(paste(book_reviews, collapse = \" \"), \" \")[[1]])\n#&gt; [1] 20571\nJust to get an idea of how much data we’re processing, I’m using a very, very simple word count. So we’re analyzing a bit over 20 thousand words.\nreviews_llm &lt;- book_reviews |&gt;\n  llm_sentiment(\n    col = review,\n    options = c(\"positive\", \"negative\"),\n    pred_name = \"predicted\"\n  )\n#&gt; ! There were 1 predictions with invalid output, they were coerced to NA\nAs far as time, on my Apple M3 machine, it took about 3 minutes to process, 100 rows, containing 20 thousand words. Setting temp to 0.2 in llm_use(), made the model run a bit faster.\nThe package uses purrr to send each prompt individually to the LLM. But, I did try a few different ways to speed up the process, unsuccessfully:\n\nUsed furrr to send multiple requests at a time. This did not work because either the LLM or Ollama processed all my requests serially. So there was no improvement.\nI also tried sending more than one row’s text at a time. This cause instability in the number of results. For example sending 5 at a time, sometimes returned 7 or 8. Even sending 2 was not stable.\n\nThis is what the new table looks like:\nreviews_llm\n#&gt; # A tibble: 100 × 3\n#&gt;    review                                                    sentiment predicted\n#&gt;    &lt;chr&gt;                                                     &lt;fct&gt;     &lt;chr&gt;    \n#&gt;  1 \"i got this as both a book and an audio file. i had wait… 1         negative \n#&gt;  2 \"this book places too much emphasis on spending money in… 1         negative \n#&gt;  3 \"remember the hollywood blacklist? the hollywood ten? i'… 2         negative \n#&gt;  4 \"while i appreciate what tipler was attempting to accomp… 1         negative \n#&gt;  5 \"the others in the series were great, and i really looke… 1         negative \n#&gt;  6 \"a few good things, but she's lost her edge and i find i… 1         negative \n#&gt;  7 \"words cannot describe how ripped off and disappointed i… 1         negative \n#&gt;  8 \"1. the persective of most writers is shaped by their ow… 1         negative \n#&gt;  9 \"i have been a huge fan of michael crichton for about 25… 1         negative \n#&gt; 10 \"i saw dr. polk on c-span a month or two ago. he was add… 2         positive \n#&gt; # ℹ 90 more rows\nI used yardstick to see how well the model performed. Of course, the accuracy will not be of the “truth”, but rather the package’s results recorded in sentiment.\nlibrary(forcats)\n\nreviews_llm |&gt;\n  mutate(fct_pred = as.factor(ifelse(predicted == \"positive\", 2, 1))) |&gt;\n  yardstick::accuracy(sentiment, fct_pred)\n#&gt; # A tibble: 1 × 3\n#&gt;   .metric  .estimator .estimate\n#&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;\n#&gt; 1 accuracy binary         0.939"
+  },
+  {
+    "objectID": "index.html#vector-functions",
+    "href": "index.html#vector-functions",
+    "title": "mall",
+    "section": "",
+    "text": "mall includes functions that expect a vector, instead of a table, to run the predictions. This should make it easier to test things, such as custom prompts or results of specific text. Each llm_ function has a corresponding llm_vec_ function:\nllm_vec_sentiment(\"I am happy\")\n#&gt; [1] \"positive\"\nllm_vec_translate(\"Este es el mejor dia!\", \"english\")\n#&gt; [1] \"This is the best day!\""
+  },
+  {
+    "objectID": "reference/m_backend_submit.html",
+    "href": "reference/m_backend_submit.html",
+    "title": "Functions to integrate different back-ends",
+    "section": "",
+    "text": "R/m-backend-prompt.R, R/m-backend-submit.R"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#m_backend_prompt",
+    "href": "reference/m_backend_submit.html#m_backend_prompt",
+    "title": "Functions to integrate different back-ends",
+    "section": "m_backend_prompt",
+    "text": "m_backend_prompt"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#description",
+    "href": "reference/m_backend_submit.html#description",
+    "title": "Functions to integrate different back-ends",
+    "section": "Description",
+    "text": "Description\nFunctions to integrate different back-ends"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#usage",
+    "href": "reference/m_backend_submit.html#usage",
+    "title": "Functions to integrate different back-ends",
+    "section": "Usage",
+    "text": "Usage\n \nm_backend_prompt(backend, additional) \n \nm_backend_submit(backend, x, prompt, preview = FALSE)"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#arguments",
+    "href": "reference/m_backend_submit.html#arguments",
+    "title": "Functions to integrate different back-ends",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\nbackend\nAn mall_session object\n\n\nadditional\nAdditional text to insert to the base_prompt\n\n\nx\nThe body of the text to be submitted to the LLM\n\n\nprompt\nThe additional information to add to the submission\n\n\npreview\nIf TRUE, it will display the resulting R call of the first text in x"
+  },
+  {
+    "objectID": "reference/m_backend_submit.html#value",
+    "href": "reference/m_backend_submit.html#value",
+    "title": "Functions to integrate different back-ends",
+    "section": "Value",
+    "text": "Value\nm_backend_submit does not return an object. m_backend_prompt returns a list of functions that contain the base prompts."
+  },
+  {
+    "objectID": "reference/llm_extract.html",
+    "href": "reference/llm_extract.html",
+    "title": "Extract entities from text",
+    "section": "",
+    "text": "R/llm-extract.R"
+  },
+  {
+    "objectID": "reference/llm_extract.html#llm_extract",
+    "href": "reference/llm_extract.html#llm_extract",
+    "title": "Extract entities from text",
+    "section": "llm_extract",
+    "text": "llm_extract"
+  },
+  {
+    "objectID": "reference/llm_extract.html#description",
+    "href": "reference/llm_extract.html#description",
+    "title": "Extract entities from text",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to extract specific entity, or entities, from the provided text"
+  },
+  {
+    "objectID": "reference/llm_extract.html#usage",
+    "href": "reference/llm_extract.html#usage",
+    "title": "Extract entities from text",
+    "section": "Usage",
+    "text": "Usage\n \nllm_extract( \n  .data, \n  col, \n  labels, \n  expand_cols = FALSE, \n  additional_prompt = \"\", \n  pred_name = \".extract\" \n) \n \nllm_vec_extract(x, labels = c(), additional_prompt = \"\", preview = FALSE)"
+  },
+  {
+    "objectID": "reference/llm_extract.html#arguments",
+    "href": "reference/llm_extract.html#arguments",
+    "title": "Extract entities from text",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nlabels\nA vector with the entities to extract from the text\n\n\nexpand_cols\nIf multiple labels are passed, this is a flag that tells the function to create a new column per item in labels. If labels is a named vector, this function will use those names as the new column names, if not, the function will use a sanitized version of the content as the name.\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_extract.html#value",
+    "href": "reference/llm_extract.html#value",
+    "title": "Extract entities from text",
+    "section": "Value",
+    "text": "Value\nllm_extract returns a data.frame or tbl object. llm_vec_extract returns a vector that is the same length as x."
+  },
+  {
+    "objectID": "reference/llm_use.html",
+    "href": "reference/llm_use.html",
+    "title": "Specify the model to use",
+    "section": "",
+    "text": "R/llm-use.R"
+  },
+  {
+    "objectID": "reference/llm_use.html#llm_use",
+    "href": "reference/llm_use.html#llm_use",
+    "title": "Specify the model to use",
+    "section": "llm_use",
+    "text": "llm_use"
+  },
+  {
+    "objectID": "reference/llm_use.html#description",
+    "href": "reference/llm_use.html#description",
+    "title": "Specify the model to use",
+    "section": "Description",
+    "text": "Description\nAllows us to specify the back-end provider, model to use during the current R session"
+  },
+  {
+    "objectID": "reference/llm_use.html#usage",
+    "href": "reference/llm_use.html#usage",
+    "title": "Specify the model to use",
+    "section": "Usage",
+    "text": "Usage\n \nllm_use( \n  backend = NULL, \n  model = NULL, \n  ..., \n  .silent = FALSE, \n  .cache = NULL, \n  .force = FALSE \n)"
+  },
+  {
+    "objectID": "reference/llm_use.html#arguments",
+    "href": "reference/llm_use.html#arguments",
+    "title": "Specify the model to use",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\nbackend\nThe name of an supported back-end provider. Currently only ‘ollama’ is supported.\n\n\nmodel\nThe name of model supported by the back-end provider\n\n\n…\nAdditional arguments that this function will pass down to the integrating function. In the case of Ollama, it will pass those arguments to ollamar::chat().\n\n\n.silent\nAvoids console output\n\n\n.cache\nThe path to save model results, so they can be re-used if the same operation is ran again. To turn off, set this argument to an empty character: \"\". ‘It defaults to’_mall_cache’. If this argument is left NULL when calling this function, no changes to the path will be made.\n\n\n.force\nFlag that tell the function to reset all of the settings in the R session"
+  },
+  {
+    "objectID": "reference/llm_use.html#value",
+    "href": "reference/llm_use.html#value",
+    "title": "Specify the model to use",
+    "section": "Value",
+    "text": "Value\nA mall_session object"
+  },
+  {
+    "objectID": "reference/llm_classify.html",
+    "href": "reference/llm_classify.html",
+    "title": "Categorize data as one of options given",
+    "section": "",
+    "text": "R/llm-classify.R"
+  },
+  {
+    "objectID": "reference/llm_classify.html#llm_classify",
+    "href": "reference/llm_classify.html#llm_classify",
+    "title": "Categorize data as one of options given",
+    "section": "llm_classify",
+    "text": "llm_classify"
+  },
+  {
+    "objectID": "reference/llm_classify.html#description",
+    "href": "reference/llm_classify.html#description",
+    "title": "Categorize data as one of options given",
+    "section": "Description",
+    "text": "Description\nUse a Large Language Model (LLM) to classify the provided text as one of the options provided via the labels argument."
+  },
+  {
+    "objectID": "reference/llm_classify.html#usage",
+    "href": "reference/llm_classify.html#usage",
+    "title": "Categorize data as one of options given",
+    "section": "Usage",
+    "text": "Usage\n \nllm_classify( \n  .data, \n  col, \n  labels, \n  pred_name = \".classify\", \n  additional_prompt = \"\" \n) \n \nllm_vec_classify(x, labels, additional_prompt = \"\", preview = FALSE)"
+  },
+  {
+    "objectID": "reference/llm_classify.html#arguments",
+    "href": "reference/llm_classify.html#arguments",
+    "title": "Categorize data as one of options given",
+    "section": "Arguments",
+    "text": "Arguments\n\n\n\n\n\n\n\nArguments\nDescription\n\n\n\n\n.data\nA data.frame or tbl object that contains the text to be analyzed\n\n\ncol\nThe name of the field to analyze, supports tidy-eval\n\n\nlabels\nA character vector with at least 2 labels to classify the text as\n\n\npred_name\nA character vector with the name of the new column where the prediction will be placed\n\n\nadditional_prompt\nInserts this text into the prompt sent to the LLM\n\n\nx\nA vector that contains the text to be analyzed\n\n\npreview\nIt returns the R call that would have been used to run the prediction. It only returns the first record in x. Defaults to FALSE Applies to vector function only."
+  },
+  {
+    "objectID": "reference/llm_classify.html#value",
+    "href": "reference/llm_classify.html#value",
+    "title": "Categorize data as one of options given",
+    "section": "Value",
+    "text": "Value\nllm_classify returns a data.frame or tbl object. llm_vec_classify returns a vector that is the same length as x."
+  }
+]
