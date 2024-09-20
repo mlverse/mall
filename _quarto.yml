@@ -3,7 +3,8 @@ project:
   output-dir: docs
   
 execute: 
-  freeze: true  
+  freeze: true 
+  eval: true
 
 website:
   title: mall

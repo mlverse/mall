@@ -1,0 +1,17 @@
+on:
+  push:
+    branches: main
+name: Quarto site
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Render project
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          to: html
+      - name: Publish project
+          uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+          render: false

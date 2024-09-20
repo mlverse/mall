@@ -1,5 +1,8 @@
 ---
 title: "Databricks"
+execute:
+  eval: true
+  freeze: true
 ---
 
 

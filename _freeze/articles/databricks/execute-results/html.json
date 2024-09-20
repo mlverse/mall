@@ -1,0 +1,15 @@
+{
+  "hash": "4d6a52e12cdfd1480480265e7f5b4801",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Databricks\"\nexecute:\n  eval: true\n  freeze: true\n---\n\n\n\n\n\n\nThis brief example shows how seamless it is to use the same functions,\nbut against a remote database connection. Today, it works with the following\nfunctions:\n\n- `llm_sentiment()` / `llm_vec_sentiment()`\n- `llm_summarize()` / `llm_vec_summarize()`\n\n## Examples\n\nWe will start by connecting to the Databricks Warehouse\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(mall)\nlibrary(DBI)\n\ncon <- dbConnect(\n  odbc::databricks(),\n  HTTPPath = Sys.getenv(\"DATABRICKS_PATH\")\n)\n```\n:::\n\n\n\n\nNext, we will create a small reviews table\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(dplyr)\n\nreviews <- tribble(\n  ~review,\n  \"This has been the best TV I've ever used. Great screen, and sound.\",\n  \"I regret buying this laptop. It is too slow and the keyboard is too noisy\",\n  \"Not sure how to feel about my new washing machine. Great color, but hard to figure\"\n)\n\ntbl_reviews <- copy_to(con, reviews)\n```\n:::\n\n\n\n\nUsing `llm_sentiment()` in Databricks will call that vendor's SQL AI function\ndirectly:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntbl_reviews |>\n  llm_sentiment(review)\n#> # Source:   SQL [3 x 2]\n#> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]\n#>   review                                                              .sentiment\n#>   <chr>                                                               <chr>     \n#> 1 This has been the best TV Ive ever used. Great screen, and sound.   positive  \n#> 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  \n#> 3 Not sure how to feel about my new washing machine. Great color, bu… mixed\n```\n:::\n\n\n\n\nThere are some differences in the arguments, and output of the LLM's. Notice\nthat instead of \"neutral\", the prediction is \"mixed\".  The AI Sentiment function\ndoes not allow to change the possible options.\n\nNext, we will try `llm_summarize()`. The `max_words` argument maps to the same\nargument in the AI Summarize function:\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ntbl_reviews |>\n  llm_summarize(review, max_words = 5)\n#> # Source:   SQL [3 x 2]\n#> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]\n#>   review                                                                .summary\n#>   <chr>                                                                 <chr>   \n#> 1 This has been the best TV Ive ever used. Great screen, and sound.     Superio…\n#> 2 I regret buying this laptop. It is too slow and the keyboard is too … Slow, n…\n#> 3 Not sure how to feel about my new washing machine. Great color, but … Initial…\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
