@@ -46,3 +46,6 @@ po/*~
 rsconnect/
 
 /.quarto/
+
+_freeze/
+
