@@ -1,12 +1,12 @@
 reference_to_list_page <- function(file_in, pkg) {
-  if(is.character(pkg)) pkg <- as_pkgdown(pkg)
-  #set_package_name(pkg$package)
+  if (is.character(pkg)) pkg <- as_pkgdown(pkg)
+  # set_package_name(pkg$package)
   out <- file_in %>%
     tags_get(pkg) %>%
     tags_process()
-  
+
   out$repo <- pkg$repo$url$home
-  #set_package_name(NULL)
+  # set_package_name(NULL)
   ln <- find_in_script(out, pkg)
   out$alias_line <- ln
   out
@@ -14,39 +14,41 @@ reference_to_list_page <- function(file_in, pkg) {
 
 find_in_script <- function(x, pkg) {
   out <- ""
-  if(is.null(x$source)) return(out)
+  if (is.null(x$source)) {
+    return(out)
+  }
   script <- path(pkg$src_path, x$source)
-  
-  if(file_exists(script)) {
-    script_lines <- script %>% 
-      readLines() %>% 
-      map_chr(trimws) 
-    
+
+  if (file_exists(script)) {
+    script_lines <- script %>%
+      readLines() %>%
+      map_chr(trimws)
+
     res <- c(
-      paste0("`", x$alias, "`", " <-"), 
-      paste0(x$alias, " <-"), 
+      paste0("`", x$alias, "`", " <-"),
+      paste0(x$alias, " <-"),
       paste0("#' @name ", x$alias)
-    ) %>% 
-      map(~{
+    ) %>%
+      map(~ {
         out <- NULL
         cr <- .x
         scrip_sub <- map_chr(script_lines, ~ substr(.x, 1, nchar(cr)))
         find_func <- which(scrip_sub == cr)
-        if(length(find_func)) out <- find_func[[1]]
+        if (length(find_func)) out <- find_func[[1]]
         out
-      }) %>% 
-      list_c() %>% 
+      }) %>%
+      list_c() %>%
       as.numeric()
-    
-    if(length(res) > 0) out <- res[[1]]
+
+    if (length(res) > 0) out <- res[[1]]
   }
-  
+
   out
 }
 
 tags_get <- function(file_in, pkg) {
-  if(is.character(pkg)) pkg <- as_pkgdown(pkg)
-  
+  if (is.character(pkg)) pkg <- as_pkgdown(pkg)
+
   pkg_topics <- pkg$topics
   topic_row <- pkg_topics[pkg_topics$file_in == file_in, ]
   topic <- transpose(topic_row)
@@ -54,30 +56,31 @@ tags_get <- function(file_in, pkg) {
   tag_names <- map_chr(topic_rd, ~ class(.)[[1]])
   tag_split <- split(topic_rd, tag_names)
   tag_split <- tag_split[names(tag_split) != "TEXT"]
-  
-  imap(tag_split, 
-       ~{ 
-         nm <- .y 
-         class(.x) <- c(nm, class(.x))
-         .x
-        })
-  
+
+  imap(
+    tag_split,
+    ~ {
+      nm <- .y
+      class(.x) <- c(nm, class(.x))
+      .x
+    }
+  )
 }
 
 tags_process <- function(x) {
-  out <- map(x, ~  tag_convert(.x))
-  
+  out <- map(x, ~ tag_convert(.x))
+
   comment <- NULL
   comment <- names(out) == "COMMENT"
-  if(length(comment) > 0) {
+  if (length(comment) > 0) {
     comment_list <- list_flatten(out$COMMENT)
     reg_list <- out[!comment]
     out <- c(comment_list, reg_list)
   }
-  
+
   new_names <- substr(names(out), 5, nchar(names(out)))
   names(out) <- new_names
-  
+
   out
 }
 
@@ -90,13 +93,13 @@ tag_convert <- function(x) {
 tag_convert_default <- function(x) {
   x <- x[[1]]
   rf <- tag_flatten(x)
-  
+
   rf_cr <- NULL
   cr <- NULL
-  for(i in seq_along(rf)) {
+  for (i in seq_along(rf)) {
     cl <- rf[[i]]
-    if(cl == new_paragraph_symbol) {
-      if(!is.null(cr)) rf_cr <- c(rf_cr, cr)
+    if (cl == new_paragraph_symbol) {
+      if (!is.null(cr)) rf_cr <- c(rf_cr, cr)
       cr <- NULL
     } else {
       cr <- paste0(cr, cl, collapse = "")
@@ -116,7 +119,7 @@ tag_convert.COMMENT <- function(x) {
 tag_convert.default <- tag_convert_default
 
 tag_convert.tag_section <- function(x) {
-  map(x, ~{
+  map(x, ~ {
     list(
       title = tag_convert_default(.x[1]),
       contents = tag_convert_default(.x[2])
@@ -131,26 +134,26 @@ tag_convert.tag_examples <- function(x) {
   examples_run <- NULL
   examples_dont_run <- NULL
   cr <- NULL
-  for(i in seq_along(rf)) {
+  for (i in seq_along(rf)) {
     cl <- rf[[i]]
-    if(cl == new_paragraph_symbol | cl == do_not_run_symbol) {
-      if(!is.null(cr)){
-        if(on_examples) {
-          examples_run <- c(examples_run, cr)  
+    if (cl == new_paragraph_symbol | cl == do_not_run_symbol) {
+      if (!is.null(cr)) {
+        if (on_examples) {
+          examples_run <- c(examples_run, cr)
         } else {
-          examples_dont_run <- c(examples_dont_run, cr)  
+          examples_dont_run <- c(examples_dont_run, cr)
         }
-      }  
+      }
       cr <- NULL
     } else {
       cr <- c(cr, cl)
     }
-    if(cl == do_not_run_symbol) {
+    if (cl == do_not_run_symbol) {
       on_examples <- FALSE
     }
   }
-  if(all(examples_run == " ")) examples_run <- NULL
-  if(all(examples_dont_run == " ")) examples_dont_run <- NULL
+  if (all(examples_run == " ")) examples_run <- NULL
+  if (all(examples_dont_run == " ")) examples_dont_run <- NULL
   list(
     code_run = add_library(examples_run),
     code_dont_run = add_library(examples_dont_run)
@@ -158,12 +161,14 @@ tag_convert.tag_examples <- function(x) {
 }
 
 add_library <- function(x) {
-  if(is.null(x)) return(x)
+  if (is.null(x)) {
+    return(x)
+  }
   pkg_library <- NULL
   pkg_name <- get_package_name()
-  if(!is.null(pkg_name)) {
+  if (!is.null(pkg_name)) {
     pkg_library <- paste0("library(", pkg_name, ")")
-    if(!any(map_lgl(x, ~ trimws(.x) == pkg_library))) {
+    if (!any(map_lgl(x, ~ trimws(.x) == pkg_library))) {
       x <- c(pkg_library, x)
     }
   }
@@ -176,23 +181,24 @@ tag_convert.tag_usage <- function(x) {
   x <- x[[1]]
   out <- NULL
   not_s3 <- TRUE
-  for(i in seq_along(x)) {
-    if(not_s3) {
+  for (i in seq_along(x)) {
+    if (not_s3) {
       cs <- x[[i]]
-      ts <- tag_single(cs) 
+      ts <- tag_single(cs)
       curr_s3 <- substr(ts[[1]], 1, nchar(s3_label)) == s3_label
-      if(curr_s3) {
-        ts1 <- tag_single(x[[i+1]])
+      if (curr_s3) {
+        ts1 <- tag_single(x[[i + 1]])
         ts1[[1]] <- paste0(ts[[2]], ts1[[1]], collapse = "")
         ts[[2]] <- ts1
         not_s3 <- FALSE
-        }
+      }
       out <- c(out, ts)
     } else {
       not_s3 <- TRUE
-    }}
+    }
+  }
   out[out == new_paragraph_symbol] <- ""
-  if(out[[1]] == "" && length(out) > 1) out <- out[2:length(out)]
+  if (out[[1]] == "" && length(out) > 1) out <- out[2:length(out)]
   out
 }
 
@@ -203,12 +209,12 @@ tag_convert.tag_arguments <- function(x) {
     item <- x[[i]]
     if ("tag_item" %in% class(item)) {
       res <- c(
-        res, 
+        res,
         list(list(
-          argument = tag_convert(item[1]), 
+          argument = tag_convert(item[1]),
           description = tag_convert(item[2])
-        )
         ))
+      )
     }
   }
   res
@@ -268,34 +274,34 @@ tag_translate.tag_Sexpr <- function(x) ""
 
 tag_single <- function(x, rm_return = TRUE) {
   out <- tag_translate(x)
-  if(rm_return) out <- map_chr(out, remove_return)
+  if (rm_return) out <- map_chr(out, remove_return)
   out
 }
 
-tag_flatten <-  function(x) {
+tag_flatten <- function(x) {
   x %>%
-    map(tag_single) %>% 
-    list_c() %>% 
-    c(., new_paragraph_symbol)  
+    map(tag_single) %>%
+    list_c() %>%
+    c(., new_paragraph_symbol)
 }
 
 new_paragraph_symbol <- "<<<<<<<<<<<<<<<<<<<<<<<<<"
 do_not_run_symbol <- ";;;;;;;;;;;;;;;;;;;;;;;;;"
 
 remove_return <- function(x) {
-  if(trimws(x) == "\n") {
+  if (trimws(x) == "\n") {
     x <- new_paragraph_symbol
-    }
+  }
   remove_generic(x)
 }
 
 remove_return_code <- function(x) {
-  if(x == "\n") x <- "```r"
+  if (x == "\n") x <- "```r"
   remove_generic(x)
 }
 
 remove_generic <- function(x) {
-  if(substr(x, nchar(x), nchar(x)) == "\n") {
+  if (substr(x, nchar(x), nchar(x)) == "\n") {
     x <- substr(x, 1, nchar(x) - 1)
     x <- paste0(x, " ")
   }
@@ -305,62 +311,62 @@ remove_generic <- function(x) {
 ## -------------------------- Atomic RD tag functions ---------------------------
 
 tag_LIST <- function(x) {
-  x %>% 
-    map(tag_single) %>% 
-    paste(collapse = "") %>% 
+  x %>%
+    map(tag_single) %>%
+    paste(collapse = "") %>%
     paste0("\n")
 }
 
 tag_describe <- function(x) {
-  out <- x %>%  
-    list_c() %>% 
-    map(~.x[[1]]) %>% 
+  out <- x %>%
+    list_c() %>%
+    map(~ .x[[1]]) %>%
     map(tag_single)
   out_nulls <- !map_lgl(out, is.null)
   out <- out[out_nulls]
-  
+
   reduce(out, function(x, y) c(x, new_paragraph_symbol, y))
 }
 
 tag_dontrun <- function(x) {
-  x %>% 
-    map(tag_single) %>% 
-    list_c() %>% 
+  x %>%
+    map(tag_single) %>%
+    list_c() %>%
     c(do_not_run_symbol, .)
 }
 
 tag_sub_section <- function(x) {
   x_class <- map_chr(x, class)
-  if(any(x_class == "tag")) {
+  if (any(x_class == "tag")) {
     out <- map(x, function(x) list_c(map(x, tag_single)))
   } else {
-    out <-  map(x, tag_single)   
+    out <- map(x, tag_single)
   }
 
-  out %>% 
-    list_c() %>% 
-    map(remove_return) %>% 
+  out %>%
+    list_c() %>%
+    map(remove_return) %>%
     c(., new_paragraph_symbol)
 }
 
 tag_itemize1 <- function(x) {
-  x %>% 
-    map(tag_single, FALSE) %>% 
-    list_c() %>% 
-    map(remove_return) %>% 
+  x %>%
+    map(tag_single, FALSE) %>%
+    list_c() %>%
+    map(remove_return) %>%
     c(., new_paragraph_symbol)
 }
 
 tag_code <- function(x) {
-  x %>% 
-    map(tag_single) %>% 
-    reduce(paste0) %>% 
+  x %>%
+    map(tag_single) %>%
+    reduce(paste0) %>%
     paste0("`", ., "`")
 }
 
 tag_preformatted <- function(x) {
-  as.character(x) %>%  
-    reduce(function(x, y) c(x, new_paragraph_symbol, y)) %>% 
+  as.character(x) %>%
+    reduce(function(x, y) c(x, new_paragraph_symbol, y)) %>%
     c("```", new_paragraph_symbol, ., new_paragraph_symbol, "```")
 }
 
@@ -379,10 +385,9 @@ tag_href <- function(x) {
 
 tag_method <- function(x) {
   c(
-    paste0(s3_label, x[[2]],"'"),
+    paste0(s3_label, x[[2]], "'"),
     as.character(x[[1]])
   )
-  
 }
 
 tag_deqn <- function(x) {
