@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  eval = TRUE
+  eval = FALSE
 )
 library(dplyr)
 library(dbplyr)
@@ -28,29 +28,6 @@ mall::llm_use("ollama", "llama3.1", seed = 100, .cache = "_readme_cache")
 [![Codecov test coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/edgararuiz/mall?branch=main)
 <!-- badges: end -->
 
-```{r, eval = FALSE, echo = FALSE}
-source("utils/table_of_contents.R")
-table_of_contents()
-```
-
-
-<!-- toc: start -->
-- [Motivation](#motivation)
-- [LLM functions](#llm-functions)
-    - [Sentiment](#sentiment)
-    - [Summarize](#summarize)
-    - [Classify](#classify)
-    - [Extract ](#extract)
-    - [Translate](#translate)
-    - [Custom prompt](#custom-prompt)
-- [Initialize session](#initialize-session)
-- [Key considerations](#key-considerations)
-- [Performance](#performance)
-- [Vector functions](#vector-functions)
-- [Databricks](#databricks)
-
-<!-- toc: end -->
-
 ## Intro
 
 Run multiple LLM predictions against a table. The predictions run row-wise
@@ -66,8 +43,6 @@ type of analysis needed. Currently, the included prompts perform the following:
 This package is inspired by the SQL AI functions now offered by vendors such as
 [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html) 
 and Snowflake. For local data, `mall` uses [Ollama](https://ollama.com/) to call an LLM. 
-
-### Databricks integration
 
 If you pass a table connected to **Databricks** via `odbc`, `mall` will automatically
 use Databricks' LLM instead of Ollama. It will call the corresponding SQL AI 

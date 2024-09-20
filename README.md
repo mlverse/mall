@@ -12,24 +12,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/edgararuiz/mall?branch=main)
 <!-- badges: end -->
 
-<!-- toc: start -->
-
-- [Motivation](#motivation)
-- [LLM functions](#llm-functions)
-  - [Sentiment](#sentiment)
-  - [Summarize](#summarize)
-  - [Classify](#classify)
-  - [Extract](#extract)
-  - [Translate](#translate)
-  - [Custom prompt](#custom-prompt)
-- [Initialize session](#initialize-session)
-- [Key considerations](#key-considerations)
-- [Performance](#performance)
-- [Vector functions](#vector-functions)
-- [Databricks](#databricks)
-
-<!-- toc: end -->
-
 ## Intro
 
 Run multiple LLM predictions against a table. The predictions run
@@ -47,8 +29,6 @@ such as
 [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html)
 and Snowflake. For local data, `mall` uses [Ollama](https://ollama.com/)
 to call an LLM.
-
-### Databricks integration
 
 If you pass a table connected to **Databricks** via `odbc`, `mall` will
 automatically use Databricks’ LLM instead of Ollama. It will call the
@@ -91,12 +71,6 @@ library(mall)
 
 reviews |>
   llm_sentiment(review)
-#> # A tibble: 3 × 2
-#>   review                                   .sentiment
-#>   <chr>                                    <chr>     
-#> 1 This has been the best TV I've ever use… positive  
-#> 2 I regret buying this laptop. It is too … negative  
-#> 3 Not sure how to feel about my new washi… neutral
 ```
 
 The function let’s us modify the options to choose from:
@@ -104,12 +78,6 @@ The function let’s us modify the options to choose from:
 ``` r
 reviews |>
   llm_sentiment(review, options = c("positive", "negative"))
-#> # A tibble: 3 × 2
-#>   review                                   .sentiment
-#>   <chr>                                    <chr>     
-#> 1 This has been the best TV I've ever use… positive  
-#> 2 I regret buying this laptop. It is too … negative  
-#> 3 Not sure how to feel about my new washi… negative
 ```
 
 As mentioned before, by being pipe friendly, the results from the LLM
@@ -119,11 +87,6 @@ prediction can be used in further transformations:
 reviews |>
   llm_sentiment(review, options = c("positive", "negative")) |>
   filter(.sentiment == "negative")
-#> # A tibble: 2 × 2
-#>   review                                   .sentiment
-#>   <chr>                                    <chr>     
-#> 1 I regret buying this laptop. It is too … negative  
-#> 2 Not sure how to feel about my new washi… negative
 ```
 
 ### Summarize
@@ -136,12 +99,6 @@ number of words to output (`max_words`):
 ``` r
 reviews |>
   llm_summarize(review, max_words = 5)
-#> # A tibble: 3 × 2
-#>   review                                   .summary                       
-#>   <chr>                                    <chr>                          
-#> 1 This has been the best TV I've ever use… very good tv experience overall
-#> 2 I regret buying this laptop. It is too … slow and noisy laptop purchase 
-#> 3 Not sure how to feel about my new washi… mixed feelings about new washer
 ```
 
 To control the name of the prediction field, you can change `pred_name`
@@ -150,12 +107,6 @@ argument. This works with the other `llm_` functions as well.
 ``` r
 reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
-#> # A tibble: 3 × 2
-#>   review                                   review_summary                 
-#>   <chr>                                    <chr>                          
-#> 1 This has been the best TV I've ever use… very good tv experience overall
-#> 2 I regret buying this laptop. It is too … slow and noisy laptop purchase 
-#> 3 Not sure how to feel about my new washi… mixed feelings about new washer
 ```
 
 ### Classify
@@ -165,12 +116,6 @@ Use the LLM to categorize the text into one of the options you provide:
 ``` r
 reviews |>
   llm_classify(review, c("appliance", "computer"))
-#> # A tibble: 3 × 2
-#>   review                                   .classify
-#>   <chr>                                    <chr>    
-#> 1 This has been the best TV I've ever use… appliance
-#> 2 I regret buying this laptop. It is too … computer 
-#> 3 Not sure how to feel about my new washi… appliance
 ```
 
 ### Extract
@@ -184,12 +129,6 @@ We do this by simply saying “product”. The LLM understands what we
 ``` r
 reviews |>
   llm_extract(review, "product")
-#> # A tibble: 3 × 2
-#>   review                                   .extract       
-#>   <chr>                                    <chr>          
-#> 1 This has been the best TV I've ever use… tv             
-#> 2 I regret buying this laptop. It is too … laptop         
-#> 3 Not sure how to feel about my new washi… washing machine
 ```
 
 ### Translate
@@ -202,12 +141,6 @@ to be defined. The translation accuracy will depend on the LLM
 ``` r
 reviews |>
   llm_translate(review, "spanish")
-#> # A tibble: 3 × 2
-#>   review                                   .translation                         
-#>   <chr>                                    <chr>                                
-#> 1 This has been the best TV I've ever use… Este ha sido el mejor televisor que …
-#> 2 I regret buying this laptop. It is too … Lamento haber comprado esta laptop. …
-#> 3 Not sure how to feel about my new washi… No estoy seguro de cómo sentirme sob…
 ```
 
 ### Custom prompt
@@ -226,12 +159,6 @@ my_prompt <- paste(
 
 reviews |>
   llm_custom(review, my_prompt)
-#> # A tibble: 3 × 2
-#>   review                                   .pred
-#>   <chr>                                    <chr>
-#> 1 This has been the best TV I've ever use… Yes  
-#> 2 I regret buying this laptop. It is too … No   
-#> 3 Not sure how to feel about my new washi… No
 ```
 
 ## Initialize session
@@ -295,10 +222,6 @@ book_reviews <- data_bookReviews |>
   as_tibble()
 
 glimpse(book_reviews)
-#> Rows: 100
-#> Columns: 2
-#> $ review    <chr> "i got this as both a book and an audio file. i had waited t…
-#> $ sentiment <fct> 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, …
 ```
 
 As per the docs, `sentiment` is a factor indicating the sentiment of the
@@ -306,7 +229,6 @@ review: negative (1) or positive (2)
 
 ``` r
 length(strsplit(paste(book_reviews, collapse = " "), " ")[[1]])
-#> [1] 20571
 ```
 
 Just to get an idea of how much data we’re processing, I’m using a very,
@@ -319,7 +241,6 @@ reviews_llm <- book_reviews |>
     options = c("positive", "negative"),
     pred_name = "predicted"
   )
-#> ! There were 1 predictions with invalid output, they were coerced to NA
 ```
 
 As far as **time**, on my Apple M3 machine, it took about 3 minutes to
@@ -342,20 +263,6 @@ This is what the new table looks like:
 
 ``` r
 reviews_llm
-#> # A tibble: 100 × 3
-#>    review                                                    sentiment predicted
-#>    <chr>                                                     <fct>     <chr>    
-#>  1 "i got this as both a book and an audio file. i had wait… 1         negative 
-#>  2 "this book places too much emphasis on spending money in… 1         negative 
-#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         negative 
-#>  4 "while i appreciate what tipler was attempting to accomp… 1         negative 
-#>  5 "the others in the series were great, and i really looke… 1         negative 
-#>  6 "a few good things, but she's lost her edge and i find i… 1         negative 
-#>  7 "words cannot describe how ripped off and disappointed i… 1         negative 
-#>  8 "1. the persective of most writers is shaped by their ow… 1         negative 
-#>  9 "i have been a huge fan of michael crichton for about 25… 1         negative 
-#> 10 "i saw dr. polk on c-span a month or two ago. he was add… 2         positive 
-#> # ℹ 90 more rows
 ```
 
 I used `yardstick` to see how well the model performed. Of course, the
@@ -368,10 +275,6 @@ library(forcats)
 reviews_llm |>
   mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |>
   yardstick::accuracy(sentiment, fct_pred)
-#> # A tibble: 1 × 3
-#>   .metric  .estimator .estimate
-#>   <chr>    <chr>          <dbl>
-#> 1 accuracy binary         0.939
 ```
 
 ## Vector functions
@@ -383,12 +286,10 @@ corresponding `llm_vec_` function:
 
 ``` r
 llm_vec_sentiment("I am happy")
-#> [1] "positive"
 ```
 
 ``` r
 llm_vec_translate("Este es el mejor dia!", "english")
-#> [1] "This is the best day!"
 ```
 
 ## Databricks
@@ -413,13 +314,6 @@ vendor’s SQL AI function directly:
 ``` r
 tbl_reviews |>
   llm_sentiment(review)
-#> # Source:   SQL [3 x 2]
-#> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]
-#>   review                                                              .sentiment
-#>   <chr>                                                               <chr>     
-#> 1 This has been the best TV Ive ever used. Great screen, and sound.   positive  
-#> 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  
-#> 3 Not sure how to feel about my new washing machine. Great color, bu… mixed
 ```
 
 There are some differences in the arguments, and output of the LLM’s.
@@ -432,11 +326,4 @@ the same argument in the AI Summarize function:
 ``` r
 tbl_reviews |>
   llm_summarize(review, max_words = 5)
-#> # Source:   SQL [3 x 2]
-#> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]
-#>   review                                                                .summary
-#>   <chr>                                                                 <chr>   
-#> 1 This has been the best TV Ive ever used. Great screen, and sound.     Superio…
-#> 2 I regret buying this laptop. It is too slow and the keyboard is too … Slow, n…
-#> 3 Not sure how to feel about my new washing machine. Great color, but … Initial…
 ```

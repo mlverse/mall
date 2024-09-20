@@ -1,10 +1,29 @@
 url: https://edgararuiz.github.io/mall/
 template:
   bootstrap: 5
-  light-switch: true
+  bslib:
+    primary: "#447099"
+    base_font: {google: {family: "Source Sans Pro", wght: [400, 600], ital: [0, 1]}}
+    code_font: {google: "Source Code Pro"}
+    font_scale: 1.2
+    fg: "#172431"
+    bg: "#fcfcfc"
+    border-radius: 0
+    btn-border-radius: 3px
+    grid-gutter-width: 3rem
+    pkgdown-nav-height: 78px  
+    
+code:
+  width: 74
+
 navbar:
+  type: light
+  bg: none
   structure:
     right: [search, github, lightswitch]
+home:
+  sidebar:
+    structure: [toc]
 repo:
   url:
     home: https://github.com/edgararuiz/mall
