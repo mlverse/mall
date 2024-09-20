@@ -5,7 +5,10 @@ on:
 
 name: Render and Publish
 
-permissions: write
+you need these permissions to publish to GitHub pages
+permissions:
+    contents: write
+    pages: write
 
 jobs:
   build-deploy:
@@ -14,14 +17,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Publish to GitHub Pages (and render)
+        uses: quarto-dev/quarto-actions/publish@v2
         with:
-    - name: Publish to GitHub Pages (and render)
-      uses: quarto-dev/quarto-actions/publish@v2
-      with:
-        target: gh-pages
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is always available for github actions
+      
