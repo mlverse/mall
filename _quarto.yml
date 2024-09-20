@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: docs
+  
+execute: 
+  freeze: true  
+
+website:
+  title: mall
+  navbar:
+    left:
+      - sidebar:articles    
+      - href: reference/index.qmd
+        text: Reference
+  sidebar:
+    - id: articles
+      title: "Articles"
+      style: "docked"
+      background: light
+      collapse-level: 2
+      contents: 
+      - text: "Databricks"
+        href: articles/databricks.qmd
+
+format:
+  html:
+    toc: true
+    code-copy: true
+    code-overflow: wrap
+    code-toos: true
+    eval: false
+    theme:
+      light: [cosmo, theme.scss]
+      dark: [cosmo, theme-dark.scss]
+
+knitr:
+  opts_chunk: 
+    collapse: true
+    comment: "#>"    

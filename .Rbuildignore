@@ -11,3 +11,10 @@ utils/
 ^_mall_cache/
 ^_readme_cache/
 ^_prompt_cache/
+^_freeze/
+^_quarto.yml
+^articles/
+^index.qmd
+^reference/
+^.*\.scss$
+^.quarto

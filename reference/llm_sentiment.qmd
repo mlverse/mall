@@ -1,0 +1,50 @@
+---
+title: "Sentiment analysis"
+---
+
+[R/llm-sentiment.R](https://github.com/edgararuiz/mall/blob/main/R/llm-sentiment.R)
+
+## llm_sentiment
+
+## Description
+ Use a Large Language Model (LLM) to perform sentiment analysis from the provided text 
+
+
+## Usage
+```r
+ 
+llm_sentiment( 
+  .data, 
+  col, 
+  options = c("positive", "negative", "neutral"), 
+  pred_name = ".sentiment", 
+  additional_prompt = "" 
+) 
+ 
+llm_vec_sentiment( 
+  x, 
+  options = c("positive", "negative", "neutral"), 
+  additional_prompt = "", 
+  preview = FALSE 
+) 
+```
+
+## Arguments
+|Arguments|Description|
+|---|---|
+| .data | A `data.frame` or `tbl` object that contains the text to be analyzed |
+| col | The name of the field to analyze, supports `tidy-eval` |
+| options | A vector with the options that the LLM should use to assign a sentiment to the text. Defaults to: 'positive', 'negative', 'neutral' |
+| pred_name | A character vector with the name of the new column where the prediction will be placed |
+| additional_prompt | Inserts this text into the prompt sent to the LLM |
+| x | A vector that contains the text to be analyzed |
+| preview | It returns the R call that would have been used to run the prediction. It only returns the first record in `x`. Defaults to `FALSE` Applies to vector function only. |
+
+
+
+## Value
+ `llm_sentiment` returns a `data.frame` or `tbl` object. `llm_vec_sentiment` returns a vector that is the same length as `x`. 
+
+
+
+
