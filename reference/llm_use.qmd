@@ -2,7 +2,7 @@
 title: "Specify the model to use"
 ---
 
-*R/llm-use.R*
+[R/llm-use.R](https://github.com/edgararuiz/mall/blob/main/R/llm-use.R)
 
 ## llm_use
 

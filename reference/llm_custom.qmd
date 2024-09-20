@@ -2,7 +2,7 @@
 title: "Send a custom prompt to the LLM"
 ---
 
-*R/llm-custom.R*
+[R/llm-custom.R](https://github.com/edgararuiz/mall/blob/main/R/llm-custom.R)
 
 ## llm_custom
 

@@ -2,7 +2,7 @@
 title: "Functions to integrate different back-ends"
 ---
 
-*R/m-backend-prompt.R, R/m-backend-submit.R*
+[R/m-backend-prompt.R, R/m-backend-submit.R](https://github.com/edgararuiz/mall/blob/main/R/m-backend-prompt.R, R/m-backend-submit.R)
 
 ## m_backend_prompt
 

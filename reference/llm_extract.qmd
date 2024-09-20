@@ -2,7 +2,7 @@
 title: "Extract entities from text"
 ---
 
-*R/llm-extract.R*
+[R/llm-extract.R](https://github.com/edgararuiz/mall/blob/main/R/llm-extract.R)
 
 ## llm_extract
 

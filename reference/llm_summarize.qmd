@@ -2,7 +2,7 @@
 title: "Summarize text"
 ---
 
-*R/llm-summarize.R*
+[R/llm-summarize.R](https://github.com/edgararuiz/mall/blob/main/R/llm-summarize.R)
 
 ## llm_summarize
 

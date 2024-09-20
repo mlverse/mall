@@ -2,7 +2,7 @@
 title: "Translates text to a specific language"
 ---
 
-*R/llm-translate.R*
+[R/llm-translate.R](https://github.com/edgararuiz/mall/blob/main/R/llm-translate.R)
 
 ## llm_translate
 
