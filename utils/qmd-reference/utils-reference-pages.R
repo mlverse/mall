@@ -165,7 +165,7 @@ reference_convert <- function(x, output = "qmd") {
       run_examples <- FALSE
       if(output == "md") {
         out <- map(curr, reference_qmd_example, FALSE)
-        out <- flatten(out)
+        out <- list_c(out)
       } else {
         out <- list()
         if(!is.null(curr$code_run)) {
@@ -193,7 +193,7 @@ reference_convert <- function(x, output = "qmd") {
     
     if(is.null(out)) {
       out <- curr
-      if(is.list(out)) out <- flatten(out)
+      if(is.list(out)) out <- list_c(out)
       if(length(out) > 1) out <- reduce(out, function(x, y) c(x, "", y), .init = NULL)
     }
 

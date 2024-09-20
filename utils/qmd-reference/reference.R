@@ -4,9 +4,9 @@ source("utils/qmd-reference/utils-reference-pages.R")
 source("utils/qmd-reference/pkgdown.R")
 library(pkgdown)
 library(magrittr)
-library(purrr)
-library(rlang)
+suppressPackageStartupMessages(library(purrr))
 library(fs)
+library(cli)
 
 pkg <- as_pkgdown(".")
 
@@ -21,11 +21,10 @@ walk(
   \(x) {
     p <- path_ext_remove(x)
     p <- paste0("reference/", p, ".qmd")
-    print(p)
     qmd <- reference_to_qmd(x, pkg)    
-    print(qmd)
     try(file_delete(p))
     writeLines(qmd, p)
+    cli_inform(col_green(p))
   }
 )
 

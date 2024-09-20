@@ -70,7 +70,7 @@ tags_process <- function(x) {
   comment <- NULL
   comment <- names(out) == "COMMENT"
   if(length(comment) > 0) {
-    comment_list <- flatten(out$COMMENT)
+    comment_list <- list_flatten(out$COMMENT)
     reg_list <- out[!comment]
     out <- c(comment_list, reg_list)
   }
@@ -332,7 +332,7 @@ tag_dontrun <- function(x) {
 tag_sub_section <- function(x) {
   x_class <- map_chr(x, class)
   if(any(x_class == "tag")) {
-    out <- map(x, function(x) flatten(map(x, tag_single)))
+    out <- map(x, function(x) list_c(map(x, tag_single)))
   } else {
     out <-  map(x, tag_single)   
   }

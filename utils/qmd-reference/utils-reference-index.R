@@ -86,7 +86,7 @@ reference_to_list_index <- function(pkg) {
           item_numbers
         }
       )
-      topic_ids <- as.numeric(flatten(topic_list))
+      topic_ids <- as.numeric(list_c(topic_list))
       transpose(pkg_topics[topic_ids, ])
     })
   

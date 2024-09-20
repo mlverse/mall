@@ -1,5 +1,5 @@
 match_env <- function(topics) {
-  out <- env(empty_env(),
+  out <- rlang::env(rlang::empty_env(),
              "-" = function(x) -x,
              "c" = function(...) c(...)
   )
@@ -8,17 +8,17 @@ match_env <- function(topics) {
   
   # Each \alias{} is matched to its position
   topics$alias <- lapply(topics$alias, unique)
-  aliases <- set_names(
+  aliases <- rlang::set_names(
     rep(topic_index, lengths(topics$alias)),
     unlist(topics$alias)
   )
-  env_bind(out, !!!aliases)
+  rlang::env_bind(out, !!!aliases)
   
   # As is each \name{} - we bind these second so that if \name{x} and \alias{x}
   # are in different files, \name{x} wins. This doesn't usually matter, but
   # \name{} needs to win so that the default_reference_index() matches the
   # correct files
-  env_bind(out, !!!set_names(topic_index, topics$name))
+  rlang::env_bind(out, !!!rlang::set_names(topic_index, topics$name))
   
   # dplyr-like matching functions
   
