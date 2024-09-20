@@ -15,6 +15,7 @@ try(dir_create("reference"))
 ref_path <- path("reference", "index", ext = "qmd")
 try(file_delete(ref_path))
 writeLines(reference_index(pkg, "reference"), ref_path)
+cli_inform(col_green(ref_path))
 
 walk(
   pkg$topics$file_in, 
