@@ -12,24 +12,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/edgararuiz/mall?branch=main)
 <!-- badges: end -->
 
-<!-- toc: start -->
-
-- [Motivation](#motivation)
-- [LLM functions](#llm-functions)
-  - [Sentiment](#sentiment)
-  - [Summarize](#summarize)
-  - [Classify](#classify)
-  - [Extract](#extract)
-  - [Translate](#translate)
-  - [Custom prompt](#custom-prompt)
-- [Initialize session](#initialize-session)
-- [Key considerations](#key-considerations)
-- [Performance](#performance)
-- [Vector functions](#vector-functions)
-- [Databricks](#databricks)
-
-<!-- toc: end -->
-
 ## Intro
 
 Run multiple LLM predictions against a table. The predictions run
@@ -389,54 +371,4 @@ llm_vec_sentiment("I am happy")
 ``` r
 llm_vec_translate("Este es el mejor dia!", "english")
 #> [1] "This is the best day!"
-```
-
-## Databricks
-
-This brief example shows how seamless it is to use the same `llm_`
-functions, but against a remote connection:
-
-``` r
-library(DBI)
-
-con <- dbConnect(
-  odbc::databricks(),
-  HTTPPath = Sys.getenv("DATABRICKS_PATH")
-)
-
-tbl_reviews <- copy_to(con, reviews)
-```
-
-As mentioned above, using `llm_sentiment()` in Databricks will call that
-vendor’s SQL AI function directly:
-
-``` r
-tbl_reviews |>
-  llm_sentiment(review)
-#> # Source:   SQL [3 x 2]
-#> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]
-#>   review                                                              .sentiment
-#>   <chr>                                                               <chr>     
-#> 1 This has been the best TV Ive ever used. Great screen, and sound.   positive  
-#> 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  
-#> 3 Not sure how to feel about my new washing machine. Great color, bu… mixed
-```
-
-There are some differences in the arguments, and output of the LLM’s.
-Notice that instead of “neutral”, the prediction is “mixed”. The AI
-Sentiment function does not allow to change the possible options.
-
-Next, we will try `llm_summarize()`. The `max_words` argument maps to
-the same argument in the AI Summarize function:
-
-``` r
-tbl_reviews |>
-  llm_summarize(review, max_words = 5)
-#> # Source:   SQL [3 x 2]
-#> # Database: Spark SQL 3.1.1[token@Spark SQL/hive_metastore]
-#>   review                                                                .summary
-#>   <chr>                                                                 <chr>   
-#> 1 This has been the best TV Ive ever used. Great screen, and sound.     Superio…
-#> 2 I regret buying this laptop. It is too slow and the keyboard is too … Slow, n…
-#> 3 Not sure how to feel about my new washing machine. Great color, but … Initial…
 ```
