@@ -27,6 +27,11 @@ format:
     toc: true
     code-copy: true
     code-overflow: wrap
+    code-toos: true
+    eval: false
+    theme:
+      light: [cosmo, theme.scss]
+      dark: [cosmo, theme-dark.scss]
 
 knitr:
   opts_chunk: 
