@@ -2,6 +2,13 @@ project:
   type: website
   output-dir: docs
 
+website:
+  title: mall
+  navbar:
+    left:
+      - href: reference/index.qmd
+        text: Reference
+
 format:
   html:
     toc: true

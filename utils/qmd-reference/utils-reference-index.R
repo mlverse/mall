@@ -42,7 +42,7 @@ reference_index_convert <- function(index_list, dir_out = "") {
     if(length(funcs) == 0) funcs <- .x$alias
     funcs <- gsub("&lt;", "<", funcs)
     funcs <- gsub("&gt;", ">", funcs)
-    funcs <- paste0(funcs, collapse = " ")
+    funcs <- paste0(funcs, collapse = " \\| ")
     
     file_out <- path(dir_out, .x$file_out)
     desc <- .x$title
