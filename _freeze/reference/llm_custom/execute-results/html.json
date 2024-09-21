@@ -1,0 +1,15 @@
+{
+  "hash": "8de85ae8ae484ef4e4ff9cf1d8486d07",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Send a custom prompt to the LLM\"\nexecute:\n  eval: true\n  freeze: true\n---\n\n\n\n\n\n[R/llm-custom.R](https://github.com/edgararuiz/mall/blob/main/R/llm-custom.R)\n\n## llm_custom\n\n## Description\n Use a Large Language Model (LLM) to process the provided text using the instructions from `prompt` \n\n\n## Usage\n```r\n \nllm_custom(.data, col, prompt = \"\", pred_name = \".pred\", valid_resps = \"\") \n \nllm_vec_custom(x, prompt = \"\", valid_resps = NULL) \n```\n\n## Arguments\n|Arguments|Description|\n|---|---|\n| .data | A `data.frame` or `tbl` object that contains the text to be analyzed |\n| col | The name of the field to analyze, supports `tidy-eval` |\n| prompt | The prompt to append to each record sent to the LLM |\n| pred_name | A character vector with the name of the new column where the prediction will be placed |\n| valid_resps | If the response from the LLM is not open, but deterministic, provide the options in a vector. This function will set to `NA` any response not in the options |\n| x | A vector that contains the text to be analyzed |\n\n\n\n## Value\n `llm_custom` returns a `data.frame` or `tbl` object. `llm_vec_custom` returns a vector that is the same length as `x`. \n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

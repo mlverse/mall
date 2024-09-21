@@ -5,6 +5,10 @@ execute:
   freeze: true
 ---
 
+```{r}
+#| include: false
+source("../utils/knitr-print.R")
+```
 
 ```{r, include = FALSE}
 packageStartupMessage(library(dplyr))

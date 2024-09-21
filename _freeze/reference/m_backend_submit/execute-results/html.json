@@ -1,0 +1,15 @@
+{
+  "hash": "ae407edd991c3bb6d06e7b77c3db287a",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Functions to integrate different back-ends\"\nexecute:\n  eval: true\n  freeze: true\n---\n\n\n\n\n\n[R/m-backend-prompt.R, R/m-backend-submit.R](https://github.com/edgararuiz/mall/blob/main/R/m-backend-prompt.R, R/m-backend-submit.R)\n\n## m_backend_prompt\n\n## Description\n Functions to integrate different back-ends \n\n\n## Usage\n```r\n \nm_backend_prompt(backend, additional) \n \nm_backend_submit(backend, x, prompt, preview = FALSE) \n```\n\n## Arguments\n|Arguments|Description|\n|---|---|\n| backend | An `mall_session` object |\n| additional | Additional text to insert to the `base_prompt` |\n| x | The body of the text to be submitted to the LLM |\n| prompt | The additional information to add to the submission |\n| preview | If `TRUE`, it will display the resulting R call of the first text in `x` |\n\n\n\n## Value\n `m_backend_submit` does not return an object. `m_backend_prompt` returns a list of functions that contain the base prompts. \n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

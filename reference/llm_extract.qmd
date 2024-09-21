@@ -5,6 +5,11 @@ execute:
   freeze: true
 ---
 
+```{r}
+#| include: false
+source("../utils/knitr-print.R")
+```
+
 [R/llm-extract.R](https://github.com/edgararuiz/mall/blob/main/R/llm-extract.R)
 
 ## llm_extract
