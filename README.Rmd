@@ -16,6 +16,8 @@ library(dbplyr)
 library(tictoc)
 library(DBI)
 
+source("utils/knitr-print.R")
+
 mall::llm_use("ollama", "llama3.1", seed = 100, .cache = "_readme_cache")
 ```
 
@@ -103,28 +105,6 @@ reviews <- tribble(
   "I regret buying this laptop. It is too slow and the keyboard is too noisy",
   "Not sure how to feel about my new washing machine. Great color, but hard to figure"
 )
-```
-
-```{r, include=FALSE}
-# Customizing print for tibble because the 'review' is too long, and doesn't
-# allow new columns to be read
-
-library(tibble)
-library(pillar)
-
-reviews <- new_tibble(reviews, class = "tbl_long")
-
-ctl_new_pillar.tbl_long <- function(controller, x, width, ...) {
-  out <- NextMethod()
-  if (attr(out$data, "width") > 50) {
-    attr(out$data, "width") <- 40
-  }
-  new_pillar(list(
-    title = out$title,
-    type = out$type,
-    data = out$data
-  ))
-}
 ```
 
 ### Sentiment

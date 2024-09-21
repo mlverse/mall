@@ -355,18 +355,18 @@ This is what the new table looks like:
 ``` r
 reviews_llm
 #> # A tibble: 100 × 3
-#>    review                                                    sentiment predicted
-#>    <chr>                                                     <fct>     <chr>    
-#>  1 "i got this as both a book and an audio file. i had wait… 1         negative 
-#>  2 "this book places too much emphasis on spending money in… 1         negative 
-#>  3 "remember the hollywood blacklist? the hollywood ten? i'… 2         negative 
-#>  4 "while i appreciate what tipler was attempting to accomp… 1         negative 
-#>  5 "the others in the series were great, and i really looke… 1         negative 
-#>  6 "a few good things, but she's lost her edge and i find i… 1         negative 
-#>  7 "words cannot describe how ripped off and disappointed i… 1         negative 
-#>  8 "1. the persective of most writers is shaped by their ow… 1         negative 
-#>  9 "i have been a huge fan of michael crichton for about 25… 1         negative 
-#> 10 "i saw dr. polk on c-span a month or two ago. he was add… 2         positive 
+#>    review                                   sentiment predicted
+#>    <chr>                                    <fct>     <chr>    
+#>  1 "i got this as both a book and an audio… 1         negative 
+#>  2 "this book places too much emphasis on … 1         negative 
+#>  3 "remember the hollywood blacklist? the … 2         negative 
+#>  4 "while i appreciate what tipler was att… 1         negative 
+#>  5 "the others in the series were great, a… 1         negative 
+#>  6 "a few good things, but she's lost her … 1         negative 
+#>  7 "words cannot describe how ripped off a… 1         negative 
+#>  8 "1. the persective of most writers is s… 1         negative 
+#>  9 "i have been a huge fan of michael cric… 1         negative 
+#> 10 "i saw dr. polk on c-span a month or tw… 2         positive 
 #> # ℹ 90 more rows
 ```
 
