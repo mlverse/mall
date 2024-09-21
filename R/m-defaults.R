@@ -65,12 +65,5 @@ print.mall_session <- function(x, ...) {
   }
   session <- imap(x$session, \(x, y) glue("{col_yellow({paste0(y, ':')})}{x}"))
   label_argument <- "{col_green('R session:')}"
-  if (length(session) == 1) {
-    cli_inform(paste(label_argument, session[[1]]))
-  } else {
-    cli_inform(label_argument)
-    session <- as.character(session)
-    session <- set_names(session, " ")
-    cli_bullets(session)
-  }
+  cli_inform(paste(label_argument, session[[1]]))
 }
