@@ -1,21 +1,18 @@
 source("utils/_qmd-reference/utils-reference-index.R")
 source("utils/_qmd-reference/utils-reference-list.R")
 source("utils/_qmd-reference/utils-reference-pages.R")
-source("utils/_qmd-reference/utils-context.R")
-library(pkgdown)
+
 suppressPackageStartupMessages(library(purrr))
 library(fs)
 library(cli)
-
-pkg <- as_pkgdown(".")
-
 try(dir_create("reference"))
 
 ref_path <- path("reference", "index", ext = "qmd")
 try(file_delete(ref_path))
-writeLines(reference_index(pkg, "reference"), ref_path)
+writeLines(reference_index(".", "reference"), ref_path)
 cli_inform(col_green(ref_path))
 
+pkg <- pkgdown::as_pkgdown()
 walk(
   pkg$topics$file_in, 
   \(x) {
