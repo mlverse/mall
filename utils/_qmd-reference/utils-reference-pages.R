@@ -3,7 +3,7 @@ reference_to_qmd <- function(file_in, pkg, template = NULL) {
   con <- reference_convert(parsed)
 
   if (is.null(template)) {
-    template_path <- "utils/qmd-reference/reference.qmd"
+    template_path <- "utils/_qmd-reference/reference.qmd"
   } else {
     template_path <- template
   }
