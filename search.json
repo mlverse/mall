@@ -342,6 +342,13 @@
     "text": "Value\nllm_sentiment returns a data.frame or tbl object. llm_vec_sentiment returns a vector that is the same length as x."
   },
   {
+    "objectID": "reference/llm_sentiment.html#examples",
+    "href": "reference/llm_sentiment.html#examples",
+    "title": "Sentiment analysis",
+    "section": "Examples",
+    "text": "Examples\n\n \nlibrary(mall) \n \nllm_use(\"ollama\", \"llama3.1\", seed = 100, .silent = TRUE) \n \nllm_vec_sentiment(\"I am happy\") \n#&gt; [1] \"positive\"\n \n# Specify values to return per sentiment \nllm_vec_sentiment(\"I am happy\", c(\"positive\" ~ 1, \"negative\" ~ 0)) \n#&gt; [1] 1\n \nllm_vec_sentiment(\"I am sad\", c(\"positive\" ~ 1, \"negative\" ~ 0)) \n#&gt; [1] 0"
+  },
+  {
     "objectID": "reference/llm_translate.html",
     "href": "reference/llm_translate.html",
     "title": "Translates text to a specific language",
