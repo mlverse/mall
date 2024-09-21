@@ -107,24 +107,9 @@ tag_convert.tag_examples <- function(x) {
   if (all(examples_run == " ")) examples_run <- NULL
   if (all(examples_dont_run == " ")) examples_dont_run <- NULL
   list(
-    code_run = add_library(examples_run),
-    code_dont_run = add_library(examples_dont_run)
+    code_run = examples_run,
+    code_dont_run = examples_dont_run
   )
-}
-
-add_library <- function(x) {
-  if (is.null(x)) {
-    return(x)
-  }
-  pkg_library <- NULL
-  pkg_name <- get_package_name()
-  if (!is.null(pkg_name)) {
-    pkg_library <- paste0("library(", pkg_name, ")")
-    if (!any(map_lgl(x, ~ trimws(.x) == pkg_library))) {
-      x <- c(pkg_library, x)
-    }
-  }
-  x
 }
 
 s3_label <- "## S3 method for class '"
