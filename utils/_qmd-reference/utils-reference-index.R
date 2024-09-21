@@ -1,48 +1,35 @@
-reference_index <- function(pkg = NULL, quarto_sub_folder = "", version_folder = "",
-                            reference_folder = "", vignettes_folder, output = "qmd",
-                            package_description = NULL) {
+reference_index <- function(pkg = NULL, folder = "/reference", output = "qmd") {
   if (is.character(pkg)) pkg <- pkgdown::as_pkgdown(pkg)
-
   ref_list <- reference_to_list_index(pkg)
-
-  dir_out <- path("/", quarto_sub_folder, version_folder, reference_folder)
-
+  dir_out <- path(folder)
   ref_convert <- reference_index_convert(ref_list, dir_out)
-
-  res <- purrr::imap(ref_convert, ~ {
+  res <- imap(
+    ref_convert, 
+    \(.x, .y) {
     if (.y == 1) {
       .x
     } else {
       c(" ", paste("##", .y), " ", .x)
     }
   })
-
   res <- reduce(res, c)
-
-  if (output == "qmd") {
-    if (is.null(package_description)) package_description <- pkg$desc$get_field("Title")
-    res <- c(
-      "---",
-      paste0("title: ", pkg$package),
-      paste0("description: ", package_description),
-      "---",
-      res
-    )
-  }
-
-  res
+  c(
+    "---",
+    paste0("title: ", pkg$package),
+    paste0("description: ", pkg$desc$get_field("Title")),
+    "---",
+    res
+  )
 }
 
 reference_index_convert <- function(index_list, dir_out = "") {
   out <- map(index_list, ~ map(.x, ~ {
     # Manual fixes of special characters in funs variable
-
     funcs <- .x$funs
     if (length(funcs) == 0) funcs <- .x$alias
     funcs <- gsub("&lt;", "<", funcs)
     funcs <- gsub("&gt;", ">", funcs)
     funcs <- paste0(funcs, collapse = " \\| ")
-
     file_out <- path(dir_out, .x$file_out)
     desc <- .x$title
     c(
@@ -59,7 +46,7 @@ reference_to_list_index <- function(pkg) {
   pkg_ref <- pkg$meta$reference
 
   pkg_topics <- pkg$topics
-  topics_env <- match_env(pkg_topics)
+  topics_env <- pkgdown:::match_env(pkg_topics)
 
   if (is.null(pkg_ref)) {
     x <- list(data.frame(contents = pkg_topics$name))

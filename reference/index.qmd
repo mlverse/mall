@@ -4,11 +4,11 @@ description: Run multiple 'Large Language Model' predictions against a table, or
 ---
 Function(s) | Description
 |---|---|
-|[llm_classify() \| llm_vec_classify()](/reference/llm_classify.html)|Categorize data as one of options given|
-|[llm_custom() \| llm_vec_custom()](/reference/llm_custom.html)|Send a custom prompt to the LLM|
-|[llm_extract() \| llm_vec_extract()](/reference/llm_extract.html)|Extract entities from text|
-|[llm_sentiment() \| llm_vec_sentiment()](/reference/llm_sentiment.html)|Sentiment analysis|
-|[llm_summarize() \| llm_vec_summarize()](/reference/llm_summarize.html)|Summarize text|
-|[llm_translate() \| llm_vec_translate()](/reference/llm_translate.html)|Translates text to a specific language|
-|[llm_use()](/reference/llm_use.html)|Specify the model to use|
-|[m_backend_prompt() \| m_backend_submit()](/reference/m_backend_submit.html)|Functions to integrate different back-ends|
+|[llm_classify() \| llm_vec_classify()](reference/llm_classify.html)|Categorize data as one of options given|
+|[llm_custom() \| llm_vec_custom()](reference/llm_custom.html)|Send a custom prompt to the LLM|
+|[llm_extract() \| llm_vec_extract()](reference/llm_extract.html)|Extract entities from text|
+|[llm_sentiment() \| llm_vec_sentiment()](reference/llm_sentiment.html)|Sentiment analysis|
+|[llm_summarize() \| llm_vec_summarize()](reference/llm_summarize.html)|Summarize text|
+|[llm_translate() \| llm_vec_translate()](reference/llm_translate.html)|Translates text to a specific language|
+|[llm_use()](reference/llm_use.html)|Specify the model to use|
+|[m_backend_prompt() \| m_backend_submit()](reference/m_backend_submit.html)|Functions to integrate different back-ends|
