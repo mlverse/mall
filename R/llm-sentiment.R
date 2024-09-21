@@ -24,6 +24,9 @@
 #'
 #' llm_sentiment(reviews, review)
 #'
+#' # Use 'pred_name' to customize the new column's name
+#' llm_sentiment(reviews, review, pred_name = "review_sentiment")
+#'
 #' # Pass custom sentiment options
 #' llm_sentiment(reviews, review, c("positive", "negative"))
 #'
@@ -32,6 +35,10 @@
 #'
 #' # For character vectors, instead of a data frame, use this function
 #' llm_vec_sentiment(c("I am happy", "I am sad"))
+#' 
+#' #' # For character vectors, instead of a data frame, use this function
+#' llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE)
+#' 
 #' }
 #' @export
 llm_sentiment <- function(.data,
