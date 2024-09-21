@@ -1,54 +1,11 @@
 reference_to_list_page <- function(file_in, pkg) {
   if (is.character(pkg)) pkg <- as_pkgdown(pkg)
-  # set_package_name(pkg$package)
-  out <- file_in %>%
-    tags_get(pkg) %>%
-    tags_process()
-
+  out <- tags_process(tags_get(file_in, pkg))
   out$repo <- pkg$repo$url$home
-  # set_package_name(NULL)
-  ln <- find_in_script(out, pkg)
-  out$alias_line <- ln
-  out
-}
-
-find_in_script <- function(x, pkg) {
-  out <- ""
-  if (is.null(x$source)) {
-    return(out)
-  }
-  script <- path(pkg$src_path, x$source)
-
-  if (file_exists(script)) {
-    script_lines <- script %>%
-      readLines() %>%
-      map_chr(trimws)
-
-    res <- c(
-      paste0("`", x$alias, "`", " <-"),
-      paste0(x$alias, " <-"),
-      paste0("#' @name ", x$alias)
-    ) %>%
-      map(~ {
-        out <- NULL
-        cr <- .x
-        scrip_sub <- map_chr(script_lines, ~ substr(.x, 1, nchar(cr)))
-        find_func <- which(scrip_sub == cr)
-        if (length(find_func)) out <- find_func[[1]]
-        out
-      }) %>%
-      list_c() %>%
-      as.numeric()
-
-    if (length(res) > 0) out <- res[[1]]
-  }
-
   out
 }
 
 tags_get <- function(file_in, pkg) {
-  if (is.character(pkg)) pkg <- as_pkgdown(pkg)
-
   pkg_topics <- pkg$topics
   topic_row <- pkg_topics[pkg_topics$file_in == file_in, ]
   topic <- transpose(topic_row)
@@ -56,7 +13,6 @@ tags_get <- function(file_in, pkg) {
   tag_names <- map_chr(topic_rd, ~ class(.)[[1]])
   tag_split <- split(topic_rd, tag_names)
   tag_split <- tag_split[names(tag_split) != "TEXT"]
-
   imap(
     tag_split,
     ~ {
@@ -69,7 +25,6 @@ tags_get <- function(file_in, pkg) {
 
 tags_process <- function(x) {
   out <- map(x, ~ tag_convert(.x))
-
   comment <- NULL
   comment <- names(out) == "COMMENT"
   if (length(comment) > 0) {
@@ -77,10 +32,8 @@ tags_process <- function(x) {
     reg_list <- out[!comment]
     out <- c(comment_list, reg_list)
   }
-
   new_names <- substr(names(out), 5, nchar(names(out)))
   names(out) <- new_names
-
   out
 }
 
@@ -93,7 +46,6 @@ tag_convert <- function(x) {
 tag_convert_default <- function(x) {
   x <- x[[1]]
   rf <- tag_flatten(x)
-
   rf_cr <- NULL
   cr <- NULL
   for (i in seq_along(rf)) {
@@ -279,10 +231,8 @@ tag_single <- function(x, rm_return = TRUE) {
 }
 
 tag_flatten <- function(x) {
-  x %>%
-    map(tag_single) %>%
-    list_c() %>%
-    c(., new_paragraph_symbol)
+  x <- list_c(map(x, tag_single)) 
+  c(x, new_paragraph_symbol)
 }
 
 new_paragraph_symbol <- "<<<<<<<<<<<<<<<<<<<<<<<<<"
@@ -311,28 +261,20 @@ remove_generic <- function(x) {
 ## -------------------------- Atomic RD tag functions ---------------------------
 
 tag_LIST <- function(x) {
-  x %>%
-    map(tag_single) %>%
-    paste(collapse = "") %>%
-    paste0("\n")
+  paste0(paste(map(x, tag_single), collapse = ""), "\n")
 }
 
 tag_describe <- function(x) {
-  out <- x %>%
-    list_c() %>%
-    map(~ .x[[1]]) %>%
-    map(tag_single)
+  out <- map(list_c(x), \(.x) .x[[1]]) 
+  out <- map(out, tag_single)
   out_nulls <- !map_lgl(out, is.null)
   out <- out[out_nulls]
-
   reduce(out, function(x, y) c(x, new_paragraph_symbol, y))
 }
 
 tag_dontrun <- function(x) {
-  x %>%
-    map(tag_single) %>%
-    list_c() %>%
-    c(do_not_run_symbol, .)
+  out <- list_c(map(x, tag_single)) 
+  c(do_not_run_symbol, out)
 }
 
 tag_sub_section <- function(x) {
@@ -342,32 +284,24 @@ tag_sub_section <- function(x) {
   } else {
     out <- map(x, tag_single)
   }
-
-  out %>%
-    list_c() %>%
-    map(remove_return) %>%
-    c(., new_paragraph_symbol)
+  out <- map(list_c(out), remove_return) 
+  c(out, new_paragraph_symbol)
 }
 
 tag_itemize1 <- function(x) {
-  x %>%
-    map(tag_single, FALSE) %>%
-    list_c() %>%
-    map(remove_return) %>%
-    c(., new_paragraph_symbol)
+  x <- map(x, tag_single, FALSE) 
+  x <- map(list_c(x), remove_return) 
+  c(x, new_paragraph_symbol)
 }
 
 tag_code <- function(x) {
-  x %>%
-    map(tag_single) %>%
-    reduce(paste0) %>%
-    paste0("`", ., "`")
+  x <-  reduce(map(x, tag_single), paste0) 
+  paste0("`", x, "`")
 }
 
 tag_preformatted <- function(x) {
-  as.character(x) %>%
-    reduce(function(x, y) c(x, new_paragraph_symbol, y)) %>%
-    c("```", new_paragraph_symbol, ., new_paragraph_symbol, "```")
+  x <- reduce(as.character(x), function(x, y) c(x, new_paragraph_symbol, y)) 
+  c("```", new_paragraph_symbol, x, new_paragraph_symbol, "```")
 }
 
 tag_url <- function(x) {
