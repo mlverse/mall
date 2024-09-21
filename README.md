@@ -14,27 +14,26 @@ coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](ht
 
 ## Intro
 
-Run multiple LLM predictions against a table. The predictions run
-row-wise over a specified column. It works using a pre-determined
-one-shot prompt, along with the current row’s content. The prompt that
-is use will depend of the type of analysis needed. Currently, the
-included prompts perform the following:
+Run multiple LLM predictions against a data frame. The predictions are
+processed row-wise over a specified column. It works using a
+pre-determined one-shot prompt, along with the current row’s content.
+The prompt that is use will depend of the type of analysis needed.
+Currently, the included prompts perform the following:
 
-- Sentiment analysis
-- Summarize the text
-- Extract one, or several, specific pieces information from the text
+- [Sentiment analysis](#sentiment)
+- [Text summarizing](#summarize)
+- [Classify text](#classify)
+- [Extract one, or several](#extract), specific pieces information from
+  the text
+- [Translate text](#translate)
+- [Custom prompt](#custom-prompt)
 
 This package is inspired by the SQL AI functions now offered by vendors
 such as
 [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html)
-and Snowflake. For local data, `mall` uses [Ollama](https://ollama.com/)
-to call an LLM.
-
-### Databricks integration
-
-If you pass a table connected to **Databricks** via `odbc`, `mall` will
-automatically use Databricks’ LLM instead of Ollama. It will call the
-corresponding SQL AI function.
+and Snowflake. `mall` uses [Ollama](https://ollama.com/) to interact
+with LLMs installed locally. That interaction takes place via the
+[`ollamar`](https://hauselin.github.io/ollama-r/) package.
 
 ## Motivation
 
@@ -44,6 +43,37 @@ completion, this interface runs your text data directly against the LLM.
 The LLM’s flexibility, allows for it to adapt to the subject of your
 data, and provide surprisingly accurate predictions. This saves the data
 scientist the need to write and tune an NLP model.
+
+## Get started
+
+- Install `mall` from Github
+
+  ``` r
+  pak::pak("edgararuiz/mall")
+  ```
+
+### With local LLMs
+
+- Install Ollama in your machine. The `ollamar` package’s website
+  provides this [Installation
+  guide](https://hauselin.github.io/ollama-r/#installation)
+
+- Download an LLM model. For example, I have been developing this
+  package using Llama 3.1 to test. To get that model you can run:
+
+  ``` r
+  ollamar::pull("llama3.1")
+  ```
+
+### With Databricks
+
+If you pass a table connected to **Databricks** via `odbc`, `mall` will
+automatically use Databricks’ LLM instead of Ollama. *You won’t need
+Ollama installed if you are using Databricks only.*
+
+`mall` will call the appropriate SQL AI function. For more information
+see our [Databricks
+article.](https://edgararuiz.github.io/mall/articles/databricks.html)
 
 ## LLM functions
 
