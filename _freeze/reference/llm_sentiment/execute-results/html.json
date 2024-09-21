@@ -1,0 +1,15 @@
+{
+  "hash": "ffb23648b4f6280b3e4c6a87d85973f4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Sentiment analysis\"\nexecute:\n  eval: true\n  freeze: true\n---\n\n\n\n[R/llm-sentiment.R](https://github.com/edgararuiz/mall/blob/main/R/llm-sentiment.R)\n\n## llm_sentiment\n\n## Description\n Use a Large Language Model (LLM) to perform sentiment analysis from the provided text \n\n\n## Usage\n```r\n \nllm_sentiment( \n  .data, \n  col, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  pred_name = \".sentiment\", \n  additional_prompt = \"\" \n) \n \nllm_vec_sentiment( \n  x, \n  options = c(\"positive\", \"negative\", \"neutral\"), \n  additional_prompt = \"\", \n  preview = FALSE \n) \n```\n\n## Arguments\n|Arguments|Description|\n|---|---|\n| .data | A `data.frame` or `tbl` object that contains the text to be analyzed |\n| col | The name of the field to analyze, supports `tidy-eval` |\n| options | A vector with the options that the LLM should use to assign a sentiment to the text. Defaults to: 'positive', 'negative', 'neutral' |\n| pred_name | A character vector with the name of the new column where the prediction will be placed |\n| additional_prompt | Inserts this text into the prompt sent to the LLM |\n| x | A vector that contains the text to be analyzed |\n| preview | It returns the R call that would have been used to run the prediction. It only returns the first record in `x`. Defaults to `FALSE` Applies to vector function only. |\n\n\n\n## Value\n `llm_sentiment` returns a `data.frame` or `tbl` object. `llm_vec_sentiment` returns a vector that is the same length as `x`. \n\n\n## Examples\n\n\n::: {.cell}\n\n```{.r .cell-code}\n \nlibrary(mall) \n \nllm_use(\"ollama\", \"llama3.1\", seed = 100, .silent = TRUE) \n \nllm_vec_sentiment(\"I am happy\") \n#> [1] \"positive\"\n \n# Specify values to return per sentiment \nllm_vec_sentiment(\"I am happy\", c(\"positive\" ~ 1, \"negative\" ~ 0)) \n#> [1] 1\n \nllm_vec_sentiment(\"I am sad\", c(\"positive\" ~ 1, \"negative\" ~ 0)) \n#> [1] 0\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

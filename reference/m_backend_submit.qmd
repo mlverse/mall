@@ -1,5 +1,8 @@
 ---
 title: "Functions to integrate different back-ends"
+execute:
+  eval: true
+  freeze: true
 ---
 
 [R/m-backend-prompt.R, R/m-backend-submit.R](https://github.com/edgararuiz/mall/blob/main/R/m-backend-prompt.R, R/m-backend-submit.R)

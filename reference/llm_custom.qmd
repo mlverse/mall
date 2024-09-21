@@ -1,5 +1,8 @@
 ---
 title: "Send a custom prompt to the LLM"
+execute:
+  eval: true
+  freeze: true
 ---
 
 [R/llm-custom.R](https://github.com/edgararuiz/mall/blob/main/R/llm-custom.R)

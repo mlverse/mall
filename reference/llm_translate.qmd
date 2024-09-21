@@ -1,5 +1,8 @@
 ---
 title: "Translates text to a specific language"
+execute:
+  eval: true
+  freeze: true
 ---
 
 [R/llm-translate.R](https://github.com/edgararuiz/mall/blob/main/R/llm-translate.R)

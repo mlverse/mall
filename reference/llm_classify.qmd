@@ -1,5 +1,8 @@
 ---
 title: "Categorize data as one of options given"
+execute:
+  eval: true
+  freeze: true
 ---
 
 [R/llm-classify.R](https://github.com/edgararuiz/mall/blob/main/R/llm-classify.R)

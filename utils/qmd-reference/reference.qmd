@@ -1,5 +1,8 @@
 ---
 title: "{{{{notitle.title}}}}"
+execute:
+  eval: true
+  freeze: true
 ---
 
 [{{{{notitle.source}}}}](https://github.com/edgararuiz/mall/blob/main/{{{{notitle.source}}}})

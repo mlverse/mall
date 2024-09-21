@@ -48,3 +48,18 @@ Applies to vector function only.}
 Use a Large Language Model (LLM) to perform sentiment analysis
 from the provided text
 }
+\examples{
+\dontrun{
+library(mall)
+
+llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+
+llm_vec_sentiment("I am happy")
+
+# Specify values to return per sentiment
+llm_vec_sentiment("I am happy", c("positive" ~ 1, "negative" ~ 0))
+
+llm_vec_sentiment("I am sad", c("positive" ~ 1, "negative" ~ 0))
+
+}
+}

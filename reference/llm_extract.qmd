@@ -1,5 +1,8 @@
 ---
 title: "Extract entities from text"
+execute:
+  eval: true
+  freeze: true
 ---
 
 [R/llm-extract.R](https://github.com/edgararuiz/mall/blob/main/R/llm-extract.R)

@@ -1,6 +1,7 @@
 source("utils/qmd-reference/utils-reference-index.R")
 source("utils/qmd-reference/utils-reference-list.R")
 source("utils/qmd-reference/utils-reference-pages.R")
+source("utils/qmd-reference/utils-context.R")
 source("utils/qmd-reference/pkgdown.R")
 library(pkgdown)
 library(magrittr)

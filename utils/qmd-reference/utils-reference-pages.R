@@ -13,6 +13,8 @@ reference_to_qmd <- function(file_in, pkg, template = NULL) {
 
   template |>
     map(parse_line_tag, con) %>%
+    discard(is.null) %>%
+    list_flatten() %>%
     list_c() %>%
     as.character()
 }
@@ -119,10 +121,10 @@ reference_convert <- function(x, output = "qmd") {
       } else {
         out <- list()
         if (!is.null(curr$code_run)) {
-          out <- c(out, "```{r, eval=ecodown::examples_run()}", curr$code_run, "```")
+          out <- c(out, "```{r}", curr$code_run, "```")
         }
         if (!is.null(curr$code_dont_run)) {
-          out <- c(out, "```{r, eval=ecodown::examples_not_run()}", curr$code_dont_run, "```")
+          out <- c(out, "```{r}", curr$code_dont_run, "```")
         }
       }
     }

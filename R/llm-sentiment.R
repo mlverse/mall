@@ -49,6 +49,20 @@ llm_sentiment.data.frame <- function(.data,
 globalVariables("ai_analyze_sentiment")
 
 #' @rdname llm_sentiment
+#'@examples
+#'\dontrun{
+#'library(mall)
+#'
+#'llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+#'
+#'llm_vec_sentiment("I am happy")
+#'
+#'# Specify values to return per sentiment
+#'llm_vec_sentiment("I am happy", c("positive" ~ 1, "negative" ~ 0))
+#'
+#'llm_vec_sentiment("I am sad", c("positive" ~ 1, "negative" ~ 0))
+#'
+#'}
 #' @export
 llm_vec_sentiment <- function(x,
                               options = c("positive", "negative", "neutral"),
