@@ -11,12 +11,11 @@ reference_to_qmd <- function(file_in, pkg, template = NULL) {
 
   template <- readLines(template_path)
 
-  template |>
-    map(parse_line_tag, con) %>%
-    discard(is.null) %>%
-    list_flatten() %>%
-    list_c() %>%
-    as.character()
+  out <- map(template, parse_line_tag, con)
+  out <- discard(out, is.null)
+  out <- list_flatten(out)
+  out <- list_c(out)
+  as.character(out)
 }
 
 parse_line_tag <- function(line, con) {
@@ -31,9 +30,7 @@ parse_line_tag <- function(line, con) {
   if (grepl(start_tag, line)) {
     start_half <- strsplit(line, start_tag)[[1]]
 
-    parsed <- start_half %>%
-      strsplit(end_tag) %>%
-      list_c()
+    parsed <- list_c(strsplit(start_half, end_tag))
 
     pm <- map(parsed, ~ {
       yes_title <- substr(.x, 1, 6) == "title."
@@ -54,8 +51,8 @@ parse_line_tag <- function(line, con) {
         no_lines = length(x),
         tag = tag
       )
-    }) %>%
-      transpose()
+    })
+    pm <- transpose(pm)
 
     if (all(map_lgl(pm$content, is.null))) {
       tag_content <- NULL
@@ -136,10 +133,9 @@ reference_convert <- function(x, output = "qmd") {
     if (curr_name == "arguments") out <- reference_arguments(curr)
 
     if (curr_name == "section") {
-      out <- curr %>%
-        map(~ c(paste("##", .x$title), .x$contents)) %>%
-        list_c() %>%
-        reduce(function(x, y) c(x, "", y), .init = NULL)
+      out <- map(curr, ~ c(paste("##", .x$title), .x$contents))
+      out <- list_c(out)
+      out <- reduce(out, function(x, y) c(x, "", y), .init = NULL)
     }
 
     if (is.null(out)) {
