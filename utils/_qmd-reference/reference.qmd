@@ -5,6 +5,11 @@ execute:
   freeze: true
 ---
 
+```{r}
+#| include: false
+source("../utils/knitr-print.R")
+```
+
 [{{{{notitle.source}}}}](https://github.com/edgararuiz/mall/blob/main/{{{{notitle.source}}}})
 
 ## {{{{notitle.alias}}}}
