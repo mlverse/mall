@@ -1,4 +1,4 @@
-reference_index <- function(pkg = NULL, folder = "/reference") {
+reference_index <- function(pkg = ".", folder = "/reference") {
   if (is.character(pkg)) pkg <- pkgdown::as_pkgdown(pkg)
   ref_list <- reference_to_list_index(pkg)
   dir_out <- path(folder)
