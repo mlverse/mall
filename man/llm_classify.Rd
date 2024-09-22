@@ -43,3 +43,43 @@ Applies to vector function only.}
 Use a Large Language Model (LLM) to classify the provided text as one of the
 options provided via the \code{labels} argument.
 }
+\examples{
+\dontrun{
+library(mall)
+
+llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+
+reviews <- data.frame(review = c(
+  "This has been the best TV I've ever used. Great screen, and sound.",
+  "I regret buying this laptop. It is too slow and the keyboard is too noisy",
+  "Not sure how to feel about my new washing machine. Great color, but hard to figure"
+))
+
+llm_classify(reviews, review, c("appliance", "computer"))
+
+# Use 'pred_name' to customize the new column's name
+llm_classify(
+  reviews, 
+  review,
+  c("appliance", "computer"), 
+  pred_name = "prod_type"
+  )
+
+# Pass custom values for each classification 
+llm_classify(reviews, review, c("appliance" ~ 1, "computer" ~ 2))
+
+# For character vectors, instead of a data frame, use this function
+llm_vec_classify(
+  c("this is important!", "just whenever"), 
+  c("urgent", "not urgent")
+  )
+
+#' # For character vectors, instead of a data frame, use this function
+llm_vec_classify(
+  c("this is important!", "just whenever"), 
+  c("urgent", "not urgent"), 
+  preview = TRUE
+  )
+
+} 
+}
