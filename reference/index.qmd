@@ -1,6 +1,10 @@
 ---
-title: Function Reference
+toc: false
 ---
+<img src="../man/figures/favicon/apple-touch-icon-180x180.png" style="float:right" />
+
+# Function Reference
+
 [llm_classify()](llm_classify.html) [llm_vec_classify()](llm_classify.html)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categorize data as one of options given

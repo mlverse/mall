@@ -15,8 +15,12 @@ reference_index <- function(pkg = ".") {
   res <- reduce(res, c)
   c(
     "---",
-    "title: Function Reference",
+    "toc: false",
     "---",
+    "<img src=\"../man/figures/favicon/apple-touch-icon-180x180.png\" style=\"float:right\" />",
+    "",
+    "# Function Reference",
+    "",
     res
   )
 }
