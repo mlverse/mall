@@ -15,8 +15,7 @@ reference_index <- function(pkg = ".") {
   res <- reduce(res, c)
   c(
     "---",
-    paste0("title: ", pkg$package),
-    paste0("description: ", pkg$desc$get_field("Title")),
+    "Function Reference",
     "---",
     res
   )
@@ -24,13 +23,19 @@ reference_index <- function(pkg = ".") {
 
 reference_index_convert <- function(index_list) {
   out <- map(index_list, \(.x) map(.x, reference_links))
-  header <- c("Function(s) | Description", "|---|---|")
   map(
     out,
     \(.x) {
       c(
-        header,
-        map_chr(.x, \(.x) paste0("|", .x[[1]], "|", .x[[2]], "|"))
+        map_chr(
+          .x, 
+          \(.x) paste0(
+            .x$links, 
+            "\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", 
+            .x$desc, 
+            "\n\n"
+            )
+          )
       )
     }
   )
@@ -39,15 +44,16 @@ reference_index_convert <- function(index_list) {
 reference_links <- function(x) {
   # Manual fixes of special characters in funs variable
   funcs <- x$funs
+  file_out <- path(x$file_out)
   if (length(funcs) == 0) funcs <- x$alias
   funcs <- gsub("&lt;", "<", funcs)
   funcs <- gsub("&gt;", ">", funcs)
-  funcs <- paste0(funcs, collapse = " \\| ")
-  file_out <- path(x$file_out)
+  funcs <- paste0("[", funcs, "](", file_out, ")")
+  funcs <- paste0(funcs, collapse = " ")
   desc <- x$title
-  c(
-    paste0("[", funcs, "](", file_out, ")"),
-    desc
+  list(
+    links = funcs,
+    desc = desc
   )
 }
 
@@ -55,6 +61,7 @@ reference_to_list_index <- function(pkg) {
   if (is.character(pkg)) pkg <- as_pkgdown(pkg)
   pkg_ref <- pkg$meta$reference
   pkg_topics <- pkg$topics
+  pkg_topics <- pkg_topics[!pkg_topics$internal, ]
   topics_env <- pkgdown:::match_env(pkg_topics)
   if (is.null(pkg_ref)) {
     x <- list(data.frame(contents = pkg_topics$name))
