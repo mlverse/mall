@@ -8,11 +8,16 @@ execute:
 
 website:
   title: mall
+  favicon: "man/figures/favicon/apple-touch-icon.png"
   navbar:
+    logo: "man/figures/favicon/apple-touch-icon.png"
     left:
       - sidebar:articles    
       - href: reference/index.qmd
         text: Reference
+    right:
+      - icon: github
+        href: https://github.com/edgararuiz/mall    
   sidebar:
     - id: articles
       title: "Articles"

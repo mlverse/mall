@@ -15,7 +15,30 @@
 #' the same operation is ran again. To turn off, set this argument to an empty
 #' character: `""`. 'It defaults to '_mall_cache'. If this argument is left
 #' `NULL` when calling this function, no changes to the path will be made.
-#'
+#' @examples
+#' \dontrun{
+#' library(mall)
+#' 
+#' llm_use("ollama", "llama3.1")
+#' 
+#' # Additional arguments will be passed 'as-is' to the 
+#' # downstream R function in this example, to ollama::chat()
+#' llm_use("ollama", "llama3.1", seed = 100, temp = 0.1)
+#' 
+#' # During the R session, you can change any argument 
+#' # individually and it will retain all of previous
+#' # arguments used
+#' llm_use(temp = 0.3)
+#' 
+#' # Use .cache to modify the target folder for caching
+#' llm_use(.cache = "_my_cache")
+#' 
+#' # Leave .cache empty to turn off this functionality 
+#' llm_use(.cache = "")
+#' 
+#' # Use .silent to avoid the print out
+#' llm_use(.silent = TRUE)
+#' }
 #' @returns A `mall_session` object
 #'
 #' @export

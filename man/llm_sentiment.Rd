@@ -74,7 +74,7 @@ llm_sentiment(reviews, review, c("positive" ~ 1, "negative" ~ 0))
 # For character vectors, instead of a data frame, use this function
 llm_vec_sentiment(c("I am happy", "I am sad"))
 
-#' # For character vectors, instead of a data frame, use this function
+# To preview the first call that will be made to the downstream R function
 llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE)
 
 }
