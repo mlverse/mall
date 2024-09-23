@@ -15,7 +15,7 @@ reference_index <- function(pkg = ".") {
   res <- reduce(res, c)
   c(
     "---",
-    "Function Reference",
+    "title: Function Reference",
     "---",
     res
   )

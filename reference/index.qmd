@@ -1,5 +1,5 @@
 ---
-Function Reference
+title: Function Reference
 ---
 [llm_classify()](llm_classify.html) [llm_vec_classify()](llm_classify.html)
 
