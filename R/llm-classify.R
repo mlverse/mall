@@ -49,7 +49,7 @@
 #'   c("urgent", "not urgent")
 #'   )
 #' 
-#' #' # For character vectors, instead of a data frame, use this function
+#' # To preview the first call that will be made to the downstream R function
 #' llm_vec_classify(
 #'   c("this is important!", "just whenever"), 
 #'   c("urgent", "not urgent"), 
