@@ -1,11 +1,16 @@
 /*-- scss:defaults --*/
-$font-size-base: 1rem;
 $navbar-brand-font-size: 2rem;
+$navbar-bg: #cb99b3;
+
+.navbar {
+  font-size: 1.5em;
+}
+
+$code-color: #333;
+$code-bg: #eee;
+
+$link-color: #333;
 
 code {
   font-weight: 550;
-  
 }
-
-
-
