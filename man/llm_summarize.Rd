@@ -42,3 +42,35 @@ Applies to vector function only.}
 \description{
 Use a Large Language Model (LLM) to summarize text
 }
+\examples{
+\dontrun{
+library(mall) 
+
+llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE) 
+
+reviews <- data.frame(review = c( 
+  "This has been the best TV I've ever used. Great screen, and sound.", 
+  "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
+  "Not sure how to feel about my new washing machine. Great color, but hard to figure" 
+)) 
+
+# Use max_words to set the maximum number of words to use for the summary
+llm_summarize(reviews, review, max_words = 5) 
+
+# Use 'pred_name' to customize the new column's name 
+llm_summarize(reviews, review, 5, pred_name = "review_sentiment") 
+
+# For character vectors, instead of a data frame, use this function 
+llm_vec_summarize(
+  "This has been the best TV I've ever used. Great screen, and sound.",
+  max_words = 5
+  ) 
+
+# For character vectors, instead of a data frame, use this function 
+llm_vec_summarize(
+  "This has been the best TV I've ever used. Great screen, and sound.",
+  max_words = 5, 
+  preview = TRUE
+) 
+}
+}
