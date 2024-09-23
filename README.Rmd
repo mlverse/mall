@@ -15,9 +15,7 @@ library(dplyr)
 library(dbplyr)
 library(tictoc)
 library(DBI)
-
 source("utils/knitr-print.R")
-
 mall::llm_use("ollama", "llama3.1", seed = 100, .cache = "_readme_cache")
 ```
 
