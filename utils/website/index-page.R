@@ -1,8 +1,7 @@
-reference_index <- function(pkg = ".", folder = "/reference") {
+reference_index <- function(pkg = ".") {
   if (is.character(pkg)) pkg <- pkgdown::as_pkgdown(pkg)
   ref_list <- reference_to_list_index(pkg)
-  dir_out <- path(folder)
-  ref_convert <- reference_index_convert(ref_list, dir_out)
+  ref_convert <- reference_index_convert(ref_list)
   res <- imap(
     ref_convert,
     \(.x, .y) {
@@ -23,8 +22,8 @@ reference_index <- function(pkg = ".", folder = "/reference") {
   )
 }
 
-reference_index_convert <- function(index_list, dir_out = "") {
-  out <- map(index_list, \(.x) map(.x, reference_links, dir_out))
+reference_index_convert <- function(index_list) {
+  out <- map(index_list, \(.x) map(.x, reference_links))
   header <- c("Function(s) | Description", "|---|---|")
   map(
     out,
@@ -37,14 +36,14 @@ reference_index_convert <- function(index_list, dir_out = "") {
   )
 }
 
-reference_links <- function(x, dir_out) {
+reference_links <- function(x) {
   # Manual fixes of special characters in funs variable
   funcs <- x$funs
   if (length(funcs) == 0) funcs <- x$alias
   funcs <- gsub("&lt;", "<", funcs)
   funcs <- gsub("&gt;", ">", funcs)
   funcs <- paste0(funcs, collapse = " \\| ")
-  file_out <- path(dir_out, x$file_out)
+  file_out <- path(x$file_out)
   desc <- x$title
   c(
     paste0("[", funcs, "](", file_out, ")"),

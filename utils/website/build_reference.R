@@ -10,7 +10,7 @@ build_reference_index <- function(pkg = ".", folder = "reference") {
   try(dir_create(folder))
   ref_path <- path(folder, "index", ext = "qmd")
   try(file_delete(ref_path))
-  writeLines(reference_index(folder = folder), ref_path)
+  writeLines(reference_index(), ref_path)
   cli_inform(col_green(ref_path))  
 }
 
