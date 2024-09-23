@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Run multiple ‘Large Language Model’ predictions against a table, or vectors">
 
-<title>mall</title>
+<title>index – mall</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../man/figures/favicon/apple-touch-icon.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -73,13 +73,16 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../man/figures/favicon/apple-touch-icon.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">mall</span>
     </a>
@@ -106,6 +109,13 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Reference</span></a>
   </li>  
 </ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/edgararuiz/mall"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
@@ -117,80 +127,33 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">mall</h1>
-</div>
-
-<div>
-  <div class="description">
-    Run multiple ‘Large Language Model’ predictions against a table, or vectors
-  </div>
-</div>
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Function(s)</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="llm_classify.html">llm_classify() | llm_vec_classify()</a></td>
-<td>Categorize data as one of options given</td>
-</tr>
-<tr class="even">
-<td><a href="llm_custom.html">llm_custom() | llm_vec_custom()</a></td>
-<td>Send a custom prompt to the LLM</td>
-</tr>
-<tr class="odd">
-<td><a href="llm_extract.html">llm_extract() | llm_vec_extract()</a></td>
-<td>Extract entities from text</td>
-</tr>
-<tr class="even">
-<td><a href="llm_sentiment.html">llm_sentiment() | llm_vec_sentiment()</a></td>
-<td>Sentiment analysis</td>
-</tr>
-<tr class="odd">
-<td><a href="llm_summarize.html">llm_summarize() | llm_vec_summarize()</a></td>
-<td>Summarize text</td>
-</tr>
-<tr class="even">
-<td><a href="llm_translate.html">llm_translate() | llm_vec_translate()</a></td>
-<td>Translates text to a specific language</td>
-</tr>
-<tr class="odd">
-<td><a href="llm_use.html">llm_use()</a></td>
-<td>Specify the model to use</td>
-</tr>
-<tr class="even">
-<td><a href="m_backend_submit.html">m_backend_prompt() | m_backend_submit()</a></td>
-<td>Functions to integrate different back-ends</td>
-</tr>
-</tbody>
-</table>
+<p><img src="../man/figures/favicon/apple-touch-icon-180x180.png" style="float:right"></p>
+<section id="function-reference" class="level1">
+<h1>Function Reference</h1>
+<p><a href="llm_classify.html">llm_classify()</a> <a href="llm_classify.html">llm_vec_classify()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categorize data as one of options given</p>
+<p><a href="llm_custom.html">llm_custom()</a> <a href="llm_custom.html">llm_vec_custom()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send a custom prompt to the LLM</p>
+<p><a href="llm_extract.html">llm_extract()</a> <a href="llm_extract.html">llm_vec_extract()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extract entities from text</p>
+<p><a href="llm_sentiment.html">llm_sentiment()</a> <a href="llm_sentiment.html">llm_vec_sentiment()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sentiment analysis</p>
+<p><a href="llm_summarize.html">llm_summarize()</a> <a href="llm_summarize.html">llm_vec_summarize()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summarize text</p>
+<p><a href="llm_translate.html">llm_translate()</a> <a href="llm_translate.html">llm_vec_translate()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translates text to a specific language</p>
+<p><a href="llm_use.html">llm_use()</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
