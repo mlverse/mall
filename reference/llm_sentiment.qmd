@@ -56,26 +56,35 @@ llm_vec_sentiment(
 
 ## Examples
 ```{r}
-library(mall)
-
-llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
-
-reviews <- data.frame(review = c(
-  "This has been the best TV I've ever used. Great screen, and sound.",
-  "I regret buying this laptop. It is too slow and the keyboard is too noisy",
-  "Not sure how to feel about my new washing machine. Great color, but hard to figure"
-))
-
-llm_sentiment(reviews, review)
-
-# Pass custom sentiment options
-llm_sentiment(reviews, review, c("positive", "negative"))
-
-# Specify values to return per sentiment
-llm_sentiment(reviews, review, c("positive" ~ 1, "negative" ~ 0))
-
-# For character vectors, instead of a data frame, use this function
-llm_vec_sentiment(c("I am happy", "I am sad"))
+ 
+library(mall) 
+ 
+llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE) 
+ 
+reviews <- data.frame(review = c( 
+  "This has been the best TV I've ever used. Great screen, and sound.", 
+  "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
+  "Not sure how to feel about my new washing machine. Great color, but hard to figure" 
+)) 
+ 
+llm_sentiment(reviews, review) 
+ 
+# Use 'pred_name' to customize the new column's name 
+llm_sentiment(reviews, review, pred_name = "review_sentiment") 
+ 
+# Pass custom sentiment options 
+llm_sentiment(reviews, review, c("positive", "negative")) 
+ 
+# Specify values to return per sentiment 
+llm_sentiment(reviews, review, c("positive" ~ 1, "negative" ~ 0)) 
+ 
+# For character vectors, instead of a data frame, use this function 
+llm_vec_sentiment(c("I am happy", "I am sad")) 
+ 
+#' # For character vectors, instead of a data frame, use this function 
+llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE) 
+ 
+ 
 ```
 
 
