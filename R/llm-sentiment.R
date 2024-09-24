@@ -15,9 +15,9 @@
 #' library(mall)
 #'
 #' data("reviews")
-#' 
+#'
 #' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
-#' 
+#'
 #' llm_sentiment(reviews, review)
 #'
 #' # Use 'pred_name' to customize the new column's name
@@ -31,10 +31,9 @@
 #'
 #' # For character vectors, instead of a data frame, use this function
 #' llm_vec_sentiment(c("I am happy", "I am sad"))
-#' 
+#'
 #' # To preview the first call that will be made to the downstream R function
 #' llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE)
-#' 
 #' }
 #' @export
 llm_sentiment <- function(.data,

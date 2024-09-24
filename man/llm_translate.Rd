@@ -52,6 +52,5 @@ llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
 
 # Pass the desired language to translate to
 llm_translate(reviews, review, "spanish")
-
 }
 }

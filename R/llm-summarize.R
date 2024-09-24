@@ -8,30 +8,30 @@
 #' summary. Defaults to 10.
 #' @examples
 #' \dontrun{
-#' library(mall) 
-#' 
+#' library(mall)
+#'
 #' data("reviews")
-#' 
+#'
 #' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
-#' 
+#'
 #' # Use max_words to set the maximum number of words to use for the summary
-#' llm_summarize(reviews, review, max_words = 5) 
-#' 
-#' # Use 'pred_name' to customize the new column's name 
-#' llm_summarize(reviews, review, 5, pred_name = "review_summary") 
-#' 
-#' # For character vectors, instead of a data frame, use this function 
+#' llm_summarize(reviews, review, max_words = 5)
+#'
+#' # Use 'pred_name' to customize the new column's name
+#' llm_summarize(reviews, review, 5, pred_name = "review_summary")
+#'
+#' # For character vectors, instead of a data frame, use this function
 #' llm_vec_summarize(
 #'   "This has been the best TV I've ever used. Great screen, and sound.",
 #'   max_words = 5
-#'   ) 
-#' 
+#' )
+#'
 #' # To preview the first call that will be made to the downstream R function
 #' llm_vec_summarize(
 #'   "This has been the best TV I've ever used. Great screen, and sound.",
-#'   max_words = 5, 
+#'   max_words = 5,
 #'   preview = TRUE
-#' ) 
+#' )
 #' }
 #' @returns `llm_summarize` returns a `data.frame` or `tbl` object.
 #' `llm_vec_summarize` returns a vector that is the same length as `x`.

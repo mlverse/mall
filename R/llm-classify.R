@@ -23,36 +23,35 @@
 #' library(mall)
 #'
 #' data("reviews")
-#' 
+#'
 #' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
 #'
 #' llm_classify(reviews, review, c("appliance", "computer"))
 #'
 #' # Use 'pred_name' to customize the new column's name
 #' llm_classify(
-#'   reviews, 
+#'   reviews,
 #'   review,
-#'   c("appliance", "computer"), 
+#'   c("appliance", "computer"),
 #'   pred_name = "prod_type"
-#'   )
+#' )
 #'
-#' # Pass custom values for each classification 
+#' # Pass custom values for each classification
 #' llm_classify(reviews, review, c("appliance" ~ 1, "computer" ~ 2))
 #'
 #' # For character vectors, instead of a data frame, use this function
 #' llm_vec_classify(
-#'   c("this is important!", "just whenever"), 
+#'   c("this is important!", "just whenever"),
 #'   c("urgent", "not urgent")
-#'   )
-#' 
+#' )
+#'
 #' # To preview the first call that will be made to the downstream R function
 #' llm_vec_classify(
-#'   c("this is important!", "just whenever"), 
-#'   c("urgent", "not urgent"), 
+#'   c("this is important!", "just whenever"),
+#'   c("urgent", "not urgent"),
 #'   preview = TRUE
-#'   )
-#' 
-#' } 
+#' )
+#' }
 #' @export
 llm_classify <- function(.data,
                          col,

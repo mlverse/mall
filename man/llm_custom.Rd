@@ -51,6 +51,5 @@ my_prompt <- paste(
 
 reviews |>
   llm_custom(review, my_prompt)
-
-} 
+}
 }

@@ -13,42 +13,42 @@
 #' the content as the name.
 #' @examples
 #' \dontrun{
-#' library(mall) 
-#' 
+#' library(mall)
+#'
 #' data("reviews")
-#' 
+#'
 #' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
-#' 
+#'
 #' # Use 'labels' to let the function know what to extract
 #' llm_extract(reviews, review, labels = "product")
-#' 
-#' # Use 'pred_name' to customize the new column's name 
-#' llm_extract(reviews, review, "product", pred_name = "prod") 
-#' 
+#'
+#' # Use 'pred_name' to customize the new column's name
+#' llm_extract(reviews, review, "product", pred_name = "prod")
+#'
 #' # Pass a vector to request multiple things, the results will be pipe delimeted
 #' # in a single column
 #' llm_extract(reviews, review, c("product", "feelings"))
-#' 
+#'
 #' # To get multiple columns, use 'expand_cols'
 #' llm_extract(reviews, review, c("product", "feelings"), expand_cols = TRUE)
-#' 
+#'
 #' # Pass a named vector to set the resulting column names
 #' llm_extract(
 #'   .data = reviews,
-#'   col =  review,
-#'   labels =  c(prod = "product", feels = "feelings"),
+#'   col = review,
+#'   labels = c(prod = "product", feels = "feelings"),
 #'   expand_cols = TRUE
-#'   )
-#' 
-#' # For character vectors, instead of a data frame, use this function 
-#' llm_vec_extract("bob smith, 123 3rd street", c("name", "address")) 
-#' 
-#' # To preview the first call that will be made to the downstream R function 
+#' )
+#'
+#' # For character vectors, instead of a data frame, use this function
+#' llm_vec_extract("bob smith, 123 3rd street", c("name", "address"))
+#'
+#' # To preview the first call that will be made to the downstream R function
 #' llm_vec_extract(
-#'   "bob smith, 123 3rd street", 
-#'   c("name", "address"), 
+#'   "bob smith, 123 3rd street",
+#'   c("name", "address"),
 #'   preview = TRUE
-#'   ) 
+#' )
 #' }
 #' @returns `llm_extract` returns a `data.frame` or `tbl` object.
 #' `llm_vec_extract` returns a vector that is the same length as `x`.

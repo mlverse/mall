@@ -72,6 +72,5 @@ llm_vec_sentiment(c("I am happy", "I am sad"))
 
 # To preview the first call that will be made to the downstream R function
 llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE)
-
 }
 }
