@@ -23,3 +23,9 @@ test_that("Init code is covered", {
   m_defaults_reset()
   expect_message(llm_use())
 })
+
+test_that("Stops cache", {
+  expect_snapshot(
+    llm_use("simulate_llm", "echo", .force = TRUE, .cache = "")
+  )
+})
