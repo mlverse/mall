@@ -22,13 +22,9 @@
 #' \dontrun{
 #' library(mall)
 #'
+#' data("reviews")
+#' 
 #' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
-#'
-#' reviews <- data.frame(review = c(
-#'   "This has been the best TV I've ever used. Great screen, and sound.",
-#'   "I regret buying this laptop. It is too slow and the keyboard is too noisy",
-#'   "Not sure how to feel about my new washing machine. Great color, but hard to figure"
-#' ))
 #'
 #' llm_classify(reviews, review, c("appliance", "computer"))
 #'

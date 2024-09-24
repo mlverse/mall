@@ -46,13 +46,9 @@ Use a Large Language Model (LLM) to summarize text
 \dontrun{
 library(mall) 
 
-llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE) 
+data("reviews")
 
-reviews <- data.frame(review = c( 
-  "This has been the best TV I've ever used. Great screen, and sound.", 
-  "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
-  "Not sure how to feel about my new washing machine. Great color, but hard to figure" 
-)) 
+llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
 
 # Use max_words to set the maximum number of words to use for the summary
 llm_summarize(reviews, review, max_words = 5) 

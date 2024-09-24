@@ -94,30 +94,26 @@ installed if you are using Databricks only.*
 
 ## LLM functions
 
-We will start with a very small table with product reviews:
-
-```{r}
-library(dplyr)
-
-reviews <- tribble(
-  ~review,
-  "This has been the best TV I've ever used. Great screen, and sound.",
-  "I regret buying this laptop. It is too slow and the keyboard is too noisy",
-  "Not sure how to feel about my new washing machine. Great color, but hard to figure"
-)
-```
-
 ### Sentiment
 
 Primarily,  `mall` provides verb-like functions that expect a `tbl` as 
 their first argument. This allows us to use them in piped operations. 
 
-For the first example, we'll asses the sentiment of each review. In order to 
-do this we will call `llm_sentiment()`:
+We will start with loading a very small data set contained in `mall`. It has
+3 product reviews that we will use as the source of our examples.
 
 ```{r}
 library(mall)
 
+data("reviews")
+
+reviews
+```
+
+For the first example, we'll asses the sentiment of each review. In order to 
+do this we will call `llm_sentiment()`:
+
+```{r}
 reviews |>
   llm_sentiment(review)
 ```
