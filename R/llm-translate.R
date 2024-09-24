@@ -10,17 +10,12 @@
 #' \dontrun{
 #' library(mall)
 #'
-#' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+#' data("reviews")
 #'
-#' reviews <- data.frame(review = c(
-#'   "This has been the best TV I've ever used. Great screen, and sound.",
-#'   "I regret buying this laptop. It is too slow and the keyboard is too noisy",
-#'   "Not sure how to feel about my new washing machine. Great color, but hard to figure"
-#' ))
+#' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
 #'
 #' # Pass the desired language to translate to
 #' llm_translate(reviews, review, "spanish")
-#' 
 #' }
 #' @returns `llm_translate` returns a `data.frame` or `tbl` object.
 #' `llm_vec_translate` returns a vector that is the same length as `x`.

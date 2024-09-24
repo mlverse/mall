@@ -54,41 +54,36 @@ llm_vec_classify(x, labels, additional_prompt = "", preview = FALSE)
  
 library(mall) 
  
-llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE) 
+data("reviews") 
  
-reviews <- data.frame(review = c( 
-  "This has been the best TV I've ever used. Great screen, and sound.", 
-  "I regret buying this laptop. It is too slow and the keyboard is too noisy", 
-  "Not sure how to feel about my new washing machine. Great color, but hard to figure" 
-)) 
+llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE) 
  
 llm_classify(reviews, review, c("appliance", "computer")) 
  
 # Use 'pred_name' to customize the new column's name 
 llm_classify( 
-  reviews,  
+  reviews, 
   review, 
-  c("appliance", "computer"),  
+  c("appliance", "computer"), 
   pred_name = "prod_type" 
-  ) 
+) 
  
-# Pass custom values for each classification  
+# Pass custom values for each classification 
 llm_classify(reviews, review, c("appliance" ~ 1, "computer" ~ 2)) 
  
 # For character vectors, instead of a data frame, use this function 
 llm_vec_classify( 
-  c("this is important!", "just whenever"),  
+  c("this is important!", "just whenever"), 
   c("urgent", "not urgent") 
-  ) 
+) 
  
 # To preview the first call that will be made to the downstream R function 
 llm_vec_classify( 
-  c("this is important!", "just whenever"),  
-  c("urgent", "not urgent"),  
+  c("this is important!", "just whenever"), 
+  c("urgent", "not urgent"), 
   preview = TRUE 
-  ) 
+) 
  
-  
 ```
 
 

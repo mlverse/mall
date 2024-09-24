@@ -1,0 +1,43 @@
+---
+title: "Mini reviews data set"
+execute:
+  eval: true
+  freeze: true
+---
+
+```{r}
+#| include: false
+source("../utils/knitr-print.R")
+```
+
+[R/data-reviews.R](https://github.com/edgararuiz/mall/blob/main/R/data-reviews.R)
+
+## reviews
+
+## Description
+ Mini reviews data set 
+
+## Format
+ A data frame that contains 3 records. The records are of fictitious product reviews. 
+
+## Usage
+```r
+ 
+reviews 
+```
+
+
+
+
+
+
+## Examples
+```{r}
+ 
+library(mall) 
+data(reviews) 
+reviews 
+ 
+```
+
+

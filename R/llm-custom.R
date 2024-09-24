@@ -13,25 +13,20 @@
 #' \dontrun{
 #' library(mall)
 #'
+#' data("reviews")
+#'
 #' llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
 #'
-#' reviews <- data.frame(review = c(
-#'   "This has been the best TV I've ever used. Great screen, and sound.",
-#'   "I regret buying this laptop. It is too slow and the keyboard is too noisy",
-#'   "Not sure how to feel about my new washing machine. Great color, but hard to figure"
-#' ))
-#' 
 #' my_prompt <- paste(
 #'   "Answer a question.",
 #'   "Return only the answer, no explanation",
 #'   "Acceptable answers are 'yes', 'no'",
 #'   "Answer this about the following text, is this a happy customer?:"
 #' )
-#' 
+#'
 #' reviews |>
 #'   llm_custom(review, my_prompt)
-#' 
-#' } 
+#' }
 #' @returns `llm_custom` returns a `data.frame` or `tbl` object.
 #' `llm_vec_custom` returns a vector that is the same length as `x`.
 #' @export
