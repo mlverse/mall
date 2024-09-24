@@ -63,7 +63,13 @@ print.mall_session <- function(x, ...) {
     args <- set_names(args, " ")
     cli_bullets(args)
   }
-  session <- imap(x$session, \(x, y) glue("{col_yellow({paste0(y, ':')})}{x}"))
-  label_argument <- "{col_green('R session:')}"
-  cli_inform(paste(label_argument, session[[1]]))
+  session <- x$session
+  if(session$cache_folder == "") {
+    session$cache_folder <- NULL
+  } 
+  if(length(session) > 0) {
+    session <- imap(session, \(x, y) glue("{col_yellow({paste0(y, ':')})}{x}"))
+    label_argument <- "{col_green('R session:')}"
+    cli_inform(paste(label_argument, session[[1]]))  
+  }
 }
