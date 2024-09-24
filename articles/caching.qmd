@@ -1,0 +1,29 @@
+---
+title: "Caching results"
+execute:
+  eval: true
+  freeze: true
+---
+
+```{r}
+#| include: false
+source("../utils/knitr-print.R")
+```
+
+Data preparation, and model preparation, is usually a iterative process. Because
+models in R are normally rather fast,   it is not a problem to re-run the
+entire code to confirm that all of the results are reproducible. But in
+the case of LLM's, re-running things may be a problem. Locally, running the 
+LLM will be processor intensive, and typically long. If running against a remote
+LLM, the issue would the cost per token. 
+
+To ameliorate this, `mall` is able to cache existing results in a folder. That way, 
+running the same analysis over and over, will be much quicker. Because instead of
+calling the LLM again, `mall` will return the previously recorded result. 
+
+By default, this functionality is turned on. The results will be saved to a folder
+named "_mall_cache" . The name of the folder can be easily changed, simply set
+the `.cache` argument in `llm_use()`. To **disable** this functionality, set
+the argument to an empty character, meaning `.cache = ""`.
+
+
