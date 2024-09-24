@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Translates text to a specific language – mall</title>
+<title>Mini reviews data set – mall</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -166,11 +166,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#llm_translate" id="toc-llm_translate" class="nav-link active" data-scroll-target="#llm_translate">llm_translate</a></li>
+  <li><a href="#reviews" id="toc-reviews" class="nav-link active" data-scroll-target="#reviews">reviews</a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
+  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">Format</a></li>
   <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
-  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
-  <li><a href="#value" id="toc-value" class="nav-link" data-scroll-target="#value">Value</a></li>
   <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
   </ul>
 </nav>
@@ -180,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Translates text to a specific language</h1>
+<h1 class="title">Mini reviews data set</h1>
 </div>
 
 
@@ -197,94 +196,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><a href="https://github.com/edgararuiz/mall/blob/main/R/llm-translate.R">R/llm-translate.R</a></p>
-<section id="llm_translate" class="level2">
-<h2 class="anchored" data-anchor-id="llm_translate">llm_translate</h2>
+<p><a href="https://github.com/edgararuiz/mall/blob/main/R/data-reviews.R">R/data-reviews.R</a></p>
+<section id="reviews" class="level2">
+<h2 class="anchored" data-anchor-id="reviews">reviews</h2>
 </section>
 <section id="description" class="level2">
 <h2 class="anchored" data-anchor-id="description">Description</h2>
-<p>Use a Large Language Model (LLM) to translate a text to a specific language</p>
+<p>Mini reviews data set</p>
+</section>
+<section id="format" class="level2">
+<h2 class="anchored" data-anchor-id="format">Format</h2>
+<p>A data frame that contains 3 records. The records are of fictitious product reviews.</p>
 </section>
 <section id="usage" class="level2">
 <h2 class="anchored" data-anchor-id="usage">Usage</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_translate</span>( </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  .data, </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  col, </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  language, </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pred_name =</span> <span class="st">".translation"</span>, </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">additional_prompt =</span> <span class="st">""</span> </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>) </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_vec_translate</span>(x, language, <span class="at">additional_prompt =</span> <span class="st">""</span>, <span class="at">preview =</span> <span class="cn">FALSE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="arguments" class="level2">
-<h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Arguments</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>.data</td>
-<td>A <code>data.frame</code> or <code>tbl</code> object that contains the text to be analyzed</td>
-</tr>
-<tr class="even">
-<td>col</td>
-<td>The name of the field to analyze, supports <code>tidy-eval</code></td>
-</tr>
-<tr class="odd">
-<td>language</td>
-<td>Target language to translate the text to</td>
-</tr>
-<tr class="even">
-<td>pred_name</td>
-<td>A character vector with the name of the new column where the prediction will be placed</td>
-</tr>
-<tr class="odd">
-<td>additional_prompt</td>
-<td>Inserts this text into the prompt sent to the LLM</td>
-</tr>
-<tr class="even">
-<td>x</td>
-<td>A vector that contains the text to be analyzed</td>
-</tr>
-<tr class="odd">
-<td>preview</td>
-<td>It returns the R call that would have been used to run the prediction. It only returns the first record in <code>x</code>. Defaults to <code>FALSE</code> Applies to vector function only.</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="value" class="level2">
-<h2 class="anchored" data-anchor-id="value">Value</h2>
-<p><code>llm_translate</code> returns a <code>data.frame</code> or <code>tbl</code> object. <code>llm_vec_translate</code> returns a vector that is the same length as <code>x</code>.</p>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>reviews </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="examples" class="level2">
 <h2 class="anchored" data-anchor-id="examples">Examples</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mall) </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"reviews"</span>) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_use</span>(<span class="st">"ollama"</span>, <span class="st">"llama3.1"</span>, <span class="at">seed =</span> <span class="dv">100</span>, <span class="at">.silent =</span> <span class="cn">TRUE</span>) </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass the desired language to translate to </span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_translate</span>(reviews, review, <span class="st">"spanish"</span>) </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .translation                    </span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                           </span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… Ha sido la mejor televisión que…</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … Me arrepiento de haber comprado…</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… No estoy seguro de cómo sentirm…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(reviews) </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>reviews </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 1</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                        </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.            </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too noisy     </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but hard to f…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

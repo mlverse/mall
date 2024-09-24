@@ -2,50 +2,54 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://edgararuiz.github.io/mall/LICENSE.html</loc>
-    <lastmod>2024-09-23T21:02:37.645Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.389Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_custom.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_translate.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_sentiment.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
-    <loc>https://edgararuiz.github.io/mall/reference/m_backend_submit.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/reference/index.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
-  </url>
-  <url>
-    <loc>https://edgararuiz.github.io/mall/articles/databricks.html</loc>
-    <lastmod>2024-09-23T21:02:37.647Z</lastmod>
+    <loc>https://edgararuiz.github.io/mall/reference/reviews.html</loc>
+    <lastmod>2024-09-24T17:45:23.397Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_classify.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/articles/databricks.html</loc>
+    <lastmod>2024-09-24T17:45:23.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/index.html</loc>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
+  </url>
+  <url>
+    <loc>https://edgararuiz.github.io/mall/reference/m_backend_submit.html</loc>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_summarize.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_use.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/reference/llm_extract.html</loc>
-    <lastmod>2024-09-23T21:02:37.652Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.396Z</lastmod>
   </url>
   <url>
     <loc>https://edgararuiz.github.io/mall/index.html</loc>
-    <lastmod>2024-09-23T21:02:37.647Z</lastmod>
+    <lastmod>2024-09-24T17:45:23.391Z</lastmod>
   </url>
 </urlset>
