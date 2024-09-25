@@ -90,7 +90,7 @@ llm_classify.data.frame <- function(.data,
   )
 }
 
-globalVariables(c("ai_summarize", "array"))
+globalVariables(c("ai_classify", "array"))
 
 #' @rdname llm_classify
 #' @export
