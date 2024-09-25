@@ -18,8 +18,9 @@ This brief example shows how seamless it is to use the same functions,
 but against a remote database connection. Today, it works with the following
 functions:
 
-- `llm_sentiment()` / `llm_vec_sentiment()`
-- `llm_summarize()` / `llm_vec_summarize()`
+- `llm_sentiment()`
+- `llm_summarize()`
+- `llm_classify()`
 
 ## Examples
 
@@ -47,7 +48,7 @@ reviews <- tribble(
   "Not sure how to feel about my new washing machine. Great color, but hard to figure"
 )
 
-tbl_reviews <- copy_to(con, reviews)
+tbl_reviews <- copy_to(con, reviews, overwrite = TRUE)
 ```
 
 Using `llm_sentiment()` in Databricks will call that vendor's SQL AI function
@@ -67,5 +68,15 @@ argument in the AI Summarize function:
 
 ```{r}
 tbl_reviews |>
-  llm_summarize(review, max_words = 5)
+  llm_summarize(review, max_words = 5) |> 
+  show_query()
 ```
+
+`llm_classify()` for this back-end, will only accept unnamed options. 
+
+```{r}
+tbl_reviews |> 
+  llm_classify(review, c("appliance", "computer"))
+```
+
+
