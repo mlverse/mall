@@ -10,6 +10,7 @@ execute:
 library(fs)
 library(jsonlite)
 dir_delete("_mall_cache")
+dir_delete("_performance_cache")
 source("../utils/knitr-print.R")
 ```
 
@@ -44,7 +45,7 @@ is the name of the file itself. The name is the hashed value of the combined
 value of the items listed above. This becomes the "finger print" that allows 
 `mall` to know if there is an existing cache. 
 
-## Examples 
+## Walk-through 
 
 We will initialize the LLM session specifying a seed
 
@@ -73,7 +74,9 @@ combination mentioned in the previous section.
 dir_ls("_mall_cache", recurse = TRUE, type = "file")
 ```
 
-The cache is a JSON file, that contains both the call, and the response
+The cache is a JSON file, that contains both the request, and the response. As
+mentioned in the previous section, the named of the file is derived from the
+combining the values in the request (`$request`).
 
 ```{r}
 jsonlite::read_json(
@@ -122,22 +125,87 @@ llm_vec_sentiment("I am very happy")
 dir_ls("_mall_cache", recurse = TRUE, type = "file")
 ```
 
+## Performance improvements 
+
+To drive home the point of the usefulness of this feature, we will use the
+same data set we used for the README. To start, we will change the cache folder
+to make it easy to track the new files
 
 ```{r}
-library(tictoc)
+llm_use(.cache = "_performance_cache", .silent = TRUE)
+```
+As mentioned, we will use the `data_bookReviews` data frame from the `classmap`
+package
 
-data(reviews)
+```{r}
+library(classmap)
 
+data(data_bookReviews)
+```
+
+The individual reviews in this data set are really long. So they take a while to
+process. To run this test, we will use the first 5 rows: 
+
+```{r}
 tic()
-reviews |> 
+
+data_bookReviews |>
+  head(5)  |> 
   llm_sentiment(review)
+
 toc()
 ```
 
+The analysis took about 10 seconds on my laptop, so around 2 seconds per record.
+That may not seem like much, but during model, or workflow, development having
+to wait this long every time will take its toll on our time, and patience.
+
+The new cache folder now has the 5 records cached in their corresponding 
+JSON files
+
+```{r}
+dir_ls("_performance_cache", recurse = TRUE, type = "file")
+```
+
+Re-running the same exact call will not take a fraction of a fraction of the
+original time!
+
 ```{r}
 tic()
-reviews |> 
+
+data_bookReviews |>
+  head(5)  |> 
   llm_sentiment(review)
+
 toc()
+```
+
+Running an additional record, will only cost the time it takes to process it.
+The other 5 will still be scored using their cached result
+
+```{r}
+tic()
+
+data_bookReviews |>
+  head(6)  |> 
+  llm_sentiment(review)
+
+toc()
+```
+
+## Set the seed!
+
+If at the end of your analysis, you plan to re-run all of the code, and you
+want to take advantage of the caching functionaly, then set the model seed. This
+will allow for the exact same results to be returned by the LLM.
+
+If no seed is set during development, then the results will always come back 
+the same because the cache is being read. But once the cache is removed, to run 
+everything from 0, then you will get different results. This is because the 
+invariability of the cache results, mask the fact that the model will have 
+variability. 
+
+```{r}
+llm_use("ollama", "llama3.1", seed = 999)
 ```
 
