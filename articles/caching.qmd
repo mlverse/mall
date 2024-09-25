@@ -8,6 +8,7 @@ execute:
 ```{r}
 #| include: false
 library(fs)
+library(jsonlite)
 dir_delete("_mall_cache")
 source("../utils/knitr-print.R")
 ```
@@ -38,6 +39,11 @@ to confidently identify when the same query is being done again. This includes:
 - Any other arguments/options used, set in `llm_use()`
 - The name of the back end used for the call
 
+A file is created that contains the request and response. The key to the process
+is the name of the file itself. The name is the hashed value of the combined
+value of the items listed above. This becomes the "finger print" that allows 
+`mall` to know if there is an existing cache. 
+
 ## Examples 
 
 We will initialize the LLM session specifying a seed
@@ -47,6 +53,7 @@ library(mall)
 
 llm_use("ollama", "llama3.1", seed = 100)
 ```
+
 Using the `tictoc` package, we will measure how long it takes to make a simple
 sentiment call. 
 
@@ -63,13 +70,17 @@ file with the cache. The name of the file is the resulting hash value of the
 combination mentioned in the previous section. 
 
 ```{r}
-dir_tree("_mall_cache", recurse = TRUE)
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
 ```
 
 The cache is a JSON file, that contains both the call, and the response
 
 ```{r}
-readLines("_mall_cache/08/086214f2638f60496fd0468d7de37c59.json")
+jsonlite::read_json(
+  "_mall_cache/08/086214f2638f60496fd0468d7de37c59.json", 
+  simplifyVector = TRUE, 
+  flatten = TRUE
+  )
 ```
 
 Re-running the same `mall` call, will complete significantly faster
@@ -87,16 +98,46 @@ new JSON file.
 ```{r}
 llm_vec_sentiment("I am very happy")
 
-dir_tree("_mall_cache", recurse = TRUE)
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
 ```
+
+During the same R session, if we change something in `llm_use()` that will
+impact the request to the LLM, that will trigger a new cache file
 
 ```{r}
 llm_use(seed = 101)
-```
-```{r}
+
 llm_vec_sentiment("I am very happy")
+
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
+```
+
+The only argument that does not trigger a new cache file is `.silent`
+
+```{r}
+llm_use(seed = 101, .silent = TRUE)
+
+llm_vec_sentiment("I am very happy")
+
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
+```
+
+
+```{r}
+library(tictoc)
+
+data(reviews)
+
+tic()
+reviews |> 
+  llm_sentiment(review)
+toc()
 ```
 
 ```{r}
-dir_tree("_mall_cache", recurse = TRUE)
+tic()
+reviews |> 
+  llm_sentiment(review)
+toc()
 ```
+
