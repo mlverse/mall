@@ -68,14 +68,14 @@ argument in the AI Summarize function:
 
 ```{r}
 tbl_reviews |>
-  llm_summarize(review, max_words = 5) |> 
+  llm_summarize(review, max_words = 5) |>
   show_query()
 ```
 
 `llm_classify()` for this back-end, will only accept unnamed options. 
 
 ```{r}
-tbl_reviews |> 
+tbl_reviews |>
   llm_classify(review, c("appliance", "computer"))
 ```
 

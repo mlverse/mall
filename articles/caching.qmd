@@ -80,10 +80,10 @@ combining the values in the request (`$request`).
 
 ```{r}
 jsonlite::read_json(
-  "_mall_cache/08/086214f2638f60496fd0468d7de37c59.json", 
-  simplifyVector = TRUE, 
+  "_mall_cache/08/086214f2638f60496fd0468d7de37c59.json",
+  simplifyVector = TRUE,
   flatten = TRUE
-  )
+)
 ```
 
 Re-running the same `mall` call, will complete significantly faster
@@ -150,7 +150,7 @@ process. To run this test, we will use the first 5 rows:
 tic()
 
 data_bookReviews |>
-  head(5)  |> 
+  head(5) |>
   llm_sentiment(review)
 
 toc()
@@ -174,7 +174,7 @@ original time!
 tic()
 
 data_bookReviews |>
-  head(5)  |> 
+  head(5) |>
   llm_sentiment(review)
 
 toc()
@@ -187,7 +187,7 @@ The other 5 will still be scored using their cached result
 tic()
 
 data_bookReviews |>
-  head(6)  |> 
+  head(6) |>
   llm_sentiment(review)
 
 toc()
