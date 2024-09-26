@@ -77,6 +77,21 @@ llm_classify.data.frame <- function(.data,
   )
 }
 
+#' @export
+`llm_classify.tbl_Spark SQL` <- function(.data,
+                                         col,
+                                         labels,
+                                         pred_name = ".classify",
+                                         additional_prompt = "") {
+  prep_labels <- paste0("'", labels, "'", collapse = ", ")
+  mutate(
+    .data = .data,
+    !!pred_name := ai_classify({{ col }}, array(sql(prep_labels)))
+  )
+}
+
+globalVariables(c("ai_classify", "array"))
+
 #' @rdname llm_classify
 #' @export
 llm_vec_classify <- function(x,

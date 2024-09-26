@@ -26,6 +26,20 @@ test_that("Classify works", {
   )
 })
 
+test_that("Classify translates expected Spark SQL", {
+  suppressPackageStartupMessages(library(dbplyr))
+  df <- data.frame(x = 1)
+  df_spark <- tbl_lazy(df, con = simulate_spark_sql())
+  expect_snapshot(llm_classify(df_spark, x, c("a", "b")))
+})
+
+test_that("Preview works", {
+  llm_use("ollama", "llama3.1", seed = 100, .silent = FALSE)
+  expect_snapshot(
+    llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
+  )
+})
+
 test_that("Classify on Ollama works", {
   skip_if_no_ollama()
   reviews <- reviews_table()
@@ -52,12 +66,5 @@ test_that("Classify on Ollama works", {
       labels = c("appliance", "computer"),
       additional_prompt = "Consider all laptops as appliances."
     )
-  )
-})
-
-test_that("Preview works", {
-  llm_use("ollama", "llama3.1", seed = 100, .silent = FALSE)
-  expect_snapshot(
-    llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
   )
 })

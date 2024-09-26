@@ -1,3 +1,20 @@
+# Classify translates expected Spark SQL
+
+    Code
+      llm_classify(df_spark, x, c("a", "b"))
+    Output
+      <SQL>
+      SELECT `df`.*, ai_classify(`x`, array('a', 'b')) AS `.classify`
+      FROM `df`
+
+# Preview works
+
+    Code
+      llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
+    Output
+      ollamar::chat(messages = list(list(role = "user", content = "You are a helpful classification engine. Determine if the text refers to one of the following: a, b. No capitalization. No explanations.  The answer is based on the following text:\nthis is a test")), 
+          output = "text", model = "llama3.1", seed = 100)
+
 # Classify on Ollama works
 
     Code
@@ -41,12 +58,4 @@
       1 appliance
       2 appliance
       3 appliance
-
-# Preview works
-
-    Code
-      llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
-    Output
-      ollamar::chat(messages = list(list(role = "user", content = "You are a helpful classification engine. Determine if the text refers to one of the following: a, b. No capitalization. No explanations.  The answer is based on the following text:\nthis is a test")), 
-          output = "text", model = "llama3.1", seed = 100)
 

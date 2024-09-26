@@ -1,0 +1,211 @@
+---
+title: "Caching results"
+execute:
+  eval: true
+  freeze: true
+---
+
+```{r}
+#| include: false
+library(fs)
+library(jsonlite)
+dir_delete("_mall_cache")
+dir_delete("_performance_cache")
+source("../utils/knitr-print.R")
+```
+
+Data preparation, and model preparation, is usually a iterative process. Because
+models in R are normally rather fast,   it is not a problem to re-run the
+entire code to confirm that all of the results are reproducible. But in
+the case of LLM's, re-running things may be a problem. Locally, running the 
+LLM will be processor intensive, and typically long. If running against a remote
+LLM, the issue would the cost per token. 
+
+To ameliorate this, `mall` is able to cache existing results in a folder. That way, 
+running the same analysis over and over, will be much quicker. Because instead of
+calling the LLM again, `mall` will return the previously recorded result. 
+
+By default, this functionality is turned on. The results will be saved to a folder
+named "_mall_cache" . The name of the folder can be easily changed, simply set
+the `.cache` argument in `llm_use()`. To **disable** this functionality, set
+the argument to an empty character, meaning `.cache = ""`.
+
+## How it works
+
+`mall` uses all of the values used to make the LLM query as the "finger print"
+to confidently identify when the same query is being done again. This includes:
+
+- The value in the particular row
+- The additional prompting built by the `llm_` function,
+- Any other arguments/options used, set in `llm_use()`
+- The name of the back end used for the call
+
+A file is created that contains the request and response. The key to the process
+is the name of the file itself. The name is the hashed value of the combined
+value of the items listed above. This becomes the "finger print" that allows 
+`mall` to know if there is an existing cache. 
+
+## Walk-through 
+
+We will initialize the LLM session specifying a seed
+
+```{r}
+library(mall)
+
+llm_use("ollama", "llama3.1", seed = 100)
+```
+
+Using the `tictoc` package, we will measure how long it takes to make a simple
+sentiment call. 
+
+```{r}
+library(tictoc)
+
+tic()
+llm_vec_sentiment("I am happy")
+toc()
+```
+
+This creates a the "_mall_cache" folder, and inside a sub-folder, it creates a 
+file with the cache. The name of the file is the resulting hash value of the
+combination mentioned in the previous section. 
+
+```{r}
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
+```
+
+The cache is a JSON file, that contains both the request, and the response. As
+mentioned in the previous section, the named of the file is derived from the
+combining the values in the request (`$request`).
+
+```{r}
+jsonlite::read_json(
+  "_mall_cache/08/086214f2638f60496fd0468d7de37c59.json",
+  simplifyVector = TRUE,
+  flatten = TRUE
+)
+```
+
+Re-running the same `mall` call, will complete significantly faster
+
+```{r}
+tic()
+llm_vec_sentiment("I am happy")
+toc()
+```
+
+If a slightly different query is made, `mall` will recognize that this is a
+different call, and it will send it to the LLM. The results are then saved in a 
+new JSON file. 
+
+```{r}
+llm_vec_sentiment("I am very happy")
+
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
+```
+
+During the same R session, if we change something in `llm_use()` that will
+impact the request to the LLM, that will trigger a new cache file
+
+```{r}
+llm_use(seed = 101)
+
+llm_vec_sentiment("I am very happy")
+
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
+```
+
+The only argument that does not trigger a new cache file is `.silent`
+
+```{r}
+llm_use(seed = 101, .silent = TRUE)
+
+llm_vec_sentiment("I am very happy")
+
+dir_ls("_mall_cache", recurse = TRUE, type = "file")
+```
+
+## Performance improvements 
+
+To drive home the point of the usefulness of this feature, we will use the
+same data set we used for the README. To start, we will change the cache folder
+to make it easy to track the new files
+
+```{r}
+llm_use(.cache = "_performance_cache", .silent = TRUE)
+```
+As mentioned, we will use the `data_bookReviews` data frame from the `classmap`
+package
+
+```{r}
+library(classmap)
+
+data(data_bookReviews)
+```
+
+The individual reviews in this data set are really long. So they take a while to
+process. To run this test, we will use the first 5 rows: 
+
+```{r}
+tic()
+
+data_bookReviews |>
+  head(5) |>
+  llm_sentiment(review)
+
+toc()
+```
+
+The analysis took about 10 seconds on my laptop, so around 2 seconds per record.
+That may not seem like much, but during model, or workflow, development having
+to wait this long every time will take its toll on our time, and patience.
+
+The new cache folder now has the 5 records cached in their corresponding 
+JSON files
+
+```{r}
+dir_ls("_performance_cache", recurse = TRUE, type = "file")
+```
+
+Re-running the same exact call will not take a fraction of a fraction of the
+original time!
+
+```{r}
+tic()
+
+data_bookReviews |>
+  head(5) |>
+  llm_sentiment(review)
+
+toc()
+```
+
+Running an additional record, will only cost the time it takes to process it.
+The other 5 will still be scored using their cached result
+
+```{r}
+tic()
+
+data_bookReviews |>
+  head(6) |>
+  llm_sentiment(review)
+
+toc()
+```
+
+## Set the seed!
+
+If at the end of your analysis, you plan to re-run all of the code, and you
+want to take advantage of the caching functionaly, then set the model seed. This
+will allow for the exact same results to be returned by the LLM.
+
+If no seed is set during development, then the results will always come back 
+the same because the cache is being read. But once the cache is removed, to run 
+everything from 0, then you will get different results. This is because the 
+invariability of the cache results, mask the fact that the model will have 
+variability. 
+
+```{r}
+llm_use("ollama", "llama3.1", seed = 999)
+```
+
