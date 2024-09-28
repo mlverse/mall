@@ -21,7 +21,7 @@ skip_if_no_ollama <- function() {
     .mall_test$ollama_present <- TRUE
     llm_use(
       backend = "ollama",
-      model = "llama3.1",
+      model = "llama3.2",
       seed = 100,
       .silent = TRUE,
       .force = TRUE,

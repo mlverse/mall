@@ -2,7 +2,7 @@ test_that("Ollama code is covered", {
   local_mocked_bindings(
     chat = function(...) "positive"
   )
-  llm_use("ollama", "llama3.1", .silent = TRUE, .force = TRUE)
+  llm_use("ollama", "llama3.2", .silent = TRUE, .force = TRUE)
   expect_equal(
     llm_vec_sentiment("I am happy"),
     "positive"
