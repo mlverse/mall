@@ -16,7 +16,7 @@ library(dbplyr)
 library(tictoc)
 library(DBI)
 source("utils/knitr-print.R")
-mall::llm_use("ollama", "llama3.1", seed = 100, .cache = "_readme_cache")
+mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 ```
 
 # mall
@@ -78,9 +78,9 @@ This saves the data scientist the need to write and tune an NLP model.
 [Installation guide](https://hauselin.github.io/ollama-r/#installation)
 
 - Download an LLM model. For example, I have been developing this package using
-Llama 3.1 to test. To get that model you can run: 
+Llama 3.2 to test. To get that model you can run: 
   ```r
-  ollamar::pull("llama3.1")
+  ollamar::pull("llama3.2")
   ```
 
 ### With Databricks
@@ -221,7 +221,7 @@ function that actually runs the prediction. In the case of Ollama, that function
 is [`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html). 
 
 ```{r, eval = FALSE}
-llm_use("ollama", "llama3.1", seed = 100, temperature = 0.2)
+llm_use("ollama", "llama3.2", seed = 100, temperature = 0)
 ```
 
 ## Key considerations
@@ -232,7 +232,7 @@ If using this method with an LLM locally available, the cost will be a long
 running time. Unless using a very specialized LLM, a given LLM is a general model. 
 It was fitted using a vast amount of data. So determining a response for each 
 row, takes longer than if using a manually created NLP model. The default model
-used in Ollama is Llama 3.1, which was fitted using 8B parameters. 
+used in Ollama is Llama 3.2, which was fitted using 8B parameters. 
 
 If using an external LLM service, the consideration will need to be for the 
 billing costs of using such service. Keep in mind that you will be sending a lot
@@ -260,27 +260,25 @@ library(classmap)
 
 data(data_bookReviews)
 
-book_reviews <- data_bookReviews |>
-  head(100) |>
-  as_tibble()
-
-glimpse(book_reviews)
+data_bookReviews |>
+  glimpse()
 ```
 As per the docs, `sentiment` is a factor indicating the sentiment of the review:
 negative (1) or positive (2)
 
 ```{r}
-length(strsplit(paste(book_reviews, collapse = " "), " ")[[1]])
+length(strsplit(paste(head(data_bookReviews$review, 100), collapse = " "), " ")[[1]])
 ```
 
 Just to get an idea of how much data we're processing, I'm using a very, very 
 simple word count. So we're analyzing a bit over 20 thousand words.
 
 ```{r}
-reviews_llm <- book_reviews |>
+reviews_llm <- data_bookReviews |>
+  head(100) |> 
   llm_sentiment(
     col = review,
-    options = c("positive", "negative"),
+    options = c("positive" ~ 2, "negative" ~ 1),
     pred_name = "predicted"
   )
 ```
@@ -314,8 +312,8 @@ will not be of the "truth", but rather the package's results recorded in
 library(forcats)
 
 reviews_llm |>
-  mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |>
-  yardstick::accuracy(sentiment, fct_pred)
+  mutate(predicted = as.factor(predicted)) |>
+  yardstick::accuracy(sentiment, predicted)
 ```
 
 ## Vector functions

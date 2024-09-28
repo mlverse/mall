@@ -61,10 +61,10 @@ scientist the need to write and tune an NLP model.
   guide](https://hauselin.github.io/ollama-r/#installation)
 
 - Download an LLM model. For example, I have been developing this
-  package using Llama 3.1 to test. To get that model you can run:
+  package using Llama 3.2 to test. To get that model you can run:
 
   ``` r
-  ollamar::pull("llama3.1")
+  ollamar::pull("llama3.2")
   ```
 
 ### With Databricks
@@ -153,11 +153,11 @@ number of words to output (`max_words`):
 reviews |>
   llm_summarize(review, max_words = 5)
 #> # A tibble: 3 × 2
-#>   review                                        .summary                       
-#>   <chr>                                         <chr>                          
-#> 1 This has been the best TV I've ever used. Gr… very good tv experience overall
-#> 2 I regret buying this laptop. It is too slow … slow and noisy laptop purchase 
-#> 3 Not sure how to feel about my new washing ma… mixed feelings about new washer
+#>   review                                        .summary                      
+#>   <chr>                                         <chr>                         
+#> 1 This has been the best TV I've ever used. Gr… it's a great tv               
+#> 2 I regret buying this laptop. It is too slow … laptop purchase was a mistake 
+#> 3 Not sure how to feel about my new washing ma… having mixed feelings about it
 ```
 
 To control the name of the prediction field, you can change `pred_name`
@@ -167,11 +167,11 @@ argument. This works with the other `llm_` functions as well.
 reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
 #> # A tibble: 3 × 2
-#>   review                                        review_summary                 
-#>   <chr>                                         <chr>                          
-#> 1 This has been the best TV I've ever used. Gr… very good tv experience overall
-#> 2 I regret buying this laptop. It is too slow … slow and noisy laptop purchase 
-#> 3 Not sure how to feel about my new washing ma… mixed feelings about new washer
+#>   review                                        review_summary                
+#>   <chr>                                         <chr>                         
+#> 1 This has been the best TV I've ever used. Gr… it's a great tv               
+#> 2 I regret buying this laptop. It is too slow … laptop purchase was a mistake 
+#> 3 Not sure how to feel about my new washing ma… having mixed feelings about it
 ```
 
 ### Classify
@@ -184,7 +184,7 @@ reviews |>
 #> # A tibble: 3 × 2
 #>   review                                        .classify
 #>   <chr>                                         <chr>    
-#> 1 This has been the best TV I've ever used. Gr… appliance
+#> 1 This has been the best TV I've ever used. Gr… computer 
 #> 2 I regret buying this laptop. It is too slow … computer 
 #> 3 Not sure how to feel about my new washing ma… appliance
 ```
@@ -221,9 +221,9 @@ reviews |>
 #> # A tibble: 3 × 2
 #>   review                                        .translation                    
 #>   <chr>                                         <chr>                           
-#> 1 This has been the best TV I've ever used. Gr… Este ha sido el mejor televisor…
-#> 2 I regret buying this laptop. It is too slow … Lamento haber comprado esta lap…
-#> 3 Not sure how to feel about my new washing ma… No estoy seguro de cómo sentirm…
+#> 1 This has been the best TV I've ever used. Gr… Esta ha sido la mejor televisió…
+#> 2 I regret buying this laptop. It is too slow … Me arrepiento de comprar este p…
+#> 3 Not sure how to feel about my new washing ma… No estoy seguro de cómo me sien…
 ```
 
 ### Custom prompt
@@ -265,7 +265,7 @@ Ollama, that function is
 [`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html).
 
 ``` r
-llm_use("ollama", "llama3.1", seed = 100, temperature = 0.2)
+llm_use("ollama", "llama3.2", seed = 100, temperature = 0)
 ```
 
 ## Key considerations
@@ -276,7 +276,7 @@ If using this method with an LLM locally available, the cost will be a
 long running time. Unless using a very specialized LLM, a given LLM is a
 general model. It was fitted using a vast amount of data. So determining
 a response for each row, takes longer than if using a manually created
-NLP model. The default model used in Ollama is Llama 3.1, which was
+NLP model. The default model used in Ollama is Llama 3.2, which was
 fitted using 8B parameters.
 
 If using an external LLM service, the consideration will need to be for
@@ -306,12 +306,9 @@ library(classmap)
 
 data(data_bookReviews)
 
-book_reviews <- data_bookReviews |>
-  head(100) |>
-  as_tibble()
-
-glimpse(book_reviews)
-#> Rows: 100
+data_bookReviews |>
+  glimpse()
+#> Rows: 1,000
 #> Columns: 2
 #> $ review    <chr> "i got this as both a book and an audio file. i had waited t…
 #> $ sentiment <fct> 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, …
@@ -321,21 +318,22 @@ As per the docs, `sentiment` is a factor indicating the sentiment of the
 review: negative (1) or positive (2)
 
 ``` r
-length(strsplit(paste(book_reviews, collapse = " "), " ")[[1]])
-#> [1] 20571
+length(strsplit(paste(head(data_bookReviews$review, 100), collapse = " "), " ")[[1]])
+#> [1] 20470
 ```
 
 Just to get an idea of how much data we’re processing, I’m using a very,
 very simple word count. So we’re analyzing a bit over 20 thousand words.
 
 ``` r
-reviews_llm <- book_reviews |>
+reviews_llm <- data_bookReviews |>
+  head(100) |> 
   llm_sentiment(
     col = review,
-    options = c("positive", "negative"),
+    options = c("positive" ~ 2, "negative" ~ 1),
     pred_name = "predicted"
   )
-#> ! There were 1 predictions with invalid output, they were coerced to NA
+#> ! There were 2 predictions with invalid output, they were coerced to NA
 ```
 
 As far as **time**, on my Apple M3 machine, it took about 3 minutes to
@@ -359,18 +357,18 @@ This is what the new table looks like:
 ``` r
 reviews_llm
 #> # A tibble: 100 × 3
-#>    review                                        sentiment predicted
-#>    <chr>                                         <fct>     <chr>    
-#>  1 "i got this as both a book and an audio file… 1         negative 
-#>  2 "this book places too much emphasis on spend… 1         negative 
-#>  3 "remember the hollywood blacklist? the holly… 2         negative 
-#>  4 "while i appreciate what tipler was attempti… 1         negative 
-#>  5 "the others in the series were great, and i … 1         negative 
-#>  6 "a few good things, but she's lost her edge … 1         negative 
-#>  7 "words cannot describe how ripped off and di… 1         negative 
-#>  8 "1. the persective of most writers is shaped… 1         negative 
-#>  9 "i have been a huge fan of michael crichton … 1         negative 
-#> 10 "i saw dr. polk on c-span a month or two ago… 2         positive 
+#>    review                                        sentiment             predicted
+#>    <chr>                                         <fct>                     <dbl>
+#>  1 "i got this as both a book and an audio file… 1                             1
+#>  2 "this book places too much emphasis on spend… 1                             1
+#>  3 "remember the hollywood blacklist? the holly… 2                             2
+#>  4 "while i appreciate what tipler was attempti… 1                             1
+#>  5 "the others in the series were great, and i … 1                             1
+#>  6 "a few good things, but she's lost her edge … 1                             1
+#>  7 "words cannot describe how ripped off and di… 1                             1
+#>  8 "1. the persective of most writers is shaped… 1                            NA
+#>  9 "i have been a huge fan of michael crichton … 1                             1
+#> 10 "i saw dr. polk on c-span a month or two ago… 2                             2
 #> # ℹ 90 more rows
 ```
 
@@ -382,12 +380,12 @@ recorded in `sentiment`.
 library(forcats)
 
 reviews_llm |>
-  mutate(fct_pred = as.factor(ifelse(predicted == "positive", 2, 1))) |>
-  yardstick::accuracy(sentiment, fct_pred)
+  mutate(predicted = as.factor(predicted)) |>
+  yardstick::accuracy(sentiment, predicted)
 #> # A tibble: 1 × 3
 #>   .metric  .estimator .estimate
 #>   <chr>    <chr>          <dbl>
-#> 1 accuracy binary         0.939
+#> 1 accuracy binary         0.980
 ```
 
 ## Vector functions
@@ -404,5 +402,5 @@ llm_vec_sentiment("I am happy")
 
 ``` r
 llm_vec_translate("Este es el mejor dia!", "english")
-#> [1] "This is the best day!"
+#> [1] "It's the best day!"
 ```
