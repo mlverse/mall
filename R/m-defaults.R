@@ -7,7 +7,7 @@ m_defaults_set <- function(...) {
   }
   model <- defaults[["model"]]
   split_model <- strsplit(model, "\\:")[[1]]
-  if (length(split_model > 1)) {
+  if (length(split_model) > 1) {
     sub_model <- split_model[[1]]
   } else {
     sub_model <- NULL
