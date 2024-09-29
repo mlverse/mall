@@ -7,14 +7,14 @@ m_defaults_set <- function(...) {
   }
   model <- defaults[["model"]]
   split_model <- strsplit(model, "\\:")[[1]]
-  if(length(split_model > 1)) {
+  if (length(split_model > 1)) {
     sub_model <- split_model[[1]]
   } else {
     sub_model <- NULL
   }
   obj_class <- clean_names(c(
-    model,    
-    sub_model, 
+    model,
+    sub_model,
     defaults[["backend"]],
     "session"
   ))

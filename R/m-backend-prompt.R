@@ -5,9 +5,9 @@ m_backend_prompt <- function(backend, additional) {
 }
 
 #' @export
-m_backend_prompt.mall_llama3.2<- function(backend, additional = "") {
+m_backend_prompt.mall_llama3.2 <- function(backend, additional = "") {
   base_method <- NextMethod()
-  base_method$extract = function(labels) {
+  base_method$extract <- function(labels) {
     no_labels <- length(labels)
     col_labels <- paste0(labels, collapse = ", ")
     plural <- ifelse(no_labels > 1, "s", "")
