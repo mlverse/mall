@@ -262,7 +262,7 @@ Calling `llm_use()` directly will let you specify the model and backend
 to use. You can also setup additional arguments that will be passed down
 to the function that actually runs the prediction. In the case of
 Ollama, that function is
-[`generate()`](https://hauselin.github.io/ollama-r/reference/generate.html).
+[`chat()`](https://hauselin.github.io/ollama-r/reference/chat.html).
 
 ``` r
 llm_use("ollama", "llama3.2", seed = 100, temperature = 0)
@@ -276,8 +276,9 @@ If using this method with an LLM locally available, the cost will be a
 long running time. Unless using a very specialized LLM, a given LLM is a
 general model. It was fitted using a vast amount of data. So determining
 a response for each row, takes longer than if using a manually created
-NLP model. The default model used in Ollama is Llama 3.2, which was
-fitted using 8B parameters.
+NLP model. The default model used in Ollama is [Llama
+3.2](https://ollama.com/library/llama3.2), which was fitted using 3B
+parameters.
 
 If using an external LLM service, the consideration will need to be for
 the billing costs of using such service. Keep in mind that you will be
@@ -336,9 +337,9 @@ reviews_llm <- data_bookReviews |>
 #> ! There were 2 predictions with invalid output, they were coerced to NA
 ```
 
-As far as **time**, on my Apple M3 machine, it took about 3 minutes to
-process, 100 rows, containing 20 thousand words. Setting `temp` to 0.2
-in `llm_use()`, made the model run a bit faster.
+As far as **time**, on my Apple M3 machine, it took about 1.5 minutes to
+process, 100 rows, containing 20 thousand words. Setting `temp` to 0 in
+`llm_use()`, made the model run faster.
 
 The package uses `purrr` to send each prompt individually to the LLM.
 But, I did try a few different ways to speed up the process,
