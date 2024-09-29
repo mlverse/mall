@@ -34,7 +34,7 @@ test_that("Classify translates expected Spark SQL", {
 })
 
 test_that("Preview works", {
-  llm_use("ollama", "llama3.1", seed = 100, .silent = FALSE)
+  llm_use("ollama", "llama3.2", seed = 100, .silent = FALSE)
   expect_snapshot(
     llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
   )

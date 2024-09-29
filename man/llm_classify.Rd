@@ -49,7 +49,7 @@ library(mall)
 
 data("reviews")
 
-llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
 
 llm_classify(reviews, review, c("appliance", "computer"))
 

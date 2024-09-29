@@ -13,7 +13,7 @@
       llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
     Output
       ollamar::chat(messages = list(list(role = "user", content = "You are a helpful classification engine. Determine if the text refers to one of the following: a, b. No capitalization. No explanations.  The answer is based on the following text:\nthis is a test")), 
-          output = "text", model = "llama3.1", seed = 100)
+          output = "text", model = "llama3.2", seed = 100)
 
 # Classify on Ollama works
 
@@ -25,7 +25,7 @@
       2          I regret buying this laptop. It is too slow and the keyboard is too noisy
       3 Not sure how to feel about my new washing machine. Great color, but hard to figure
         .classify
-      1 appliance
+      1  computer
       2  computer
       3 appliance
 
@@ -40,7 +40,7 @@
       2          I regret buying this laptop. It is too slow and the keyboard is too noisy
       3 Not sure how to feel about my new washing machine. Great color, but hard to figure
               new
-      1 appliance
+      1  computer
       2  computer
       3 appliance
 
@@ -56,6 +56,6 @@
       3 Not sure how to feel about my new washing machine. Great color, but hard to figure
               new
       1 appliance
-      2 appliance
+      2  computer
       3 appliance
 

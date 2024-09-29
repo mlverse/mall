@@ -55,7 +55,7 @@ library(mall)
 
 data("reviews")
 
-llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE)
+llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
 
 # Use 'labels' to let the function know what to extract
 llm_extract(reviews, review, labels = "product")
