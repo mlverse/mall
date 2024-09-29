@@ -32,5 +32,5 @@
     Code
       llm_vec_extract("bob smith, 105 2nd street", c("name", "address"))
     Output
-      [1] "bob smith | 105 2nd street"
+      [1] "| bob smith | 105 2nd street |"
 
