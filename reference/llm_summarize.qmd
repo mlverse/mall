@@ -56,7 +56,7 @@ library(mall)
  
 data("reviews") 
  
-llm_use("ollama", "llama3.1", seed = 100, .silent = TRUE) 
+llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE) 
  
 # Use max_words to set the maximum number of words to use for the summary 
 llm_summarize(reviews, review, max_words = 5) 

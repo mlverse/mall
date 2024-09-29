@@ -5,6 +5,36 @@ m_backend_prompt <- function(backend, additional) {
 }
 
 #' @export
+m_backend_prompt.mall_llama3.2<- function(backend, additional = "") {
+  base_method <- NextMethod()
+  base_method$extract = function(labels) {
+    no_labels <- length(labels)
+    col_labels <- paste0(labels, collapse = ", ")
+    plural <- ifelse(no_labels > 1, "s", "")
+    text_multi <- ifelse(
+      no_labels > 1,
+      "Return the response exclusively in a pipe separated list, and no headers. ",
+      ""
+    )
+    list(
+      list(
+        role = "user",
+        content = glue(paste(
+          "You are a helpful text extraction engine.",
+          "Extract the {col_labels} being referred to on the text.",
+          "I expect {no_labels} item{plural} exactly.",
+          "No capitalization. No explanations.",
+          "{text_multi}",
+          "{additional}",
+          "The answer is based on the following text:\n{{x}}"
+        ))
+      )
+    )
+  }
+  base_method
+}
+
+#' @export
 m_backend_prompt.mall_session <- function(backend, additional = "") {
   list(
     sentiment = function(options) {
