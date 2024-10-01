@@ -1,0 +1,17 @@
+---
+format: gfm
+---
+
+# mall
+
+```{python}
+import mall 
+import polars as tp
+
+df = tp.DataFrame(
+    data=["I am happy", "I am sad"],
+    schema=[("txt", tp.String)],
+)
+
+df.llm.sentiment("txt")
+```
