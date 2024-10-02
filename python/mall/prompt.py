@@ -1,11 +1,12 @@
-def process_labels(x, if_characters = "", if_formula = ""): 
+def process_labels(x, if_characters="", if_list=""):
     return if_characters.format(x)
 
-def sentiment(options, additional = ""):
+
+def sentiment(options, additional=""):
     new_options = process_labels(
         options,
         "Return only one of the following answers: {}",
-        "- If the text is {f_lhs(x)}, return {f_rhs(x)}"
+        "- If the text is {f_lhs(x)}, return {f_rhs(x)}",
     )
     msg = [
         {
