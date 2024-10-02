@@ -22,6 +22,7 @@ class MallFrame:
                         {
                             "role": "user",
                             "content": prompt + x,
+                            
                         }
                     ],
                 )["message"]["content"],
