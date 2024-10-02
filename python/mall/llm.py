@@ -3,6 +3,19 @@ import ollama
 from mall.prompt import sentiment
 
 
+def build_msg(x, msg):
+    out = []
+    for msgs in msg:
+        out.append({"role": msgs["role"], "content": msgs["content"].format(x)})
+    return out
+
+
+def llm_call(x, msg):
+    out = ollama.chat(model="llama3.2", messages=build_msg(x, msg))
+    out = out["message"]["content"]
+    return out
+
+
 @pl.api.register_dataframe_namespace("llm")
 class MallFrame:
     def __init__(self, df: pl.DataFrame) -> None:
@@ -17,12 +30,9 @@ class MallFrame:
     ) -> list[pl.DataFrame]:
         msg = sentiment(options, additional=additional)
         df = self._df.with_columns(
-            pl.col(col)            
+            pl.col(col)
             .map_elements(
-                lambda x: ollama.chat(
-                    model="llama3.2",
-                    messages= msg.format(x),
-                )["message"]["content"],
+                lambda x: llm_call(x, msg),
                 return_dtype=pl.String,
             )
             .alias(pred_name)
