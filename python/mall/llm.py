@@ -20,7 +20,10 @@ def llm_call(x, msg):
 class MallFrame:
     def __init__(self, df: pl.DataFrame) -> None:
         self._df = df
-
+        self._use = {"backend": "ollama", "model":"llama3.2"}
+    def use(self, backend = "", model = "", **kwars):
+        print(self._use)
+        return self._df
     def sentiment(
         self,
         col,
@@ -29,12 +32,12 @@ class MallFrame:
         pred_name="sentiment",
     ) -> list[pl.DataFrame]:
         msg = sentiment(options, additional=additional)
-        df = self._df.with_columns(
+        self._df = self._df.with_columns(
             pl.col(col)
             .map_elements(
                 lambda x: llm_call(x, msg),
                 return_dtype=pl.String,
             )
             .alias(pred_name)
-        )
-        return df
+            )
+        return self._df
