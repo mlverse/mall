@@ -38,7 +38,7 @@ reviews.llm.sentiment("review")
 | str                              | str        |
 | "This has been the best TV I've… | "positive" |
 | "I regret buying this laptop. I… | "negative" |
-| "Not sure how to feel about my … | "negative" |
+| "Not sure how to feel about my … | "neutral"  |
 
 </div>
 
@@ -58,8 +58,58 @@ reviews.llm.summarize("review", 5)
 | review | sentiment | summary |
 |----|----|----|
 | str | str | str |
-| "This has been the best TV I've… | "positive" | "best tv experience ever" |
-| "I regret buying this laptop. I… | "negative" | "laptop purchase was a mistake" |
-| "Not sure how to feel about my … | "negative" | "neutral about the washing mach… |
+| "This has been the best TV I've… | "positive" | "great tv with excellent featur… |
+| "I regret buying this laptop. I… | "negative" | "bad purchase decision made her… |
+| "Not sure how to feel about my … | "neutral" | " unsure about my new washer" |
+
+</div>
+
+``` python
+reviews.llm.use(options = dict(seed = 100))
+```
+
+    {'backend': 'ollama', 'model': 'llama3.2', 'options': {'seed': 100}}
+
+``` python
+reviews.llm.summarize("review", 5)
+```
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 3)</small>
+
+| review | sentiment | summary |
+|----|----|----|
+| str | str | str |
+| "This has been the best TV I've… | "positive" | "it's a great tv" |
+| "I regret buying this laptop. I… | "negative" | "laptop not worth the money" |
+| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… |
+
+</div>
+
+``` python
+reviews.llm.summarize("review", 5)
+```
+
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 3)</small>
+
+| review | sentiment | summary |
+|----|----|----|
+| str | str | str |
+| "This has been the best TV I've… | "positive" | "it's a great tv" |
+| "I regret buying this laptop. I… | "negative" | "laptop not worth the money" |
+| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… |
 
 </div>

@@ -24,8 +24,22 @@ reviews = pl.DataFrame(
 )
 ```
 
+
 ```{python}
 reviews.llm.sentiment("review")
+```
+
+
+```{python}
+reviews.llm.summarize("review", 5)
+```
+
+```{python}
+reviews.llm.use(options = dict(seed = 100))
+```
+
+```{python}
+reviews.llm.summarize("review", 5)
 ```
 
 ```{python}

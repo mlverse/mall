@@ -14,8 +14,7 @@ class MallFrame:
         if model != "":
             self._use = {"backend": self._use["backend"], "model": model}
         self._use.update(dict(kwargs))
-        print(self._use)
-        return self._df
+        return self._use
 
     def sentiment(
         self,
