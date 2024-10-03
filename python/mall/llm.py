@@ -21,9 +21,14 @@ def llm_call(x, msg, backend, model):
 class MallFrame:
     def __init__(self, df: pl.DataFrame) -> None:
         self._df = df
-        self._use = {"backend": "ollama", "model": "llama3.2"}
+        self._use = {"backend": "ollama", "model": "llama3.2"}   
 
-    def use(self, backend="", model="", **kwars):
+    def use(self, backend="", model="", **kwargs):
+        if(backend != ""):
+            self._use = {"backend": backend, "model": self._use["model"]}
+        if(model != ""):
+            self._use = {"backend": self._use["backend"], "model": model}
+        self._use.update(dict(kwargs))
         print(self._use)
         return self._df
 
