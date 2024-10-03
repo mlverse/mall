@@ -1,5 +1,5 @@
 import polars as pl
-from mall.prompt import sentiment
+from mall.prompt import sentiment, summarize
 from mall.llm import llm_call 
 
 @pl.api.register_dataframe_namespace("llm")
@@ -20,8 +20,8 @@ class MallFrame:
     def sentiment(
         self,
         col,
-        additional="",
         options=["positive", "negative", "neutral"],
+        additional="",
         pred_name="sentiment",
     ) -> list[pl.DataFrame]:
         msg = sentiment(options, additional=additional)
@@ -34,3 +34,21 @@ class MallFrame:
             .alias(pred_name)
         )
         return self._df
+
+    def summarize(
+        self,
+        col,
+        max_words=10,
+        additional="",
+        pred_name="summary",
+    ) -> list[pl.DataFrame]:
+        msg = summarize(max_words, additional=additional)
+        self._df = self._df.with_columns(
+            pl.col(col)
+            .map_elements(
+                lambda x: llm_call(x, msg, self._use),
+                return_dtype=pl.String,
+            )
+            .alias(pred_name)
+        )
+        return self._df        

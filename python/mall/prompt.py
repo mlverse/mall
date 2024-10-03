@@ -8,6 +8,7 @@ def process_labels(x, if_list="", if_dict=""):
         out = if_list.replace("{values}", out)
     return out
 
+
 def sentiment(options, additional=""):
     new_options = process_labels(
         options,
@@ -22,6 +23,20 @@ def sentiment(options, additional=""):
             + "No capitalization. No explanations. "
             + f"{additional} "
             + "The answer is based on the following text:\n{}",
+        }
+    ]
+    return msg
+
+
+def summarize(max_words, additional=""):
+    msg = [
+        {
+            "role": "user",
+            "content": "You are a helpful summarization engine."
+            + "Your answer will contain no no capitalization and no explanations."
+            + f"Return no more than " + str(max_words) + " words."
+            + f"{additional}"
+            + "The answer is the summary of the following text:\n{}",
         }
     ]
     return msg

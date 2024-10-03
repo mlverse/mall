@@ -10,6 +10,11 @@ def build_msg(x, msg):
 
 def llm_call(x, msg, use):
     if use.get("backend"):
+        # print(dict(
+        #     model=use.get("model"),
+        #     messages=build_msg(x, msg),
+        #     options=use.get("options"),
+        # ))
         resp = ollama.chat(
             model=use.get("model"),
             messages=build_msg(x, msg),
