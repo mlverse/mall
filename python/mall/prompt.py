@@ -1,5 +1,10 @@
-def process_labels(x, if_characters="", if_list=""):
-    return if_characters.format(x)
+def process_labels(x, if_list="", if_dict=""):
+    if type(x) == "list":
+        out = ""
+        for i in x:
+            out += " " + i
+        out = out.strip()
+        return out.replace(" ", ", ")
 
 
 def sentiment(options, additional=""):
@@ -19,3 +24,5 @@ def sentiment(options, additional=""):
         }
     ]
     return msg
+
+

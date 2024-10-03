@@ -40,12 +40,10 @@ class MallFrame:
         self,
         col,
         additional="",
-        options="positive, negative",
+        options=["positive", "negative"],
         pred_name="sentiment",
     ) -> list[pl.DataFrame]:
         msg = sentiment(options, additional=additional)
-        backend = self._use["backend"]
-        model = self._use["model"]
         self._df = self._df.with_columns(
             pl.col(col)
             .map_elements(
