@@ -3,6 +3,10 @@
 # mall
 
 ``` python
+pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
+```
+
+``` python
 import mall 
 import polars as tp
 
@@ -14,14 +18,6 @@ df = tp.DataFrame(
 df.llm.sentiment("txt")
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-<small>shape: (2, 2)</small>
 
 | txt          | sentiment  |
 |--------------|------------|
@@ -29,4 +25,4 @@ df.llm.sentiment("txt")
 | "I am happy" | "positive" |
 | "I am sad"   | "negative" |
 
-</div>
+

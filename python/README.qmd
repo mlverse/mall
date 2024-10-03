@@ -4,6 +4,12 @@ format: gfm
 
 # mall
 
+
+
+```python
+pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
+```
+
 ```{python}
 import mall 
 import polars as tp
