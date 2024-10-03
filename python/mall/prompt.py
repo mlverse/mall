@@ -1,17 +1,18 @@
 def process_labels(x, if_list="", if_dict=""):
-    if type(x) == "list":
+    if isinstance(x, list):
         out = ""
         for i in x:
             out += " " + i
         out = out.strip()
-        return out.replace(" ", ", ")
+        out = out.replace(" ", ", ")
+        out = if_list.replace("{values}", out)
 
 
 def sentiment(options, additional=""):
     new_options = process_labels(
         options,
-        "Return only one of the following answers: {}",
-        "- If the text is {f_lhs(x)}, return {f_rhs(x)}",
+        "Return only one of the following answers: {values}",
+        "- If the text is {key}, return {value}",
     )
     msg = [
         {
@@ -24,5 +25,3 @@ def sentiment(options, additional=""):
         }
     ]
     return msg
-
-
