@@ -1,5 +1,5 @@
 ---
-format: markdown
+format: gfm
 ---
 
 # mall
@@ -22,6 +22,14 @@ reviews = pl.DataFrame(
         ],
     schema=[("review", pl.String)],
 )
+```
 
-reviews.llm.sentiment("review")
+```{python}
+def markdown(x):
+    return x.to_pandas().to_markdown()
+```
+
+
+```{python}
+markdown(reviews.llm.sentiment("review"))
 ```
