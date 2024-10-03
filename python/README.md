@@ -8,21 +8,34 @@ pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdir
 
 ``` python
 import mall 
-import polars as tp
+import polars as pl
 
-df = tp.DataFrame(
-    data=["I am happy", "I am sad"],
-    schema=[("txt", tp.String)],
+reviews = pl.DataFrame(
+    data=[
+        "This has been the best TV I've ever used. Great screen, and sound.", 
+        "I regret buying this laptop. It is too slow and the keyboard is too noisy",
+        "Not sure how to feel about my new washing machine. Great color, but hard to figure"
+        ],
+    schema=[("review", pl.String)],
 )
 
-df.llm.sentiment("txt")
+reviews.llm.sentiment("review")
 ```
 
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
 
-| txt          | sentiment  |
-|--------------|------------|
-| str          | str        |
-| "I am happy" | "positive" |
-| "I am sad"   | "negative" |
+| review                           | sentiment  |
+|----------------------------------|------------|
+| str                              | str        |
+| "This has been the best TV I've… | "positive" |
+| "I regret buying this laptop. I… | "negative" |
+| "Not sure how to feel about my … | "neutral"  |
 
-
+</div>

@@ -21,7 +21,7 @@ class MallFrame:
         self,
         col,
         additional="",
-        options=["positive", "negative"],
+        options=["positive", "negative", "neutral"],
         pred_name="sentiment",
     ) -> list[pl.DataFrame]:
         msg = sentiment(options, additional=additional)
