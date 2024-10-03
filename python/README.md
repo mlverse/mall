@@ -1,4 +1,6 @@
-
+---
+toc-title: Table of contents
+---
 
 # mall
 
@@ -6,7 +8,8 @@
 pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
 ```
 
-``` python
+:::: {.cell execution_count="1"}
+``` {.python .cell-code}
 import mall 
 import polars as pl
 
@@ -22,6 +25,7 @@ reviews = pl.DataFrame(
 reviews.llm.sentiment("review")
 ```
 
+::: {.cell-output .cell-output-display execution_count="3"}
 <div><style>
 .dataframe > thead > tr,
 .dataframe > tbody > tr {
@@ -31,11 +35,13 @@ reviews.llm.sentiment("review")
 </style>
 <small>shape: (3, 2)</small>
 
-| review                           | sentiment  |
-|----------------------------------|------------|
-| str                              | str        |
-| "This has been the best TV I've… | "positive" |
-| "I regret buying this laptop. I… | "negative" |
-| "Not sure how to feel about my … | "neutral"  |
+  review                                 sentiment
+  -------------------------------------- --------------
+  str                                    str
+  \"This has been the best TV I\'ve...   \"positive\"
+  \"I regret buying this laptop. I...    \"negative\"
+  \"Not sure how to feel about my ...    \"neutral\"
 
 </div>
+:::
+::::
