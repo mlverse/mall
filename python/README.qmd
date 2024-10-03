@@ -25,11 +25,9 @@ reviews = pl.DataFrame(
 ```
 
 ```{python}
-def markdown(x):
-    return x.to_pandas().to_markdown()
+reviews.llm.sentiment("review")
 ```
 
-
 ```{python}
-markdown(reviews.llm.sentiment("review"))
+reviews.llm.summarize("review", 5)
 ```
