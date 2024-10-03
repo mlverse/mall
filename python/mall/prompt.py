@@ -6,7 +6,7 @@ def process_labels(x, if_list="", if_dict=""):
         out = out.strip()
         out = out.replace(" ", ", ")
         out = if_list.replace("{values}", out)
-
+    return out
 
 def sentiment(options, additional=""):
     new_options = process_labels(
