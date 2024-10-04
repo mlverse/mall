@@ -4,31 +4,16 @@ format: gfm
 
 # mall
 
-
-
 ```python
 pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
 ```
 
 ```{python}
 #| include: false
-
 import polars as pl
 from polars.dataframe._html import HTMLFormatter
-
-
-# demo of formatting w/o style tags ----
-
-HTMLFormatter(pl.DataFrame({"x": [1]})).render()
-
-
-# override default jupyter repr html with new formatter ----
-
 html_formatter = get_ipython().display_formatter.formatters['text/html']
 html_formatter.for_type(pl.DataFrame, lambda df: "\n".join(HTMLFormatter(df).render()))
-
-# now html repr automatically uses the lambda above
-pl.DataFrame({"x": [1]})
 ```
 
 
@@ -51,35 +36,32 @@ reviews = pl.DataFrame(
 reviews.llm.use(options = dict(seed = 100))
 ```
 
+## Sentiment
+
 ```{python}
 reviews.llm.sentiment("review")
 ```
 
+## Summarize
 
 ```{python}
 reviews.llm.summarize("review", 5)
 ```
 
-```{python}
-reviews.llm.use(options = dict(seed = 100))
-```
-
-```{python}
-reviews.llm.summarize("review", 5)
-```
-
-```{python}
-reviews.llm.summarize("review", 5)
-```
+## Translate (as in 'English to French')
 
 ```{python}
 reviews.llm.translate("review", "spanish")
 ```
 
-```{python}
-reviews.llm.translate("review", "spanish")
-```
+## Classify
 
 ```{python}
 reviews.llm.classify("review", ["computer", "appliance"])
+```
+
+## LLM session setup
+
+```{python}
+reviews.llm.use(options = dict(seed = 100))
 ```

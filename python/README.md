@@ -1,3 +1,4 @@
+# Sentiment
 
 
 # mall
@@ -33,24 +34,7 @@ reviews.llm.sentiment("review")
 | "I regret buying this laptop. I… | "negative" |
 | "Not sure how to feel about my … | "neutral"  |
 
-``` python
-reviews.llm.summarize("review", 5)
-```
-
-<small>shape: (3, 2)</small>
-
-| review                           | summary                          |
-|----------------------------------|----------------------------------|
-| str                              | str                              |
-| "This has been the best TV I've… | "it's a great tv"                |
-| "I regret buying this laptop. I… | "laptop not worth the money"     |
-| "Not sure how to feel about my … | "feeling uncertain about new pu… |
-
-``` python
-reviews.llm.use(options = dict(seed = 100))
-```
-
-    {'backend': 'ollama', 'model': 'llama3.2', 'options': {'seed': 100}}
+## Summarize
 
 ``` python
 reviews.llm.summarize("review", 5)
@@ -65,18 +49,7 @@ reviews.llm.summarize("review", 5)
 | "I regret buying this laptop. I… | "laptop not worth the money"     |
 | "Not sure how to feel about my … | "feeling uncertain about new pu… |
 
-``` python
-reviews.llm.summarize("review", 5)
-```
-
-<small>shape: (3, 2)</small>
-
-| review                           | summary                          |
-|----------------------------------|----------------------------------|
-| str                              | str                              |
-| "This has been the best TV I've… | "it's a great tv"                |
-| "I regret buying this laptop. I… | "laptop not worth the money"     |
-| "Not sure how to feel about my … | "feeling uncertain about new pu… |
+## Translate (as in ‘English to French’)
 
 ``` python
 reviews.llm.translate("review", "spanish")
@@ -91,18 +64,7 @@ reviews.llm.translate("review", "spanish")
 | "I regret buying this laptop. I… | "Lo lamento comprar este portát… |
 | "Not sure how to feel about my … | "No estoy seguro de cómo sentir… |
 
-``` python
-reviews.llm.translate("review", "spanish")
-```
-
-<small>shape: (3, 2)</small>
-
-| review                           | translation                      |
-|----------------------------------|----------------------------------|
-| str                              | str                              |
-| "This has been the best TV I've… | "Esta ha sido la mejor TV que h… |
-| "I regret buying this laptop. I… | "Lo lamento comprar este portát… |
-| "Not sure how to feel about my … | "No estoy seguro de cómo sentir… |
+## Classify
 
 ``` python
 reviews.llm.classify("review", ["computer", "appliance"])
@@ -116,3 +78,11 @@ reviews.llm.classify("review", ["computer", "appliance"])
 | "This has been the best TV I've… | "appliance" |
 | "I regret buying this laptop. I… | "appliance" |
 | "Not sure how to feel about my … | "appliance" |
+
+## LLM session setup
+
+``` python
+reviews.llm.use(options = dict(seed = 100))
+```
+
+    {'backend': 'ollama', 'model': 'llama3.2', 'options': {'seed': 100}}

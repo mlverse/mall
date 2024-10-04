@@ -59,7 +59,7 @@ def translate(language, additional=""):
 
 
 def classify(labels, additional=""):
-    labels = process_labels(
+    new_labels = process_labels(
         labels,
         "Determine if the text refers to one of the following:{values}",
         "- If the text is {key}, return {value}",
@@ -68,7 +68,7 @@ def classify(labels, additional=""):
         {
             "role": "user",
             "content": "You are a helpful classification engine. "
-            + f"{labels}. "
+            + f"{new_labels}. "
             + "No capitalization. No explanations. "
             + f"{additional} "
             + "The answer is based on the following text:\n{}",
