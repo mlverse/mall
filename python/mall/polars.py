@@ -24,14 +24,14 @@ class MallFrame:
         additional="",
         pred_name="sentiment",
     ) -> list[pl.DataFrame]:
-        self._df = map_call(
-            df = self._df,
-            col= col, 
+        df = map_call(
+            df=self._df,
+            col=col,
             msg=sentiment(options, additional=additional),
-            pred_name= pred_name, 
-            use=self._use
-            )
-        return self._df
+            pred_name=pred_name,
+            use=self._use,
+        )
+        return df
 
     def summarize(
         self,
@@ -40,14 +40,14 @@ class MallFrame:
         additional="",
         pred_name="summary",
     ) -> list[pl.DataFrame]:
-        self._df = map_call(
-            df = self._df,
-            col= col, 
+        df = map_call(
+            df=self._df,
+            col=col,
             msg=summarize(max_words, additional=additional),
-            pred_name= pred_name, 
-            use=self._use
-            )
-        return self._df
+            pred_name=pred_name,
+            use=self._use,
+        )
+        return df
 
     def translate(
         self,
@@ -56,14 +56,14 @@ class MallFrame:
         additional="",
         pred_name="translation",
     ) -> list[pl.DataFrame]:
-        self._df = map_call(
-            df = self._df,
-            col= col, 
+        df = map_call(
+            df=self._df,
+            col=col,
             msg=translate(language, additional=additional),
-            pred_name= pred_name, 
-            use=self._use
-            )
-        return self._df
+            pred_name=pred_name,
+            use=self._use,
+        )
+        return df
 
     def classify(
         self,
@@ -72,14 +72,15 @@ class MallFrame:
         additional="",
         pred_name="classify",
     ) -> list[pl.DataFrame]:
-        self._df = map_call(
-            df = self._df,
-            col= col, 
+        df = map_call(
+            df=self._df,
+            col=col,
             msg=classify(labels, additional=additional),
-            pred_name= pred_name, 
-            use=self._use
-            )
-        return self._df
+            pred_name=pred_name,
+            use=self._use,
+        )
+        return df
+
 
 def map_call(df, col, msg, pred_name, use):
     df = df.with_columns(
