@@ -11,6 +11,27 @@ pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdir
 ```
 
 ```{python}
+#| include: false
+
+import polars as pl
+from polars.dataframe._html import HTMLFormatter
+
+
+# demo of formatting w/o style tags ----
+
+HTMLFormatter(pl.DataFrame({"x": [1]})).render()
+
+
+# override default jupyter repr html with new formatter ----
+
+html_formatter = get_ipython().display_formatter.formatters['text/html']
+html_formatter.for_type(pl.DataFrame, lambda df: "\n".join(HTMLFormatter(df).render()))
+
+# now html repr automatically uses the lambda above
+pl.DataFrame({"x": [1]})
+```
+
+```{python}
 import mall 
 import polars as pl
 

@@ -82,7 +82,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ollama", specifier = ">=0.3.3" },
-    { name = "polars" },
+    { name = "polars", specifier = ">=1.9.0" },
 ]
 
 [[package]]
