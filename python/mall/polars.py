@@ -1,5 +1,5 @@
 import polars as pl
-from mall.prompt import sentiment, summarize, translate
+from mall.prompt import sentiment, summarize, translate, classify
 from mall.llm import llm_call
 
 
@@ -60,6 +60,22 @@ class MallFrame:
             df = self._df,
             col= col, 
             msg=translate(language, additional=additional),
+            pred_name= pred_name, 
+            use=self._use
+            )
+        return self._df
+
+    def classify(
+        self,
+        col,
+        labels="",
+        additional="",
+        pred_name="classify",
+    ) -> list[pl.DataFrame]:
+        self._df = map_call(
+            df = self._df,
+            col= col, 
+            msg=classify(labels, additional=additional),
             pred_name= pred_name, 
             use=self._use
             )

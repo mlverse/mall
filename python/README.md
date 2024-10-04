@@ -42,9 +42,9 @@ reviews.llm.summarize("review", 5)
 | review | sentiment | summary |
 |----|----|----|
 | str | str | str |
-| "This has been the best TV I've… | "positive" | "best tv i've ever owned" |
-| "I regret buying this laptop. I… | "negative" | "laptop not living up expectati… |
-| "Not sure how to feel about my … | "neutral" | " unsure about the purchase" |
+| "This has been the best TV I've… | "positive" | "it's a great tv" |
+| "I regret buying this laptop. I… | "negative" | "laptop not worth the money" |
+| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… |
 
 ``` python
 reviews.llm.use(options = dict(seed = 100))
@@ -90,3 +90,29 @@ reviews.llm.translate("review", "spanish")
 | "This has been the best TV I've… | "positive" | "it's a great tv" | "Esta ha sido la mejor TV que h… |
 | "I regret buying this laptop. I… | "negative" | "laptop not worth the money" | "Lo lamento comprar este portát… |
 | "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… | "No estoy seguro de cómo sentir… |
+
+``` python
+reviews.llm.translate("review", "spanish")
+```
+
+<small>shape: (3, 4)</small>
+
+| review | sentiment | summary | translation |
+|----|----|----|----|
+| str | str | str | str |
+| "This has been the best TV I've… | "positive" | "it's a great tv" | "Esta ha sido la mejor TV que h… |
+| "I regret buying this laptop. I… | "negative" | "laptop not worth the money" | "Lo lamento comprar este portát… |
+| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… | "No estoy seguro de cómo sentir… |
+
+``` python
+reviews.llm.classify("review", ["computer", "appliance"])
+```
+
+<small>shape: (3, 5)</small>
+
+| review | sentiment | summary | translation | classify |
+|----|----|----|----|----|
+| str | str | str | str | str |
+| "This has been the best TV I've… | "positive" | "it's a great tv" | "Esta ha sido la mejor TV que h… | "appliance" |
+| "I regret buying this laptop. I… | "negative" | "laptop not worth the money" | "Lo lamento comprar este portát… | "appliance" |
+| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… | "No estoy seguro de cómo sentir… | "appliance" |

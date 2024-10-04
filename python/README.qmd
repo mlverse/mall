@@ -31,6 +31,7 @@ html_formatter.for_type(pl.DataFrame, lambda df: "\n".join(HTMLFormatter(df).ren
 pl.DataFrame({"x": [1]})
 ```
 
+
 ```{python}
 import mall 
 import polars as pl
@@ -45,6 +46,10 @@ reviews = pl.DataFrame(
 )
 ```
 
+```{python}
+#| include: false
+reviews.llm.use(options = dict(seed = 100))
+```
 
 ```{python}
 reviews.llm.sentiment("review")
@@ -69,4 +74,12 @@ reviews.llm.summarize("review", 5)
 
 ```{python}
 reviews.llm.translate("review", "spanish")
+```
+
+```{python}
+reviews.llm.translate("review", "spanish")
+```
+
+```{python}
+reviews.llm.classify("review", ["computer", "appliance"])
 ```
