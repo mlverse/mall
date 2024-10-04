@@ -1,11 +1,20 @@
-# Sentiment
-
-
 # mall
+
+## Intro
+
+Run multiple LLM predictions against a data frame. The predictions are
+processed row-wise over a specified column. It works using a
+pre-determined one-shot prompt, along with the current row’s content.
+
+## Install
+
+To install from Github, use:
 
 ``` python
 pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
 ```
+
+## Examples
 
 ``` python
 import mall 
@@ -20,6 +29,9 @@ reviews = pl.DataFrame(
     schema=[("review", pl.String)],
 )
 ```
+
+## Sentiment
+
 
 ``` python
 reviews.llm.sentiment("review")
