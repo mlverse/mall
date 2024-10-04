@@ -24,15 +24,13 @@ class MallFrame:
         additional="",
         pred_name="sentiment",
     ) -> list[pl.DataFrame]:
-        msg = sentiment(options, additional=additional)
-        self._df = self._df.with_columns(
-            pl.col(col)
-            .map_elements(
-                lambda x: llm_call(x, msg, self._use),
-                return_dtype=pl.String,
+        self._df = map_call(
+            df = self._df,
+            col= col, 
+            msg=sentiment(options, additional=additional),
+            pred_name= pred_name, 
+            use=self._use
             )
-            .alias(pred_name)
-        )
         return self._df
 
     def summarize(
@@ -42,15 +40,13 @@ class MallFrame:
         additional="",
         pred_name="summary",
     ) -> list[pl.DataFrame]:
-        msg = summarize(max_words, additional=additional)
-        self._df = self._df.with_columns(
-            pl.col(col)
-            .map_elements(
-                lambda x: llm_call(x, msg, self._use),
-                return_dtype=pl.String,
+        self._df = map_call(
+            df = self._df,
+            col= col, 
+            msg=summarize(max_words, additional=additional),
+            pred_name= pred_name, 
+            use=self._use
             )
-            .alias(pred_name)
-        )
         return self._df
 
     def translate(
@@ -60,13 +56,22 @@ class MallFrame:
         additional="",
         pred_name="translation",
     ) -> list[pl.DataFrame]:
-        msg = translate(language, additional=additional)
-        self._df = self._df.with_columns(
-            pl.col(col)
-            .map_elements(
-                lambda x: llm_call(x, msg, self._use),
-                return_dtype=pl.String,
+        self._df = map_call(
+            df = self._df,
+            col= col, 
+            msg=translate(language, additional=additional),
+            pred_name= pred_name, 
+            use=self._use
             )
-            .alias(pred_name)
-        )
         return self._df
+
+def map_call(df, col, msg, pred_name, use):
+    df = df.with_columns(
+        pl.col(col)
+        .map_elements(
+            lambda x: llm_call(x, msg, use),
+            return_dtype=pl.String,
+        )
+        .alias(pred_name)
+    )
+    return df
