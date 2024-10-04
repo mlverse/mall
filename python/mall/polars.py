@@ -5,6 +5,9 @@ from mall.llm import llm_call
 
 @pl.api.register_dataframe_namespace("llm")
 class MallFrame:
+    """Extension to Polars that add ability to use 
+    an LLM to run batch predictions over a data frame   
+    """
     def __init__(self, df: pl.DataFrame) -> None:
         self._df = df
         self._use = {"backend": "ollama", "model": "llama3.2"}
@@ -56,6 +59,23 @@ class MallFrame:
         additional="",
         pred_name="translation",
     ) -> list[pl.DataFrame]:
+        """Translate text into another language.
+
+        Parameters
+        ------
+        col
+            The name of the text field to process
+
+        language
+            The target language to translate to. For example 'French'. 
+
+        pred_name
+            A character vector with the name of the new column where the
+            prediction will be placed
+            
+        additional
+            Inserts this text into the prompt sent to the LLM
+        """    
         df = map_call(
             df=self._df,
             col=col,
