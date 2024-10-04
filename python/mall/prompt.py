@@ -34,9 +34,24 @@ def summarize(max_words, additional=""):
             "role": "user",
             "content": "You are a helpful summarization engine."
             + "Your answer will contain no no capitalization and no explanations."
-            + f"Return no more than " + str(max_words) + " words."
+            + f"Return no more than "
+            + str(max_words)
+            + " words."
             + f"{additional}"
             + "The answer is the summary of the following text:\n{}",
+        }
+    ]
+    return msg
+
+
+def translate(language, additional=""):
+    msg = [
+        {
+            "You are a helpful translation engine."
+            + "You will return only the translation text, no explanations."
+            + f"The target language to translate to is: {language}."
+            + f"{additional}"
+            + "The answer is the translation of the following text:\n{}"
         }
     ]
     return msg

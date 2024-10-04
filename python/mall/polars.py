@@ -1,6 +1,7 @@
 import polars as pl
-from mall.prompt import sentiment, summarize
-from mall.llm import llm_call 
+from mall.prompt import sentiment, summarize, translate
+from mall.llm import llm_call
+
 
 @pl.api.register_dataframe_namespace("llm")
 class MallFrame:
@@ -50,4 +51,22 @@ class MallFrame:
             )
             .alias(pred_name)
         )
-        return self._df        
+        return self._df
+
+    def translate(
+        self,
+        col,
+        language="",
+        additional="",
+        pred_name="translation",
+    ) -> list[pl.DataFrame]:
+        msg = translate(language, additional=additional)
+        self._df = self._df.with_columns(
+            pl.col(col)
+            .map_elements(
+                lambda x: llm_call(x, msg, self._use),
+                return_dtype=pl.String,
+            )
+            .alias(pred_name)
+        )
+        return self._df
