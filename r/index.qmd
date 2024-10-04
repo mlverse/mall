@@ -1,7 +1,0 @@
----
-format:
-  html:
-    toc: true
----
-
-{{< include README.md >}}

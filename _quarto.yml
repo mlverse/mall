@@ -8,9 +8,9 @@ execute:
 
 website:
   title: mall
-  favicon: "man/figures/favicon/apple-touch-icon.png"
+  favicon: "figures/favicon/apple-touch-icon.png"
   navbar:
-    logo: "man/figures/favicon/apple-touch-icon.png"
+    logo: "figures/favicon/apple-touch-icon.png"
     left:
       - sidebar:articles    
       - href: reference/index.qmd
