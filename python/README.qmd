@@ -66,3 +66,7 @@ reviews.llm.summarize("review", 5)
 ```{python}
 reviews.llm.summarize("review", 5)
 ```
+
+```{python}
+reviews.llm.translate("review", "spanish")
+```

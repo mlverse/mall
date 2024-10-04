@@ -31,7 +31,7 @@ reviews.llm.sentiment("review")
 | str                              | str        |
 | "This has been the best TV I've… | "positive" |
 | "I regret buying this laptop. I… | "negative" |
-| "Not sure how to feel about my … | "neutral"  |
+| "Not sure how to feel about my … | "negative" |
 
 ``` python
 reviews.llm.summarize("review", 5)
@@ -42,9 +42,9 @@ reviews.llm.summarize("review", 5)
 | review | sentiment | summary |
 |----|----|----|
 | str | str | str |
-| "This has been the best TV I've… | "positive" | "very happy with this tv" |
-| "I regret buying this laptop. I… | "negative" | "laptop not meeting expectation… |
-| "Not sure how to feel about my … | "neutral" | "unsure about my new washer" |
+| "This has been the best TV I've… | "positive" | "best tv ever purchased" |
+| "I regret buying this laptop. I… | "negative" | "laptop not living up expectati… |
+| "Not sure how to feel about my … | "negative" | "having mixed feelings about it" |
 
 ``` python
 reviews.llm.use(options = dict(seed = 100))
@@ -63,7 +63,7 @@ reviews.llm.summarize("review", 5)
 | str | str | str |
 | "This has been the best TV I've… | "positive" | "it's a great tv" |
 | "I regret buying this laptop. I… | "negative" | "laptop not worth the money" |
-| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… |
+| "Not sure how to feel about my … | "negative" | "feeling uncertain about new pu… |
 
 ``` python
 reviews.llm.summarize("review", 5)
@@ -76,4 +76,17 @@ reviews.llm.summarize("review", 5)
 | str | str | str |
 | "This has been the best TV I've… | "positive" | "it's a great tv" |
 | "I regret buying this laptop. I… | "negative" | "laptop not worth the money" |
-| "Not sure how to feel about my … | "neutral" | "feeling uncertain about new pu… |
+| "Not sure how to feel about my … | "negative" | "feeling uncertain about new pu… |
+
+``` python
+reviews.llm.translate("review", "spanish")
+```
+
+<small>shape: (3, 4)</small>
+
+| review | sentiment | summary | translation |
+|----|----|----|----|
+| str | str | str | str |
+| "This has been the best TV I've… | "positive" | "it's a great tv" | "Esta ha sido la mejor TV que h… |
+| "I regret buying this laptop. I… | "negative" | "laptop not worth the money" | "Lo lamento comprar este portát… |
+| "Not sure how to feel about my … | "negative" | "feeling uncertain about new pu… | "No estoy seguro de cómo sentir… |

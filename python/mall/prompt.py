@@ -47,11 +47,12 @@ def summarize(max_words, additional=""):
 def translate(language, additional=""):
     msg = [
         {
-            "You are a helpful translation engine."
+            "role": "user",
+            "content": "You are a helpful translation engine."
             + "You will return only the translation text, no explanations."
             + f"The target language to translate to is: {language}."
             + f"{additional}"
-            + "The answer is the translation of the following text:\n{}"
+            + "The answer is the translation of the following text:\n{}",
         }
     ]
     return msg

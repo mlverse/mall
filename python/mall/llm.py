@@ -8,18 +8,18 @@ def build_msg(x, msg):
     return out
 
 
-def llm_call(x, msg, use, preview = False):
-    if use.get("backend") == "ollama":
-        if preview:
-            print(dict(
-                model=use.get("model"),
-                messages=build_msg(x, msg),
-                options=use.get("options"),
-            ))
-        resp = ollama.chat(
-            model=use.get("model"),
-            messages=build_msg(x, msg),
-            options=use.get("options"),
-        )
-        out = resp["message"]["content"]
+def llm_call(x, msg, use, preview=True):
+    # print(
+    #     dict(
+    #         model=use.get("model"),
+    #         messages=build_msg(x, msg),
+    #         options=use.get("options"),
+    #     )
+    # )
+    resp = ollama.chat(
+        model=use.get("model"),
+        messages=build_msg(x, msg),
+        options=use.get("options"),
+    )
+    out = resp["message"]["content"]
     return out
