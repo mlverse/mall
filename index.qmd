@@ -9,7 +9,7 @@ execute:
 
 
 ```{r}
-#| eval: true
+
 #| include: false
 library(dplyr)
 library(dbplyr)
@@ -108,7 +108,7 @@ We will start with loading a very small data set contained in `mall`. It has
 ## R
 
 ```{r}
-#| eval: true
+
 
 library(mall)
 
@@ -120,7 +120,7 @@ reviews
 ## python
 
 ```{python}
-#| eval: true
+
 
 
 import mall 
@@ -139,7 +139,7 @@ reviews = pl.DataFrame(
 
 ```{python}
 #| include: false
-#| eval: true
+
 
 reviews.llm.use(options = dict(seed = 100))
 ```
@@ -221,7 +221,7 @@ function has an argument to control the maximum number of words to output
 ## R
 
 ```{r}
-#| eval: true
+
 
 reviews |>
   llm_summarize(review, max_words = 5)
@@ -230,7 +230,7 @@ reviews |>
 ## python 
 
 ```{python}
-#| eval: true
+
 
 reviews.llm.summarize("review", 5)
 ```
@@ -306,7 +306,7 @@ accuracy will depend on the LLM
 ## R
 
 ```{r}
-#| eval: true
+
 
 reviews |>
   llm_translate(review, "spanish")
@@ -316,7 +316,7 @@ reviews |>
 ## python 
 
 ```{python}
-#| eval: true
+
 
 reviews.llm.translate("review", "spanish")
 ```

@@ -46,3 +46,17 @@ knitr:
   opts_chunk: 
     collapse: true
     comment: "#>"    
+    
+quartodoc:
+  package: mall
+  options: null
+  style: pkgdown
+  dir: reference
+  out_index: _api_index.qmd
+  dynamic: true
+  sections:
+    - title: mall
+      desc: ''
+      contents:
+      - name: MallFrame
+
