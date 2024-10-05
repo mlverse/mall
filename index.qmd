@@ -22,8 +22,6 @@ mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 
 <img src="figures/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
-## Intro
-
 Run multiple LLM predictions against a data frame. The predictions are processed 
 row-wise over a specified column. It works using a pre-determined one-shot prompt,
 along with the current row's content. The prompt that is use will depend of the
@@ -140,6 +138,14 @@ reviews = pl.DataFrame(
 :::
 
 ```{python}
+#| include: false
+#| eval: true
+
+reviews.llm.use(options = dict(seed = 100))
+```
+
+
+```{python}
 import mall 
 import polars as pl
 
@@ -220,8 +226,11 @@ reviews |>
 ## python
 
 ```{python}
+#| eval: true
 
-reviews.llm.sentiment("review", options=["positive", "negative"]).filter(sentiment == "negative")
+x = reviews.llm.sentiment("review", options=["positive", "negative"])
+
+x.filter(pl.col("sentiment") == "negative")
 
 ```
 
