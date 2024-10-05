@@ -171,7 +171,6 @@ do this we will call `llm_sentiment()`:
 ## R
 
 ```{r}
-#| eval: true
 
 reviews |>
   llm_sentiment(review)
@@ -180,7 +179,6 @@ reviews |>
 ## python 
 
 ```{python}
-#| eval: true
 
 reviews.llm.sentiment("review")
 ```
@@ -193,7 +191,6 @@ The function let's us modify the options to choose from:
 ## R
 
 ```{r}
-#| eval: true
 
 reviews |>
   llm_sentiment(review, options = c("positive", "negative"))
@@ -202,7 +199,6 @@ reviews |>
 ## python 
 
 ```{python}
-#| eval: true
 
 reviews.llm.sentiment("review", options=["positive", "negative"])
 ```
@@ -216,7 +212,6 @@ can be used in further transformations:
 ## R
 
 ```{r}
-#| eval: true
 
 reviews |>
   llm_sentiment(review, options = c("positive", "negative")) |>
@@ -226,7 +221,6 @@ reviews |>
 ## python
 
 ```{python}
-#| eval: true
 
 x = reviews.llm.sentiment("review", options=["positive", "negative"])
 
@@ -243,18 +237,48 @@ make it easier to capture its intent. To do this, use `llm_summarize()`. This
 function has an argument to control the maximum number of words to output 
 (`max_words`):
 
+::: {.panel-tabset group="language"}
+## R
+
 ```{r}
+#| eval: true
+
 reviews |>
   llm_summarize(review, max_words = 5)
 ```
 
+## python 
+
+```{python}
+#| eval: true
+
+reviews.llm.summarize("review", 5)
+```
+
+:::
+
 To control the name of the prediction field, you can change `pred_name` argument.
 This works with the other `llm_` functions as well. 
 
+::: {.panel-tabset group="language"}
+## R
+
 ```{r}
+#| eval: true
+
 reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
 ```
+
+## python 
+
+```{python}
+#| eval: true
+
+reviews.llm.summarize("review", max_words = 5, pred_name = "review_summary")
+```
+
+:::
 
 ### Classify
 
