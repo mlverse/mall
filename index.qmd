@@ -287,8 +287,6 @@ Use the LLM to categorize the text into one of the options you provide:
 ## R
 
 ```{r}
-#| eval: true
-
 reviews |>
   llm_classify(review, c("appliance", "computer"))
 ```
@@ -297,7 +295,6 @@ reviews |>
 ## python 
 
 ```{python}
-#| eval: true
 
 reviews.llm.classify("review", ["computer", "appliance"])
 ```
@@ -325,11 +322,26 @@ language. What is really nice, it is that you don't need to specify the language
 of the source text. Only the target language needs to be defined.  The translation
 accuracy will depend on the LLM
 
+::: {.panel-tabset group="language"}
+## R
+
 ```{r}
+#| eval: true
+
 reviews |>
   llm_translate(review, "spanish")
 ```
 
+
+## python 
+
+```{python}
+#| eval: true
+
+reviews.llm.translate("review", "spanish")
+```
+
+:::
 
 ### Custom prompt
 
@@ -361,9 +373,30 @@ You can also setup additional arguments that will be passed down to the
 function that actually runs the prediction. In the case of Ollama, that function
 is [`chat()`](https://hauselin.github.io/ollama-r/reference/chat.html). 
 
-```{r, eval = FALSE}
+
+
+::: {.panel-tabset group="language"}
+## R
+
+The model to use, and other options can be set for the current R session
+
+```{r}
+#| eval: false
 llm_use("ollama", "llama3.2", seed = 100, temperature = 0)
 ```
+
+
+## python 
+
+The model to use, and other options can be set for the specific Polars
+data frame
+
+```{python}
+#| eval: false
+reviews.llm.use(options = dict(seed = 100))
+```
+
+:::
 
 ## Key considerations
 
@@ -458,7 +491,7 @@ reviews_llm |>
   yardstick::accuracy(sentiment, predicted)
 ```
 
-## Vector functions
+## Vector functions (R only)
 
 `mall` includes functions that expect a vector, instead of a table, to run the
 predictions. This should make it easier to test things, such as custom prompts
@@ -473,66 +506,3 @@ llm_vec_sentiment("I am happy")
 llm_vec_translate("Este es el mejor dia!", "english")
 ```
 
-
-::: {.panel-tabset group="language"}
-## R
-
-``` {.r}
-fizz_buzz <- function(fbnums = 1:50) {
-  output <- dplyr::case_when(
-    fbnums %% 15 == 0 ~ "FizzBuzz",
-    fbnums %% 3 == 0 ~ "Fizz",
-    fbnums %% 5 == 0 ~ "Buzz",
-    TRUE ~ as.character(fbnums)
-  )
-  print(output)
-}
-```
-
-## Python
-
-``` {.python}
-def fizz_buzz(num):
-  if num % 15 == 0:
-    print("FizzBuzz")
-  elif num % 5 == 0:
-    print("Buzz")
-  elif num % 3 == 0:
-    print("Fizz")
-  else:
-    print(num)
-```
-
-:::
-
-
-::: {.panel-tabset group="language"}
-## R
-
-``` {.r}
-fizz_buzz <- function(fbnums = 1:50) {
-  output <- dplyr::case_when(
-    fbnums %% 15 == 0 ~ "FizzBuzz",
-    fbnums %% 3 == 0 ~ "Fizz",
-    fbnums %% 5 == 0 ~ "Buzz",
-    TRUE ~ as.character(fbnums)
-  )
-  print(output)
-}
-```
-
-## Python
-
-``` {.python}
-def fizz_buzz(num):
-  if num % 15 == 0:
-    print("FizzBuzz")
-  elif num % 5 == 0:
-    print("Buzz")
-  elif num % 3 == 0:
-    print("Fizz")
-  else:
-    print(num)
-```
-
-:::
