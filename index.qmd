@@ -264,7 +264,6 @@ This works with the other `llm_` functions as well.
 ## R
 
 ```{r}
-#| eval: true
 
 reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
@@ -273,7 +272,6 @@ reviews |>
 ## python 
 
 ```{python}
-#| eval: true
 
 reviews.llm.summarize("review", max_words = 5, pred_name = "review_summary")
 ```
@@ -284,10 +282,27 @@ reviews.llm.summarize("review", max_words = 5, pred_name = "review_summary")
 
 Use the LLM to categorize the text into one of the options you provide: 
 
+
+::: {.panel-tabset group="language"}
+## R
+
 ```{r}
+#| eval: true
+
 reviews |>
   llm_classify(review, c("appliance", "computer"))
 ```
+
+
+## python 
+
+```{python}
+#| eval: true
+
+reviews.llm.classify("review", ["computer", "appliance"])
+```
+
+:::
 
 ### Extract 
 

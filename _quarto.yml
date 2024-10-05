@@ -33,6 +33,7 @@ website:
 format:
   html:
     toc: true
+    toc-expand: true
     code-copy: true
     code-overflow: wrap
     code-toos: true
