@@ -52,7 +52,7 @@ quartodoc:
   options: null
   style: pkgdown
   dir: reference
-  out_index: python_index.qmd
+  out_index: _api_index.qmd
   dynamic: true
   sections:
     - title: mall

@@ -3,7 +3,13 @@
 {{< include r_index.qmd >}}
 
 ## python
-{{< include python_index.qmd >}}
+
+<img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right" />
+
+[MallFrame](MallFrame.qmd#mall.MallFrame) 
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to Polars that add ability to use 
+an LLM to run batch predictions over a data frame
 
 :::
   

@@ -1,9 +1,7 @@
 ---
 toc: false
 ---
-<img src="../figures/favicon/apple-touch-icon-180x180.png" style="float:right" />
-
-# Function Reference
+<img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right" />
 
 [llm_classify()](llm_classify.html) [llm_vec_classify()](llm_classify.html)
 
