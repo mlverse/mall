@@ -6,7 +6,14 @@ def process_labels(x, if_list="", if_dict=""):
         out = out.strip()
         out = out.replace(" ", ", ")
         out = if_list.replace("{values}", out)
-    return out
+    if isinstance(x, dict):
+        out = ""
+        for i in x:
+            new = if_dict
+            new = new.replace("{key}", i)
+            new = new.replace("{value}", x.get(i))
+            out += " " + new
+    return out    
 
 
 def sentiment(options, additional=""):
@@ -75,3 +82,5 @@ def classify(labels, additional=""):
         }
     ]
     return msg
+
+
