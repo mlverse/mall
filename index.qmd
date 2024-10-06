@@ -64,17 +64,17 @@ reviews.llm.sentiment("review")
 
 We want to new find ways to help data scientists use LLMs in their daily work. 
 Unlike the familiar interfaces, such as chatting and code completion, this interface
-runs your text data directly against the LLM.  The LLM's flexibility, allows for
-it to adapt to the subject of your data, and provide surprisingly accurate predictions. 
-This saves the data scientist the need to write and tune an NLP model. 
+runs your text data directly against the LLM.  
 
-```{r}
-#| include: false
+The LLM's flexibility, allows for it to adapt to the subject of your data, and 
+provide surprisingly accurate predictions. This saves the data scientist the
+need to write and tune an NLP model. 
 
-# Add paragraph about: thanks to the more widespread availability of capable
-# local llms, data does not leave your company, no $$ cost to use
-
-```
+In recent times, the capabilities of LLMs that can run locally in your computer 
+have increased dramatically. This means that these sort of analysis can run
+in your machine with good accuracy. Additionally, it makes it possible to take
+advantage of LLM's at your institution, since the data will not leave the
+corporate network. 
 
 ## Get started
 
