@@ -1,7 +1,7 @@
-# Function reference {.doc .doc-index}
-
-## mall
-
+---
+toc: false
+---
+<img src="../figures/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
 
 | | |

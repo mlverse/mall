@@ -9,8 +9,9 @@ execute:
 
 
 ```{r}
-
 #| include: false
+#| eval: true
+
 library(dplyr)
 library(dbplyr)
 library(tictoc)
