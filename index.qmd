@@ -10,7 +10,7 @@ execute:
 
 ```{r}
 #| include: false
-#| eval: true
+
 
 library(dplyr)
 library(dbplyr)
@@ -26,7 +26,9 @@ mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 Run multiple LLM predictions against a data frame. The predictions are processed 
 row-wise over a specified column. It works using a pre-determined one-shot prompt,
 along with the current row's content. The prompt that is use will depend of the
-type of analysis needed. Currently, the included prompts perform the following: 
+type of analysis needed. 
+
+Currently, the included prompts perform the following: 
 
 - [Sentiment analysis](#sentiment)
 - [Text summarizing](#summarize)
@@ -37,9 +39,26 @@ type of analysis needed. Currently, the included prompts perform the following:
 
 This package is inspired by the SQL AI functions now offered by vendors such as
 [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html) 
-and Snowflake. `mall` uses [Ollama](https://ollama.com/) to 
-interact with LLMs installed locally. That interaction takes place via the
-[`ollamar`](https://hauselin.github.io/ollama-r/) package. 
+and Snowflake.  `mall` uses [Ollama](https://ollama.com/) to  interact with LLMs 
+installed  locally. 
+
+
+For R, that interaction takes place via the 
+[`ollamar`](https://hauselin.github.io/ollama-r/) package. The functions are 
+designed to easily work with piped commands, such as `dplyr`. 
+
+```r
+reviews |>
+  llm_sentiment(review)
+```
+
+
+For Python, `mall` includes an extension to [Polars](https://pola.rs/). To
+interact with Ollama, it uses the official [Python library](https://github.com/ollama/ollama-python).
+
+```python
+reviews.llm.sentiment("review")
+```
 
 ## Motivation
 
