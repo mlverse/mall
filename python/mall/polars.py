@@ -63,17 +63,17 @@ class MallFrame:
 
         Parameters
         ------
-        col
+        col: str
             The name of the text field to process
 
-        language
+        language: str
             The target language to translate to. For example 'French'. 
 
-        pred_name
+        pred_name: str
             A character vector with the name of the new column where the
             prediction will be placed
             
-        additional
+        additional: str
             Inserts this text into the prompt sent to the LLM
         """    
         df = map_call(
