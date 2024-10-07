@@ -85,20 +85,23 @@ def classify(labels, additional=""):
 
 
 def extract(labels, additional=""):
-    no_labels = len(labels)
     col_labels = ""
-    for label in labels:
-        col_labels += label + " "
-    col_labels = col_labels.rstrip()
-    col_labels = col_labels.replace(" ", ", ")
-    if no_labels > 1:
+    if isinstance(labels, list):
+        no_labels = len(labels)
         plural = "s"
         text_multi = (
             "Return the response in a simple list, pipe separated, and no headers. "
         )
+        for label in labels:
+            col_labels += label + " "
+        col_labels = col_labels.rstrip()
+        col_labels = col_labels.replace(" ", ", ")
     else:
+        no_labels = 1
         plural = ""
         text_multi = ""
+        col_labels = labels
+
     msg = [
         {
             "role": "user",
