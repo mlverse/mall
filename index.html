@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./man/figures/favicon/apple-touch-icon.png" rel="icon" type="image/png">
+<link href="./figures/favicon/apple-touch-icon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./man/figures/favicon/apple-touch-icon.png" alt="" class="navbar-logo">
+    <img src="./figures/favicon/apple-touch-icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">mall</span>
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="./articles/databricks.html">
- <span class="dropdown-text">Databricks</span></a>
+ <span class="dropdown-text">Databricks (R only)</span></a>
   </li>  
     </ul>
   </li>
@@ -166,18 +166,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#mall" id="toc-mall" class="nav-link active" data-scroll-target="#mall">mall</a>
-  <ul class="collapse">
-  <li><a href="#intro" id="toc-intro" class="nav-link" data-scroll-target="#intro">Intro</a></li>
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#get-started" id="toc-get-started" class="nav-link" data-scroll-target="#get-started">Get started</a>
   <ul class="collapse">
   <li><a href="#with-local-llms" id="toc-with-local-llms" class="nav-link" data-scroll-target="#with-local-llms">With local LLMs</a></li>
-  <li><a href="#with-databricks" id="toc-with-databricks" class="nav-link" data-scroll-target="#with-databricks">With Databricks</a></li>
+  <li><a href="#with-databricks-r-only" id="toc-with-databricks-r-only" class="nav-link" data-scroll-target="#with-databricks-r-only">With Databricks (R only)</a></li>
   </ul></li>
   <li><a href="#llm-functions" id="toc-llm-functions" class="nav-link" data-scroll-target="#llm-functions">LLM functions</a>
   <ul class="collapse">
@@ -188,11 +185,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#translate" id="toc-translate" class="nav-link" data-scroll-target="#translate">Translate</a></li>
   <li><a href="#custom-prompt" id="toc-custom-prompt" class="nav-link" data-scroll-target="#custom-prompt">Custom prompt</a></li>
   </ul></li>
-  <li><a href="#initialize-session" id="toc-initialize-session" class="nav-link" data-scroll-target="#initialize-session">Initialize session</a></li>
+  <li><a href="#model-selection-and-settings" id="toc-model-selection-and-settings" class="nav-link" data-scroll-target="#model-selection-and-settings">Model selection and settings</a></li>
   <li><a href="#key-considerations" id="toc-key-considerations" class="nav-link" data-scroll-target="#key-considerations">Key considerations</a></li>
   <li><a href="#performance" id="toc-performance" class="nav-link" data-scroll-target="#performance">Performance</a></li>
-  <li><a href="#vector-functions" id="toc-vector-functions" class="nav-link" data-scroll-target="#vector-functions">Vector functions</a></li>
-  </ul></li>
+  <li><a href="#vector-functions-r-only" id="toc-vector-functions-r-only" class="nav-link" data-scroll-target="#vector-functions-r-only">Vector functions (R only)</a></li>
   </ul>
 </nav>
     </div>
@@ -202,15 +198,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-<section id="mall" class="level1">
-<h1>mall</h1>
-<p><img src="man/figures/favicon/apple-touch-icon-180x180.png" style="float:right"></p>
-<!-- badges: start -->
-<p><a href="https://github.com/edgararuiz/mall/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/edgararuiz/mall/actions/workflows/R-CMD-check.yaml/badge.svg" class="img-fluid" alt="R-CMD-check"></a> <a href="https://app.codecov.io/gh/edgararuiz/mall?branch=main"><img src="https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg" class="img-fluid" alt="Codecov test coverage"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" class="img-fluid" alt="Lifecycle: experimental"></a> <!-- badges: end --></p>
-<section id="intro" class="level2">
-<h2 class="anchored" data-anchor-id="intro">Intro</h2>
-<p>Run multiple LLM predictions against a data frame. The predictions are processed row-wise over a specified column. It works using a pre-determined one-shot prompt, along with the current row’s content. The prompt that is use will depend of the type of analysis needed. Currently, the included prompts perform the following:</p>
+<p><img src="figures/favicon/apple-touch-icon-180x180.png" style="float:right"></p>
+<p>Run multiple LLM predictions against a data frame. The predictions are processed row-wise over a specified column. It works using a pre-determined one-shot prompt, along with the current row’s content. The prompt that is use will depend of the type of analysis needed.</p>
+<p>Currently, the included prompts perform the following:</p>
 <ul>
 <li><a href="#sentiment">Sentiment analysis</a></li>
 <li><a href="#summarize">Text summarizing</a></li>
@@ -219,28 +209,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#translate">Translate text</a></li>
 <li><a href="#custom-prompt">Custom prompt</a></li>
 </ul>
-<p>This package is inspired by the SQL AI functions now offered by vendors such as <a href="https://docs.databricks.com/en/large-language-models/ai-functions.html">Databricks</a> and Snowflake. <code>mall</code> uses <a href="https://ollama.com/">Ollama</a> to interact with LLMs installed locally. That interaction takes place via the <a href="https://hauselin.github.io/ollama-r/"><code>ollamar</code></a> package.</p>
-</section>
+<p>This package is inspired by the SQL AI functions now offered by vendors such as <a href="https://docs.databricks.com/en/large-language-models/ai-functions.html">Databricks</a> and Snowflake. <code>mall</code> uses <a href="https://ollama.com/">Ollama</a> to interact with LLMs installed locally.</p>
+<p>For R, that interaction takes place via the <a href="https://hauselin.github.io/ollama-r/"><code>ollamar</code></a> package. The functions are designed to easily work with piped commands, such as <code>dplyr</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For Python, <code>mall</code> includes an extension to <a href="https://pola.rs/">Polars</a>. To interact with Ollama, it uses the official <a href="https://github.com/ollama/ollama-python">Python library</a>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p>We want to new find ways to help data scientists use LLMs in their daily work. Unlike the familiar interfaces, such as chatting and code completion, this interface runs your text data directly against the LLM. The LLM’s flexibility, allows for it to adapt to the subject of your data, and provide surprisingly accurate predictions. This saves the data scientist the need to write and tune an NLP model.</p>
+<p>We want to new find ways to help data scientists use LLMs in their daily work. Unlike the familiar interfaces, such as chatting and code completion, this interface runs your text data directly against the LLM.</p>
+<p>The LLM’s flexibility, allows for it to adapt to the subject of your data, and provide surprisingly accurate predictions. This saves the data scientist the need to write and tune an NLP model.</p>
+<p>In recent times, the capabilities of LLMs that can run locally in your computer have increased dramatically. This means that these sort of analysis can run in your machine with good accuracy. Additionally, it makes it possible to take advantage of LLM’s at your institution, since the data will not leave the corporate network.</p>
 </section>
 <section id="get-started" class="level2">
 <h2 class="anchored" data-anchor-id="get-started">Get started</h2>
 <ul>
-<li><p>Install <code>mall</code> from Github</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"edgararuiz/mall"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li>Install <code>mall</code> from Github</li>
 </ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pak<span class="sc">::</span><span class="fu">pak</span>(<span class="st">"edgararuiz/mall/r@python"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pip install <span class="st">"mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <section id="with-local-llms" class="level3">
 <h3 class="anchored" data-anchor-id="with-local-llms">With local LLMs</h3>
 <ul>
+<li><p><a href="https://ollama.com/download">Download Ollama from the official website</a></p></li>
+<li><p>Install and start Ollama in your computer</p></li>
+</ul>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<ul>
 <li><p>Install Ollama in your machine. The <code>ollamar</code> package’s website provides this <a href="https://hauselin.github.io/ollama-r/#installation">Installation guide</a></p></li>
 <li><p>Download an LLM model. For example, I have been developing this package using Llama 3.2 to test. To get that model you can run:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ollamar<span class="sc">::</span><span class="fu">pull</span>(<span class="st">"llama3.2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ollamar<span class="sc">::</span><span class="fu">pull</span>(<span class="st">"llama3.2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<ul>
+<li><p>Install the official Ollama library</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pip install ollama</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Download an LLM model. For example, I have been developing this package using Llama 3.2 to test. To get that model you can run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ollama</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ollama.pull(<span class="st">'llama3.2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</div>
+</div>
+</div>
 </section>
-<section id="with-databricks" class="level3">
-<h3 class="anchored" data-anchor-id="with-databricks">With Databricks</h3>
+<section id="with-databricks-r-only" class="level3">
+<h3 class="anchored" data-anchor-id="with-databricks-r-only">With Databricks (R only)</h3>
 <p>If you pass a table connected to <strong>Databricks</strong> via <code>odbc</code>, <code>mall</code> will automatically use Databricks’ LLM instead of Ollama. <em>You won’t need Ollama installed if you are using Databricks only.</em></p>
 <p><code>mall</code> will call the appropriate SQL AI function. For more information see our <a href="https://edgararuiz.github.io/mall/articles/databricks.html">Databricks article.</a></p>
 </section>
@@ -249,129 +275,680 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="llm-functions">LLM functions</h2>
 <section id="sentiment" class="level3">
 <h3 class="anchored" data-anchor-id="sentiment">Sentiment</h3>
-<p>Primarily, <code>mall</code> provides verb-like functions that expect a <code>tbl</code> as their first argument. This allows us to use them in piped operations.</p>
+<p>Primarily, <code>mall</code> provides verb-like functions that expect a data frame as their first argument.</p>
 <p>We will start with loading a very small data set contained in <code>mall</code>. It has 3 product reviews that we will use as the source of our examples.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mall)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"reviews"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>reviews</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 1</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                        </span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.            </span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too noisy     </span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but hard to f…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For the first example, we’ll asses the sentiment of each review. In order to do this we will call <code>llm_sentiment()</code>:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                              .sentiment</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.  positive  </span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  </span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, bu… neutral</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The function let’s us modify the options to choose from:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review, <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"positive"</span>, <span class="st">"negative"</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                              .sentiment</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     </span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.  positive  </span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  </span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, bu… negative</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>As mentioned before, by being pipe friendly, the results from the LLM prediction can be used in further transformations:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review, <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"positive"</span>, <span class="st">"negative"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.sentiment <span class="sc">==</span> <span class="st">"negative"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 2</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                              .sentiment</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     </span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 I regret buying this laptop. It is too slow and the keyboard is to… negative  </span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Not sure how to feel about my new washing machine. Great color, bu… negative</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mall)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"reviews"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>reviews</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 1</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                        </span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                         </span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.            </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too noisy     </span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but hard to f…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mall </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> mall.MallData</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>reviews <span class="op">=</span> data.reviews</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>reviews </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 1)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>For the first example, we’ll asses the sentiment of each review:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                              .sentiment</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     </span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.  positive  </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, bu… neutral</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">sentiment</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"positive"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"negative"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"neutral"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>We can also provide custom sentiment labels. Use the <code>options</code> argument to control that:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review, <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"positive"</span>, <span class="st">"negative"</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                              .sentiment</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     </span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.  positive  </span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is to… negative  </span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, bu… negative</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>, options<span class="op">=</span>[<span class="st">"positive"</span>, <span class="st">"negative"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">sentiment</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"positive"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"negative"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"negative"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>As mentioned before, these functions are create to play well with the rest of the analysis</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" role="tab" aria-controls="tabset-6-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" role="tab" aria-controls="tabset-6-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-6-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-6-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review, <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"positive"</span>, <span class="st">"negative"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(.sentiment <span class="sc">==</span> <span class="st">"negative"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 2 × 2</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                              .sentiment</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                               &lt;chr&gt;     </span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 I regret buying this laptop. It is too slow and the keyboard is to… negative  </span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Not sure how to feel about my new washing machine. Great color, bu… negative</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-6-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-6-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> reviews.llm.sentiment(<span class="st">"review"</span>, options<span class="op">=</span>[<span class="st">"positive"</span>, <span class="st">"negative"</span>])</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">filter</span>(pl.col(<span class="st">"sentiment"</span>) <span class="op">==</span> <span class="st">"negative"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (2, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">sentiment</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"I regret buying this laptop. I…</td>
+<td>"negative"</td>
+</tr>
+<tr class="even">
+<td>"Not sure how to feel about my …</td>
+<td>"negative"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="summarize" class="level3">
 <h3 class="anchored" data-anchor-id="summarize">Summarize</h3>
-<p>There may be a need to reduce the number of words in a given text. Usually, to make it easier to capture its intent. To do this, use <code>llm_summarize()</code>. This function has an argument to control the maximum number of words to output (<code>max_words</code>):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_summarize</span>(review, <span class="at">max_words =</span> <span class="dv">5</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .summary                      </span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                         </span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… it's a great tv               </span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … laptop purchase was a mistake </span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… having mixed feelings about it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To control the name of the prediction field, you can change <code>pred_name</code> argument. This works with the other <code>llm_</code> functions as well.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_summarize</span>(review, <span class="at">max_words =</span> <span class="dv">5</span>, <span class="at">pred_name =</span> <span class="st">"review_summary"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        review_summary                </span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                         </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… it's a great tv               </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … laptop purchase was a mistake </span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… having mixed feelings about it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There may be a need to reduce the number of words in a given text. Typically to make it easier to understand its intent. The function has an argument to control the maximum number of words to output (<code>max_words</code>):</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_summarize</span>(review, <span class="at">max_words =</span> <span class="dv">5</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .summary                      </span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                         </span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… it's a great tv               </span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … laptop purchase was a mistake </span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… having mixed feelings about it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>reviews.llm.summarize(<span class="st">"review"</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">summary</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"it's a great tv"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"laptop not worth the money"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"feeling uncertain about new pu…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>To control the name of the prediction field, you can change <code>pred_name</code> argument. <strong>This works with the other <code>llm</code> functions as well.</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-8-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-1" role="tab" aria-controls="tabset-8-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-8-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-8-2" role="tab" aria-controls="tabset-8-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-8-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-8-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_summarize</span>(review, <span class="at">max_words =</span> <span class="dv">5</span>, <span class="at">pred_name =</span> <span class="st">"review_summary"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        review_summary                </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                         </span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… it's a great tv               </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … laptop purchase was a mistake </span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… having mixed feelings about it</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.summarize(<span class="st">"review"</span>, max_words <span class="op">=</span> <span class="dv">5</span>, pred_name <span class="op">=</span> <span class="st">"review_summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">review_summary</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"it's a great tv"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"laptop not worth the money"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"feeling uncertain about new pu…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="classify" class="level3">
 <h3 class="anchored" data-anchor-id="classify">Classify</h3>
 <p>Use the LLM to categorize the text into one of the options you provide:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_classify</span>(review, <span class="fu">c</span>(<span class="st">"appliance"</span>, <span class="st">"computer"</span>))</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .classify</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;    </span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… computer </span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … computer </span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… appliance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_classify</span>(review, <span class="fu">c</span>(<span class="st">"appliance"</span>, <span class="st">"computer"</span>))</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .classify</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;    </span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… computer </span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … computer </span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… appliance</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.classify(<span class="st">"review"</span>, [<span class="st">"computer"</span>, <span class="st">"appliance"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">classify</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"appliance"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"appliance"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"appliance"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="extract" class="level3">
 <h3 class="anchored" data-anchor-id="extract">Extract</h3>
-<p>One of the most interesting operations. Using natural language, we can tell the LLM to return a specific part of the text. In the following example, we request that the LLM return the product being referred to. We do this by simply saying “product”. The LLM understands what we <em>mean</em> by that word, and looks for that in the text.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_extract</span>(review, <span class="st">"product"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .extract       </span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;          </span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… tv             </span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … laptop         </span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… washing machine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>One of the most interesting use cases Using natural language, we can tell the LLM to return a specific part of the text. In the following example, we request that the LLM return the product being referred to. We do this by simply saying “product”. The LLM understands what we <em>mean</em> by that word, and looks for that in the text.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_extract</span>(review, <span class="st">"product"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .extract       </span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;          </span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… tv             </span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … laptop         </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… washing machine</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.extract(<span class="st">"review"</span>, <span class="st">"product"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">extract</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"tv"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"laptop"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"washing machine"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="translate" class="level3">
 <h3 class="anchored" data-anchor-id="translate">Translate</h3>
 <p>As the title implies, this function will translate the text into a specified language. What is really nice, it is that you don’t need to specify the language of the source text. Only the target language needs to be defined. The translation accuracy will depend on the LLM</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_translate</span>(review, <span class="st">"spanish"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .translation                    </span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                           </span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… Esta ha sido la mejor televisió…</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … Me arrepiento de comprar este p…</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… No estoy seguro de cómo me sien…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_translate</span>(review, <span class="st">"spanish"</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                        .translation                    </span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                         &lt;chr&gt;                           </span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Gr… Esta ha sido la mejor televisió…</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow … Me arrepiento de comprar este p…</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing ma… No estoy seguro de cómo me sien…</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>reviews.llm.translate(<span class="st">"review"</span>, <span class="st">"spanish"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">translation</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"Esta ha sido la mejor TV que h…</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"Lo lamento comprar este portát…</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"No estoy seguro de cómo sentir…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="custom-prompt" class="level3">
 <h3 class="anchored" data-anchor-id="custom-prompt">Custom prompt</h3>
-<p>It is possible to pass your own prompt to the LLM, and have <code>mall</code> run it against each text entry. Use <code>llm_custom()</code> to access this functionality:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>my_prompt <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Answer a question."</span>,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Return only the answer, no explanation"</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Acceptable answers are 'yes', 'no'"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Answer this about the following text, is this a happy customer?:"</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_custom</span>(review, my_prompt)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                   .pred</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                    &lt;chr&gt;</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.       Yes  </span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too noi… No   </span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but har… No</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is possible to pass your own prompt to the LLM, and have <code>mall</code> run it against each text entry:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-12-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-1" role="tab" aria-controls="tabset-12-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-12-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-12-2" role="tab" aria-controls="tabset-12-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-12-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-12-1-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>my_prompt <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Answer a question."</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Return only the answer, no explanation"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Acceptable answers are 'yes', 'no'"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Answer this about the following text, is this a happy customer?:"</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_custom</span>(review, my_prompt)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                   .pred</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                    &lt;chr&gt;</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.       Yes  </span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too noi… No   </span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but har… No</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-12-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-12-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>my_prompt <span class="op">=</span> <span class="st">"Answer a question."</span> \</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> <span class="st">"Return only the answer, no explanation"</span> \</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> <span class="st">"Acceptable answers are 'yes', 'no'"</span> \</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">+</span> <span class="st">"Answer this about the following text, is this a happy customer?:"</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>reviews.llm.custom(<span class="st">"review"</span>, prompt <span class="op">=</span> my_prompt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (3, 2)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">custom</th>
+</tr>
+<tr class="odd">
+<th>str</th>
+<th>str</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've…</td>
+<td>"Yes"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. I…</td>
+<td>"No"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my …</td>
+<td>"No"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
-<section id="initialize-session" class="level2">
-<h2 class="anchored" data-anchor-id="initialize-session">Initialize session</h2>
-<p>Invoking an <code>llm_</code> function will automatically initialize a model selection if you don’t have one selected yet. If there is only one option, it will pre-select it for you. If there are more than one available models, then <code>mall</code> will present you as menu selection so you can select which model you wish to use.</p>
+<section id="model-selection-and-settings" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection-and-settings">Model selection and settings</h2>
+<p>You can set the model and its options to use when calling the LLM. In this case, we refer to options as model specific things that can be set, such as seed or temperature.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-13-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-1" role="tab" aria-controls="tabset-13-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-13-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-13-2" role="tab" aria-controls="tabset-13-2" aria-selected="false">python</a></li></ul>
+<div class="tab-content" data-group="language">
+<div id="tabset-13-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-13-1-tab">
+<p>Invoking an <code>llm</code> function will automatically initialize a model selection if you don’t have one selected yet. If there is only one option, it will pre-select it for you. If there are more than one available models, then <code>mall</code> will present you as menu selection so you can select which model you wish to use.</p>
 <p>Calling <code>llm_use()</code> directly will let you specify the model and backend to use. You can also setup additional arguments that will be passed down to the function that actually runs the prediction. In the case of Ollama, that function is <a href="https://hauselin.github.io/ollama-r/reference/chat.html"><code>chat()</code></a>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_use</span>(<span class="st">"ollama"</span>, <span class="st">"llama3.2"</span>, <span class="at">seed =</span> <span class="dv">100</span>, <span class="at">temperature =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The model to use, and other options can be set for the current R session</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_use</span>(<span class="st">"ollama"</span>, <span class="st">"llama3.2"</span>, <span class="at">seed =</span> <span class="dv">100</span>, <span class="at">temperature =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
+<p>The model and options to be used will be defined at the Polars data frame object level. If not passed, the default model will be <strong>llama3.2</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.use(options <span class="op">=</span> <span class="bu">dict</span>(seed <span class="op">=</span> <span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="key-considerations" class="level2">
 <h2 class="anchored" data-anchor-id="key-considerations">Key considerations</h2>
@@ -388,28 +965,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>How well it predicts</p></li>
 </ul>
 <p>To do so, we will use the <code>data_bookReviews</code> data set, provided by the <code>classmap</code> package. For this exercise, only the first 100, of the total 1,000, are going to be part of this analysis.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(classmap)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(data_bookReviews)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>data_bookReviews <span class="sc">|&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1,000</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 2</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ review    &lt;chr&gt; "i got this as both a book and an audio file. i had waited t…</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sentiment &lt;fct&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(classmap)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(data_bookReviews)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>data_bookReviews <span class="sc">|&gt;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1,000</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 2</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ review    &lt;chr&gt; "i got this as both a book and an audio file. i had waited t…</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sentiment &lt;fct&gt; 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 1, 1, 2, 1, …</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>As per the docs, <code>sentiment</code> is a factor indicating the sentiment of the review: negative (1) or positive (2)</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">strsplit</span>(<span class="fu">paste</span>(<span class="fu">head</span>(data_bookReviews<span class="sc">$</span>review, <span class="dv">100</span>), <span class="at">collapse =</span> <span class="st">" "</span>), <span class="st">" "</span>)[[<span class="dv">1</span>]])</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 20470</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(<span class="fu">strsplit</span>(<span class="fu">paste</span>(<span class="fu">head</span>(data_bookReviews<span class="sc">$</span>review, <span class="dv">100</span>), <span class="at">collapse =</span> <span class="st">" "</span>), <span class="st">" "</span>)[[<span class="dv">1</span>]])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 20470</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Just to get an idea of how much data we’re processing, I’m using a very, very simple word count. So we’re analyzing a bit over 20 thousand words.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>reviews_llm <span class="ot">&lt;-</span> data_bookReviews <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> review,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"positive"</span> <span class="sc">~</span> <span class="dv">2</span>, <span class="st">"negative"</span> <span class="sc">~</span> <span class="dv">1</span>),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_name =</span> <span class="st">"predicted"</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! There were 2 predictions with invalid output, they were coerced to NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>reviews_llm <span class="ot">&lt;-</span> data_bookReviews <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">100</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> review,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">c</span>(<span class="st">"positive"</span> <span class="sc">~</span> <span class="dv">2</span>, <span class="st">"negative"</span> <span class="sc">~</span> <span class="dv">1</span>),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_name =</span> <span class="st">"predicted"</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ! There were 2 predictions with invalid output, they were coerced to NA</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>As far as <strong>time</strong>, on my Apple M3 machine, it took about 1.5 minutes to process, 100 rows, containing 20 thousand words. Setting <code>temp</code> to 0 in <code>llm_use()</code>, made the model run faster.</p>
 <p>The package uses <code>purrr</code> to send each prompt individually to the LLM. But, I did try a few different ways to speed up the process, unsuccessfully:</p>
 <ul>
@@ -417,42 +1000,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>I also tried sending more than one row’s text at a time. This cause instability in the number of results. For example sending 5 at a time, sometimes returned 7 or 8. Even sending 2 was not stable.</p></li>
 </ul>
 <p>This is what the new table looks like:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reviews_llm</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 100 × 3</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    review                                        sentiment             predicted</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                         &lt;fct&gt;                     &lt;dbl&gt;</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 "i got this as both a book and an audio file… 1                             1</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 "this book places too much emphasis on spend… 1                             1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 "remember the hollywood blacklist? the holly… 2                             2</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 "while i appreciate what tipler was attempti… 1                             1</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 "the others in the series were great, and i … 1                             1</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 "a few good things, but she's lost her edge … 1                             1</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 "words cannot describe how ripped off and di… 1                             1</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 "1. the persective of most writers is shaped… 1                            NA</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 "i have been a huge fan of michael crichton … 1                             1</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 "i saw dr. polk on c-span a month or two ago… 2                             2</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 90 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>reviews_llm</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 100 × 3</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    review                                        sentiment             predicted</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                                         &lt;fct&gt;                     &lt;dbl&gt;</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 "i got this as both a book and an audio file… 1                             1</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 "this book places too much emphasis on spend… 1                             1</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 "remember the hollywood blacklist? the holly… 2                             2</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 "while i appreciate what tipler was attempti… 1                             1</span></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 "the others in the series were great, and i … 1                             1</span></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 "a few good things, but she's lost her edge … 1                             1</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 "words cannot describe how ripped off and di… 1                             1</span></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 "1. the persective of most writers is shaped… 1                            NA</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 "i have been a huge fan of michael crichton … 1                             1</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 "i saw dr. polk on c-span a month or two ago… 2                             2</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 90 more rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>I used <code>yardstick</code> to see how well the model performed. Of course, the accuracy will not be of the “truth”, but rather the package’s results recorded in <code>sentiment</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>reviews_llm <span class="sc">|&gt;</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">as.factor</span>(predicted)) <span class="sc">|&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  yardstick<span class="sc">::</span><span class="fu">accuracy</span>(sentiment, predicted)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   .metric  .estimator .estimate</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 accuracy binary         0.980</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>reviews_llm <span class="sc">|&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predicted =</span> <span class="fu">as.factor</span>(predicted)) <span class="sc">|&gt;</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  yardstick<span class="sc">::</span><span class="fu">accuracy</span>(sentiment, predicted)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   .metric  .estimator .estimate</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 accuracy binary         0.980</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="vector-functions" class="level2">
-<h2 class="anchored" data-anchor-id="vector-functions">Vector functions</h2>
+<section id="vector-functions-r-only" class="level2">
+<h2 class="anchored" data-anchor-id="vector-functions-r-only">Vector functions (R only)</h2>
 <p><code>mall</code> includes functions that expect a vector, instead of a table, to run the predictions. This should make it easier to test things, such as custom prompts or results of specific text. Each <code>llm_</code> function has a corresponding <code>llm_vec_</code> function:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_vec_sentiment</span>(<span class="st">"I am happy"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "positive"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_vec_translate</span>(<span class="st">"Este es el mejor dia!"</span>, <span class="st">"english"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "It's the best day!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_vec_sentiment</span>(<span class="st">"I am happy"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "positive"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_vec_translate</span>(<span class="st">"Este es el mejor dia!"</span>, <span class="st">"english"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "It's the best day!"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
