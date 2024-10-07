@@ -3,8 +3,8 @@ format:
   html:
     toc: true
 execute:
-  eval: false
-  freeze: false
+  eval: true
+  freeze: true
 ---
 
 
@@ -177,7 +177,7 @@ reviews
 #| include: false
 
 
-reviews.llm.use(options = dict(seed = 100))
+reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
 ```
 
 For the first example, we'll asses the sentiment of each review. In order to 
@@ -274,7 +274,7 @@ reviews.llm.summarize("review", 5)
 :::
 
 To control the name of the prediction field, you can change `pred_name` argument.
-This works with the other `llm_` functions as well. 
+This works with the other `llm` functions as well. 
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -326,10 +326,24 @@ that the LLM return the product being referred to. We do this by simply saying
 in the text.
 
 
+::: {.panel-tabset group="language"}
+## R
+
 ```{r}
 reviews |>
   llm_extract(review, "product")
 ```
+
+
+## python 
+
+```{python}
+
+reviews.llm.extract("review", "product")
+```
+
+:::
+
 
 ### Translate
 
@@ -364,6 +378,10 @@ reviews.llm.translate("review", "spanish")
 It is possible to pass your own prompt to the LLM, and have `mall` run it 
 against each text entry. Use `llm_custom()` to access this functionality: 
 
+
+::: {.panel-tabset group="language"}
+## R
+
 ```{r}
 my_prompt <- paste(
   "Answer a question.",
@@ -376,9 +394,25 @@ reviews |>
   llm_custom(review, my_prompt)
 ```
 
+
+## python 
+
+```{python}
+
+my_prompt = "Answer a question." \
+  + "Return only the answer, no explanation" \
+  + "Acceptable answers are 'yes', 'no'" \
+  + "Answer this about the following text, is this a happy customer?:"
+
+
+reviews.llm.custom("review", prompt = my_prompt)
+```
+
+:::
+
 ## Initialize session
 
-Invoking an `llm_` function will automatically initialize a model selection
+Invoking an `llm` function will automatically initialize a model selection
 if you don't have one selected yet. If there is only one option, it will 
 pre-select it for you. If there are more than one available models, then `mall`
 will present you as menu selection so you can select which model you wish to 
