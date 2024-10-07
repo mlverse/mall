@@ -142,8 +142,8 @@ installed if you are using Databricks only.*
 
 ### Sentiment
 
-Primarily,  `mall` provides verb-like functions that expect a `tbl` as 
-their first argument. This allows us to use them in piped operations. 
+Primarily,  `mall` provides verb-like functions that expect a data frame as 
+their first argument. 
 
 We will start with loading a very small data set contained in `mall`. It has
 3 product reviews that we will use as the source of our examples.
@@ -180,8 +180,7 @@ reviews
 reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
 ```
 
-For the first example, we'll asses the sentiment of each review. In order to 
-do this we will call `llm_sentiment()`:
+For the first example, we'll asses the sentiment of each review:
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -201,7 +200,8 @@ reviews.llm.sentiment("review")
 
 :::
 
-The function let's us modify the options to choose from: 
+We can also provide custom sentiment labels. Use the `options` argument to control
+that:
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -221,8 +221,8 @@ reviews.llm.sentiment("review", options=["positive", "negative"])
 
 :::
 
-As mentioned before, by being pipe friendly, the results from the LLM prediction
-can be used in further transformations: 
+As mentioned before, these functions are create to play well with the rest of 
+the analysis
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -248,9 +248,9 @@ x.filter(pl.col("sentiment") == "negative")
 
 ### Summarize
 
-There may be a need to reduce the number of words in a given text. Usually, to 
-make it easier to capture its intent. To do this, use `llm_summarize()`. This
-function has an argument to control the maximum number of words to output 
+There may be a need to reduce the number of words in a given text. Typically to 
+make it easier to understand its intent. The function has an argument to 
+control the maximum number of words to output 
 (`max_words`):
 
 ::: {.panel-tabset group="language"}
@@ -274,7 +274,7 @@ reviews.llm.summarize("review", 5)
 :::
 
 To control the name of the prediction field, you can change `pred_name` argument.
-This works with the other `llm` functions as well. 
+**This works with the other `llm` functions as well.**
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -319,7 +319,7 @@ reviews.llm.classify("review", ["computer", "appliance"])
 
 ### Extract 
 
-One of the most interesting operations. Using natural language, we can tell the 
+One of the most interesting use cases Using natural language, we can tell the 
 LLM to return a specific part of the text. In the following example, we request
 that the LLM return the product being referred to. We do this by simply saying 
 "product". The LLM understands what we *mean* by that word, and looks for that
@@ -376,7 +376,7 @@ reviews.llm.translate("review", "spanish")
 ### Custom prompt
 
 It is possible to pass your own prompt to the LLM, and have `mall` run it 
-against each text entry. Use `llm_custom()` to access this functionality: 
+against each text entry:
 
 
 ::: {.panel-tabset group="language"}
@@ -410,7 +410,14 @@ reviews.llm.custom("review", prompt = my_prompt)
 
 :::
 
-## Initialize session
+## Model selection and settings
+
+You can set the model and its options to use when calling the LLM. In this case,
+we refer to options as model specific things that can be set, such as seed or
+temperature. 
+
+::: {.panel-tabset group="language"}
+## R
 
 Invoking an `llm` function will automatically initialize a model selection
 if you don't have one selected yet. If there is only one option, it will 
@@ -423,11 +430,6 @@ You can also setup additional arguments that will be passed down to the
 function that actually runs the prediction. In the case of Ollama, that function
 is [`chat()`](https://hauselin.github.io/ollama-r/reference/chat.html). 
 
-
-
-::: {.panel-tabset group="language"}
-## R
-
 The model to use, and other options can be set for the current R session
 
 ```{r}
@@ -438,8 +440,8 @@ llm_use("ollama", "llama3.2", seed = 100, temperature = 0)
 
 ## python 
 
-The model to use, and other options can be set for the specific Polars
-data frame
+The model and options to be used will be defined at the Polars data frame 
+object level. If not passed, the default model will be **llama3.2**.
 
 ```{python}
 #| eval: false
