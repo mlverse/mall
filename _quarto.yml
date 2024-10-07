@@ -27,7 +27,7 @@ website:
       contents: 
       - text: "Caching"
         href: articles/caching.qmd
-      - text: "Databricks"
+      - text: "Databricks (R only)"
         href: articles/databricks.qmd        
 
 format:
