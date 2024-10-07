@@ -118,6 +118,22 @@ class MallFrame:
         )
         return df
 
+    def custom(
+        self,
+        col,
+        prompt="",
+        valid_resps="",
+        pred_name="custom",
+    ) -> list[pl.DataFrame]:
+        df = map_call(
+            df=self._df,
+            col=col,
+            msg=prompt,
+            pred_name=pred_name,
+            use=self._use,
+        )
+        return df
+
 
 def map_call(df, col, msg, pred_name, use):
     df = df.with_columns(
