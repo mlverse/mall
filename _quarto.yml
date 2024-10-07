@@ -8,9 +8,9 @@ execute:
 
 website:
   title: mall
-  favicon: "man/figures/favicon/apple-touch-icon.png"
+  favicon: "figures/favicon/apple-touch-icon.png"
   navbar:
-    logo: "man/figures/favicon/apple-touch-icon.png"
+    logo: "figures/favicon/apple-touch-icon.png"
     left:
       - sidebar:articles    
       - href: reference/index.qmd
@@ -27,12 +27,13 @@ website:
       contents: 
       - text: "Caching"
         href: articles/caching.qmd
-      - text: "Databricks"
+      - text: "Databricks (R only)"
         href: articles/databricks.qmd        
 
 format:
   html:
     toc: true
+    toc-expand: true
     code-copy: true
     code-overflow: wrap
     code-toos: true
@@ -45,3 +46,17 @@ knitr:
   opts_chunk: 
     collapse: true
     comment: "#>"    
+    
+quartodoc:
+  package: mall
+  options: null
+  style: pkgdown
+  dir: reference
+  out_index: _api_index.qmd
+  dynamic: true
+  sections:
+    - title: mall
+      desc: ''
+      contents:
+      - name: MallFrame
+

@@ -8,9 +8,9 @@ library(cli)
 build_reference_index <- function(pkg = ".", folder = "reference") {
   if (is.character(pkg)) pkg <- pkgdown::as_pkgdown(pkg)
   try(dir_create(folder))
-  ref_path <- path(folder, "index", ext = "qmd")
+  ref_path <- path(folder, "r_index", ext = "qmd")
   try(file_delete(ref_path))
-  writeLines(reference_index(), ref_path)
+  writeLines(reference_index(pkg), ref_path)
   cli_inform(col_green(ref_path))  
 }
 
@@ -29,5 +29,5 @@ build_reference <- function(pkg = ".", folder = "reference") {
   )  
 }
 
-build_reference_index()
-build_reference()
+build_reference_index("r")
+build_reference("r")

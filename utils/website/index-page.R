@@ -17,9 +17,7 @@ reference_index <- function(pkg = ".") {
     "---",
     "toc: false",
     "---",
-    "<img src=\"../man/figures/favicon/apple-touch-icon-180x180.png\" style=\"float:right\" />",
-    "",
-    "# Function Reference",
+    "<img src=\"../figures/favicon/apple-touch-icon-76x76.png\" style=\"float:right\" />",
     "",
     res
   )

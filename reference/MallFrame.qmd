@@ -1,0 +1,27 @@
+# MallFrame { #mall.MallFrame }
+
+`MallFrame(self, df)`
+
+Extension to Polars that add ability to use 
+an LLM to run batch predictions over a data frame
+
+## Methods
+
+| Name | Description |
+| --- | --- |
+| [translate](#mall.MallFrame.translate) | Translate text into another language. |
+
+### translate { #mall.MallFrame.translate }
+
+`MallFrame.translate(col, language='', additional='', pred_name='translation')`
+
+Translate text into another language.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                            | Default         |
+|--------------|--------|----------------------------------------------------------------------------------------|-----------------|
+| `col`        |        | The name of the text field to process                                                  | _required_      |
+| `language`   |        | The target language to translate to. For example 'French'.                             | `''`            |
+| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
+| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`            |
