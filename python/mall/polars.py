@@ -1,13 +1,14 @@
 import polars as pl
-from mall.prompt import sentiment, summarize, translate, classify
+from mall.prompt import sentiment, summarize, translate, classify, extract
 from mall.llm import llm_call
 
 
 @pl.api.register_dataframe_namespace("llm")
 class MallFrame:
-    """Extension to Polars that add ability to use 
-    an LLM to run batch predictions over a data frame   
+    """Extension to Polars that add ability to use
+    an LLM to run batch predictions over a data frame
     """
+
     def __init__(self, df: pl.DataFrame) -> None:
         self._df = df
         self._use = {"backend": "ollama", "model": "llama3.2"}
@@ -67,15 +68,15 @@ class MallFrame:
             The name of the text field to process
 
         language: str
-            The target language to translate to. For example 'French'. 
+            The target language to translate to. For example 'French'.
 
         pred_name: str
             A character vector with the name of the new column where the
             prediction will be placed
-            
+
         additional: str
             Inserts this text into the prompt sent to the LLM
-        """    
+        """
         df = map_call(
             df=self._df,
             col=col,
@@ -96,6 +97,22 @@ class MallFrame:
             df=self._df,
             col=col,
             msg=classify(labels, additional=additional),
+            pred_name=pred_name,
+            use=self._use,
+        )
+        return df
+
+    def extract(
+        self,
+        col,
+        labels="",
+        additional="",
+        pred_name="extract",
+    ) -> list[pl.DataFrame]:
+        df = map_call(
+            df=self._df,
+            col=col,
+            msg=extract(labels, additional=additional),
             pred_name=pred_name,
             use=self._use,
         )

@@ -13,7 +13,7 @@ def process_labels(x, if_list="", if_dict=""):
             new = new.replace("{key}", i)
             new = new.replace("{value}", x.get(i))
             out += " " + new
-    return out    
+    return out
 
 
 def sentiment(options, additional=""):
@@ -84,3 +84,31 @@ def classify(labels, additional=""):
     return msg
 
 
+def extract(labels, additional=""):
+    no_labels = len(labels)
+    col_labels = ""
+    for label in labels:
+        col_labels += label + " "
+    col_labels = col_labels.rstrip()
+    col_labels = col_labels.replace(" ", ", ")
+    if no_labels > 1:
+        plural = "s"
+        text_multi = (
+            "Return the response in a simple list, pipe separated, and no headers. "
+        )
+    else:
+        plural = ""
+        text_multi = ""
+    msg = [
+        {
+            "role": "user",
+            "content": "You are a helpful text extraction engine."
+            + f"Extract the {col_labels} being referred to on the text."
+            + f"I expect {no_labels} item{plural} exactly."
+            + "No capitalization. No explanations."
+            + f"{text_multi}"
+            + f"{additional}"
+            + "The answer is based on the following text:\n{}",
+        }
+    ]
+    return msg
