@@ -11,13 +11,18 @@ class MallFrame:
 
     def __init__(self, df: pl.DataFrame) -> None:
         self._df = df
-        self._use = {"backend": "ollama", "model": "llama3.2"}
+        self._use = dict(
+            backend = "ollama",
+            model = "llama3.2", 
+            _cache = "_mall_cache"
+        ) 
 
-    def use(self, backend="", model="", **kwargs):
+    def use(self, backend="", model="", _cache = "_mall_cache", **kwargs):
         if backend != "":
-            self._use = {"backend": backend, "model": self._use["model"]}
+            self._use.update(dict(backend = backend))
         if model != "":
-            self._use = {"backend": self._use["backend"], "model": model}
+            self._use.update(dict(model = model))
+        self._use.update(dict(_cache = _cache))
         self._use.update(dict(kwargs))
         return self._use
 
