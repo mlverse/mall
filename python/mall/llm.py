@@ -1,4 +1,6 @@
 import ollama
+import json
+import hashlib
 
 
 def build_msg(x, msg):
@@ -9,6 +11,16 @@ def build_msg(x, msg):
 
 
 def llm_call(x, msg, use, preview=True, valid_resps=""):
+
+    call = dict(
+        model=use.get("model"),
+        messages=build_msg(x, msg),
+        options=use.get("options"),
+    )
+
+    if preview:
+        print(call)
+
     resp = ollama.chat(
         model=use.get("model"),
         messages=build_msg(x, msg),
@@ -21,10 +33,9 @@ def llm_call(x, msg, use, preview=True, valid_resps=""):
     return out
 
 
-# print(
-#     dict(
-#         model=use.get("model"),
-#         messages=build_msg(x, msg),
-#         options=use.get("options"),
-#     )
-# )
+def build_hash(x):
+    if isinstance(x, dict):
+        x = json.dumps(x)
+    x_sha = hashlib.sha1(x.encode("utf-8"))
+    x_digest = x_sha.hexdigest()
+    return x_digest
