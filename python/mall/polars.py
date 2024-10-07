@@ -1,5 +1,5 @@
 import polars as pl
-from mall.prompt import sentiment, summarize, translate, classify, extract
+from mall.prompt import sentiment, summarize, translate, classify, extract, custom
 from mall.llm import llm_call
 
 
@@ -34,6 +34,7 @@ class MallFrame:
             msg=sentiment(options, additional=additional),
             pred_name=pred_name,
             use=self._use,
+            valid_resps=options,
         )
         return df
 
@@ -99,6 +100,7 @@ class MallFrame:
             msg=classify(labels, additional=additional),
             pred_name=pred_name,
             use=self._use,
+            valid_resps=labels,
         )
         return df
 
@@ -115,6 +117,7 @@ class MallFrame:
             msg=extract(labels, additional=additional),
             pred_name=pred_name,
             use=self._use,
+            valid_resps=labels,
         )
         return df
 
@@ -128,18 +131,19 @@ class MallFrame:
         df = map_call(
             df=self._df,
             col=col,
-            msg=prompt,
+            msg=custom(prompt),
             pred_name=pred_name,
             use=self._use,
+            valid_resps=valid_resps,
         )
         return df
 
 
-def map_call(df, col, msg, pred_name, use):
+def map_call(df, col, msg, pred_name, use, valid_resps=""):
     df = df.with_columns(
         pl.col(col)
         .map_elements(
-            lambda x: llm_call(x, msg, use),
+            lambda x: llm_call(x, msg, use, False, valid_resps),
             return_dtype=pl.String,
         )
         .alias(pred_name)

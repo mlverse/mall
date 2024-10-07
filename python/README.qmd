@@ -30,11 +30,8 @@ html_formatter.for_type(pl.DataFrame, lambda df: "\n".join(HTMLFormatter(df).ren
 ```{python}
 import mall 
 import polars as pl
-
 data = mall.MallData
-
 reviews = data.reviews
-
 ```
 
 ```{python}

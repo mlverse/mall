@@ -115,3 +115,8 @@ def extract(labels, additional=""):
         }
     ]
     return msg
+
+
+def custom(prompt):
+    msg = [{"role": "user", "content": f"{prompt}" + ": \n{}"}]
+    return msg
