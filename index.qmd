@@ -25,8 +25,8 @@ mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 
 Run multiple LLM predictions against a data frame. The predictions are processed 
 row-wise over a specified column. It works using a pre-determined one-shot prompt,
-along with the current row's content. The prompt that is use will depend of the
-type of analysis needed. 
+along with the current row's content. `mall` has been implemented for both R
+and Python. The prompt that is use will depend of the type of analysis needed. 
 
 Currently, the included prompts perform the following: 
 
@@ -84,12 +84,12 @@ corporate network.
 ::: {.panel-tabset group="language"}
 ## R
 ```r
-pak::pak("edgararuiz/mall/r@python")
+pak::pak("edgararuiz/mall/r")
 ```
 
 ## python
 ```python
-pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
+pip install "mall @ git+https://git@github.com/edgararuiz/mall.git#subdirectory=python"
 ```
 :::
   
