@@ -6,4 +6,4 @@
 
 | | |
 | --- | --- |
-| [MallFrame](MallFrame.qmd#mall.MallFrame) | Extension to Polars that add ability to use  |
+| [MallFrame](MallFrame.qmd#mall.MallFrame) | Extension to Polars that add ability to use |

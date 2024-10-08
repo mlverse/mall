@@ -50,6 +50,23 @@ class MallFrame:
         additional="",
         pred_name="summary",
     ) -> list[pl.DataFrame]:
+        """Summarise the text down to a specific number of words.
+
+        Parameters
+        ------
+        col: str
+            The name of the text field to process
+
+        max_words: int
+            Maximum number of words to use for the summary
+
+        pred_name: str
+            A character vector with the name of the new column where the
+            prediction will be placed
+
+        additional: str
+            Inserts this text into the prompt sent to the LLM
+        """    
         df = map_call(
             df=self._df,
             col=col,

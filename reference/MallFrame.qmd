@@ -2,14 +2,30 @@
 
 `MallFrame(self, df)`
 
-Extension to Polars that add ability to use 
+Extension to Polars that add ability to use
 an LLM to run batch predictions over a data frame
 
 ## Methods
 
 | Name | Description |
 | --- | --- |
+| [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
+
+### summarize { #mall.MallFrame.summarize }
+
+`MallFrame.summarize(col, max_words=10, additional='', pred_name='summary')`
+
+Summarise the text down to a specific number of words.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                            | Default     |
+|--------------|--------|----------------------------------------------------------------------------------------|-------------|
+| `col`        |        | The name of the text field to process                                                  | _required_  |
+| `max_words`  |        | Maximum number of words to use for the summary                                         | `10`        |
+| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'summary'` |
+| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`        |
 
 ### translate { #mall.MallFrame.translate }
 
