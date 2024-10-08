@@ -450,6 +450,47 @@ reviews.llm.use(options = dict(seed = 100))
 
 :::
 
+## Caching results
+
+By default `mall` caches the requests and corresponding results from a given
+LLM run. Each response is saved as individual JSON files. By default, the folder
+name is `_mall_cache`. The folder name can be customized, if needed. Also, the
+caching can be turned off by setting the argument to empty (`""`).
+
+::: {.panel-tabset group="language"}
+## R
+
+
+```{r}
+#| eval: false
+llm_use(.cache = "_my_cache")
+```
+
+To turn off:
+
+```{r}
+#| eval: false
+llm_use(.cache = "")
+```
+
+## Python 
+
+```{python}
+#| eval: false
+reviews.llm.use(_cache = "my_cache")
+```
+
+To turn off:
+
+```{python}
+#| eval: false
+reviews.llm.use(_cache = "")
+```
+
+:::
+
+For more information see the [Caching Results](articles/caching.qmd) article. 
+
 ## Key considerations
 
 The main consideration is **cost**. Either, time cost, or money cost.
