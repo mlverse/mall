@@ -9,9 +9,25 @@ an LLM to run batch predictions over a data frame
 
 | Name | Description |
 | --- | --- |
+| [classify](#mall.MallFrame.classify) | Classify text into specific categories. |
 | [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
 | [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
+
+### classify { #mall.MallFrame.classify }
+
+`MallFrame.classify(col, labels='', additional='', pred_name='classify')`
+
+Classify text into specific categories.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                                                              | Default      |
+|--------------|--------|--------------------------------------------------------------------------------------------------------------------------|--------------|
+| `col`        |        | The name of the text field to process                                                                                    | _required_   |
+| `labels`     |        | A list or a DICT object that defines the categories to  classify the text as. It will return one of the provided labels. | `''`         |
+| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed                                   | `'classify'` |
+| `additional` |        | Inserts this text into the prompt sent to the LLM                                                                        | `''`         |
 
 ### sentiment { #mall.MallFrame.sentiment }
 

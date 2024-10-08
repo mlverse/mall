@@ -134,6 +134,25 @@ class MallFrame:
         additional="",
         pred_name="classify",
     ) -> list[pl.DataFrame]:
+        """Classify text into specific categories.
+
+        Parameters
+        ------
+        col: str
+            The name of the text field to process
+
+        labels: list
+            A list or a DICT object that defines the categories to 
+            classify the text as. It will return one of the provided
+            labels.
+
+        pred_name: str
+            A character vector with the name of the new column where the
+            prediction will be placed
+
+        additional: str
+            Inserts this text into the prompt sent to the LLM
+        """    
         df = map_call(
             df=self._df,
             col=col,
