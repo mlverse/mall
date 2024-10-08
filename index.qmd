@@ -87,7 +87,7 @@ corporate network.
 pak::pak("edgararuiz/mall/r")
 ```
 
-## python
+## Python
 ```python
 pip install "mall @ git+https://git@github.com/edgararuiz/mall.git#subdirectory=python"
 ```
@@ -112,7 +112,7 @@ Llama 3.2 to test. To get that model you can run:
   ollamar::pull("llama3.2")
   ```
   
-## python
+## Python
 
 - Install the official Ollama library
   ```python
@@ -159,7 +159,7 @@ data("reviews")
 reviews
 ```
 
-## python
+## Python
 
 ```{python}
 #| eval: true 
@@ -191,7 +191,7 @@ reviews |>
   llm_sentiment(review)
 ```
 
-## python 
+## Python 
 
 ```{python}
 
@@ -212,7 +212,7 @@ reviews |>
   llm_sentiment(review, options = c("positive", "negative"))
 ```
 
-## python 
+## Python 
 
 ```{python}
 
@@ -234,7 +234,7 @@ reviews |>
   filter(.sentiment == "negative")
 ```
 
-## python
+## Python
 
 ```{python}
 
@@ -263,7 +263,7 @@ reviews |>
   llm_summarize(review, max_words = 5)
 ```
 
-## python 
+## Python 
 
 ```{python}
 
@@ -285,7 +285,7 @@ reviews |>
   llm_summarize(review, max_words = 5, pred_name = "review_summary")
 ```
 
-## python 
+## Python 
 
 ```{python}
 
@@ -308,7 +308,7 @@ reviews |>
 ```
 
 
-## python 
+## Python 
 
 ```{python}
 
@@ -335,7 +335,7 @@ reviews |>
 ```
 
 
-## python 
+## Python 
 
 ```{python}
 
@@ -363,7 +363,7 @@ reviews |>
 ```
 
 
-## python 
+## Python 
 
 ```{python}
 
@@ -395,7 +395,7 @@ reviews |>
 ```
 
 
-## python 
+## Python 
 
 ```{python}
 
@@ -438,7 +438,7 @@ llm_use("ollama", "llama3.2", seed = 100, temperature = 0)
 ```
 
 
-## python 
+## Python 
 
 The model and options to be used will be defined at the Polars data frame 
 object level. If not passed, the default model will be **llama3.2**.
