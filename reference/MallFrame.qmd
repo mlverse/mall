@@ -9,8 +9,24 @@ an LLM to run batch predictions over a data frame
 
 | Name | Description |
 | --- | --- |
+| [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
 | [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
+
+### sentiment { #mall.MallFrame.sentiment }
+
+`MallFrame.sentiment(col, options=['positive', 'negative', 'neutral'], additional='', pred_name='sentiment')`
+
+Use an LLM to run a sentiment analysis
+
+#### Parameters
+
+| Name         | Type   | Description                                                                            | Default                               |
+|--------------|--------|----------------------------------------------------------------------------------------|---------------------------------------|
+| `col`        |        | The name of the text field to process                                                  | _required_                            |
+| `options`    |        | A list of the sentiment options to use, or a named DICT  object                        | `['positive', 'negative', 'neutral']` |
+| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'sentiment'`                         |
+| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`                                  |
 
 ### summarize { #mall.MallFrame.summarize }
 
