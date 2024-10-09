@@ -11,18 +11,14 @@ class MallFrame:
 
     def __init__(self, df: pl.DataFrame) -> None:
         self._df = df
-        self._use = dict(
-            backend = "ollama",
-            model = "llama3.2", 
-            _cache = "_mall_cache"
-        ) 
+        self._use = dict(backend="ollama", model="llama3.2", _cache="_mall_cache")
 
-    def use(self, backend="", model="", _cache = "_mall_cache", **kwargs):
+    def use(self, backend="", model="", _cache="_mall_cache", **kwargs):
         if backend != "":
-            self._use.update(dict(backend = backend))
+            self._use.update(dict(backend=backend))
         if model != "":
-            self._use.update(dict(model = model))
-        self._use.update(dict(_cache = _cache))
+            self._use.update(dict(model=model))
+        self._use.update(dict(_cache=_cache))
         self._use.update(dict(kwargs))
         return self._use
 
@@ -41,7 +37,7 @@ class MallFrame:
             The name of the text field to process
 
         options: list or dict
-            A list of the sentiment options to use, or a named DICT 
+            A list of the sentiment options to use, or a named DICT
             object
 
         pred_name: str
@@ -50,7 +46,21 @@ class MallFrame:
 
         additional: str
             Inserts this text into the prompt sent to the LLM
-        """       
+
+
+        Examples
+        ------
+
+        ```{python}
+        import mall
+        import polars as pl
+        data = mall.MallData
+        reviews = data.reviews
+        reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
+        reviews.llm.sentiment("review")
+        ```
+
+        """
         df = map_call(
             df=self._df,
             col=col,
@@ -84,7 +94,8 @@ class MallFrame:
 
         additional: str
             Inserts this text into the prompt sent to the LLM
-        """    
+
+        """
         df = map_call(
             df=self._df,
             col=col,
@@ -142,7 +153,7 @@ class MallFrame:
             The name of the text field to process
 
         labels: list
-            A list or a DICT object that defines the categories to 
+            A list or a DICT object that defines the categories to
             classify the text as. It will return one of the provided
             labels.
 
@@ -152,7 +163,7 @@ class MallFrame:
 
         additional: str
             Inserts this text into the prompt sent to the LLM
-        """    
+        """
         df = map_call(
             df=self._df,
             col=col,
