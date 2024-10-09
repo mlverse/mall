@@ -1,9 +1,5 @@
----
-title: "MallFrame"
-execute:
-  eval: true
-  freeze: true
----
+# MallFrame { #mall.MallFrame }
+
 `MallFrame(self, df)`
 
 Extension to Polars that add ability to use
@@ -17,6 +13,7 @@ an LLM to run batch predictions over a data frame
 | [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
 | [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
+| [use](#mall.MallFrame.use) | Define the model, backend, and other options to use to  |
 
 ### classify { #mall.MallFrame.classify }
 
@@ -51,13 +48,11 @@ Use an LLM to run a sentiment analysis
 #### Examples
 
 ```{python}
-#| eval: true
-#| 
 import mall
 import polars as pl
 data = mall.MallData
 reviews = data.reviews
-reviews.llm.use(options = dict(seed = 100))
+reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
 reviews.llm.sentiment("review")
 ```
 
@@ -90,3 +85,19 @@ Translate text into another language.
 | `language`   |        | The target language to translate to. For example 'French'.                             | `''`            |
 | `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
 | `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`            |
+
+### use { #mall.MallFrame.use }
+
+`MallFrame.use(backend='', model='', _cache='_mall_cache', **kwargs)`
+
+Define the model, backend, and other options to use to 
+interact with the LLM.
+
+#### Parameters
+
+| Name       | Type   | Description                                                                                                                                              | Default         |
+|------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| `backend`  | str    | The name of the backend to use. At the beginning of the session it defaults to "ollama". If passing `""`, it will remain unchanged                       | `''`            |
+| `model`    | str    | The name of the model tha the backend should use. At the beginning  of the session it defaults to "llama3.2". If passing `""`, it will  remain unchanged | `''`            |
+| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                            | `'_mall_cache'` |
+| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                           | `{}`            |
