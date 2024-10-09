@@ -37,7 +37,8 @@ format:
     code-copy: true
     code-overflow: wrap
     code-toos: true
-    eval: false
+    eval: true
+    freeze: true
     theme:
       light: [cosmo, theme.scss]
       dark: [cosmo, theme-dark.scss]

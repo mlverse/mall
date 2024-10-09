@@ -78,7 +78,6 @@ class MallFrame:
         reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
         reviews.llm.sentiment("review")
         ```
-
         """
         df = map_call(
             df=self._df,
