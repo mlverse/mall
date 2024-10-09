@@ -16,6 +16,8 @@ class MallFrame:
     import mall
     import polars as pl
     pl.Config(fmt_str_lengths=100)
+    pl.Config.set_tbl_hide_dataframe_shape(True)  
+    pl.Config.set_tbl_hide_column_data_types(True)
     data = mall.MallData
     reviews = data.reviews
     reviews.llm.use(options = dict(seed = 100))
