@@ -73,6 +73,7 @@ class MallFrame:
         ```{python}
         import mall
         import polars as pl
+        pl.Config(fmt_str_lengths=100)
         data = mall.MallData
         reviews = data.reviews
         reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
