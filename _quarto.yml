@@ -39,6 +39,7 @@ format:
     code-toos: true
     eval: true
     freeze: true
+    css: styles.css
     theme:
       light: [cosmo, theme.scss]
       dark: [cosmo, theme-dark.scss]
