@@ -146,7 +146,7 @@ class MallFrame:
         additional="",
         pred_name="summary",
     ) -> list[pl.DataFrame]:
-        """Summarise the text down to a specific number of words.
+        """Summarize the text down to a specific number of words.
 
         Parameters
         ------
@@ -359,6 +359,19 @@ class MallFrame:
         pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
+
+
+        Examples
+        ------
+
+        ```{python}
+        my_prompt = "Answer a question." \
+        + "Return only the answer, no explanation" \
+        + "Acceptable answers are 'yes', 'no'" \
+        + "Answer this about the following text, is this a happy customer?:"
+
+        reviews.llm.custom("review", prompt = my_prompt)
+        ```
         """
         df = map_call(
             df=self._df,

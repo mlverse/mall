@@ -26,7 +26,7 @@ reviews.llm.use(options = dict(seed = 100))
 | [custom](#mall.MallFrame.custom) | Provide the full prompt that the LLM will process. |
 | [extract](#mall.MallFrame.extract) | Pull a specific label from the text. |
 | [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
-| [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
+| [summarize](#mall.MallFrame.summarize) | Summarize the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
 | [use](#mall.MallFrame.use) | Define the model, backend, and other options to use to |
 
@@ -74,6 +74,14 @@ Provide the full prompt that the LLM will process.
 | `col`       | str    | The name of the text field to process                                                  | _required_ |
 | `prompt`    | str    | The prompt to send to the LLM along with the `col`                                     | `''`       |
 | `pred_name` | str    | A character vector with the name of the new column where the prediction will be placed | `'custom'` |
+
+#### Examples
+
+```{python}
+my_prompt = "Answer a question."         + "Return only the answer, no explanation"         + "Acceptable answers are 'yes', 'no'"         + "Answer this about the following text, is this a happy customer?:"
+
+reviews.llm.custom("review", prompt = my_prompt)
+```
 
 ### extract { #mall.MallFrame.extract }
 
@@ -148,7 +156,7 @@ reviews.llm.sentiment("review", {"positive" : "1", "negative" : "0"})
 
 `MallFrame.summarize(col, max_words=10, additional='', pred_name='summary')`
 
-Summarise the text down to a specific number of words.
+Summarize the text down to a specific number of words.
 
 #### Parameters
 
