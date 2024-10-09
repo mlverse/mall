@@ -290,6 +290,7 @@ class MallFrame:
         self,
         col,
         labels="",
+        expand_cols=False, 
         additional="",
         pred_name="extract",
     ) -> list[pl.DataFrame]:
@@ -339,6 +340,18 @@ class MallFrame:
             pred_name=pred_name,
             use=self._use,
         )
+        if expand_cols:
+            lab_names = labels 
+            if isinstance(labels, dict):
+                lab_names = []
+                for label in labels:
+                    lab_names.append(label)            
+            df = df.with_columns(
+                pl.col("extract")
+                .str.split_exact(n = len(labels) - 1, by="|")
+                .struct.rename_fields(lab_names)
+                ).unnest("extract")
+
         return df
 
     def custom(
