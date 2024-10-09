@@ -1,5 +1,9 @@
-# MallFrame { #mall.MallFrame }
-
+---
+title: "MallFrame"
+execute:
+  eval: true
+  freeze: true
+---
 `MallFrame(self, df)`
 
 Extension to Polars that add ability to use
@@ -22,12 +26,12 @@ Classify text into specific categories.
 
 #### Parameters
 
-| Name         | Type   | Description                                                                                                              | Default      |
-|--------------|--------|--------------------------------------------------------------------------------------------------------------------------|--------------|
-| `col`        |        | The name of the text field to process                                                                                    | _required_   |
-| `labels`     |        | A list or a DICT object that defines the categories to  classify the text as. It will return one of the provided labels. | `''`         |
-| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed                                   | `'classify'` |
-| `additional` |        | Inserts this text into the prompt sent to the LLM                                                                        | `''`         |
+| Name         | Type   | Description                                                                                                             | Default      |
+|--------------|--------|-------------------------------------------------------------------------------------------------------------------------|--------------|
+| `col`        |        | The name of the text field to process                                                                                   | _required_   |
+| `labels`     |        | A list or a DICT object that defines the categories to classify the text as. It will return one of the provided labels. | `''`         |
+| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed                                  | `'classify'` |
+| `additional` |        | Inserts this text into the prompt sent to the LLM                                                                       | `''`         |
 
 ### sentiment { #mall.MallFrame.sentiment }
 
@@ -40,9 +44,22 @@ Use an LLM to run a sentiment analysis
 | Name         | Type   | Description                                                                            | Default                               |
 |--------------|--------|----------------------------------------------------------------------------------------|---------------------------------------|
 | `col`        |        | The name of the text field to process                                                  | _required_                            |
-| `options`    |        | A list of the sentiment options to use, or a named DICT  object                        | `['positive', 'negative', 'neutral']` |
+| `options`    |        | A list of the sentiment options to use, or a named DICT object                         | `['positive', 'negative', 'neutral']` |
 | `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'sentiment'`                         |
 | `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`                                  |
+
+#### Examples
+
+```{python}
+#| eval: true
+#| 
+import mall
+import polars as pl
+data = mall.MallData
+reviews = data.reviews
+reviews.llm.use(options = dict(seed = 100))
+reviews.llm.sentiment("review")
+```
 
 ### summarize { #mall.MallFrame.summarize }
 

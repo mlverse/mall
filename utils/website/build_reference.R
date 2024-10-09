@@ -1,6 +1,14 @@
-source("utils/website/index-page.R")
-source("utils/website/list-to-qmd.R")
-source("utils/website/rd-to-list.R")
+local_folder <- here::here()
+pkg <- "r"
+if(path_file(local_folder) == "r") {
+  pkg <- "."
+  local_folder = path_dir(local_folder)
+}
+
+library(fs)
+source(path(local_folder, "utils/website/index-page.R"))
+source(path(local_folder, "utils/website/list-to-qmd.R"))
+source(path(local_folder, "utils/website/rd-to-list.R"))
 suppressPackageStartupMessages(library(purrr))
 library(fs)
 library(cli)
@@ -29,5 +37,5 @@ build_reference <- function(pkg = ".", folder = "reference") {
   )  
 }
 
-build_reference_index("r")
-build_reference("r")
+build_reference_index(pkg, path(local_folder, "reference"))
+build_reference(pkg, path(local_folder, "reference"))
