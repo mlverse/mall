@@ -14,7 +14,7 @@ class MallFrame:
         self._use = dict(backend="ollama", model="llama3.2", _cache="_mall_cache")
 
     def use(self, backend="", model="", _cache="_mall_cache", **kwargs):
-        """Define the model, backend, and other options to use to 
+        """Define the model, backend, and other options to use to
         interact with the LLM.
 
         Parameters
@@ -23,8 +23,8 @@ class MallFrame:
             The name of the backend to use. At the beginning of the session
             it defaults to "ollama". If passing `""`, it will remain unchanged
         model : str
-            The name of the model tha the backend should use. At the beginning 
-            of the session it defaults to "llama3.2". If passing `""`, it will 
+            The name of the model tha the backend should use. At the beginning
+            of the session it defaults to "llama3.2". If passing `""`, it will
             remain unchanged
         _cache : str
             The path of where to save the cached results. Passing `""` disables
@@ -32,7 +32,7 @@ class MallFrame:
         **kwargs
             Arguments to pass to the downstream Python call. In this case, the
             `chat` function in `ollama`
-        """        
+        """
         if backend != "":
             self._use.update(dict(backend=backend))
         if model != "":
@@ -247,7 +247,7 @@ class MallFrame:
         pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
-        """    
+        """
         df = map_call(
             df=self._df,
             col=col,

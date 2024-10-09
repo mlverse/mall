@@ -15,7 +15,7 @@ an LLM to run batch predictions over a data frame
 | [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
 | [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
-| [use](#mall.MallFrame.use) | Define the model, backend, and other options to use to  |
+| [use](#mall.MallFrame.use) | Define the model, backend, and other options to use to |
 
 ### classify { #mall.MallFrame.classify }
 
@@ -121,14 +121,14 @@ Translate text into another language.
 
 `MallFrame.use(backend='', model='', _cache='_mall_cache', **kwargs)`
 
-Define the model, backend, and other options to use to 
+Define the model, backend, and other options to use to
 interact with the LLM.
 
 #### Parameters
 
-| Name       | Type   | Description                                                                                                                                              | Default         |
-|------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| `backend`  | str    | The name of the backend to use. At the beginning of the session it defaults to "ollama". If passing `""`, it will remain unchanged                       | `''`            |
-| `model`    | str    | The name of the model tha the backend should use. At the beginning  of the session it defaults to "llama3.2". If passing `""`, it will  remain unchanged | `''`            |
-| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                            | `'_mall_cache'` |
-| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                           | `{}`            |
+| Name       | Type   | Description                                                                                                                                            | Default         |
+|------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| `backend`  | str    | The name of the backend to use. At the beginning of the session it defaults to "ollama". If passing `""`, it will remain unchanged                     | `''`            |
+| `model`    | str    | The name of the model tha the backend should use. At the beginning of the session it defaults to "llama3.2". If passing `""`, it will remain unchanged | `''`            |
+| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                          | `'_mall_cache'` |
+| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                         | `{}`            |
