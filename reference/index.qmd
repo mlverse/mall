@@ -2,7 +2,7 @@
 ## R
 {{< include r_index.qmd >}}
 
-## python
+## Python
 
 <img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right" />
 

@@ -2,14 +2,105 @@
 
 `MallFrame(self, df)`
 
-Extension to Polars that add ability to use 
+Extension to Polars that add ability to use
 an LLM to run batch predictions over a data frame
 
 ## Methods
 
 | Name | Description |
 | --- | --- |
+| [classify](#mall.MallFrame.classify) | Classify text into specific categories. |
+| [custom](#mall.MallFrame.custom) | Provide the full prompt that the LLM will process. |
+| [extract](#mall.MallFrame.extract) | Pull a specific label from the text. |
+| [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
+| [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
+| [use](#mall.MallFrame.use) | Define the model, backend, and other options to use to |
+
+### classify { #mall.MallFrame.classify }
+
+`MallFrame.classify(col, labels='', additional='', pred_name='classify')`
+
+Classify text into specific categories.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                                                             | Default      |
+|--------------|--------|-------------------------------------------------------------------------------------------------------------------------|--------------|
+| `col`        | str    | The name of the text field to process                                                                                   | _required_   |
+| `labels`     | list   | A list or a DICT object that defines the categories to classify the text as. It will return one of the provided labels. | `''`         |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed                                  | `'classify'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                                                       | `''`         |
+
+### custom { #mall.MallFrame.custom }
+
+`MallFrame.custom(col, prompt='', valid_resps='', pred_name='custom')`
+
+Provide the full prompt that the LLM will process.
+
+#### Parameters
+
+| Name        | Type   | Description                                                                            | Default    |
+|-------------|--------|----------------------------------------------------------------------------------------|------------|
+| `col`       | str    | The name of the text field to process                                                  | _required_ |
+| `prompt`    | str    | The prompt to send to the LLM along with the `col`                                     | `''`       |
+| `pred_name` | str    | A character vector with the name of the new column where the prediction will be placed | `'custom'` |
+
+### extract { #mall.MallFrame.extract }
+
+`MallFrame.extract(col, labels='', additional='', pred_name='extract')`
+
+Pull a specific label from the text.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                            | Default     |
+|--------------|--------|----------------------------------------------------------------------------------------|-------------|
+| `col`        | str    | The name of the text field to process                                                  | _required_  |
+| `labels`     | list   | A list or a DICT object that defines tells the LLM what to look for and return         | `''`        |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'extract'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`        |
+
+### sentiment { #mall.MallFrame.sentiment }
+
+`MallFrame.sentiment(col, options=['positive', 'negative', 'neutral'], additional='', pred_name='sentiment')`
+
+Use an LLM to run a sentiment analysis
+
+#### Parameters
+
+| Name         | Type         | Description                                                                            | Default                               |
+|--------------|--------------|----------------------------------------------------------------------------------------|---------------------------------------|
+| `col`        | str          | The name of the text field to process                                                  | _required_                            |
+| `options`    | list or dict | A list of the sentiment options to use, or a named DICT object                         | `['positive', 'negative', 'neutral']` |
+| `pred_name`  | str          | A character vector with the name of the new column where the prediction will be placed | `'sentiment'`                         |
+| `additional` | str          | Inserts this text into the prompt sent to the LLM                                      | `''`                                  |
+
+#### Examples
+
+```{python}
+import mall
+import polars as pl
+data = mall.MallData
+reviews = data.reviews
+reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
+reviews.llm.sentiment("review")
+```
+
+### summarize { #mall.MallFrame.summarize }
+
+`MallFrame.summarize(col, max_words=10, additional='', pred_name='summary')`
+
+Summarise the text down to a specific number of words.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                            | Default     |
+|--------------|--------|----------------------------------------------------------------------------------------|-------------|
+| `col`        | str    | The name of the text field to process                                                  | _required_  |
+| `max_words`  | int    | Maximum number of words to use for the summary                                         | `10`        |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'summary'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`        |
 
 ### translate { #mall.MallFrame.translate }
 
@@ -21,7 +112,23 @@ Translate text into another language.
 
 | Name         | Type   | Description                                                                            | Default         |
 |--------------|--------|----------------------------------------------------------------------------------------|-----------------|
-| `col`        |        | The name of the text field to process                                                  | _required_      |
-| `language`   |        | The target language to translate to. For example 'French'.                             | `''`            |
-| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
-| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`            |
+| `col`        | str    | The name of the text field to process                                                  | _required_      |
+| `language`   | str    | The target language to translate to. For example 'French'.                             | `''`            |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`            |
+
+### use { #mall.MallFrame.use }
+
+`MallFrame.use(backend='', model='', _cache='_mall_cache', **kwargs)`
+
+Define the model, backend, and other options to use to
+interact with the LLM.
+
+#### Parameters
+
+| Name       | Type   | Description                                                                                                                                            | Default         |
+|------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| `backend`  | str    | The name of the backend to use. At the beginning of the session it defaults to "ollama". If passing `""`, it will remain unchanged                     | `''`            |
+| `model`    | str    | The name of the model tha the backend should use. At the beginning of the session it defaults to "llama3.2". If passing `""`, it will remain unchanged | `''`            |
+| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                          | `'_mall_cache'` |
+| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                         | `{}`            |
