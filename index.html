@@ -105,6 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -300,11 +301,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mall </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> mall.MallData</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>pl.Config(fmt_str_lengths<span class="op">=</span><span class="dv">100</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; &lt;polars.config.Config object at 0x139c6bec0&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> mall.MallData</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>reviews <span class="op">=</span> data.reviews</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>reviews </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>reviews </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div><style>
 .dataframe > thead > tr,
@@ -325,13 +327,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 </tr>
 </tbody>
 </table>
@@ -384,15 +386,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"positive"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"negative"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 <td>"neutral"</td>
 </tr>
 </tbody>
@@ -446,15 +448,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"positive"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"negative"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 <td>"negative"</td>
 </tr>
 </tbody>
@@ -510,11 +512,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"negative"</td>
 </tr>
 <tr class="even">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 <td>"negative"</td>
 </tr>
 </tbody>
@@ -573,16 +575,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"great tv with good features"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"laptop purchase was a mistake"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
-<td>"feeling uncertain about new pu…</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
+<td>"feeling uncertain about new purchase"</td>
 </tr>
 </tbody>
 </table>
@@ -635,16 +637,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"great tv with good features"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"laptop purchase was a mistake"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
-<td>"feeling uncertain about new pu…</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
+<td>"feeling uncertain about new purchase"</td>
 </tr>
 </tbody>
 </table>
@@ -699,15 +701,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"appliance"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"computer"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 <td>"appliance"</td>
 </tr>
 </tbody>
@@ -763,15 +765,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"tv"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"laptop"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 <td>"washing machine"</td>
 </tr>
 </tbody>
@@ -830,16 +832,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
-<td>"Esta ha sido la mejor televisi…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
+<td>"Esta ha sido la mejor televisión que he utilizado hasta ahora. Gran pantalla y sonido."</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
-<td>"Me arrepiento de comprar este …</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
+<td>"Me arrepiento de comprar este portátil. Es demasiado lento y la tecla es demasiado ruidosa."</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
-<td>"No estoy seguro de cómo sentir…</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
+<td>"No estoy seguro de cómo sentirme con mi nueva lavadora. Un color maravilloso, pero muy difícil de en…</td>
 </tr>
 </tbody>
 </table>
@@ -907,15 +909,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>"This has been the best TV I've…</td>
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
 <td>"Yes"</td>
 </tr>
 <tr class="even">
-<td>"I regret buying this laptop. I…</td>
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
 <td>"No"</td>
 </tr>
 <tr class="odd">
-<td>"Not sure how to feel about my …</td>
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
 <td>"No"</td>
 </tr>
 </tbody>
