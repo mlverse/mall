@@ -10,6 +10,7 @@ an LLM to run batch predictions over a data frame
 | Name | Description |
 | --- | --- |
 | [classify](#mall.MallFrame.classify) | Classify text into specific categories. |
+| [extract](#mall.MallFrame.extract) | Pull a specific label from the text. |
 | [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
 | [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
@@ -25,10 +26,25 @@ Classify text into specific categories.
 
 | Name         | Type   | Description                                                                                                             | Default      |
 |--------------|--------|-------------------------------------------------------------------------------------------------------------------------|--------------|
-| `col`        |        | The name of the text field to process                                                                                   | _required_   |
-| `labels`     |        | A list or a DICT object that defines the categories to classify the text as. It will return one of the provided labels. | `''`         |
-| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed                                  | `'classify'` |
-| `additional` |        | Inserts this text into the prompt sent to the LLM                                                                       | `''`         |
+| `col`        | str    | The name of the text field to process                                                                                   | _required_   |
+| `labels`     | list   | A list or a DICT object that defines the categories to classify the text as. It will return one of the provided labels. | `''`         |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed                                  | `'classify'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                                                       | `''`         |
+
+### extract { #mall.MallFrame.extract }
+
+`MallFrame.extract(col, labels='', additional='', pred_name='extract')`
+
+Pull a specific label from the text.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                            | Default     |
+|--------------|--------|----------------------------------------------------------------------------------------|-------------|
+| `col`        | str    | The name of the text field to process                                                  | _required_  |
+| `labels`     | list   | A list or a DICT object that defines tells the LLM what to look for and return         | `''`        |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'extract'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`        |
 
 ### sentiment { #mall.MallFrame.sentiment }
 
@@ -38,12 +54,12 @@ Use an LLM to run a sentiment analysis
 
 #### Parameters
 
-| Name         | Type   | Description                                                                            | Default                               |
-|--------------|--------|----------------------------------------------------------------------------------------|---------------------------------------|
-| `col`        |        | The name of the text field to process                                                  | _required_                            |
-| `options`    |        | A list of the sentiment options to use, or a named DICT object                         | `['positive', 'negative', 'neutral']` |
-| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'sentiment'`                         |
-| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`                                  |
+| Name         | Type         | Description                                                                            | Default                               |
+|--------------|--------------|----------------------------------------------------------------------------------------|---------------------------------------|
+| `col`        | str          | The name of the text field to process                                                  | _required_                            |
+| `options`    | list or dict | A list of the sentiment options to use, or a named DICT object                         | `['positive', 'negative', 'neutral']` |
+| `pred_name`  | str          | A character vector with the name of the new column where the prediction will be placed | `'sentiment'`                         |
+| `additional` | str          | Inserts this text into the prompt sent to the LLM                                      | `''`                                  |
 
 #### Examples
 
@@ -66,10 +82,10 @@ Summarise the text down to a specific number of words.
 
 | Name         | Type   | Description                                                                            | Default     |
 |--------------|--------|----------------------------------------------------------------------------------------|-------------|
-| `col`        |        | The name of the text field to process                                                  | _required_  |
-| `max_words`  |        | Maximum number of words to use for the summary                                         | `10`        |
-| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'summary'` |
-| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`        |
+| `col`        | str    | The name of the text field to process                                                  | _required_  |
+| `max_words`  | int    | Maximum number of words to use for the summary                                         | `10`        |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'summary'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`        |
 
 ### translate { #mall.MallFrame.translate }
 
@@ -81,10 +97,10 @@ Translate text into another language.
 
 | Name         | Type   | Description                                                                            | Default         |
 |--------------|--------|----------------------------------------------------------------------------------------|-----------------|
-| `col`        |        | The name of the text field to process                                                  | _required_      |
-| `language`   |        | The target language to translate to. For example 'French'.                             | `''`            |
-| `pred_name`  |        | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
-| `additional` |        | Inserts this text into the prompt sent to the LLM                                      | `''`            |
+| `col`        | str    | The name of the text field to process                                                  | _required_      |
+| `language`   | str    | The target language to translate to. For example 'French'.                             | `''`            |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`            |
 
 ### use { #mall.MallFrame.use }
 

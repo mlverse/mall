@@ -52,18 +52,18 @@ class MallFrame:
 
         Parameters
         ------
-        col: str
+        col : str
             The name of the text field to process
 
-        options: list or dict
+        options : list or dict
             A list of the sentiment options to use, or a named DICT
             object
 
-        pred_name: str
+        pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
 
-        additional: str
+        additional : str
             Inserts this text into the prompt sent to the LLM
 
 
@@ -101,17 +101,17 @@ class MallFrame:
 
         Parameters
         ------
-        col: str
+        col : str
             The name of the text field to process
 
-        max_words: int
+        max_words : int
             Maximum number of words to use for the summary
 
-        pred_name: str
+        pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
 
-        additional: str
+        additional : str
             Inserts this text into the prompt sent to the LLM
 
         """
@@ -135,17 +135,17 @@ class MallFrame:
 
         Parameters
         ------
-        col: str
+        col : str
             The name of the text field to process
 
-        language: str
+        language : str
             The target language to translate to. For example 'French'.
 
-        pred_name: str
+        pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
 
-        additional: str
+        additional : str
             Inserts this text into the prompt sent to the LLM
         """
         df = map_call(
@@ -168,19 +168,19 @@ class MallFrame:
 
         Parameters
         ------
-        col: str
+        col : str
             The name of the text field to process
 
-        labels: list
+        labels : list
             A list or a DICT object that defines the categories to
             classify the text as. It will return one of the provided
             labels.
 
-        pred_name: str
+        pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
 
-        additional: str
+        additional : str
             Inserts this text into the prompt sent to the LLM
         """
         df = map_call(
@@ -200,6 +200,24 @@ class MallFrame:
         additional="",
         pred_name="extract",
     ) -> list[pl.DataFrame]:
+        """Pull a specific label from the text.
+
+        Parameters
+        ------
+        col : str
+            The name of the text field to process
+
+        labels : list
+            A list or a DICT object that defines tells the LLM what
+            to look for and return
+
+        pred_name : str
+            A character vector with the name of the new column where the
+            prediction will be placed
+
+        additional : str
+            Inserts this text into the prompt sent to the LLM
+        """
         df = map_call(
             df=self._df,
             col=col,
