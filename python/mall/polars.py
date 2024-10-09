@@ -235,6 +235,20 @@ class MallFrame:
         valid_resps="",
         pred_name="custom",
     ) -> list[pl.DataFrame]:
+        """Provide the full prompt that the LLM will process.
+
+        Parameters
+        ------
+        col : str
+            The name of the text field to process
+
+        prompt : str
+            The prompt to send to the LLM along with the `col`
+
+        pred_name : str
+            A character vector with the name of the new column where the
+            prediction will be placed
+        """    
         df = map_call(
             df=self._df,
             col=col,

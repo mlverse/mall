@@ -10,6 +10,7 @@ an LLM to run batch predictions over a data frame
 | Name | Description |
 | --- | --- |
 | [classify](#mall.MallFrame.classify) | Classify text into specific categories. |
+| [custom](#mall.MallFrame.custom) | Provide the full prompt that the LLM will process. |
 | [extract](#mall.MallFrame.extract) | Pull a specific label from the text. |
 | [sentiment](#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
 | [summarize](#mall.MallFrame.summarize) | Summarise the text down to a specific number of words. |
@@ -30,6 +31,20 @@ Classify text into specific categories.
 | `labels`     | list   | A list or a DICT object that defines the categories to classify the text as. It will return one of the provided labels. | `''`         |
 | `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed                                  | `'classify'` |
 | `additional` | str    | Inserts this text into the prompt sent to the LLM                                                                       | `''`         |
+
+### custom { #mall.MallFrame.custom }
+
+`MallFrame.custom(col, prompt='', valid_resps='', pred_name='custom')`
+
+Provide the full prompt that the LLM will process.
+
+#### Parameters
+
+| Name        | Type   | Description                                                                            | Default    |
+|-------------|--------|----------------------------------------------------------------------------------------|------------|
+| `col`       | str    | The name of the text field to process                                                  | _required_ |
+| `prompt`    | str    | The prompt to send to the LLM along with the `col`                                     | `''`       |
+| `pred_name` | str    | A character vector with the name of the new column where the prediction will be placed | `'custom'` |
 
 ### extract { #mall.MallFrame.extract }
 
