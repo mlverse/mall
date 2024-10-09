@@ -189,6 +189,23 @@ class MallFrame:
 
         additional : str
             Inserts this text into the prompt sent to the LLM
+
+        Examples
+        ------
+
+        ```{python}
+        reviews.llm.classify("review", ["appliance", "computer"])
+        ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name 
+        reviews.llm.classify("review", ["appliance", "computer"], pred_name="prod_type")
+        ```
+        
+        ```{python}
+        #Pass a DICT to set custom values for each classification
+        reviews.llm.classify("review", {"appliance" : "1", "computer" : "2"})
+        ```            
         """
         df = map_call(
             df=self._df,
