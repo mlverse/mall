@@ -7,6 +7,19 @@ from mall.llm import llm_call
 class MallFrame:
     """Extension to Polars that add ability to use
     an LLM to run batch predictions over a data frame
+
+    Loads the neede libraries, and sets up the review
+    data frame that will be used in the examples below:
+    
+    ```{python}
+    #| output: false
+    import mall
+    import polars as pl
+    pl.Config(fmt_str_lengths=100)
+    data = mall.MallData
+    reviews = data.reviews
+    reviews.llm.use(options = dict(seed = 100))
+    ```    
     """
 
     def __init__(self, df: pl.DataFrame) -> None:
@@ -71,12 +84,6 @@ class MallFrame:
         ------
 
         ```{python}
-        import mall
-        import polars as pl
-        pl.Config(fmt_str_lengths=100)
-        data = mall.MallData
-        reviews = data.reviews
-        reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
         reviews.llm.sentiment("review")
         ```
         """
