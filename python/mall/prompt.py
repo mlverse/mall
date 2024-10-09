@@ -71,9 +71,7 @@ def extract(labels, additional=""):
     if isinstance(labels, list):
         no_labels = len(labels)
         plural = "s"
-        text_multi = (
-            "Return the response in a simple list, pipe separated, and no headers. "
-        )
+        text_multi = "Return the response exclusively in a pipe separated list, and no headers. "
         for label in labels:
             col_labels += label + " "
         col_labels = col_labels.rstrip()

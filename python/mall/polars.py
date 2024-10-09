@@ -163,6 +163,18 @@ class MallFrame:
         additional : str
             Inserts this text into the prompt sent to the LLM
 
+        Examples
+        ------
+
+        ```{python}
+        # Use max_words to set the maximum number of words to use for the summary
+        reviews.llm.summarize("review", max_words = 5)
+        ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.summarize("review", 5, pred_name = "review_summary")
+        ```
         """
         df = map_call(
             df=self._df,
@@ -196,6 +208,19 @@ class MallFrame:
 
         additional : str
             Inserts this text into the prompt sent to the LLM
+
+
+        Examples
+        ------
+
+        ```{python}
+        reviews.llm.translate("review", "spanish")
+        ```
+
+        ```{python}
+        reviews.llm.translate("review", "french")
+        ```
+
         """
         df = map_call(
             df=self._df,
@@ -283,14 +308,34 @@ class MallFrame:
 
         additional : str
             Inserts this text into the prompt sent to the LLM
+
+        Examples
+        ------
+
+        ```{python}
+        # Use 'labels' to let the function know what to extract
+        reviews.llm.extract("review", labels = "product")
+        ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.extract("review", "product", pred_name = "prod")
+        ```
+
+        ```{python}
+        # Pass a vector to request multiple things, the results will be pipe delimeted
+        # in a single column
+        reviews.llm.extract("review", ["product", "feelings"])
+        ```
+
         """
+        # TODO: Support for expand_cols
         df = map_call(
             df=self._df,
             col=col,
             msg=extract(labels, additional=additional),
             pred_name=pred_name,
             use=self._use,
-            valid_resps=labels,
         )
         return df
 

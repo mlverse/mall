@@ -90,6 +90,24 @@ Pull a specific label from the text.
 | `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'extract'` |
 | `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`        |
 
+#### Examples
+
+```{python}
+# Use 'labels' to let the function know what to extract
+reviews.llm.extract("review", labels = "product")
+```
+
+```{python}
+# Use 'pred_name' to customize the new column's name
+reviews.llm.extract("review", "product", pred_name = "prod")
+```
+
+```{python}
+# Pass a vector to request multiple things, the results will be pipe delimeted
+# in a single column
+reviews.llm.extract("review", ["product", "feelings"])
+```
+
 ### sentiment { #mall.MallFrame.sentiment }
 
 `MallFrame.sentiment(col, options=['positive', 'negative', 'neutral'], additional='', pred_name='sentiment')`
@@ -141,6 +159,18 @@ Summarise the text down to a specific number of words.
 | `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'summary'` |
 | `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`        |
 
+#### Examples
+
+```{python}
+# Use max_words to set the maximum number of words to use for the summary
+reviews.llm.summarize("review", max_words = 5)
+```
+
+```{python}
+# Use 'pred_name' to customize the new column's name
+reviews.llm.summarize("review", 5, pred_name = "review_summary")
+```
+
 ### translate { #mall.MallFrame.translate }
 
 `MallFrame.translate(col, language='', additional='', pred_name='translation')`
@@ -155,6 +185,16 @@ Translate text into another language.
 | `language`   | str    | The target language to translate to. For example 'French'.                             | `''`            |
 | `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed | `'translation'` |
 | `additional` | str    | Inserts this text into the prompt sent to the LLM                                      | `''`            |
+
+#### Examples
+
+```{python}
+reviews.llm.translate("review", "spanish")
+```
+
+```{python}
+reviews.llm.translate("review", "french")
+```
 
 ### use { #mall.MallFrame.use }
 
