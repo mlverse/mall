@@ -45,6 +45,32 @@ class MallFrame:
         **kwargs
             Arguments to pass to the downstream Python call. In this case, the
             `chat` function in `ollama`
+
+        Examples
+        ------
+
+        ```{python}
+        # Additional arguments will be passed 'as-is' to the
+        # downstream R function in this example, to ollama::chat()
+        reviews.llm.use("ollama", "llama3.2", seed = 100, temp = 0.1)
+        ```
+
+        ```{python}
+        # During the Python session, you can change any argument
+        # individually and it will retain all of previous
+        # arguments used
+        reviews.llm.use(temp = 0.3)
+        ```
+
+        ```{python}
+        # Use _cache to modify the target folder for caching
+        reviews.llm.use(_cache = "_my_cache")
+        ```
+
+        ```{python}
+        # Leave _cache empty to turn off this functionality
+        reviews.llm.use(_cache = "")
+        ```
         """
         if backend != "":
             self._use.update(dict(backend=backend))
