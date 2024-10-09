@@ -1,10 +1,13 @@
 .dataframe td{
   max-width: 200px;
+  font-size: 14px;
   text-align: left;
+  font-family: monospace;
 }
 
 .dataframe th{
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   text-align: left;
+  font-family: monospace;
 }

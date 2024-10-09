@@ -7,6 +7,21 @@ from mall.llm import llm_call
 class MallFrame:
     """Extension to Polars that add ability to use
     an LLM to run batch predictions over a data frame
+
+    Loads the neede libraries, and sets up the review
+    data frame that will be used in the examples below:
+
+    ```{python}
+    #| output: false
+    import mall
+    import polars as pl
+    pl.Config(fmt_str_lengths=100)
+    pl.Config.set_tbl_hide_dataframe_shape(True)  
+    pl.Config.set_tbl_hide_column_data_types(True)
+    data = mall.MallData
+    reviews = data.reviews
+    reviews.llm.use(options = dict(seed = 100))
+    ```
     """
 
     def __init__(self, df: pl.DataFrame) -> None:
@@ -32,6 +47,32 @@ class MallFrame:
         **kwargs
             Arguments to pass to the downstream Python call. In this case, the
             `chat` function in `ollama`
+
+        Examples
+        ------
+
+        ```{python}
+        # Additional arguments will be passed 'as-is' to the
+        # downstream R function in this example, to ollama::chat()
+        reviews.llm.use("ollama", "llama3.2", seed = 100, temp = 0.1)
+        ```
+
+        ```{python}
+        # During the Python session, you can change any argument
+        # individually and it will retain all of previous
+        # arguments used
+        reviews.llm.use(temp = 0.3)
+        ```
+
+        ```{python}
+        # Use _cache to modify the target folder for caching
+        reviews.llm.use(_cache = "_my_cache")
+        ```
+
+        ```{python}
+        # Leave _cache empty to turn off this functionality
+        reviews.llm.use(_cache = "")
+        ```
         """
         if backend != "":
             self._use.update(dict(backend=backend))
@@ -71,14 +112,24 @@ class MallFrame:
         ------
 
         ```{python}
-        import mall
-        import polars as pl
-        pl.Config(fmt_str_lengths=100)
-        data = mall.MallData
-        reviews = data.reviews
-        reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
         reviews.llm.sentiment("review")
         ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.sentiment("review", pred_name="review_sentiment")
+        ```
+
+        ```{python}
+        # Pass custom sentiment options
+        reviews.llm.sentiment("review", ["positive", "negative"])
+        ```
+
+        ```{python}
+        # Use a DICT object to specify values to return per sentiment
+        reviews.llm.sentiment("review", {"positive" : "1", "negative" : "0"})
+        ```
+
         """
         df = map_call(
             df=self._df,
@@ -97,7 +148,7 @@ class MallFrame:
         additional="",
         pred_name="summary",
     ) -> list[pl.DataFrame]:
-        """Summarise the text down to a specific number of words.
+        """Summarize the text down to a specific number of words.
 
         Parameters
         ------
@@ -114,6 +165,18 @@ class MallFrame:
         additional : str
             Inserts this text into the prompt sent to the LLM
 
+        Examples
+        ------
+
+        ```{python}
+        # Use max_words to set the maximum number of words to use for the summary
+        reviews.llm.summarize("review", max_words = 5)
+        ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.summarize("review", 5, pred_name = "review_summary")
+        ```
         """
         df = map_call(
             df=self._df,
@@ -147,6 +210,19 @@ class MallFrame:
 
         additional : str
             Inserts this text into the prompt sent to the LLM
+
+
+        Examples
+        ------
+
+        ```{python}
+        reviews.llm.translate("review", "spanish")
+        ```
+
+        ```{python}
+        reviews.llm.translate("review", "french")
+        ```
+
         """
         df = map_call(
             df=self._df,
@@ -182,6 +258,23 @@ class MallFrame:
 
         additional : str
             Inserts this text into the prompt sent to the LLM
+
+        Examples
+        ------
+
+        ```{python}
+        reviews.llm.classify("review", ["appliance", "computer"])
+        ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.classify("review", ["appliance", "computer"], pred_name="prod_type")
+        ```
+
+        ```{python}
+        #Pass a DICT to set custom values for each classification
+        reviews.llm.classify("review", {"appliance" : "1", "computer" : "2"})
+        ```
         """
         df = map_call(
             df=self._df,
@@ -217,14 +310,34 @@ class MallFrame:
 
         additional : str
             Inserts this text into the prompt sent to the LLM
+
+        Examples
+        ------
+
+        ```{python}
+        # Use 'labels' to let the function know what to extract
+        reviews.llm.extract("review", labels = "product")
+        ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.extract("review", "product", pred_name = "prod")
+        ```
+
+        ```{python}
+        # Pass a vector to request multiple things, the results will be pipe delimeted
+        # in a single column
+        reviews.llm.extract("review", ["product", "feelings"])
+        ```
+
         """
+        # TODO: Support for expand_cols
         df = map_call(
             df=self._df,
             col=col,
             msg=extract(labels, additional=additional),
             pred_name=pred_name,
             use=self._use,
-            valid_resps=labels,
         )
         return df
 
@@ -248,6 +361,19 @@ class MallFrame:
         pred_name : str
             A character vector with the name of the new column where the
             prediction will be placed
+
+
+        Examples
+        ------
+
+        ```{python}
+        my_prompt = "Answer a question." \
+        + "Return only the answer, no explanation" \
+        + "Acceptable answers are 'yes', 'no'" \
+        + "Answer this about the following text, is this a happy customer?:"
+
+        reviews.llm.custom("review", prompt = my_prompt)
+        ```
         """
         df = map_call(
             df=self._df,
