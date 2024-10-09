@@ -52,7 +52,7 @@ reviews.llm.classify("review", ["appliance", "computer"])
 ```
 
 ```{python}
-# Use 'pred_name' to customize the new column's name 
+# Use 'pred_name' to customize the new column's name
 reviews.llm.classify("review", ["appliance", "computer"], pred_name="prod_type")
 ```
 
@@ -109,6 +109,21 @@ Use an LLM to run a sentiment analysis
 
 ```{python}
 reviews.llm.sentiment("review")
+```
+
+```{python}
+# Use 'pred_name' to customize the new column's name
+reviews.llm.sentiment("review", pred_name="review_sentiment")
+```
+
+```{python}
+# Pass custom sentiment options
+reviews.llm.sentiment("review", ["positive", "negative"])
+```
+
+```{python}
+# Use a DICT object to specify values to return per sentiment
+reviews.llm.sentiment("review", {"positive" : "1", "negative" : "0"})
 ```
 
 ### summarize { #mall.MallFrame.summarize }

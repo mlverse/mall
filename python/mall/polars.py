@@ -10,7 +10,7 @@ class MallFrame:
 
     Loads the neede libraries, and sets up the review
     data frame that will be used in the examples below:
-    
+
     ```{python}
     #| output: false
     import mall
@@ -19,7 +19,7 @@ class MallFrame:
     data = mall.MallData
     reviews = data.reviews
     reviews.llm.use(options = dict(seed = 100))
-    ```    
+    ```
     """
 
     def __init__(self, df: pl.DataFrame) -> None:
@@ -86,6 +86,22 @@ class MallFrame:
         ```{python}
         reviews.llm.sentiment("review")
         ```
+
+        ```{python}
+        # Use 'pred_name' to customize the new column's name
+        reviews.llm.sentiment("review", pred_name="review_sentiment")
+        ```
+
+        ```{python}
+        # Pass custom sentiment options
+        reviews.llm.sentiment("review", ["positive", "negative"])
+        ```
+
+        ```{python}
+        # Use a DICT object to specify values to return per sentiment
+        reviews.llm.sentiment("review", {"positive" : "1", "negative" : "0"})
+        ```
+
         """
         df = map_call(
             df=self._df,
@@ -198,14 +214,14 @@ class MallFrame:
         ```
 
         ```{python}
-        # Use 'pred_name' to customize the new column's name 
+        # Use 'pred_name' to customize the new column's name
         reviews.llm.classify("review", ["appliance", "computer"], pred_name="prod_type")
         ```
-        
+
         ```{python}
         #Pass a DICT to set custom values for each classification
         reviews.llm.classify("review", {"appliance" : "1", "computer" : "2"})
-        ```            
+        ```
         """
         df = map_call(
             df=self._df,
