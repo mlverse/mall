@@ -403,10 +403,12 @@ class MallFrame:
         ------
 
         ```{python}
-        my_prompt = "Answer a question." \
-        + "Return only the answer, no explanation" \
-        + "Acceptable answers are 'yes', 'no'" \
-        + "Answer this about the following text, is this a happy customer?:"
+        my_prompt = (
+            "Answer a question."
+            "Return only the answer, no explanation"
+            "Acceptable answers are 'yes', 'no'"
+            "Answer this about the following text, is this a happy customer?:"
+        )
 
         reviews.llm.custom("review", prompt = my_prompt)
         ```
