@@ -13,7 +13,7 @@ data frame that will be used in the examples below:
 import mall
 import polars as pl
 pl.Config(fmt_str_lengths=100)
-pl.Config.set_tbl_hide_dataframe_shape(True)  
+pl.Config.set_tbl_hide_dataframe_shape(True)
 pl.Config.set_tbl_hide_column_data_types(True)
 data = mall.MallData
 reviews = data.reviews
@@ -87,7 +87,7 @@ reviews.llm.custom("review", prompt = my_prompt)
 
 ### extract { #mall.MallFrame.extract }
 
-`MallFrame.extract(col, labels='', additional='', pred_name='extract')`
+`MallFrame.extract(col, labels='', expand_cols=False, additional='', pred_name='extract')`
 
 Pull a specific label from the text.
 
@@ -116,6 +116,25 @@ reviews.llm.extract("review", "product", pred_name = "prod")
 # Pass a vector to request multiple things, the results will be pipe delimeted
 # in a single column
 reviews.llm.extract("review", ["product", "feelings"])
+```
+
+```{python}
+# Set 'expand_cols' to True to split multiple lables
+# into individual columns
+reviews.llm.extract(
+    col="review",
+    labels=["product", "feelings"],
+    expand_cols=True
+    )
+```
+
+```{python}
+# Set custom names to the resulting columns
+reviews.llm.extract(
+    col="review",
+    labels={"prod": "product", "feels": "feelings"},
+    expand_cols=True
+    )
 ```
 
 ### sentiment { #mall.MallFrame.sentiment }
