@@ -1,1 +1,1 @@
-Sitemap: https://edgararuiz.github.io/mall/sitemap.xml
+Sitemap: https://mlverse.github.io/mall/sitemap.xml

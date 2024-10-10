@@ -120,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/edgararuiz/mall"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/mlverse/mall"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -169,6 +169,44 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right"></p>
 <p><a href="../reference/MallFrame.html#mall.MallFrame">MallFrame</a></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to Polars that add ability to use an LLM to run batch predictions over a data frame</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.classify">classify</a></td>
+<td>Classify text into specific categories.</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.custom">custom</a></td>
+<td>Provide the full prompt that the LLM will process.</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.extract">extract</a></td>
+<td>Pull a specific label from the text.</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.sentiment">sentiment</a></td>
+<td>Use an LLM to run a sentiment analysis</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.summarize">summarize</a></td>
+<td>Summarize the text down to a specific number of words.</td>
+</tr>
+<tr class="even">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.translate">translate</a></td>
+<td>Translate text into another language.</td>
+</tr>
+<tr class="odd">
+<td><a href="../reference/MallFrame.html#mall.MallFrame.use">use</a></td>
+<td>Define the model, backend, and other options to use to</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -412,7 +450,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/edgararuiz\.github\.io\/mall\/");
+      var filterRegex = new RegExp("https:\/\/mlverse\.github\.io\/mall\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
