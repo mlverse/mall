@@ -2,11 +2,11 @@
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
-    branches: temp
+    branches: main
   pull_request:
-    branches: temp
+    branches: main
 
-name: test-coverage.yaml
+name: R test coverage
 
 permissions: read-all
 
@@ -24,6 +24,7 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-r-dependencies@v2
+        working-directory: r
         with:
           extra-packages: |
             any::covr
@@ -33,10 +34,13 @@ jobs:
 
       - name: Test coverage
         run: |
+          setwd("r")
           cov <- covr::package_coverage(
             quiet = FALSE,
             clean = FALSE,
-            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+            install_path = file.path(
+              normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package"
+              )
           )
           covr::to_cobertura(cov)
         shell: Rscript {0}
