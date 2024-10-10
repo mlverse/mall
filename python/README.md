@@ -11,7 +11,7 @@ pre-determined one-shot prompt, along with the current row’s content.
 To install from Github, use:
 
 ``` python
-pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
+pip install "mall @ git+https://git@github.com/mlverse/mall.git@python#subdirectory=python"
 ```
 
 ## Examples

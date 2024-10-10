@@ -84,12 +84,12 @@ corporate network.
 ::: {.panel-tabset group="language"}
 ## R
 ```r
-pak::pak("edgararuiz/mall/r")
+pak::pak("mlverse/mall/r")
 ```
 
 ## Python
 ```python
-pip install "mall @ git+https://git@github.com/edgararuiz/mall.git#subdirectory=python"
+pip install "mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
 ```
 :::
 
@@ -131,7 +131,7 @@ automatically use Databricks' LLM instead of Ollama. *You won't need Ollama
 installed if you are using Databricks only.*
 
 `mall` will call the appropriate SQL AI function. For more information see our 
-[Databricks article.](https://edgararuiz.github.io/mall/articles/databricks.html) 
+[Databricks article.](https://mlverse.github.io/mall/articles/databricks.html) 
 
 ## LLM functions
 

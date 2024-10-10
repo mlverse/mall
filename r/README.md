@@ -7,9 +7,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/edgararuiz/mall/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/edgararuiz/mall/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/edgararuiz/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/edgararuiz/mall?branch=main)
+coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mlverse/mall?branch=main)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
@@ -51,7 +51,7 @@ scientist the need to write and tune an NLP model.
 - Install `mall` from Github
 
   ``` r
-  pak::pak("edgararuiz/mall")
+  pak::pak("mlverse/mall")
   ```
 
 ### With local LLMs
@@ -75,7 +75,7 @@ Ollama installed if you are using Databricks only.*
 
 `mall` will call the appropriate SQL AI function. For more information
 see our [Databricks
-article.](https://edgararuiz.github.io/mall/articles/databricks.html)
+article.](https://mlverse.github.io/mall/articles/databricks.html)
 
 ## LLM functions
 

@@ -13,7 +13,7 @@ Run multiple LLM predictions against a data frame. The predictions are processed
 To install from Github, use:
 
 ```python
-pip install "mall @ git+https://git@github.com/edgararuiz/mall.git@python#subdirectory=python"
+pip install "mall @ git+https://git@github.com/mlverse/mall.git@python#subdirectory=python"
 ```
 
 ## Examples
