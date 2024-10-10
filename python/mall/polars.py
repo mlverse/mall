@@ -16,7 +16,7 @@ class MallFrame:
     import mall
     import polars as pl
     pl.Config(fmt_str_lengths=100)
-    pl.Config.set_tbl_hide_dataframe_shape(True)  
+    pl.Config.set_tbl_hide_dataframe_shape(True)
     pl.Config.set_tbl_hide_column_data_types(True)
     data = mall.MallData
     reviews = data.reviews
@@ -290,7 +290,7 @@ class MallFrame:
         self,
         col,
         labels="",
-        expand_cols=False, 
+        expand_cols=False,
         additional="",
         pred_name="extract",
     ) -> list[pl.DataFrame]:
@@ -332,25 +332,28 @@ class MallFrame:
         ```
 
         """
-        # TODO: Support for expand_cols
+
+        lab_names = labels
+        lab_vals = labels
+        if isinstance(labels, dict):
+            lab_names = []
+            lab_vals = []
+            for label in labels:
+                lab_names.append(label)
+                lab_vals.append(labels[label])
         df = map_call(
             df=self._df,
             col=col,
-            msg=extract(labels, additional=additional),
+            msg=extract(lab_vals, additional=additional),
             pred_name=pred_name,
             use=self._use,
         )
         if expand_cols:
-            lab_names = labels 
-            if isinstance(labels, dict):
-                lab_names = []
-                for label in labels:
-                    lab_names.append(label)            
             df = df.with_columns(
                 pl.col("extract")
-                .str.split_exact(n = len(labels) - 1, by="|")
+                .str.split_exact(n=len(labels) - 1, by="|")
                 .struct.rename_fields(lab_names)
-                ).unnest("extract")
+            ).unnest("extract")
 
         return df
 
