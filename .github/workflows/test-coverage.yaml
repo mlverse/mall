@@ -43,14 +43,12 @@ jobs:
               )
           )
           covr::to_cobertura(cov)
-          print(list.files(recursive = TRUE, full.names = TRUE))
         shell: Rscript {0}
 
       - uses: codecov/codecov-action@v4
         with:
-          directory: ./r
           fail_ci_if_error: ${{ github.event_name != 'pull_request' && true || false }}
-          file: ./cobertura.xml
+          file: ./r/cobertura.xml
           plugin: noop
           disable_search: true
           token: ${{ secrets.CODECOV_TOKEN }}
