@@ -135,11 +135,6 @@ installed if you are using Databricks only.*
 
 ## LLM functions
 
-### Sentiment
-
-Primarily,  `mall` provides verb-like functions that expect a data frame as 
-their first argument. 
-
 We will start with loading a very small data set contained in `mall`. It has
 3 product reviews that we will use as the source of our examples.
 
@@ -148,7 +143,6 @@ We will start with loading a very small data set contained in `mall`. It has
 
 ```{r}
 library(mall)
-
 data("reviews")
 
 reviews
@@ -176,74 +170,32 @@ reviews
 
 ```{python}
 #| include: false
-
-
 reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
 ```
 
-For the first example, we'll asses the sentiment of each review:
+### Sentiment
+
+Automatically returns "positive", "negative", or "neutral" based on the text.
 
 ::: {.panel-tabset group="language"}
 ## R
 
 ```{r}
-
 reviews |>
   llm_sentiment(review)
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_sentiment.qmd) 
+
 ## Python 
 
 ```{python}
-
 reviews.llm.sentiment("review")
 ```
 
-:::
-
-We can also provide custom sentiment labels. Use the `options` argument to control
-that:
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-
-reviews |>
-  llm_sentiment(review, options = c("positive", "negative"))
-```
-
-## Python 
-
-```{python}
-
-reviews.llm.sentiment("review", options=["positive", "negative"])
-```
-
-:::
-
-As mentioned before, these functions are create to play well with the rest of 
-the analysis
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-
-reviews |>
-  llm_sentiment(review, options = c("positive", "negative")) |>
-  filter(.sentiment == "negative")
-```
-
-## Python
-
-```{python}
-
-x = reviews.llm.sentiment("review", options=["positive", "negative"])
-
-x.filter(pl.col("sentiment") == "negative")
-
-```
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.sentiment) 
 
 :::
 
@@ -258,40 +210,21 @@ control the maximum number of words to output
 ## R
 
 ```{r}
-
-
 reviews |>
   llm_summarize(review, max_words = 5)
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_summarize.qmd) 
+
 ## Python 
 
 ```{python}
-
-
 reviews.llm.summarize("review", 5)
 ```
 
-:::
-
-To control the name of the prediction field, you can change `pred_name` argument.
-**This works with the other `llm` functions as well.**
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-
-reviews |>
-  llm_summarize(review, max_words = 5, pred_name = "review_summary")
-```
-
-## Python 
-
-```{python}
-
-reviews.llm.summarize("review", max_words = 5, pred_name = "review_summary")
-```
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.summarize) 
 
 :::
 
@@ -308,13 +241,17 @@ reviews |>
   llm_classify(review, c("appliance", "computer"))
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_classify.qmd) 
 
 ## Python 
 
 ```{python}
-
 reviews.llm.classify("review", ["computer", "appliance"])
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.classify) 
 
 :::
 
@@ -335,13 +272,17 @@ reviews |>
   llm_extract(review, "product")
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_extract.qmd) 
 
 ## Python 
 
 ```{python}
-
 reviews.llm.extract("review", "product")
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.extract) 
 
 :::
 
@@ -357,20 +298,21 @@ accuracy will depend on the LLM
 ## R
 
 ```{r}
-
-
 reviews |>
   llm_translate(review, "spanish")
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_translate.qmd) 
 
 ## Python 
 
 ```{python}
-
-
 reviews.llm.translate("review", "spanish")
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.translate) 
 
 :::
 
@@ -395,19 +337,24 @@ reviews |>
   llm_custom(review, my_prompt)
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_custom.qmd) 
 
 ## Python 
 
 ```{python}
-
-my_prompt = "Answer a question." \
-  + "Return only the answer, no explanation" \
-  + "Acceptable answers are 'yes', 'no'" \
-  + "Answer this about the following text, is this a happy customer?:"
-
+my_prompt = (
+    "Answer a question."
+    "Return only the answer, no explanation"
+    "Acceptable answers are 'yes', 'no'"
+    "Answer this about the following text, is this a happy customer?:"
+)
 
 reviews.llm.custom("review", prompt = my_prompt)
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.custom) 
 
 :::
 
