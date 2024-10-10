@@ -92,9 +92,6 @@ pak::pak("edgararuiz/mall/r")
 pip install "mall @ git+https://git@github.com/edgararuiz/mall.git#subdirectory=python"
 ```
 :::
-  
-
-### With local LLMs
 
 - [Download Ollama from the official website](https://ollama.com/download)
 
@@ -126,10 +123,8 @@ Llama 3.2 to test. To get that model you can run:
   ollama.pull('llama3.2')
   ```
 :::
-
-
   
-### With Databricks (R only)
+#### With Databricks (R only)
 
 If you pass a table connected to **Databricks** via `odbc`, `mall` will 
 automatically use Databricks' LLM instead of Ollama. *You won't need Ollama 
@@ -140,11 +135,6 @@ installed if you are using Databricks only.*
 
 ## LLM functions
 
-### Sentiment
-
-Primarily,  `mall` provides verb-like functions that expect a data frame as 
-their first argument. 
-
 We will start with loading a very small data set contained in `mall`. It has
 3 product reviews that we will use as the source of our examples.
 
@@ -153,7 +143,6 @@ We will start with loading a very small data set contained in `mall`. It has
 
 ```{r}
 library(mall)
-
 data("reviews")
 
 reviews
@@ -181,74 +170,32 @@ reviews
 
 ```{python}
 #| include: false
-
-
 reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
 ```
 
-For the first example, we'll asses the sentiment of each review:
+### Sentiment
+
+Automatically returns "positive", "negative", or "neutral" based on the text.
 
 ::: {.panel-tabset group="language"}
 ## R
 
 ```{r}
-
 reviews |>
   llm_sentiment(review)
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_sentiment.qmd) 
+
 ## Python 
 
 ```{python}
-
 reviews.llm.sentiment("review")
 ```
 
-:::
-
-We can also provide custom sentiment labels. Use the `options` argument to control
-that:
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-
-reviews |>
-  llm_sentiment(review, options = c("positive", "negative"))
-```
-
-## Python 
-
-```{python}
-
-reviews.llm.sentiment("review", options=["positive", "negative"])
-```
-
-:::
-
-As mentioned before, these functions are create to play well with the rest of 
-the analysis
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-
-reviews |>
-  llm_sentiment(review, options = c("positive", "negative")) |>
-  filter(.sentiment == "negative")
-```
-
-## Python
-
-```{python}
-
-x = reviews.llm.sentiment("review", options=["positive", "negative"])
-
-x.filter(pl.col("sentiment") == "negative")
-
-```
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.sentiment) 
 
 :::
 
@@ -263,40 +210,21 @@ control the maximum number of words to output
 ## R
 
 ```{r}
-
-
 reviews |>
   llm_summarize(review, max_words = 5)
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_summarize.qmd) 
+
 ## Python 
 
 ```{python}
-
-
 reviews.llm.summarize("review", 5)
 ```
 
-:::
-
-To control the name of the prediction field, you can change `pred_name` argument.
-**This works with the other `llm` functions as well.**
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-
-reviews |>
-  llm_summarize(review, max_words = 5, pred_name = "review_summary")
-```
-
-## Python 
-
-```{python}
-
-reviews.llm.summarize("review", max_words = 5, pred_name = "review_summary")
-```
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.summarize) 
 
 :::
 
@@ -313,13 +241,17 @@ reviews |>
   llm_classify(review, c("appliance", "computer"))
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_classify.qmd) 
 
 ## Python 
 
 ```{python}
-
 reviews.llm.classify("review", ["computer", "appliance"])
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.classify) 
 
 :::
 
@@ -340,13 +272,17 @@ reviews |>
   llm_extract(review, "product")
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_extract.qmd) 
 
 ## Python 
 
 ```{python}
-
 reviews.llm.extract("review", "product")
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.extract) 
 
 :::
 
@@ -362,20 +298,21 @@ accuracy will depend on the LLM
 ## R
 
 ```{r}
-
-
 reviews |>
   llm_translate(review, "spanish")
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_translate.qmd) 
 
 ## Python 
 
 ```{python}
-
-
 reviews.llm.translate("review", "spanish")
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.translate) 
 
 :::
 
@@ -400,19 +337,24 @@ reviews |>
   llm_custom(review, my_prompt)
 ```
 
+For more information and examples visit this function's 
+[R reference page](reference/llm_custom.qmd) 
 
 ## Python 
 
 ```{python}
-
-my_prompt = "Answer a question." \
-  + "Return only the answer, no explanation" \
-  + "Acceptable answers are 'yes', 'no'" \
-  + "Answer this about the following text, is this a happy customer?:"
-
+my_prompt = (
+    "Answer a question."
+    "Return only the answer, no explanation"
+    "Acceptable answers are 'yes', 'no'"
+    "Answer this about the following text, is this a happy customer?:"
+)
 
 reviews.llm.custom("review", prompt = my_prompt)
 ```
+
+For more information and examples visit this function's 
+[Python reference page](reference/MallFrame.qmd#mall.MallFrame.custom) 
 
 :::
 
@@ -451,12 +393,12 @@ object level. If not passed, the default model will be **llama3.2**.
 
 ```{python}
 #| eval: false
-reviews.llm.use(options = dict(seed = 100))
+reviews.llm.use("ollama", "llama3.2", options = dict(seed = 100))
 ```
 
 :::
 
-## Caching results
+#### Results caching 
 
 By default `mall` caches the requests and corresponding results from a given
 LLM run. Each response is saved as individual JSON files. By default, the folder
@@ -517,78 +459,6 @@ providing encouraging results. But you, as an user, will still need to keep
 in mind that the predictions will not be infallible, so always check the output.
 At this time, I think the best use for this method, is for a quick analysis.
 
-## Performance
-
-We will briefly cover this methods performance from two perspectives: 
-
-- How long the analysis takes to run locally 
-
-- How well it predicts 
-
-To do so, we will use the `data_bookReviews` data set, provided by the `classmap`
-package. For this exercise, only the first 100, of the total 1,000, are going
-to be part of this analysis.
-
-```{r}
-library(classmap)
-
-data(data_bookReviews)
-
-data_bookReviews |>
-  glimpse()
-```
-As per the docs, `sentiment` is a factor indicating the sentiment of the review:
-negative (1) or positive (2)
-
-```{r}
-length(strsplit(paste(head(data_bookReviews$review, 100), collapse = " "), " ")[[1]])
-```
-
-Just to get an idea of how much data we're processing, I'm using a very, very 
-simple word count. So we're analyzing a bit over 20 thousand words.
-
-```{r}
-reviews_llm <- data_bookReviews |>
-  head(100) |> 
-  llm_sentiment(
-    col = review,
-    options = c("positive" ~ 2, "negative" ~ 1),
-    pred_name = "predicted"
-  )
-```
-
-As far as **time**, on my Apple M3 machine, it took about 1.5 minutes to process,
-100 rows, containing 20 thousand words. Setting `temp` to 0 in `llm_use()`, 
-made the model run faster.
-
-The package uses `purrr` to send each prompt individually to the LLM. But, I did
-try a few different ways to speed up the process, unsuccessfully:
-
-- Used `furrr` to send multiple requests at a time. This did not work because 
-either the LLM or Ollama processed all my requests serially. So there was
-no improvement.
-
-- I also tried sending more than one row's text at a time. This cause instability
-in the number of results. For example sending 5 at a time, sometimes returned 7
-or 8. Even sending 2 was not stable. 
-
-This is what the new table looks like:
-
-```{r}
-reviews_llm
-```
-
-I used `yardstick` to see how well the model performed. Of course, the accuracy
-will not be of the "truth", but rather the package's results recorded in 
-`sentiment`.
-
-```{r}
-library(forcats)
-
-reviews_llm |>
-  mutate(predicted = as.factor(predicted)) |>
-  yardstick::accuracy(sentiment, predicted)
-```
 
 ## Vector functions (R only)
 

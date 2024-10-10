@@ -8,15 +8,16 @@ class MallFrame:
     """Extension to Polars that add ability to use
     an LLM to run batch predictions over a data frame
 
-    Loads the neede libraries, and sets up the review
-    data frame that will be used in the examples below:
+    We will start by loading the needed libraries, and 
+    set up the data frame that will be used in the 
+    examples:
 
     ```{python}
     #| output: false
     import mall
     import polars as pl
     pl.Config(fmt_str_lengths=100)
-    pl.Config.set_tbl_hide_dataframe_shape(True)  
+    pl.Config.set_tbl_hide_dataframe_shape(True)
     pl.Config.set_tbl_hide_column_data_types(True)
     data = mall.MallData
     reviews = data.reviews
@@ -290,6 +291,7 @@ class MallFrame:
         self,
         col,
         labels="",
+        expand_cols=False,
         additional="",
         pred_name="extract",
     ) -> list[pl.DataFrame]:
@@ -330,15 +332,49 @@ class MallFrame:
         reviews.llm.extract("review", ["product", "feelings"])
         ```
 
+        ```{python}
+        # Set 'expand_cols' to True to split multiple lables
+        # into individual columns
+        reviews.llm.extract(
+            col="review",
+            labels=["product", "feelings"],
+            expand_cols=True
+            )
+        ```
+
+        ```{python}
+        # Set custom names to the resulting columns
+        reviews.llm.extract(
+            col="review",
+            labels={"prod": "product", "feels": "feelings"},
+            expand_cols=True
+            )
+        ```
+
         """
-        # TODO: Support for expand_cols
+
+        lab_names = labels
+        lab_vals = labels
+        if isinstance(labels, dict):
+            lab_names = []
+            lab_vals = []
+            for label in labels:
+                lab_names.append(label)
+                lab_vals.append(labels[label])
         df = map_call(
             df=self._df,
             col=col,
-            msg=extract(labels, additional=additional),
+            msg=extract(lab_vals, additional=additional),
             pred_name=pred_name,
             use=self._use,
         )
+        if expand_cols:
+            df = df.with_columns(
+                pl.col("extract")
+                .str.split_exact(n=len(labels) - 1, by="|")
+                .struct.rename_fields(lab_names)
+            ).unnest("extract")
+
         return df
 
     def custom(
@@ -367,10 +403,12 @@ class MallFrame:
         ------
 
         ```{python}
-        my_prompt = "Answer a question." \
-        + "Return only the answer, no explanation" \
-        + "Acceptable answers are 'yes', 'no'" \
-        + "Answer this about the following text, is this a happy customer?:"
+        my_prompt = (
+            "Answer a question."
+            "Return only the answer, no explanation"
+            "Acceptable answers are 'yes', 'no'"
+            "Answer this about the following text, is this a happy customer?:"
+        )
 
         reviews.llm.custom("review", prompt = my_prompt)
         ```
