@@ -11,5 +11,15 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to Polars that add ability to use 
 an LLM to run batch predictions over a data frame
 
+| Name | Description |
+| --- | --- |
+| [classify](MallFrame.qmd#mall.MallFrame.classify) | Classify text into specific categories. |
+| [custom](MallFrame.qmd#mall.MallFrame.custom) | Provide the full prompt that the LLM will process. |
+| [extract](MallFrame.qmd#mall.MallFrame.extract) | Pull a specific label from the text. |
+| [sentiment](MallFrame.qmd#mall.MallFrame.sentiment) | Use an LLM to run a sentiment analysis |
+| [summarize](MallFrame.qmd#mall.MallFrame.summarize) | Summarize the text down to a specific number of words. |
+| [translate](MallFrame.qmd#mall.MallFrame.translate) | Translate text into another language. |
+| [use](MallFrame.qmd#mall.MallFrame.use) | Define the model, backend, and other options to use to |
+
 :::
   

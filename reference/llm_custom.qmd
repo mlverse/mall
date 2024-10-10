@@ -10,7 +10,7 @@ execute:
 source("../utils/knitr-print.R")
 ```
 
-[R/llm-custom.R](https://github.com/edgararuiz/mall/blob/main/R/llm-custom.R)
+[R/llm-custom.R](https://github.com/mlverse/mall/blob/main/R/llm-custom.R)
 
 ## llm_custom
 

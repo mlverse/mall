@@ -17,7 +17,7 @@ website:
         text: Reference
     right:
       - icon: github
-        href: https://github.com/edgararuiz/mall    
+        href: https://github.com/mlverse/mall    
   sidebar:
     - id: articles
       title: "Articles"

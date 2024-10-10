@@ -24,7 +24,7 @@ Suggests:
     dbplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
-URL: https://edgararuiz.github.io/mall/
+URL: https://mlverse.github.io/mall/
 Depends: 
     R (>= 2.10)
 LazyData: true
