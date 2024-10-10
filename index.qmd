@@ -42,8 +42,9 @@ This package is inspired by the SQL AI functions now offered by vendors such as
 and Snowflake.  `mall` uses [Ollama](https://ollama.com/) to  interact with LLMs 
 installed  locally. 
 
+<img src="figures/dplyr.png" style="float:left;margin-right:33px;margin-top:20px;" width="100" />
 
-For R, that interaction takes place via the 
+For **R**, that interaction takes place via the 
 [`ollamar`](https://hauselin.github.io/ollama-r/) package. The functions are 
 designed to easily work with piped commands, such as `dplyr`. 
 
@@ -52,9 +53,11 @@ reviews |>
   llm_sentiment(review)
 ```
 
+<img src="figures/polars.png" style="float:left;margin-right:10px;" width="120" />
 
-For Python, `mall` includes an extension to [Polars](https://pola.rs/). To
-interact with Ollama, it uses the official [Python library](https://github.com/ollama/ollama-python).
+For **Python**, `mall` is a library extension to [Polars](https://pola.rs/). To
+interact with Ollama, it uses the official
+[Python library](https://github.com/ollama/ollama-python).
 
 ```python
 reviews.llm.sentiment("review")
