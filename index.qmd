@@ -92,9 +92,6 @@ pak::pak("edgararuiz/mall/r")
 pip install "mall @ git+https://git@github.com/edgararuiz/mall.git#subdirectory=python"
 ```
 :::
-  
-
-### With local LLMs
 
 - [Download Ollama from the official website](https://ollama.com/download)
 
@@ -126,10 +123,8 @@ Llama 3.2 to test. To get that model you can run:
   ollama.pull('llama3.2')
   ```
 :::
-
-
   
-### With Databricks (R only)
+#### With Databricks (R only)
 
 If you pass a table connected to **Databricks** via `odbc`, `mall` will 
 automatically use Databricks' LLM instead of Ollama. *You won't need Ollama 
@@ -456,7 +451,7 @@ reviews.llm.use("ollama", "llama3.2", options = dict(seed = 100))
 
 :::
 
-## Caching results
+#### Results caching 
 
 By default `mall` caches the requests and corresponding results from a given
 LLM run. Each response is saved as individual JSON files. By default, the folder
