@@ -8,8 +8,9 @@ class MallFrame:
     """Extension to Polars that add ability to use
     an LLM to run batch predictions over a data frame
 
-    Loads the neede libraries, and sets up the review
-    data frame that will be used in the examples below:
+    We will start by loading the needed libraries, and 
+    set up the data frame that will be used in the 
+    examples:
 
     ```{python}
     #| output: false
