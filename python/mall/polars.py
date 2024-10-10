@@ -331,6 +331,25 @@ class MallFrame:
         reviews.llm.extract("review", ["product", "feelings"])
         ```
 
+        ```{python}
+        # Set 'expand_cols' to True to split multiple lables
+        # into individual columns
+        reviews.llm.extract(
+            col="review",
+            labels=["product", "feelings"],
+            expand_cols=True
+            )
+        ```
+
+        ```{python}
+        # Set custom names to the resulting columns
+        reviews.llm.extract(
+            col="review",
+            labels={"prod": "product", "feels": "feelings"},
+            expand_cols=True
+            )
+        ```
+
         """
 
         lab_names = labels
