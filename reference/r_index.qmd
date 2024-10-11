@@ -4,42 +4,18 @@ toc: false
 <img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right" />
 
 [llm_classify()](llm_classify.html) [llm_vec_classify()](llm_classify.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categorize data as one of options given
-
-
 [llm_custom()](llm_custom.html) [llm_vec_custom()](llm_custom.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send a custom prompt to the LLM
-
-
 [llm_extract()](llm_extract.html) [llm_vec_extract()](llm_extract.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extract entities from text
-
-
 [llm_sentiment()](llm_sentiment.html) [llm_vec_sentiment()](llm_sentiment.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sentiment analysis
-
-
 [llm_summarize()](llm_summarize.html) [llm_vec_summarize()](llm_summarize.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summarize text
-
-
 [llm_translate()](llm_translate.html) [llm_vec_translate()](llm_translate.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translates text to a specific language
-
-
 [llm_use()](llm_use.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use
-
-
 [reviews](reviews.html)
-
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mini reviews data set
-
-

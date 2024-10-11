@@ -1,0 +1,6 @@
+---
+toc: false
+---
+<img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right" />
+
+{{{{notitle.reference}}}}

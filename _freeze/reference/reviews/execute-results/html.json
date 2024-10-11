@@ -1,8 +1,8 @@
 {
-  "hash": "450a1111d48e83138306c47f538b455a",
+  "hash": "a51623e19e8fff2aa4b505aad2197f81",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: \"Mini reviews data set\"\nexecute:\n  eval: true\n  freeze: true\n---\n\n\n\n\n\n\n[R/data-reviews.R](https://github.com/edgararuiz/mall/blob/main/R/data-reviews.R)\n\n## reviews\n\n## Description\n Mini reviews data set \n\n## Format\n A data frame that contains 3 records. The records are of fictitious product reviews. \n\n## Usage\n```r\n \nreviews \n```\n\n\n\n\n\n\n## Examples\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n \nlibrary(mall) \ndata(reviews) \nreviews \n#> # A tibble: 3 × 1\n#>   review                                                                        \n#>   <chr>                                                                         \n#> 1 This has been the best TV I've ever used. Great screen, and sound.            \n#> 2 I regret buying this laptop. It is too slow and the keyboard is too noisy     \n#> 3 Not sure how to feel about my new washing machine. Great color, but hard to f…\n```\n:::\n",
+    "markdown": "---\ntitle: \"Mini reviews data set\"\nexecute:\n  eval: true\n  freeze: true\n---\n\n\n\n\n\n[R/data-reviews.R](https://github.com/mlverse/mall/blob/main/R/data-reviews.R)\n\n## reviews\n\n## Description\n Mini reviews data set \n\n## Format\n A data frame that contains 3 records. The records are of fictitious product reviews. \n\n## Usage\n```r\n \nreviews \n```\n\n\n\n\n\n\n## Examples\n\n\n::: {.cell}\n\n```{.r .cell-code}\n \nlibrary(mall) \ndata(reviews) \nreviews \n#> # A tibble: 3 × 1\n#>   review                                                                        \n#>   <chr>                                                                         \n#> 1 This has been the best TV I've ever used. Great screen, and sound.            \n#> 2 I regret buying this laptop. It is too slow and the keyboard is too noisy     \n#> 3 Not sure how to feel about my new washing machine. Great color, but hard to f…\n```\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"

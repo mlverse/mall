@@ -16,12 +16,12 @@ library(dplyr)
 library(dbplyr)
 library(tictoc)
 library(DBI)
-source("utils/knitr-print.R")
+source("site/knitr-print.R")
 mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 ```
 
 
-<img src="figures/favicon/apple-touch-icon-180x180.png" style="float:right" />
+<img src="site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
 <!-- badges: start -->
 
@@ -51,7 +51,7 @@ This package is inspired by the SQL AI functions now offered by vendors such as
 and Snowflake.  `mall` uses [Ollama](https://ollama.com/) to  interact with LLMs 
 installed  locally. 
 
-<img src="figures/dplyr.png" style="float:left;margin-right:33px;margin-top:20px;" width="100" />
+<img src="site/images/dplyr.png" style="float:left;margin-right:33px;margin-top:20px;" width="100" />
 
 For **R**, that interaction takes place via the 
 [`ollamar`](https://hauselin.github.io/ollama-r/) package. The functions are 
@@ -62,7 +62,7 @@ reviews |>
   llm_sentiment(review)
 ```
 
-<img src="figures/polars.png" style="float:left;margin-right:10px;" width="120" />
+<img src="site/images/polars.png" style="float:left;margin-right:10px;" width="120" />
 
 For **Python**, `mall` is a library extension to [Polars](https://pola.rs/). To
 interact with Ollama, it uses the official

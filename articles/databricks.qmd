@@ -7,7 +7,7 @@ execute:
 
 ```{r}
 #| include: false
-source("../utils/knitr-print.R")
+source("../site/knitr-print.R")
 ```
 
 ```{r, include = FALSE}

@@ -11,7 +11,7 @@ library(fs)
 library(jsonlite)
 dir_delete("_mall_cache")
 dir_delete("_performance_cache")
-source("../utils/knitr-print.R")
+source("../site/knitr-print.R")
 ```
 
 Data preparation, and model preparation, is usually a iterative process. Because

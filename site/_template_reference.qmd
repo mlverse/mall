@@ -7,7 +7,7 @@ execute:
 
 ```{r}
 #| include: false
-source("../utils/knitr-print.R")
+source("../site/knitr-print.R")
 ```
 
 [{{{{notitle.source}}}}](https://github.com/mlverse/mall/blob/main/{{{{notitle.source}}}})

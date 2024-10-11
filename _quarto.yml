@@ -8,9 +8,9 @@ execute:
 
 website:
   title: mall
-  favicon: "figures/favicon/apple-touch-icon.png"
+  favicon: "site/images/favicon/apple-touch-icon.png"
   navbar:
-    logo: "figures/favicon/apple-touch-icon.png"
+    logo: "site/images/favicon/apple-touch-icon.png"
     left:
       - sidebar:articles    
       - href: reference/index.qmd
@@ -41,10 +41,10 @@ format:
     code-toos: true
     eval: true
     freeze: true
-    css: styles.css
+    css: site/styles.css
     theme:
-      light: [cosmo, theme.scss]
-      dark: [cosmo, theme-dark.scss]
+      light: [cosmo, site/theme.scss]
+      dark: [cosmo, site/theme-dark.scss]
 
 knitr:
   opts_chunk: 
