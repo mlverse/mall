@@ -146,13 +146,13 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         )
       )
     },
-    verify = function(labels) {
+    verify = function(question, labels) {
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful verification engine.",
-            "Determine if the text is true or not",
+            "Determine if {question}.",
             "For true statements, return {labels[1]}, otherwise return {labels[2]}.", 
             "Your answer will contain no no capitalization and no explanations.",
             "{additional}",

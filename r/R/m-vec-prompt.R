@@ -59,5 +59,9 @@ m_vec_prompt <- function(x,
   if (is.numeric(valid_resps)) {
     resp <- as.numeric(resp)
   }
+  if (is.factor(valid_resps)) {
+    resp <- as.factor(resp)
+    levels(resp) <- levels(valid_resps)
+  }
   resp
 }
