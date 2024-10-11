@@ -9,7 +9,7 @@ execute:
 #| include: false
 library(dplyr)
 mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
-source("../utils/knitr-print.R")
+source("../site/knitr-print.R")
 ```
 
 ## Performance

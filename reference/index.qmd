@@ -4,7 +4,7 @@
 
 ## Python
 
-<img src="../figures/favicon/apple-touch-icon-76x76.png" style="float:right" />
+<img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right" />
 
 [MallFrame](MallFrame.qmd#mall.MallFrame) 
 
