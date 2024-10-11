@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./figures/favicon/apple-touch-icon.png" rel="icon" type="image/png">
+<link href="./site/images/favicon/apple-touch-icon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -105,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="site/styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./figures/favicon/apple-touch-icon.png" alt="" class="navbar-logo">
+    <img src="./site/images/favicon/apple-touch-icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">mall</span>
@@ -198,7 +198,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p><img src="figures/favicon/apple-touch-icon-180x180.png" style="float:right"></p>
+<p><img src="site/images/favicon/apple-touch-icon-180x180.png" style="float:right"></p>
 <!-- badges: start -->
 <p><a href="https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml/badge.svg" class="img-fluid" alt="R package check"></a> <a href="https://app.codecov.io/gh/mlverse/mall?branch=main"><img src="https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg" class="img-fluid" alt="R package coverage"></a> <a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" class="img-fluid" alt="Lifecycle: experimental"></a> <!-- badges: end --></p>
 <p>Run multiple LLM predictions against a data frame. The predictions are processed row-wise over a specified column. It works using a pre-determined one-shot prompt, along with the current row’s content. <code>mall</code> has been implemented for both R and Python. The prompt that is use will depend of the type of analysis needed.</p>
@@ -212,11 +212,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#custom-prompt">Custom prompt</a></li>
 </ul>
 <p>This package is inspired by the SQL AI functions now offered by vendors such as <a href="https://docs.databricks.com/en/large-language-models/ai-functions.html">Databricks</a> and Snowflake. <code>mall</code> uses <a href="https://ollama.com/">Ollama</a> to interact with LLMs installed locally.</p>
-<p><img src="figures/dplyr.png" style="float:left;margin-right:33px;margin-top:20px;" width="100"></p>
+<p><img src="site/images/dplyr.png" style="float:left;margin-right:33px;margin-top:20px;" width="100"></p>
 <p>For <strong>R</strong>, that interaction takes place via the <a href="https://hauselin.github.io/ollama-r/"><code>ollamar</code></a> package. The functions are designed to easily work with piped commands, such as <code>dplyr</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>reviews <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">llm_sentiment</span>(review)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="figures/polars.png" style="float:left;margin-right:10px;" width="120"></p>
+<p><img src="site/images/polars.png" style="float:left;margin-right:10px;" width="120"></p>
 <p>For <strong>Python</strong>, <code>mall</code> is a library extension to <a href="https://pola.rs/">Polars</a>. To interact with Ollama, it uses the official <a href="https://github.com/ollama/ollama-python">Python library</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="motivation" class="level2">
