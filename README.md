@@ -9,7 +9,7 @@ coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-<img src="figures/favicon/apple-touch-icon-180x180.png" style="float:right" />
+<img src="site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
 
 Run multiple LLM predictions against a data frame. The predictions are
