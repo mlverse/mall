@@ -1,0 +1,37 @@
+---
+title: "{{{{notitle.title}}}}"
+execute:
+  eval: true
+  freeze: true
+---
+
+```{r}
+#| include: false
+source("../site/knitr-print.R")
+```
+
+[{{{{notitle.source}}}}](https://github.com/mlverse/mall/blob/main/{{{{notitle.source}}}})
+
+## {{{{notitle.alias}}}}
+
+{{{{title.description}}}}
+
+{{{{title.format}}}}
+
+{{{{title.usage}}}}
+
+{{{{title.arguments}}}}
+
+{{{{title.details}}}}
+
+{{{{title.section}}}}
+
+{{{{title.value}}}}
+
+{{{{title.note}}}}
+
+{{{{title.examples}}}}
+
+{{{{title.seealso}}}}
+
+{{{{title.author}}}}
