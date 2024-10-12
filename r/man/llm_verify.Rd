@@ -56,7 +56,7 @@ Use a Large Language Model (LLM) to see if something is true or not
 based the provided text
 }
 \examples{
-
+\dontrun{
 library(mall)
 
 data("reviews")
@@ -74,5 +74,6 @@ llm_verify(reviews, review, "is the customer happy", c("y", "n"))
 # Number can also be used, this would be in the case that you wish to match
 # the output values of existing predictions
 llm_verify(reviews, review, "is the customer happy", c(2, 1))
+}
 
 }

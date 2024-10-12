@@ -29,4 +29,8 @@
       _mall_cache/b0/b02d0fab954e183a98787fa897b47d59.json
       _mall_cache/b7
       _mall_cache/b7/b7c613386c94b2500b2b733632fedd1a.json
+      _mall_cache/b9
+      _mall_cache/b9/b9f544fe374b34f5b2320ac3a8c2847f.json
+      _mall_cache/dd
+      _mall_cache/dd/dd074f573d5fe67c1a5f27f63fa06267.json
 

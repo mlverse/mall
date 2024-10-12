@@ -14,7 +14,7 @@
 #' `llm_vec_verify` returns a vector that is the same length as `x`.
 #'
 #' @examples
-#'
+#' \dontrun{
 #' library(mall)
 #' 
 #' data("reviews")
@@ -32,6 +32,7 @@
 #' # Number can also be used, this would be in the case that you wish to match
 #' # the output values of existing predictions
 #' llm_verify(reviews, review, "is the customer happy", c(2, 1))
+#' }
 #' 
 #' @export
 llm_verify <- function(.data,
