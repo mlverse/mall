@@ -13,6 +13,26 @@
 #' @returns `llm_verify` returns a `data.frame` or `tbl` object.
 #' `llm_vec_verify` returns a vector that is the same length as `x`.
 #'
+#' @examples
+#'
+#' library(mall)
+#' 
+#' data("reviews")
+#' 
+#' llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
+#' 
+#' # By default it will return 1 for 'true', and 0 for 'false',
+#' # the new column will be a factor type
+#' llm_verify(reviews, review, "is the customer happy")
+#' 
+#' # The yes_no argument can be modified to return a different response
+#' # than 1 or 0. First position will be 'true' and second, 'false'
+#' llm_verify(reviews, review, "is the customer happy", c("y", "n"))
+#' 
+#' # Number can also be used, this would be in the case that you wish to match
+#' # the output values of existing predictions
+#' llm_verify(reviews, review, "is the customer happy", c(2, 1))
+#' 
 #' @export
 llm_verify <- function(.data,
                        col,
@@ -52,7 +72,7 @@ llm_vec_verify <- function(x,
     x = x,
     prompt_label = "verify",
     what = what,
-    yes_no = yes_no,
+    labels = yes_no,
     valid_resps = yes_no,
     convert = c("yes" = yes_no[1], "no" = yes_no[2]),
     additional_prompt = additional_prompt,
