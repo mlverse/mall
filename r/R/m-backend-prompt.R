@@ -146,14 +146,14 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         )
       )
     },
-    verify = function(question, labels) {
+    verify = function(what, labels) {
       list(
         list(
           role = "user",
           content = glue(paste(
             "You are a helpful text analysis engine.",
             "Determine this is true ",
-            "'{question}'.",
+            "'{what}'.",
             "No capitalization. No explanations.",
             "{additional}",
             "The answer is based on the following text:\n{{x}}"
