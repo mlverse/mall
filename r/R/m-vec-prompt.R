@@ -3,6 +3,7 @@ m_vec_prompt <- function(x,
                          additional_prompt = "",
                          valid_resps = NULL,
                          prompt = NULL,
+                         convert = NULL,
                          preview = FALSE,
                          ...) {
   # Initializes session LLM
@@ -40,10 +41,18 @@ m_vec_prompt <- function(x,
   if (preview) {
     return(resp[[1]])
   }
+
   # Checks for invalid output and marks them as NA
   if (all_formula(valid_resps)) {
     valid_resps <- list_c(map(valid_resps, f_rhs))
   }
+
+  if (!is.null(convert)) {
+    for (i in seq_along(convert)) {
+      resp[resp == names(convert[i])] <- as.character(convert[[i]])
+    }
+  }
+
   if (!is.null(valid_resps)) {
     errors <- !resp %in% valid_resps
     resp[errors] <- NA
@@ -56,12 +65,12 @@ m_vec_prompt <- function(x,
       )
     }
   }
+
   if (is.numeric(valid_resps)) {
     resp <- as.numeric(resp)
   }
   if (is.factor(valid_resps)) {
     resp <- as.factor(resp)
-    levels(resp) <- levels(valid_resps)
   }
   resp
 }

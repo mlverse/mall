@@ -151,12 +151,12 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         list(
           role = "user",
           content = glue(paste(
-            "You are a helpful verification engine.",
-            "Determine if {question}.",
-            "For true statements, return {labels[1]}, otherwise return {labels[2]}.", 
-            "Your answer will contain no no capitalization and no explanations.",
+            "You are a helpful text analysis engine.",
+            "Determine this is true ",
+            "'{question}'.",
+            "No capitalization. No explanations.",
             "{additional}",
-            "The answer will be based on the following text:\n{{x}}"
+            "The answer is based on the following text:\n{{x}}"
           ))
         )
       )
