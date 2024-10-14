@@ -275,7 +275,7 @@ reviews.llm.use(_cache = "")
 
 ### verify { #mall.MallFrame.verify }
 
-`MallFrame.verify(col, what='', yes_no='', additional='', pred_name='verify')`
+`MallFrame.verify(col, what='', yes_no=[1, 0], additional='', pred_name='verify')`
 
 Check to see if something is true about the text.
 
@@ -285,7 +285,7 @@ Check to see if something is true about the text.
 |--------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
 | `col`        | str    | The name of the text field to process                                                                                                                                        | _required_ |
 | `what`       | str    | The statement or question that needs to be verified against the provided text                                                                                                | `''`       |
-| `yes_no`     | list   | A positional list of size 2, which contains the values to return if true and false. The first position will be used as the 'true' value, and the second as the 'false' value | `''`       |
+| `yes_no`     | list   | A positional list of size 2, which contains the values to return if true and false. The first position will be used as the 'true' value, and the second as the 'false' value | `[1, 0]`   |
 | `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed                                                                                       | `'verify'` |
 | `additional` | str    | Inserts this text into the prompt sent to the LLM                                                                                                                            | `''`       |
 
