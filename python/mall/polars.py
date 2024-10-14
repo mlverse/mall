@@ -1,6 +1,15 @@
 import polars as pl
-from mall.prompt import sentiment, summarize, translate, classify, extract, custom
-from mall.llm import llm_call
+
+from mall.prompt import (
+    sentiment,
+    summarize,
+    translate,
+    classify,
+    extract,
+    custom,
+    verify,
+)
+from mall.llm import map_call
 
 
 @pl.api.register_dataframe_namespace("llm")
@@ -8,8 +17,8 @@ class MallFrame:
     """Extension to Polars that add ability to use
     an LLM to run batch predictions over a data frame
 
-    We will start by loading the needed libraries, and 
-    set up the data frame that will be used in the 
+    We will start by loading the needed libraries, and
+    set up the data frame that will be used in the
     examples:
 
     ```{python}
@@ -423,14 +432,56 @@ class MallFrame:
         )
         return df
 
+    def verify(
+        self,
+        col,
+        what="",
+        yes_no=[1, 0],
+        additional="",
+        pred_name="verify",
+    ) -> list[pl.DataFrame]:
+        """Check to see if something is true about the text.
 
-def map_call(df, col, msg, pred_name, use, valid_resps=""):
-    df = df.with_columns(
-        pl.col(col)
-        .map_elements(
-            lambda x: llm_call(x, msg, use, False, valid_resps),
-            return_dtype=pl.String,
+        Parameters
+        ------
+        col : str
+            The name of the text field to process
+
+        what : str
+            The statement or question that needs to be verified against the
+            provided text
+
+        yes_no : list
+            A positional list of size 2, which contains the values to return
+            if true and false. The first position will be used as the 'true'
+            value, and the second as the 'false' value
+
+        pred_name : str
+            A character vector with the name of the new column where the
+            prediction will be placed
+
+        additional : str
+            Inserts this text into the prompt sent to the LLM
+
+        Examples
+        ------
+
+        ```{python}
+        reviews.llm.verify("review", "is the customer happy")
+        ```
+
+        ```{python}
+        # Use 'yes_no' to modify the 'true' and 'false' values to return
+        reviews.llm.verify("review", "is the customer happy", ["y", "n"])
+        ```
+        """
+        df = map_call(
+            df=self._df,
+            col=col,
+            msg=verify(what, additional=additional),
+            pred_name=pred_name,
+            use=self._use,
+            valid_resps=yes_no,
+            convert=dict(yes=yes_no[0], no=yes_no[1]),
         )
-        .alias(pred_name)
-    )
-    return df
+        return df

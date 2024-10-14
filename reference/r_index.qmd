@@ -38,6 +38,11 @@ toc: false
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use
 
+[llm_verify()](llm_verify.html) [llm_vec_verify()](llm_verify.html)
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify if a statement about the text is true or not
+
 [reviews](reviews.html)
 
 

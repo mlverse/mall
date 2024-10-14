@@ -1,17 +1,45 @@
+import polars as pl
 import ollama
 import json
 import hashlib
 import os
 
 
-def build_msg(x, msg):
-    out = []
-    for msgs in msg:
-        out.append({"role": msgs["role"], "content": msgs["content"].format(x)})
-    return out
+def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
+    if valid_resps == "":
+        valid_resps = []
+    valid_resps = valid_output(valid_resps)
+    ints = 0
+    for resp in valid_resps:
+        ints = ints + isinstance(resp, int)
+
+    pl_type = pl.String
+    data_type = str
+
+    if len(valid_resps) == ints & ints != 0:
+        pl_type = pl.Int8
+        data_type = int
+
+    df = df.with_columns(
+        pl.col(col)
+        .map_elements(
+            lambda x: llm_call(
+                x=x,
+                msg=msg,
+                use=use,
+                preview=False,
+                valid_resps=valid_resps,
+                convert=convert,
+                data_type=data_type,
+            ),
+            return_dtype=pl_type,
+        )
+        .alias(pred_name)
+    )
+    return df
 
 
-def llm_call(x, msg, use, preview=False, valid_resps=""):
+def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type=None):
 
     call = dict(
         model=use.get("model"),
@@ -41,9 +69,33 @@ def llm_call(x, msg, use, preview=False, valid_resps=""):
         if cache == "":
             cache_record(hash_call, use, call, out)
 
-    if isinstance(valid_resps, list):
-        if out not in valid_resps:
-            out = None
+    if isinstance(convert, dict):
+        for label in convert:
+            if out == label:
+                out = convert.get(label)
+
+    # out = data_type(out)
+
+    # if out not in valid_resps:
+    #     out = None
+
+    return out
+
+
+def valid_output(x):
+    out = []
+    if isinstance(x, list):
+        out = x
+    if isinstance(x, dict):
+        for i in x:
+            out.append(x.get(i))
+    return out
+
+
+def build_msg(x, msg):
+    out = []
+    for msgs in msg:
+        out.append({"role": msgs["role"], "content": msgs["content"].format(x)})
     return out
 
 

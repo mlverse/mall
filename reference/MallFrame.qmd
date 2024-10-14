@@ -5,8 +5,8 @@
 Extension to Polars that add ability to use
 an LLM to run batch predictions over a data frame
 
-We will start by loading the needed libraries, and 
-set up the data frame that will be used in the 
+We will start by loading the needed libraries, and
+set up the data frame that will be used in the
 examples:
 
 ```{python}
@@ -32,6 +32,7 @@ reviews.llm.use(options = dict(seed = 100))
 | [summarize](#mall.MallFrame.summarize) | Summarize the text down to a specific number of words. |
 | [translate](#mall.MallFrame.translate) | Translate text into another language. |
 | [use](#mall.MallFrame.use) | Define the model, backend, and other options to use to |
+| [verify](#mall.MallFrame.verify) | Check to see if something is true about the text. |
 
 ### classify { #mall.MallFrame.classify }
 
@@ -270,4 +271,31 @@ reviews.llm.use(_cache = "_my_cache")
 ```{python}
 # Leave _cache empty to turn off this functionality
 reviews.llm.use(_cache = "")
+```
+
+### verify { #mall.MallFrame.verify }
+
+`MallFrame.verify(col, what='', yes_no=[1, 0], additional='', pred_name='verify')`
+
+Check to see if something is true about the text.
+
+#### Parameters
+
+| Name         | Type   | Description                                                                                                                                                                  | Default    |
+|--------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| `col`        | str    | The name of the text field to process                                                                                                                                        | _required_ |
+| `what`       | str    | The statement or question that needs to be verified against the provided text                                                                                                | `''`       |
+| `yes_no`     | list   | A positional list of size 2, which contains the values to return if true and false. The first position will be used as the 'true' value, and the second as the 'false' value | `[1, 0]`   |
+| `pred_name`  | str    | A character vector with the name of the new column where the prediction will be placed                                                                                       | `'verify'` |
+| `additional` | str    | Inserts this text into the prompt sent to the LLM                                                                                                                            | `''`       |
+
+#### Examples
+
+```{python}
+reviews.llm.verify("review", "is the customer happy")
+```
+
+```{python}
+# Use 'yes_no' to modify the 'true' and 'false' values to return
+reviews.llm.verify("review", "is the customer happy", ["y", "n"])
 ```

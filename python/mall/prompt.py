@@ -71,7 +71,9 @@ def extract(labels, additional=""):
     if isinstance(labels, list):
         no_labels = len(labels)
         plural = "s"
-        text_multi = "Return the response exclusively in a pipe separated list, and no headers. "
+        text_multi = (
+            "Return the response exclusively in a pipe separated list, and no headers. "
+        )
         for label in labels:
             col_labels += label + " "
         col_labels = col_labels.rstrip()
@@ -97,6 +99,21 @@ def extract(labels, additional=""):
     return msg
 
 
+def verify(what, additional=""):
+    msg = [
+        {
+            "role": "user",
+            "content": "You are a helpful text analysis engine. "
+            + "Determine this is true "
+            + f"'{what}'."
+            + "No capitalization. No explanations. "
+            + f"{additional} "
+            + "The answer is based on the following text:\n{}",
+        }
+    ]
+    return msg
+
+
 def custom(prompt):
     msg = [{"role": "user", "content": f"{prompt}" + ": \n{}"}]
     return msg
@@ -109,12 +126,12 @@ def process_labels(x, if_list="", if_dict=""):
             out += " " + i
         out = out.strip()
         out = out.replace(" ", ", ")
-        out = if_list.replace("{values}", out)
+        out = if_list.replace("{values}", str(out))
     if isinstance(x, dict):
         out = ""
         for i in x:
             new = if_dict
             new = new.replace("{key}", i)
-            new = new.replace("{value}", x.get(i))
+            new = new.replace("{value}", str(x.get(i)))
             out += " " + new
     return out
