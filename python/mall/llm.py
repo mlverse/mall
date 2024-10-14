@@ -49,6 +49,7 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None):
     if isinstance(valid_resps, list):
         if out not in valid_resps:
             out = None
+            
     return out
 
 

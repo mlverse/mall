@@ -292,10 +292,10 @@ Check to see if something is true about the text.
 #### Examples
 
 ```{python}
-reviews.llm.classify("review", "is the customer happy")
+reviews.llm.verify("review", "is the customer happy")
 ```
 
 ```{python}
 # Use 'yes_no' to modify the 'true' and 'false' values to return
-reviews.llm.classify("review", "is the customer happy", ["y", "n"])
+reviews.llm.verify("review", "is the customer happy", ["y", "n"])
 ```
