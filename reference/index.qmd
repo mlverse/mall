@@ -20,6 +20,7 @@ an LLM to run batch predictions over a data frame
 | [summarize](MallFrame.qmd#mall.MallFrame.summarize) | Summarize the text down to a specific number of words. |
 | [translate](MallFrame.qmd#mall.MallFrame.translate) | Translate text into another language. |
 | [use](MallFrame.qmd#mall.MallFrame.use) | Define the model, backend, and other options to use to |
+| [verify](MallFrame.qmd#mall.MallFrame.verify) | Check to see if something is true about the text. |
 
 :::
   
