@@ -1,5 +1,13 @@
 import polars as pl
-from mall.prompt import sentiment, summarize, translate, classify, extract, custom, verify
+from mall.prompt import (
+    sentiment,
+    summarize,
+    translate,
+    classify,
+    extract,
+    custom,
+    verify,
+)
 from mall.llm import llm_call
 
 
@@ -427,7 +435,7 @@ class MallFrame:
         self,
         col,
         what="",
-        yes_no="",
+        yes_no= [1, 0],
         additional="",
         pred_name="verify",
     ) -> list[pl.DataFrame]:
@@ -458,12 +466,12 @@ class MallFrame:
         ------
 
         ```{python}
-        reviews.llm.classify("review", "is the customer happy")
+        reviews.llm.verify("review", "is the customer happy")
         ```
 
         ```{python}
         # Use 'yes_no' to modify the 'true' and 'false' values to return
-        reviews.llm.classify("review", "is the customer happy", ["y", "n"])
+        reviews.llm.verify("review", "is the customer happy", ["y", "n"])
         ```
         """
         df = map_call(
@@ -473,12 +481,20 @@ class MallFrame:
             pred_name=pred_name,
             use=self._use,
             valid_resps=yes_no,
-            convert=dict(yes = yes_no[0], no = yes_no[1]),
+            convert=dict(yes=yes_no[0], no=yes_no[1]),
         )
         return df
 
 
 def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
+    x = 0
+    for resp in valid_resps:
+        x = x + isinstance(resp, int)
+    if len(valid_resps) == x:
+        pl_type = pl.Int8
+    else:
+        pl_type = pl.String
+
     df = df.with_columns(
         pl.col(col)
         .map_elements(
@@ -490,7 +506,7 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
                 valid_resps=valid_resps,
                 convert=convert,
             ),
-            return_dtype=pl.String,
+            return_dtype=pl_type,
         )
         .alias(pred_name)
     )
