@@ -13,12 +13,12 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
     for resp in valid_resps:
         ints = ints + isinstance(resp, int)
 
-    if len(valid_resps) == ints:
+    pl_type = pl.String
+    data_type = str
+
+    if len(valid_resps) == ints & ints != 0:
         pl_type = pl.Int8
         data_type = int
-    else:
-        pl_type = pl.String
-        data_type = str
 
     df = df.with_columns(
         pl.col(col)
@@ -74,10 +74,10 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
             if out == label:
                 out = convert.get(label)
 
-    out = data_type(out)
+    # out = data_type(out)
 
-    if out not in valid_resps:
-        out = None
+    # if out not in valid_resps:
+    #     out = None
 
     return out
 
