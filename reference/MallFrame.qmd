@@ -177,7 +177,7 @@ reviews.llm.sentiment("review", ["positive", "negative"])
 
 ```{python}
 # Use a DICT object to specify values to return per sentiment
-reviews.llm.sentiment("review", {"positive" : "1", "negative" : "0"})
+reviews.llm.sentiment("review", {"positive" : 1, "negative" : 0})
 ```
 
 ### summarize { #mall.MallFrame.summarize }
