@@ -187,6 +187,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#mall.MallFrame.summarize" id="toc-mall.MallFrame.summarize" class="nav-link" data-scroll-target="#mall.MallFrame.summarize">summarize</a></li>
   <li><a href="#mall.MallFrame.translate" id="toc-mall.MallFrame.translate" class="nav-link" data-scroll-target="#mall.MallFrame.translate">translate</a></li>
   <li><a href="#mall.MallFrame.use" id="toc-mall.MallFrame.use" class="nav-link" data-scroll-target="#mall.MallFrame.use">use</a></li>
+  <li><a href="#mall.MallFrame.verify" id="toc-mall.MallFrame.verify" class="nav-link" data-scroll-target="#mall.MallFrame.verify">verify</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -216,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>MallFrame(self, df)</code></p>
 <p>Extension to Polars that add ability to use an LLM to run batch predictions over a data frame</p>
 <p>We will start by loading the needed libraries, and set up the data frame that will be used in the examples:</p>
-<div id="7da4c2de" class="cell" data-execution_count="1">
+<div id="e0baad23" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mall</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pl.Config(fmt_str_lengths<span class="op">=</span><span class="dv">100</span>)</span>
@@ -263,6 +264,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tr class="odd">
 <td><a href="#mall.MallFrame.use">use</a></td>
 <td>Define the model, backend, and other options to use to</td>
+</tr>
+<tr class="even">
+<td><a href="#mall.MallFrame.verify">verify</a></td>
+<td>Check to see if something is true about the text.</td>
 </tr>
 </tbody>
 </table>
@@ -317,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples" class="level4">
 <h4 class="anchored" data-anchor-id="examples">Examples</h4>
-<div id="50356a12" class="cell" data-execution_count="2">
+<div id="c433ce08" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.classify(<span class="st">"review"</span>, [<span class="st">"appliance"</span>, <span class="st">"computer"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
@@ -347,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="929299a7" class="cell" data-execution_count="3">
+<div id="cda91b85" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 'pred_name' to customize the new column's name</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.classify(<span class="st">"review"</span>, [<span class="st">"appliance"</span>, <span class="st">"computer"</span>], pred_name<span class="op">=</span><span class="st">"prod_type"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
@@ -378,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="715eb674" class="cell" data-execution_count="4">
+<div id="f6d7e2c6" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Pass a DICT to set custom values for each classification</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.classify(<span class="st">"review"</span>, {<span class="st">"appliance"</span> : <span class="st">"1"</span>, <span class="st">"computer"</span> : <span class="st">"2"</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
@@ -456,7 +461,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples-1" class="level4">
 <h4 class="anchored" data-anchor-id="examples-1">Examples</h4>
-<div id="75e71ed7" class="cell" data-execution_count="5">
+<div id="2c633a89" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_prompt <span class="op">=</span> (</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Answer a question."</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Return only the answer, no explanation"</span></span>
@@ -546,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples-2" class="level4">
 <h4 class="anchored" data-anchor-id="examples-2">Examples</h4>
-<div id="ae6b4d4c" class="cell" data-execution_count="6">
+<div id="11a96b13" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 'labels' to let the function know what to extract</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.extract(<span class="st">"review"</span>, labels <span class="op">=</span> <span class="st">"product"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -577,7 +582,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="1602b38d" class="cell" data-execution_count="7">
+<div id="33a564f6" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 'pred_name' to customize the new column's name</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.extract(<span class="st">"review"</span>, <span class="st">"product"</span>, pred_name <span class="op">=</span> <span class="st">"prod"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
@@ -608,7 +613,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f257bda7" class="cell" data-execution_count="8">
+<div id="29bc70bf" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass a vector to request multiple things, the results will be pipe delimeted</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in a single column</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>reviews.llm.extract(<span class="st">"review"</span>, [<span class="st">"product"</span>, <span class="st">"feelings"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -640,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="d90b2af3" class="cell" data-execution_count="9">
+<div id="35587a7e" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set 'expand_cols' to True to split multiple lables</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># into individual columns</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>reviews.llm.extract(</span>
@@ -680,7 +685,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="370ba370" class="cell" data-execution_count="10">
+<div id="bc1572b9" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set custom names to the resulting columns</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.extract(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    col<span class="op">=</span><span class="st">"review"</span>,</span>
@@ -772,7 +777,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples-3" class="level4">
 <h4 class="anchored" data-anchor-id="examples-3">Examples</h4>
-<div id="10220325" class="cell" data-execution_count="11">
+<div id="16b56226" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -802,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="d6195d1c" class="cell" data-execution_count="12">
+<div id="082d1ef7" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 'pred_name' to customize the new column's name</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>, pred_name<span class="op">=</span><span class="st">"review_sentiment"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
@@ -833,7 +838,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="8d3b25b4" class="cell" data-execution_count="13">
+<div id="0f2f7a13" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pass custom sentiment options</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>, [<span class="st">"positive"</span>, <span class="st">"negative"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -864,7 +869,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="2b51b9ef" class="cell" data-execution_count="14">
+<div id="7bb697be" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a DICT object to specify values to return per sentiment</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.sentiment(<span class="st">"review"</span>, {<span class="st">"positive"</span> : <span class="st">"1"</span>, <span class="st">"negative"</span> : <span class="st">"0"</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -948,7 +953,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples-4" class="level4">
 <h4 class="anchored" data-anchor-id="examples-4">Examples</h4>
-<div id="97fb9a3a" class="cell" data-execution_count="15">
+<div id="2690ac20" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use max_words to set the maximum number of words to use for the summary</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.summarize(<span class="st">"review"</span>, max_words <span class="op">=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -979,7 +984,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="f89461d7" class="cell" data-execution_count="16">
+<div id="62f13bf2" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 'pred_name' to customize the new column's name</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.summarize(<span class="st">"review"</span>, <span class="dv">5</span>, pred_name <span class="op">=</span> <span class="st">"review_summary"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
@@ -1063,7 +1068,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples-5" class="level4">
 <h4 class="anchored" data-anchor-id="examples-5">Examples</h4>
-<div id="bf769707" class="cell" data-execution_count="17">
+<div id="a4d7ae95" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.translate(<span class="st">"review"</span>, <span class="st">"spanish"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
@@ -1093,7 +1098,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="24cae7a4" class="cell" data-execution_count="18">
+<div id="df4fb9ee" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.translate(<span class="st">"review"</span>, <span class="st">"french"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -1176,7 +1181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="examples-6" class="level4">
 <h4 class="anchored" data-anchor-id="examples-6">Examples</h4>
-<div id="d1773d8b" class="cell" data-execution_count="19">
+<div id="8ac89991" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Additional arguments will be passed 'as-is' to the</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># downstream R function in this example, to ollama::chat()</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>reviews.llm.use(<span class="st">"ollama"</span>, <span class="st">"llama3.2"</span>, seed <span class="op">=</span> <span class="dv">100</span>, temp <span class="op">=</span> <span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1189,7 +1194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'temp': 0.1}</code></pre>
 </div>
 </div>
-<div id="0a90e5ca" class="cell" data-execution_count="20">
+<div id="ee435769" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># During the Python session, you can change any argument</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># individually and it will retain all of previous</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># arguments used</span></span>
@@ -1203,7 +1208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'temp': 0.3}</code></pre>
 </div>
 </div>
-<div id="7009a892" class="cell" data-execution_count="21">
+<div id="266e2cb3" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use _cache to modify the target folder for caching</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.use(_cache <span class="op">=</span> <span class="st">"_my_cache"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="21">
@@ -1215,7 +1220,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'temp': 0.3}</code></pre>
 </div>
 </div>
-<div id="87460892" class="cell" data-execution_count="22">
+<div id="ab07df94" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Leave _cache empty to turn off this functionality</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.use(_cache <span class="op">=</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
@@ -1225,6 +1230,126 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  'options': {'seed': 100},
  'seed': 100,
  'temp': 0.3}</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="mall.MallFrame.verify" class="level3">
+<h3 class="anchored" data-anchor-id="mall.MallFrame.verify">verify</h3>
+<p><code>MallFrame.verify(col, what='', yes_no=[1, 0], additional='', pred_name='verify')</code></p>
+<p>Check to see if something is true about the text.</p>
+<section id="parameters-7" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-7">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 3%">
+<col style="width: 83%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>col</code></td>
+<td>str</td>
+<td>The name of the text field to process</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td><code>what</code></td>
+<td>str</td>
+<td>The statement or question that needs to be verified against the provided text</td>
+<td><code>''</code></td>
+</tr>
+<tr class="odd">
+<td><code>yes_no</code></td>
+<td>list</td>
+<td>A positional list of size 2, which contains the values to return if true and false. The first position will be used as the ‘true’ value, and the second as the ‘false’ value</td>
+<td><code>[1, 0]</code></td>
+</tr>
+<tr class="even">
+<td><code>pred_name</code></td>
+<td>str</td>
+<td>A character vector with the name of the new column where the prediction will be placed</td>
+<td><code>'verify'</code></td>
+</tr>
+<tr class="odd">
+<td><code>additional</code></td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples-7" class="level4">
+<h4 class="anchored" data-anchor-id="examples-7">Examples</h4>
+<div id="3f2cbfdf" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>reviews.llm.verify(<span class="st">"review"</span>, <span class="st">"is the customer happy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">verify</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="4899b7b6" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use 'yes_no' to modify the 'true' and 'false' values to return</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>reviews.llm.verify(<span class="st">"review"</span>, <span class="st">"is the customer happy"</span>, [<span class="st">"y"</span>, <span class="st">"n"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<div>
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">review</th>
+<th data-quarto-table-cell-role="th">verify</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"This has been the best TV I've ever used. Great screen, and sound."</td>
+<td>"y"</td>
+</tr>
+<tr class="even">
+<td>"I regret buying this laptop. It is too slow and the keyboard is too noisy"</td>
+<td>"n"</td>
+</tr>
+<tr class="odd">
+<td>"Not sure how to feel about my new washing machine. Great color, but hard to figure"</td>
+<td>"n"</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 

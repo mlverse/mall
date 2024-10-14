@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>r_index – mall</title>
+<title>Verify if a statement about the text is true or not – mall</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -74,7 +108,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../site/styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -136,34 +170,166 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#llm_verify" id="toc-llm_verify" class="nav-link active" data-scroll-target="#llm_verify">llm_verify</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description">Description</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a></li>
+  <li><a href="#arguments" id="toc-arguments" class="nav-link" data-scroll-target="#arguments">Arguments</a></li>
+  <li><a href="#value" id="toc-value" class="nav-link" data-scroll-target="#value">Value</a></li>
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Verify if a statement about the text is true or not</h1>
+</div>
 
 
 
-<p><img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right"></p>
-<p><a href="llm_classify.html">llm_classify()</a> <a href="llm_classify.html">llm_vec_classify()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categorize data as one of options given</p>
-<p><a href="llm_custom.html">llm_custom()</a> <a href="llm_custom.html">llm_vec_custom()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send a custom prompt to the LLM</p>
-<p><a href="llm_extract.html">llm_extract()</a> <a href="llm_extract.html">llm_vec_extract()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extract entities from text</p>
-<p><a href="llm_sentiment.html">llm_sentiment()</a> <a href="llm_sentiment.html">llm_vec_sentiment()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sentiment analysis</p>
-<p><a href="llm_summarize.html">llm_summarize()</a> <a href="llm_summarize.html">llm_vec_summarize()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summarize text</p>
-<p><a href="llm_translate.html">llm_translate()</a> <a href="llm_translate.html">llm_vec_translate()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translates text to a specific language</p>
-<p><a href="llm_use.html">llm_use()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use</p>
-<p><a href="llm_verify.html">llm_verify()</a> <a href="llm_verify.html">llm_vec_verify()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify if a statement about the text is true or not</p>
-<p><a href="reviews.html">reviews</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mini reviews data set</p>
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p><a href="https://github.com/mlverse/mall/blob/main/R/llm-verify.R">R/llm-verify.R</a></p>
+<section id="llm_verify" class="level2">
+<h2 class="anchored" data-anchor-id="llm_verify">llm_verify</h2>
+</section>
+<section id="description" class="level2">
+<h2 class="anchored" data-anchor-id="description">Description</h2>
+<p>Use a Large Language Model (LLM) to see if something is true or not based the provided text</p>
+</section>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">Usage</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_verify</span>( </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  .data, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  col, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  what, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">yes_no =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)), </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pred_name =</span> <span class="st">".verify"</span>, </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">additional_prompt =</span> <span class="st">""</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_vec_verify</span>( </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  x, </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  what, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">yes_no =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)), </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">additional_prompt =</span> <span class="st">""</span>, </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">preview =</span> <span class="cn">FALSE</span> </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="arguments" class="level2">
+<h2 class="anchored" data-anchor-id="arguments">Arguments</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Arguments</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>.data</td>
+<td>A <code>data.frame</code> or <code>tbl</code> object that contains the text to be analyzed</td>
+</tr>
+<tr class="even">
+<td>col</td>
+<td>The name of the field to analyze, supports <code>tidy-eval</code></td>
+</tr>
+<tr class="odd">
+<td>what</td>
+<td>The statement or question that needs to be verified against the provided text</td>
+</tr>
+<tr class="even">
+<td>yes_no</td>
+<td>A size 2 vector that specifies the expected output. It is positional. The first item is expected to be value to return if the statement about the provided text is true, and the second if it is not. Defaults to: <code>factor(c(1, 0))</code></td>
+</tr>
+<tr class="odd">
+<td>pred_name</td>
+<td>A character vector with the name of the new column where the prediction will be placed</td>
+</tr>
+<tr class="even">
+<td>additional_prompt</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+</tr>
+<tr class="odd">
+<td>x</td>
+<td>A vector that contains the text to be analyzed</td>
+</tr>
+<tr class="even">
+<td>preview</td>
+<td>It returns the R call that would have been used to run the prediction. It only returns the first record in <code>x</code>. Defaults to <code>FALSE</code> Applies to vector function only.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="value" class="level2">
+<h2 class="anchored" data-anchor-id="value">Value</h2>
+<p><code>llm_verify</code> returns a <code>data.frame</code> or <code>tbl</code> object. <code>llm_vec_verify</code> returns a vector that is the same length as <code>x</code>.</p>
+</section>
+<section id="examples" class="level2">
+<h2 class="anchored" data-anchor-id="examples">Examples</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mall) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"reviews"</span>) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_use</span>(<span class="st">"ollama"</span>, <span class="st">"llama3.2"</span>, <span class="at">seed =</span> <span class="dv">100</span>, <span class="at">.silent =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># By default it will return 1 for 'true', and 0 for 'false', </span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># the new column will be a factor type </span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_verify</span>(reviews, review, <span class="st">"is the customer happy"</span>) </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                 .verify</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                  &lt;fct&gt;  </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.     1      </span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too n… 0      </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but h… 0</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># The yes_no argument can be modified to return a different response </span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># than 1 or 0. First position will be 'true' and second, 'false' </span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_verify</span>(reviews, review, <span class="st">"is the customer happy"</span>, <span class="fu">c</span>(<span class="st">"y"</span>, <span class="st">"n"</span>)) </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                 .verify</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                  &lt;chr&gt;  </span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.     y      </span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too n… n      </span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but h… n</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Number can also be used, this would be in the case that you wish to match </span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="co"># the output values of existing predictions </span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">llm_verify</span>(reviews, review, <span class="st">"is the customer happy"</span>, <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)) </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 2</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   review                                                                 .verify</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                                                    &lt;dbl&gt;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 This has been the best TV I've ever used. Great screen, and sound.           2</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 I regret buying this laptop. It is too slow and the keyboard is too n…       1</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Not sure how to feel about my new washing machine. Great color, but h…       1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
