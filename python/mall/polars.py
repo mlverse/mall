@@ -423,6 +423,58 @@ class MallFrame:
         )
         return df
 
+def verify(
+        self,
+        col,
+        what="",
+        yes_no="",
+        additional="",
+        pred_name="verify",
+    ) -> list[pl.DataFrame]:
+        """Check to see if something is true about the text.
+
+        Parameters
+        ------
+        col : str
+            The name of the text field to process
+
+        what : str
+            The statement or question that needs to be verified against the 
+            provided text
+
+        yes_no : list
+            A positional list of size 2, which contains the values to return
+            if true and false. The first position will be used as the 'true'
+            value, and the second as the 'false' value
+
+        pred_name : str
+            A character vector with the name of the new column where the
+            prediction will be placed
+
+        additional : str
+            Inserts this text into the prompt sent to the LLM
+
+        Examples
+        ------
+
+        ```{python}
+        reviews.llm.classify("review", "is the customer happy")
+        ```
+
+        ```{python}
+        # Use 'yes_no' to modify the 'true' and 'false' values to return
+        reviews.llm.classify("review", "is the customer happy", ["y", "n"])
+        ```
+        """
+        df = map_call(
+            df=self._df,
+            col=col,
+            msg=verify(what, yes_no, additional=additional),
+            pred_name=pred_name,
+            use=self._use,
+            valid_resps=yes_no,
+        )
+        return df
 
 def map_call(df, col, msg, pred_name, use, valid_resps=""):
     df = df.with_columns(
