@@ -126,12 +126,12 @@ def process_labels(x, if_list="", if_dict=""):
             out += " " + i
         out = out.strip()
         out = out.replace(" ", ", ")
-        out = if_list.replace("{values}", out)
+        out = if_list.replace("{values}", str(out))
     if isinstance(x, dict):
         out = ""
         for i in x:
             new = if_dict
             new = new.replace("{key}", i)
-            new = new.replace("{value}", x.get(i))
+            new = new.replace("{value}", str(x.get(i)))
             out += " " + new
     return out

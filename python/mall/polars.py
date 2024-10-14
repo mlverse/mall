@@ -1,4 +1,5 @@
 import polars as pl
+
 from mall.prompt import (
     sentiment,
     summarize,
@@ -8,7 +9,7 @@ from mall.prompt import (
     custom,
     verify,
 )
-from mall.llm import llm_call
+from mall.llm import map_call
 
 
 @pl.api.register_dataframe_namespace("llm")
@@ -435,7 +436,7 @@ class MallFrame:
         self,
         col,
         what="",
-        yes_no= [1, 0],
+        yes_no=[1, 0],
         additional="",
         pred_name="verify",
     ) -> list[pl.DataFrame]:
@@ -484,30 +485,3 @@ class MallFrame:
             convert=dict(yes=yes_no[0], no=yes_no[1]),
         )
         return df
-
-
-def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
-    x = 0
-    for resp in valid_resps:
-        x = x + isinstance(resp, int)
-    if len(valid_resps) == x:
-        pl_type = pl.Int8
-    else:
-        pl_type = pl.String
-
-    df = df.with_columns(
-        pl.col(col)
-        .map_elements(
-            lambda x: llm_call(
-                x=x,
-                msg=msg,
-                use=use,
-                preview=False,
-                valid_resps=valid_resps,
-                convert=convert,
-            ),
-            return_dtype=pl_type,
-        )
-        .alias(pred_name)
-    )
-    return df
