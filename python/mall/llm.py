@@ -11,7 +11,7 @@ def build_msg(x, msg):
     return out
 
 
-def llm_call(x, msg, use, preview=False, valid_resps=""):
+def llm_call(x, msg, use, preview=False, valid_resps="", convert=None):
 
     call = dict(
         model=use.get("model"),
@@ -40,6 +40,11 @@ def llm_call(x, msg, use, preview=False, valid_resps=""):
     if use.get("_cache") != "":
         if cache == "":
             cache_record(hash_call, use, call, out)
+
+    if isinstance(convert, dict):
+        for label in convert:
+            if out == label:
+                out = convert.get(label)
 
     if isinstance(valid_resps, list):
         if out not in valid_resps:

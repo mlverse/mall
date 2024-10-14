@@ -1,5 +1,5 @@
 import polars as pl
-from mall.prompt import sentiment, summarize, translate, classify, extract, custom
+from mall.prompt import sentiment, summarize, translate, classify, extract, custom, verify
 from mall.llm import llm_call
 
 
@@ -8,8 +8,8 @@ class MallFrame:
     """Extension to Polars that add ability to use
     an LLM to run batch predictions over a data frame
 
-    We will start by loading the needed libraries, and 
-    set up the data frame that will be used in the 
+    We will start by loading the needed libraries, and
+    set up the data frame that will be used in the
     examples:
 
     ```{python}
@@ -423,7 +423,7 @@ class MallFrame:
         )
         return df
 
-def verify(
+    def verify(
         self,
         col,
         what="",
@@ -439,7 +439,7 @@ def verify(
             The name of the text field to process
 
         what : str
-            The statement or question that needs to be verified against the 
+            The statement or question that needs to be verified against the
             provided text
 
         yes_no : list
@@ -469,18 +469,27 @@ def verify(
         df = map_call(
             df=self._df,
             col=col,
-            msg=verify(what, yes_no, additional=additional),
+            msg=verify(what, additional=additional),
             pred_name=pred_name,
             use=self._use,
             valid_resps=yes_no,
+            convert=dict(yes = yes_no[0], no = yes_no[1]),
         )
         return df
 
-def map_call(df, col, msg, pred_name, use, valid_resps=""):
+
+def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
     df = df.with_columns(
         pl.col(col)
         .map_elements(
-            lambda x: llm_call(x, msg, use, False, valid_resps),
+            lambda x: llm_call(
+                x=x,
+                msg=msg,
+                use=use,
+                preview=False,
+                valid_resps=valid_resps,
+                convert=convert,
+            ),
             return_dtype=pl.String,
         )
         .alias(pred_name)
