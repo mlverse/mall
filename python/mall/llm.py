@@ -74,10 +74,11 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
             if out == label:
                 out = convert.get(label)
 
-    # out = data_type(out)
+    if data_type == int:
+        out = data_type(out)
 
-    # if out not in valid_resps:
-    #     out = None
+    if out not in valid_resps and len(valid_resps) > 0:
+        out = None
 
     return out
 
