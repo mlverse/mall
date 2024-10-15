@@ -86,7 +86,6 @@ prompt-toolkit==3.0.48
 psutil==6.0.0
 ptyprocess==0.7.0
 pure-eval==0.2.3
-pyarrow==17.0.0
 pycparser==2.22
 pydantic==2.9.2
 pydantic-core==2.23.4
