@@ -3,11 +3,17 @@ import mall
 import polars as pl
 import pyarrow
 
+import shutil
+import os
+
+if os._exists("_test_cache"):
+    shutil.rmtree("_test_cache", ignore_errors=True)
+
 
 def test_sentiment_simple():
     data = mall.MallData
     reviews = data.reviews
-    reviews.llm.use("test", "echo")
+    reviews.llm.use("test", "echo", _cache="_test_cache")
     x = reviews.llm.sentiment("review")
     assert (
         x.select("sentiment").to_pandas().to_string()
@@ -17,7 +23,7 @@ def test_sentiment_simple():
 
 def sim_sentiment():
     df = pl.DataFrame(dict(x=["positive", "negative", "neutral", "not-real"]))
-    df.llm.use("test", "echo")
+    df.llm.use("test", "echo", _cache="_test_cache")
     return df
 
 
@@ -41,7 +47,7 @@ def test_sentiment_valid2():
 
 def test_sentiment_prompt():
     df = pl.DataFrame(dict(x="x"))
-    df.llm.use("test", "content")
+    df.llm.use("test", "content", _cache="_test_cache")
     x = df.llm.sentiment("x")
     assert (
         x["sentiment"][0]
