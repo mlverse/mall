@@ -41,8 +41,11 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
 
 def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type=None):
 
+    backend = use.get("backend")
+    model=use.get("model")
     call = dict(
-        model=use.get("model"),
+        backend=backend,
+        model=model,
         messages=build_msg(x, msg),
         options=use.get("options"),
     )
@@ -52,16 +55,24 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
 
     cache = ""
     if use.get("_cache") != "":
+
         hash_call = build_hash(call)
         cache = cache_check(hash_call, use)
 
     if cache == "":
-        resp = ollama.chat(
-            model=use.get("model"),
-            messages=build_msg(x, msg),
-            options=use.get("options"),
-        )
-        out = resp["message"]["content"]
+        if backend == "ollama":
+            resp = ollama.chat(
+                model=use.get("model"),
+                messages=build_msg(x, msg),
+                options=use.get("options"),
+            )
+            out = resp["message"]["content"]
+        if backend == "test":
+            if model=="echo":
+                out = x
+            if model=="content":
+                out = msg[0]["content"]
+                return(out)
     else:
         out = cache
 
@@ -74,10 +85,11 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
             if out == label:
                 out = convert.get(label)
 
-    # out = data_type(out)
+    if data_type == int:
+        out = data_type(out)
 
-    # if out not in valid_resps:
-    #     out = None
+    if out not in valid_resps and len(valid_resps) > 0:
+        out = None
 
     return out
 
