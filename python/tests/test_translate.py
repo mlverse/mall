@@ -4,7 +4,7 @@ import polars as pl
 import pyarrow
 
 
-def test_translate():
+def test_translate_prompt():
     df = pl.DataFrame(dict(x="x"))
     df.llm.use("test", "content")
     x = df.llm.translate("x", language="spanish")

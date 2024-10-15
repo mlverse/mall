@@ -7,7 +7,7 @@ import pyarrow
 def test_sentiment_simple():
     data = mall.MallData
     reviews = data.reviews
-    reviews.llm.use("test")
+    reviews.llm.use("test", "echo")
     x = reviews.llm.sentiment("review")
     assert (
         x.select("sentiment").to_pandas().to_string()
@@ -17,7 +17,7 @@ def test_sentiment_simple():
 
 def sim_sentiment():
     df = pl.DataFrame(dict(x=["positive", "negative", "neutral", "not-real"]))
-    df.llm.use("test")
+    df.llm.use("test", "echo")
     return df
 
 
@@ -36,4 +36,14 @@ def test_sentiment_valid2():
     assert (
         x.select("sentiment").to_pandas().to_string()
         == "  sentiment\n0  positive\n1  negative\n2      None\n3      None"
+    )
+
+
+def test_sentiment_prompt():
+    df = pl.DataFrame(dict(x="x"))
+    df.llm.use("test", "content")
+    x = df.llm.sentiment("x")
+    assert (
+        x["sentiment"][0]
+        == "You are a helpful sentiment engine. Return only one of the following answers: positive, negative, neutral . No capitalization. No explanations.  The answer is based on the following text:\n{}"
     )
