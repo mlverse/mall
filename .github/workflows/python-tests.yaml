@@ -1,14 +1,9 @@
-name: Python package tests
+name: Python package
 
-on:
-  push:
-    branches: main
-  pull_request:
-    branches: main
-    
-permissions: read-all
+on: [push]
 
 jobs:
+  build:
   python-tests:
     runs-on: ubuntu-latest
     
