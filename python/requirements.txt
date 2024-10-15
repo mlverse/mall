@@ -55,8 +55,6 @@ jupyter-server-terminals==0.5.3
 jupyterlab==4.2.5
 jupyterlab-pygments==0.3.0
 jupyterlab-server==2.27.3
-jupyterlab-widgets==3.0.13
--e file:///Users/edgar/Projects/mall/python
 markdown-it-py==3.0.0
 markupsafe==2.1.5
 matplotlib-inline==0.1.7
