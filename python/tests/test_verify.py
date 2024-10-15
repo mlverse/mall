@@ -1,7 +1,6 @@
 import pytest
 import mall
 import polars as pl
-import pyarrow
 import shutil
 import os
 
@@ -13,17 +12,18 @@ def test_verify():
     df = pl.DataFrame(dict(x=[1, 1, 0, 2]))
     df.llm.use("test", "echo", _cache="_test_cache")
     x = df.llm.verify("x", "this is my question")
-    assert (
-        x.select("verify").to_pandas().to_string()
-        == "   verify\n0     1.0\n1     1.0\n2     0.0\n3     NaN"
-    )
+    assert pull(x, "verify") == [1, 1, 0, None]
 
 
 def test_verify_yn():
     df = pl.DataFrame(dict(x=["y", "n", "y", "x"]))
     df.llm.use("test", "echo", _cache="_test_cache")
     x = df.llm.verify("x", "this is my question", ["y", "n"])
-    assert (
-        x.select("verify").to_pandas().to_string()
-        == "  verify\n0      y\n1      n\n2      y\n3   None"
-    )
+    assert pull(x, "verify") == ["y", "n", "y", None]
+
+
+def pull(df, col):
+    out = []
+    for i in df.select(col).to_dicts():
+        out.append(i.get(col))
+    return out

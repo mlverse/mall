@@ -1,8 +1,6 @@
 import pytest
 import mall
 import polars as pl
-import pyarrow
-
 import shutil
 import os
 

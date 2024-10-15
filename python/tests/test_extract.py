@@ -1,16 +1,16 @@
 import pytest
 import mall
 import polars as pl
-import pyarrow
-
 import shutil
 import os
+
 if os._exists("_test_cache"):
     shutil.rmtree("_test_cache", ignore_errors=True)
 
+
 def test_extract_list():
     df = pl.DataFrame(dict(x="x"))
-    df.llm.use("test", "content", _cache = "_test_cache")
+    df.llm.use("test", "content", _cache="_test_cache")
     x = df.llm.extract("x", ["a", "b"])
     assert (
         x["extract"][0]
@@ -20,7 +20,7 @@ def test_extract_list():
 
 def test_extract_dict():
     df = pl.DataFrame(dict(x="x"))
-    df.llm.use("test", "content", _cache = "_test_cache")
+    df.llm.use("test", "content", _cache="_test_cache")
     x = df.llm.extract("x", dict(a="one", b="two"))
     assert (
         x["extract"][0]
@@ -30,7 +30,7 @@ def test_extract_dict():
 
 def test_extract_one():
     df = pl.DataFrame(dict(x="x"))
-    df.llm.use("test", "content", _cache = "_test_cache")
+    df.llm.use("test", "content", _cache="_test_cache")
     x = df.llm.extract("x", labels="a")
     assert (
         x["extract"][0]
