@@ -99,21 +99,12 @@ reviews = data.reviews
 reviews 
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review |
 |----|
 | "This has been the best TV I've ever used. Great screen, and sound." |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" |
 
-</div>
 <p>
 
 ### Sentiment
@@ -125,21 +116,11 @@ text.
 reviews.llm.sentiment("review")
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | sentiment |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "positive" |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "negative" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "neutral" |
-
-</div>
 
 ### Summarize
 
@@ -152,21 +133,11 @@ an argument to control the maximum number of words to output
 reviews.llm.summarize("review", 5)
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | summary |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "great tv with good features" |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "laptop purchase was a mistake" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "feeling uncertain about new purchase" |
-
-</div>
 
 ### Classify
 
@@ -176,21 +147,11 @@ Use the LLM to categorize the text into one of the options you provide:
 reviews.llm.classify("review", ["computer", "appliance"])
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | classify |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "appliance" |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "computer" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "appliance" |
-
-</div>
 
 ### Extract
 
@@ -204,21 +165,11 @@ We do this by simply saying “product”. The LLM understands what we
 reviews.llm.extract("review", "product")
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | extract |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "tv" |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "laptop" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "washing machine" |
-
-</div>
 
 ### Classify
 
@@ -228,21 +179,11 @@ Use the LLM to categorize the text into one of the options you provide:
 reviews.llm.classify("review", ["computer", "appliance"])
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | classify |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "appliance" |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "computer" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "appliance" |
-
-</div>
 
 ### Verify
 
@@ -254,21 +195,11 @@ for “no”. This can be customized.
 reviews.llm.verify("review", "is the customer happy with the purchase")
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | verify |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | 1 |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | 0 |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | 0 |
-
-</div>
 
 ### Translate
 
@@ -281,21 +212,11 @@ to be defined. The translation accuracy will depend on the LLM
 reviews.llm.translate("review", "spanish")
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | translation |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "Esta ha sido la mejor televisión que he utilizado hasta ahora. Gran pantalla y sonido." |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "Me arrepiento de comprar este portátil. Es demasiado lento y la tecla es demasiado ruidosa." |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "No estoy seguro de cómo sentirme con mi nueva lavadora. Un color maravilloso, pero muy difícil de en… |
-
-</div>
 
 ### Custom prompt
 
@@ -313,21 +234,11 @@ my_prompt = (
 reviews.llm.custom("review", prompt = my_prompt)
 ```
 
-<div><style>
-.dataframe > thead > tr,
-.dataframe > tbody > tr {
-  text-align: right;
-  white-space: pre-wrap;
-}
-</style>
-
 | review | custom |
 |----|----|
 | "This has been the best TV I've ever used. Great screen, and sound." | "Yes" |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "No" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "No" |
-
-</div>
 
 ## Model selection and settings
 

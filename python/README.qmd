@@ -90,10 +90,16 @@ We will start with loading a very small data set contained in `mall`. It has
   
 ```{python}
 #| include: false
+#| 
 import polars as pl
+from polars.dataframe._html import HTMLFormatter
+
 pl.Config(fmt_str_lengths=100)
 pl.Config.set_tbl_hide_dataframe_shape(True)  
 pl.Config.set_tbl_hide_column_data_types(True)
+
+html_formatter = get_ipython().display_formatter.formatters['text/html']
+html_formatter.for_type(pl.DataFrame, lambda df: "\n".join(HTMLFormatter(df).render()))
 ```
 
 ```{python}
