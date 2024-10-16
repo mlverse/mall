@@ -20,15 +20,16 @@ jobs:
           pip install -r python/requirements.txt
       - name: Generate coverage report
         run: |
-          pytest --cov=python --cov-report=xml
+          pytest --cov=./ --cov-report=xml
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
-          directory: python/coverage/reports/
+          directory: ./coverage/reports/
           env_vars: OS,PYTHON
           fail_ci_if_error: true
-          files: python/coverage1.xml,python/coverage2.xml,!python/cache
+          files: ./coverage1.xml,./coverage2.xml,!./cache
           flags: unittests
           name: codecov-umbrella
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
+
