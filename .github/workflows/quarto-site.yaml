@@ -1,7 +1,6 @@
 on:
   push:
-    branches:
-      - temp
+    branches: main
 
 name: Render and Publish
 
