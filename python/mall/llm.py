@@ -50,8 +50,7 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
         options=use.get("options"),
     )
 
-    if preview:
-        print(call)
+    if preview: print(call)
 
     cache = ""
     if use.get("_cache") != "":
