@@ -18,5 +18,5 @@ pre-determined one-shot prompt, along with the current row’s content.
 `mall` is now available in both R and Python. 
 
 To find out how to install and use, or just to learn more about it, please 
-visit the official website: https://edgararuiz.github.io/mall/
+visit the official website: https://mlverse.github.io/mall/
 
