@@ -4,7 +4,7 @@ execute:
   eval: true
 ---
 
-<img src="site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
+<img src="logo.png" style="float:right" />
 
 <!-- badges: start -->
 [![Python tests](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml)

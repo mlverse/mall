@@ -1,6 +1,6 @@
 
 
-<img src="site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
+<img src="logo.png" style="float:right" />
 
 <!-- badges: start -->
 
