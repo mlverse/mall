@@ -2,9 +2,9 @@ name: Python tests
 
 on: 
   push:
-    branches: main
+    branches: temp
   pull_request:
-    branches: main
+    branches: temp
     
 jobs:
   python-tests:
