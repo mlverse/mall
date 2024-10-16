@@ -35,7 +35,6 @@ importlib-metadata==8.5.0
 importlib-resources==6.4.5
 iniconfig==2.0.0
 ipykernel==6.29.5
-ipython==8.28.0
 ipywidgets==8.1.5
 isoduration==20.11.0
 jedi==0.19.1
