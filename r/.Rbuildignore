@@ -1,2 +1,14 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^.*\.csv
+^.*\.qmd
+^LICENSE\.md$
+^\.github$
+^codecov\.yml$
+^utils
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
+^_readme_cache$
