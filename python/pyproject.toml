@@ -42,6 +42,5 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project.urls]
-homepage = "https://github.com/mlverse/mall"
-documentation = "https://mlverse.github.io/mall/"
+homepage = "https://mlverse.github.io/mall/"
 issues = "https://github.com/mlverse/mall/issues"
