@@ -1,6 +1,6 @@
 
 
-<img src="logo.png" style="float:right" />
+<img src="https://mlverse.github.io/mall/site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
 <!-- badges: start -->
 
