@@ -1,9 +1,11 @@
 Package: mall
 Title: Run multiple 'Large Language Model' predictions against a table, or 
     vectors
-Version: 0.0.0.9007
-Authors@R: 
-    person("Edgar", "Ruiz", , "first.last@example.com", role = c("aut", "cre"))
+Version: 0.1.0
+Authors@R: c(
+  person("Edgar", "Ruiz", , "edgar@posit.co", role = c("aut", "cre")),
+  person(given = "Posit Software, PBC", role = c("cph", "fnd"))
+  )
 Description: Run multiple 'Large Language Model' predictions against a table. The
     predictions run row-wise over a specified column. It works using a pre-determined
     one-shot prompt, along with the current row's content. The prompt that is use 
@@ -11,7 +13,7 @@ Description: Run multiple 'Large Language Model' predictions against a table. Th
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Imports: 
     cli,
     dplyr,
