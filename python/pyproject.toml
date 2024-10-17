@@ -1,6 +1,9 @@
+[tool.hatch.build.targets.wheel]
+packages = ["mall"]
+
 [project]
-name = "mall"
-version = "0.1.9000"
+name = "mlverse-mall"
+version = "0.1.0"
 description = "Run multiple 'Large Language Model' predictions against a table. The predictions run row-wise over a specified column."
 readme = "README.md"
 authors = [
