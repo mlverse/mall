@@ -1,14 +1,46 @@
+[tool.hatch.build.targets.wheel]
+packages = ["mall"]
+
 [project]
-name = "mall"
+name = "mlverse-mall"
 version = "0.1.0"
-description = "Add your description here"
+description = "Run multiple 'Large Language Model' predictions against a table. The predictions run row-wise over a specified column."
 readme = "README.md"
-requires-python = ">=3.12"
+authors = [
+    { name = "Edgar Ruiz", email = "edgar@posit.co" }
+]
+requires-python = ">=3.9"
 dependencies = [
     "ollama>=0.3.3",
     "polars>=1.9.0",
+    "json5>=0.9.25",
+    "pytest>=8.3.3",
+    "pytest-cov>=5.0.0",
+    "pytest-html>=4.1.1",
+    "pytest-metadata>=3.1.1"
 ]
+classifiers = [
+    "Intended Audience :: End Users/Desktop",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: PyPy",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+keywords = ["llm", "nlp", "polars", "large language models", "natural language processing"]
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[project.urls]
+homepage = "https://mlverse.github.io/mall/"
+issues = "https://github.com/mlverse/mall/issues"
