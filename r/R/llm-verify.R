@@ -16,24 +16,24 @@
 #' @examples
 #' \dontrun{
 #' library(mall)
-#' 
+#'
 #' data("reviews")
-#' 
+#'
 #' llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
-#' 
+#'
 #' # By default it will return 1 for 'true', and 0 for 'false',
 #' # the new column will be a factor type
 #' llm_verify(reviews, review, "is the customer happy")
-#' 
+#'
 #' # The yes_no argument can be modified to return a different response
 #' # than 1 or 0. First position will be 'true' and second, 'false'
 #' llm_verify(reviews, review, "is the customer happy", c("y", "n"))
-#' 
+#'
 #' # Number can also be used, this would be in the case that you wish to match
 #' # the output values of existing predictions
 #' llm_verify(reviews, review, "is the customer happy", c(2, 1))
 #' }
-#' 
+#'
 #' @export
 llm_verify <- function(.data,
                        col,
