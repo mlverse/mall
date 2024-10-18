@@ -2,7 +2,7 @@
 
 This is a new package submission.  Run multiple 'Large Language Model' 
 predictions against a table. The predictions run row-wise over a specified 
-column. It works using a pre-determined one-shot prompt, along with the current 
+column. It works using a one-shot prompt, along with the current 
 row's content. The prompt that is used will depend of the type of analysis 
 needed.
 
