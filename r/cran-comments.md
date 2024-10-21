@@ -1,4 +1,16 @@
-## New submission
+## Resubmission
+
+Thank you for the feedback and instructions, I have made the following changes:
+
+- Updated the Title field to title case 
+
+- Changed all \notrun{} to \nottest{}
+
+- Changed default location in llm_use() to use a temp folder
+
+- Changed the tests to use a temp folder location
+
+### Original submission text: 
 
 This is a new package submission.  Run multiple 'Large Language Model' 
 predictions against a table. The predictions run row-wise over a specified 
