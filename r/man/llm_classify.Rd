@@ -44,7 +44,7 @@ Use a Large Language Model (LLM) to classify the provided text as one of the
 options provided via the \code{labels} argument.
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")

@@ -27,7 +27,7 @@ integrating function. In the case of Ollama, it will pass those arguments to
 
 \item{.cache}{The path to save model results, so they can be re-used if
 the same operation is ran again. To turn off, set this argument to an empty
-character: \code{""}. 'It defaults to '_mall_cache'. If this argument is left
+character: \code{""}. It defaults to a temp folder. If this argument is left
 \code{NULL} when calling this function, no changes to the path will be made.}
 
 \item{.force}{Flag that tell the function to reset all of the settings in the
@@ -41,19 +41,19 @@ Allows us to specify the back-end provider, model to use during the current
 R session
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 llm_use("ollama", "llama3.2")
 
 # Additional arguments will be passed 'as-is' to the
 # downstream R function in this example, to ollama::chat()
-llm_use("ollama", "llama3.2", seed = 100, temp = 0.1)
+llm_use("ollama", "llama3.2", seed = 100, temperature = 0.1)
 
 # During the R session, you can change any argument
 # individually and it will retain all of previous
 # arguments used
-llm_use(temp = 0.3)
+llm_use(temperature = 0.3)
 
 # Use .cache to modify the target folder for caching
 llm_use(.cache = "_my_cache")

@@ -1,14 +1,8 @@
-test_that("Cache exists and delete", {
-  if (!fs::dir_exists("_mall_cache")) skip("Missing '_mall_cache' folder")
-  expect_snapshot(fs::dir_ls("_mall_cache", recurse = TRUE))
-  fs::dir_delete("_mall_cache")
-})
-
 test_that("Ollama cache exists and delete", {
   skip_if_no_ollama()
   expect_equal(
-    length(fs::dir_ls("_ollama_cache", recurse = TRUE)),
-    53
+    length(fs::dir_ls(.mall_test$cache_ollama , recurse = TRUE)),
+    59
   )
-  fs::dir_delete("_ollama_cache")
+  fs::dir_delete(.mall_test$cache_ollama )
 })

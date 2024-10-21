@@ -49,7 +49,7 @@ Use a Large Language Model (LLM) to perform sentiment analysis
 from the provided text
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")

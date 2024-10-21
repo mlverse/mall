@@ -12,7 +12,7 @@
 #' new column names, if not, the function will use a sanitized version of
 #' the content as the name.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")

@@ -43,7 +43,7 @@ Use a Large Language Model (LLM) to translate a text to a specific
 language
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")
