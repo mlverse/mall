@@ -1,5 +1,5 @@
 test_that("Extract works", {
-  llm_use("simulate_llm", "prompt", .silent = TRUE, .force = TRUE)
+  llm_use("simulate_llm", "prompt", .silent = TRUE, .force = TRUE, .cache = .mall_test$cache)
 
   expect_snapshot(
     llm_vec_extract("toaster", labels = "product")

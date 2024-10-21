@@ -4,7 +4,7 @@ test_that("Prompt handles list()", {
     model = "prompt",
     .silent = TRUE,
     .force = TRUE,
-    .cache = "_prompt_cache"
+    .cache = tempfile("_prompt_cache")
   )
   test_text <- "Custom:{prompt}\n{{x}}"
   expect_equal(

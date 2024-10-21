@@ -1,6 +1,8 @@
 .mall_test <- new.env()
 .mall_test$ollama_present <- FALSE
 .mall_test$ollama_checked <- FALSE
+.mall_test$cache_ollama <- tempfile("_ollama_cache")
+.mall_test$cache <- tempfile("_mall_cache")
 
 ollama_is_present <- function() {
   if (.mall_test$ollama_checked) {
@@ -25,7 +27,7 @@ skip_if_no_ollama <- function() {
       seed = 100,
       .silent = TRUE,
       .force = TRUE,
-      .cache = "_ollama_cache"
+      .cache = .mall_test$cache_ollama 
     )
   }
 }

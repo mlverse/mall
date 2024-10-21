@@ -1,6 +1,6 @@
 test_that("Verify works", {
   test_text <- "this is a test"
-  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE)
+  llm_use("simulate_llm", "echo", .silent = TRUE, .force = TRUE, .cache = .mall_test$cache)
   expect_equal(
     llm_vec_verify(test_text, "test", yes_no = test_text),
     test_text
