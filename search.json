@@ -437,14 +437,14 @@
     "href": "r/cran-comments.html",
     "title": "mall",
     "section": "",
-    "text": "This is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.\nThe README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/."
+    "text": "Thank you for the feedback and instructions, I have made the following changes:\n\nUpdated the Title field to title case\nChanged all to \nChanged default location in llm_use() to use a temp folder\nChanged the tests to use a temp folder location\n\n\n\nThis is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.\nThe README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/."
   },
   {
-    "objectID": "r/cran-comments.html#new-submission",
-    "href": "r/cran-comments.html#new-submission",
+    "objectID": "r/cran-comments.html#resubmission",
+    "href": "r/cran-comments.html#resubmission",
     "title": "mall",
     "section": "",
-    "text": "This is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.\nThe README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/."
+    "text": "Thank you for the feedback and instructions, I have made the following changes:\n\nUpdated the Title field to title case\nChanged all to \nChanged default location in llm_use() to use a temp folder\nChanged the tests to use a temp folder location\n\n\n\nThis is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.\nThe README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/."
   },
   {
     "objectID": "r/cran-comments.html#r-cmd-check-environments",

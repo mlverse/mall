@@ -141,7 +141,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#new-submission" id="toc-new-submission" class="nav-link active" data-scroll-target="#new-submission">New submission</a></li>
+  <li><a href="#resubmission" id="toc-resubmission" class="nav-link active" data-scroll-target="#resubmission">Resubmission</a>
+  <ul class="collapse">
+  <li><a href="#original-submission-text" id="toc-original-submission-text" class="nav-link" data-scroll-target="#original-submission-text">Original submission text:</a></li>
+  </ul></li>
   <li><a href="#r-cmd-check-environments" id="toc-r-cmd-check-environments" class="nav-link" data-scroll-target="#r-cmd-check-environments">R CMD check environments</a></li>
   <li><a href="#r-cmd-check-results" id="toc-r-cmd-check-results" class="nav-link" data-scroll-target="#r-cmd-check-results">R CMD check results</a></li>
   </ul>
@@ -153,10 +156,20 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="new-submission" class="level2">
-<h2 class="anchored" data-anchor-id="new-submission">New submission</h2>
+<section id="resubmission" class="level2">
+<h2 class="anchored" data-anchor-id="resubmission">Resubmission</h2>
+<p>Thank you for the feedback and instructions, I have made the following changes:</p>
+<ul>
+<li><p>Updated the Title field to title case</p></li>
+<li><p>Changed all to </p></li>
+<li><p>Changed default location in llm_use() to use a temp folder</p></li>
+<li><p>Changed the tests to use a temp folder location</p></li>
+</ul>
+<section id="original-submission-text" class="level3">
+<h3 class="anchored" data-anchor-id="original-submission-text">Original submission text:</h3>
 <p>This is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.</p>
 <p>The README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/.</p>
+</section>
 </section>
 <section id="r-cmd-check-environments" class="level2">
 <h2 class="anchored" data-anchor-id="r-cmd-check-environments">R CMD check environments</h2>
