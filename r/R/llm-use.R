@@ -23,12 +23,12 @@
 #'
 #' # Additional arguments will be passed 'as-is' to the
 #' # downstream R function in this example, to ollama::chat()
-#' llm_use("ollama", "llama3.2", seed = 100, temp = 0.1)
+#' llm_use("ollama", "llama3.2", seed = 100, temperature = 0.1)
 #'
 #' # During the R session, you can change any argument
 #' # individually and it will retain all of previous
 #' # arguments used
-#' llm_use(temp = 0.3)
+#' llm_use(temperature = 0.3)
 #'
 #' # Use .cache to modify the target folder for caching
 #' llm_use(.cache = "_my_cache")
