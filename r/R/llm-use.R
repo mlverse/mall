@@ -79,10 +79,10 @@ llm_use <- function(
   }
 
   if (.force) {
-    cache <- .cache %||% "_mall_cache"
+    cache <- .cache %||% tempfile("_mall_cache")
     m_defaults_reset()
   } else {
-    cache <- .cache %||% m_defaults_cache() %||% "_mall_cache"
+    cache <- .cache %||% m_defaults_cache() %||% tempfile("_mall_cache")
   }
 
   backend <- backend %||% m_defaults_backend()
