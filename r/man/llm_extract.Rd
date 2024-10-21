@@ -50,7 +50,7 @@ Use a Large Language Model (LLM) to extract specific entity, or entities,
 from the provided text
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")

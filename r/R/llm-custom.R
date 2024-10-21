@@ -10,7 +10,7 @@
 #' deterministic, provide the options in a vector. This function will set to
 #' `NA` any response not in the options
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")

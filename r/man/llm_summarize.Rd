@@ -43,7 +43,7 @@ Applies to vector function only.}
 Use a Large Language Model (LLM) to summarize text
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")

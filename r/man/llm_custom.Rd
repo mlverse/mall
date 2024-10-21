@@ -35,7 +35,7 @@ Use a Large Language Model (LLM) to process the provided text using the
 instructions from \code{prompt}
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")

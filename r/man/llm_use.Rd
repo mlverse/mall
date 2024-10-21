@@ -41,7 +41,7 @@ Allows us to specify the back-end provider, model to use during the current
 R session
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 llm_use("ollama", "llama3.2")

@@ -7,7 +7,7 @@
 #' @inheritParams llm_classify
 #' @param language Target language to translate the text to
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")

@@ -14,7 +14,7 @@
 #' `llm_vec_verify` returns a vector that is the same length as `x`.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")

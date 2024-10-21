@@ -16,7 +16,7 @@
 #' character: `""`. 'It defaults to '_mall_cache'. If this argument is left
 #' `NULL` when calling this function, no changes to the path will be made.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' llm_use("ollama", "llama3.2")

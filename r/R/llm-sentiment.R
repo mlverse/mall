@@ -11,7 +11,7 @@
 #' `llm_vec_sentiment` returns a vector that is the same length as `x`.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")

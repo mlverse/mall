@@ -19,7 +19,7 @@
 #' @returns `llm_classify` returns a `data.frame` or `tbl` object.
 #' `llm_vec_classify` returns a vector that is the same length as `x`.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")

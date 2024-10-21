@@ -56,7 +56,7 @@ Use a Large Language Model (LLM) to see if something is true or not
 based the provided text
 }
 \examples{
-\dontrun{
+\donttest{
 library(mall)
 
 data("reviews")

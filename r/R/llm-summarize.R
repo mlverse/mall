@@ -7,7 +7,7 @@
 #' @param max_words The maximum number of words that the LLM should use in the
 #' summary. Defaults to 10.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(mall)
 #'
 #' data("reviews")
