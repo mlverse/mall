@@ -64,14 +64,14 @@ class MallFrame:
         ```{python}
         # Additional arguments will be passed 'as-is' to the
         # downstream R function in this example, to ollama::chat()
-        reviews.llm.use("ollama", "llama3.2", seed = 100, temperature = 0.1)
+        reviews.llm.use("ollama", "llama3.2", options = dict(seed = 100, temperature = 0.1))
         ```
 
         ```{python}
         # During the Python session, you can change any argument
         # individually and it will retain all of previous
         # arguments used
-        reviews.llm.use(temperature = 0.3)
+        reviews.llm.use(options = dict(temperature = 0.3))
         ```
 
         ```{python}
