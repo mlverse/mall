@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/llm-sentiment.R](https://github.com/mlverse/mall/blob/main/R/llm-sentiment.R)
+[R/llm-sentiment.R](https://github.com/mlverse/mall/blob/main/r/R/llm-sentiment.R)
 
 ## llm_sentiment
 
@@ -56,6 +56,7 @@ llm_vec_sentiment(
 
 ## Examples
 ```{r}
+ 
  
 library(mall) 
  

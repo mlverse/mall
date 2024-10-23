@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/llm-extract.R](https://github.com/mlverse/mall/blob/main/R/llm-extract.R)
+[R/llm-extract.R](https://github.com/mlverse/mall/blob/main/r/R/llm-extract.R)
 
 ## llm_extract
 
@@ -53,6 +53,7 @@ llm_vec_extract(x, labels = c(), additional_prompt = "", preview = FALSE)
 
 ## Examples
 ```{r}
+ 
  
 library(mall) 
  

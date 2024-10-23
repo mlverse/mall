@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/m-backend-prompt.R, R/m-backend-submit.R](https://github.com/mlverse/mall/blob/main/R/m-backend-prompt.R, R/m-backend-submit.R)
+[R/m-backend-prompt.R, R/m-backend-submit.R](https://github.com/mlverse/mall/blob/main/r/R/m-backend-prompt.R, R/m-backend-submit.R)
 
 ## m_backend_prompt
 

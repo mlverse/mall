@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/llm-custom.R](https://github.com/mlverse/mall/blob/main/R/llm-custom.R)
+[R/llm-custom.R](https://github.com/mlverse/mall/blob/main/r/R/llm-custom.R)
 
 ## llm_custom
 
@@ -44,6 +44,7 @@ llm_vec_custom(x, prompt = "", valid_resps = NULL)
 
 ## Examples
 ```{r}
+ 
  
 library(mall) 
  

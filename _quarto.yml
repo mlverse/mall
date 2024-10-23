@@ -64,3 +64,27 @@ quartodoc:
       contents:
       - name: MallFrame
 
+pkgsite: 
+    dir: r
+    reference:
+      dir: reference
+      template: site/_template_reference.qmd
+      not_run_examples: true
+      index:
+        file: r_index.qmd
+        template: site/_template_index.qmd
+        contents:
+          sections:
+            - title: LLM
+              contents: 
+              - llm_classify
+              - llm_custom
+              - llm_extract
+              - llm_sentiment
+              - llm_summarize
+              - llm_translate
+              - llm_verify
+              - llm_use
+            - title: Data
+              contents:               
+              - reviews

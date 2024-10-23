@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/llm-classify.R](https://github.com/mlverse/mall/blob/main/R/llm-classify.R)
+[R/llm-classify.R](https://github.com/mlverse/mall/blob/main/r/R/llm-classify.R)
 
 ## llm_classify
 
@@ -51,6 +51,7 @@ llm_vec_classify(x, labels, additional_prompt = "", preview = FALSE)
 
 ## Examples
 ```{r}
+ 
  
 library(mall) 
  
