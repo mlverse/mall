@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/data-reviews.R](https://github.com/mlverse/mall/blob/main/R/data-reviews.R)
+[R/data-reviews.R](https://github.com/mlverse/mall/blob/main/r/R/data-reviews.R)
 
 ## reviews
 

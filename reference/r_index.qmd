@@ -3,6 +3,11 @@ toc: false
 ---
 <img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right" />
 
+
+
+### LLM
+
+
 [llm_classify()](llm_classify.html) [llm_vec_classify()](llm_classify.html)
 
 
@@ -33,15 +38,20 @@ toc: false
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translates text to a specific language
 
+[llm_verify()](llm_verify.html) [llm_vec_verify()](llm_verify.html)
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify if a statement about the text is true or not
+
 [llm_use()](llm_use.html)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use
 
-[llm_verify()](llm_verify.html) [llm_vec_verify()](llm_verify.html)
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify if a statement about the text is true or not
+### Data
+
 
 [reviews](reviews.html)
 

@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/llm-verify.R](https://github.com/mlverse/mall/blob/main/R/llm-verify.R)
+[R/llm-verify.R](https://github.com/mlverse/mall/blob/main/r/R/llm-verify.R)
 
 ## llm_verify
 
@@ -59,6 +59,7 @@ llm_vec_verify(
 
 ## Examples
 ```{r}
+ 
  
 library(mall) 
  

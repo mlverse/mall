@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[R/llm-summarize.R](https://github.com/mlverse/mall/blob/main/R/llm-summarize.R)
+[R/llm-summarize.R](https://github.com/mlverse/mall/blob/main/r/R/llm-summarize.R)
 
 ## llm_summarize
 
@@ -51,6 +51,7 @@ llm_vec_summarize(x, max_words = 10, additional_prompt = "", preview = FALSE)
 
 ## Examples
 ```{r}
+ 
  
 library(mall) 
  

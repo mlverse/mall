@@ -10,7 +10,7 @@ execute:
 source("../site/knitr-print.R")
 ```
 
-[{{{{notitle.source}}}}](https://github.com/mlverse/mall/blob/main/{{{{notitle.source}}}})
+[{{{{notitle.source}}}}](https://github.com/mlverse/mall/blob/main/r/{{{{notitle.source}}}})
 
 ## {{{{notitle.alias}}}}
 
