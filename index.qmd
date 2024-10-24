@@ -92,16 +92,34 @@ corporate network.
 
 ## Get started
 
-- Install `mall` from Github
+- Install `mall` 
 
   
 ::: {.panel-tabset group="language"}
 ## R
+
+From CRAN:
+
+```r
+install.packages("mall")
+```
+
+From GitHub:
+
 ```r
 pak::pak("mlverse/mall/r")
 ```
 
 ## Python
+
+From PyPi:
+
+```python
+pip install mlverse-mall
+```
+
+From GitHub:
+
 ```python
 pip install "mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
 ```
