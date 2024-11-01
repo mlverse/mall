@@ -36,7 +36,7 @@ mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 Run multiple LLM predictions against a data frame. The predictions are processed 
 row-wise over a specified column. It works using a pre-determined one-shot prompt,
 along with the current row's content. `mall` has been implemented for both R
-and Python. The prompt that is use will depend of the type of analysis needed. 
+and Python. `mall` will use the appropriate prompt for the requested analysis.
 
 Currently, the included prompts perform the following: 
 
@@ -76,7 +76,7 @@ reviews.llm.sentiment("review")
 
 ## Motivation
 
-We want to new find ways to help data scientists use LLMs in their daily work. 
+We want to new find new ways to help data scientists use LLMs in their daily work. 
 Unlike the familiar interfaces, such as chatting and code completion, this interface
 runs your text data directly against the LLM.  
 
@@ -318,32 +318,6 @@ For more information and examples visit this function's
 
 :::
 
-### Classify
-
-Use the LLM to categorize the text into one of the options you provide: 
-
-
-::: {.panel-tabset group="language"}
-## R
-
-```{r}
-reviews |>
-  llm_classify(review, c("appliance", "computer"))
-```
-
-For more information and examples visit this function's 
-[R reference page](reference/llm_classify.qmd) 
-
-## Python 
-
-```{python}
-reviews.llm.classify("review", ["computer", "appliance"])
-```
-
-For more information and examples visit this function's 
-[Python reference page](reference/MallFrame.qmd#mall.MallFrame.classify) 
-
-:::
 
 ### Verify 
 
