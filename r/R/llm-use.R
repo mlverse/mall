@@ -49,11 +49,18 @@ llm_use <- function(
     .silent = FALSE,
     .cache = NULL,
     .force = FALSE) {
+  elmer_obj <- NULL
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(m_defaults_get(), "list")
   if (supplied == 2) {
     not_init <- FALSE
+  }
+  if (inherits(backend, "Chat")) {
+    not_init <- FALSE
+    elmer_obj <- backend
+    backend <- "elmer"
+    model <- "chat"
   }
   if (not_init) {
     if (is.null(backend)) {
@@ -92,6 +99,7 @@ llm_use <- function(
     backend = backend,
     model = model,
     .cache = cache,
+    elmer_obj = elmer_obj,
     ...
   )
   if (!.silent || not_init) {
