@@ -49,6 +49,41 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
 }
 
 #' @export
+m_backend_submit.mall_elmer <- function(backend, x, prompt, preview = FALSE) {
+  if (preview) {
+    x <- head(x, 1)
+    map_here <- map
+  } else {
+    map_here <- map_chr
+  }
+  map_here(
+    x,
+    \(x) {
+      .args <- c(
+        messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
+        output = "text",
+        m_defaults_args(backend)
+      )
+      res <- NULL
+      if (preview) {
+        res <- expr(ollamar::chat(!!!.args))
+      }
+      if (m_cache_use() && is.null(res)) {
+        hash_args <- hash(.args)
+        res <- m_cache_check(hash_args)
+      }
+      if (is.null(res)) {
+        args <- m_defaults_args()
+        res <- exec("args$elmer_obj$chat", !!!.args)
+        m_cache_record(.args, res, hash_args)
+      }
+      res
+    }
+  )
+}
+
+
+#' @export
 m_backend_submit.mall_simulate_llm <- function(backend,
                                                x,
                                                prompt,
