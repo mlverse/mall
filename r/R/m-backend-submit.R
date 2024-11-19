@@ -60,13 +60,11 @@ m_backend_submit.mall_elmer <- function(backend, x, prompt, preview = FALSE) {
     x,
     \(x) {
       .args <- c(
-        messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
-        output = "text",
-        m_defaults_args(backend)
+        glue(prompt[[1]]$content, x = x)
       )
       res <- NULL
       if (preview) {
-        res <- expr(ollamar::chat(!!!.args))
+        res <- expr(x$chat(!!!.args))
       }
       if (m_cache_use() && is.null(res)) {
         hash_args <- hash(.args)
@@ -75,7 +73,7 @@ m_backend_submit.mall_elmer <- function(backend, x, prompt, preview = FALSE) {
       if (is.null(res)) {
         args <- m_defaults_args()
         arg_chat <- args$elmer_obj$chat
-        res <- exec("arg_chat", .args$messages[[1]]$content)
+        res <- exec("arg_chat", !!! .args)
         m_cache_record(.args, res, hash_args)
       }
       res
