@@ -57,6 +57,14 @@ llm_use <- function(
     not_init <- FALSE
   }
   if (inherits(backend, "Chat")) {
+    if (!is.null(model)) {
+      cli_abort(
+        c(
+          "Elmer objects already have the 'model' selected.",
+          "Please try again leaving `model` NULL"
+        )
+      )
+    }
     not_init <- FALSE
     elmer_obj <- backend
     backend <- "elmer"
