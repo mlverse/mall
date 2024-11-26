@@ -62,11 +62,13 @@ llm_use <- function(
     backend <- "elmer"
     model <- "chat"
   }
-  if (is.null(backend) && m_defaults_backend() == "elmer") {
-    args <- m_defaults_args()
-    elmer_obj <- args[["elmer_obj"]]
-    not_init <- FALSE
-  }  
+  if (is.null(backend) && !is.null(m_defaults_backend())) {
+    if (m_defaults_backend() == "elmer") {
+      args <- m_defaults_args()
+      elmer_obj <- args[["elmer_obj"]]
+      not_init <- FALSE
+    }
+  }
   if (not_init) {
     if (is.null(backend)) {
       try_connection <- test_connection()
