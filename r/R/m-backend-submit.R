@@ -95,6 +95,8 @@ m_backend_submit.mall_simulate_llm <- function(backend,
     out <- x
   } else if (args$model == "prompt") {
     out <- prompt
+  } else if (args$model == "text") {
+    out <- args$text
   }
   res <- NULL
   if (m_cache_use()) {
