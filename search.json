@@ -331,9 +331,9 @@
   {
     "objectID": "r/NEWS.html",
     "href": "r/NEWS.html",
-    "title": "mall 0.1.0",
+    "title": "mall (dev)",
     "section": "",
-    "text": "mall 0.1.0\n\nInitial CRAN submission."
+    "text": "mall (dev)\n\nAdds new LLM Simulate mode for testing. With “text”, you can pass a custom return message by using the text argument.\n\n\n\nmall 0.1.0\n\nInitial CRAN submission."
   },
   {
     "objectID": "r/LICENSE.html",
