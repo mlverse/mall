@@ -28,7 +28,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
     \(x) {
       .args <- c(
         messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
-        output = "text",
+        # output = "text",
         m_defaults_args(backend)
       )
       res <- NULL
