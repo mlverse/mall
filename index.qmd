@@ -45,7 +45,7 @@ Currently, the included prompts perform the following:
 - [Classify text](#classify)
 - [Extract one, or several](#extract), specific pieces information from the text
 - [Translate text](#translate)
-- [Verify that something it true](#verify) about the text (binary)
+- [Verify that something is true](#verify) about the text (binary)
 - [Custom prompt](#custom-prompt)
 
 This package is inspired by the SQL AI functions now offered by vendors such as
