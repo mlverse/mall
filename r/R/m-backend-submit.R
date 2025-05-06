@@ -24,21 +24,24 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
     map_here <- map_chr
   }
   warnings <- NULL
-  map_here(
+  out <- map_here(
     x,
     \(x) {
       .args <- c(
         messages = list(
           map(prompt, \(i)
-              map(i, \(j) {
-                out <- glue(j, x = x)
-                ln <- length(unlist(strsplit(out, " ")))
-                if(ln > 4096) {
-                  warnings <<- c(warnings, list(list(row = substr(x, 1, 20), len = ln)))
-                }
-                out
-                }))
-          ),
+          map(i, \(j) {
+            out <- glue(j, x = x)
+            ln <- length(unlist(strsplit(out, " ")))
+            if (ln > warn_tokens()) {
+              warnings <<- c(
+                warnings,
+                list(list(row = substr(x, 1, 20), len = ln))
+              )
+            }
+            out
+          }))
+        ),
         output = "text",
         m_defaults_args(backend)
       )
@@ -57,10 +60,10 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       res
     }
   )
-  if(!is.null(warnings)) {
+  if (!is.null(warnings)) {
     warn_len <- length(warnings)
     cli_alert_warning(c(
-      "{warn_len} record{?s} may be over 4,096 tokens\n",
+      "{warn_len} record{?s} may be over {warn_tokens()} tokens\n",
       "Ollama may have truncated what was sent to the model \n",
       "(https://github.com/ollama/ollama/issues/7043)"
     ))
@@ -68,10 +71,16 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
     limit <- ifelse(limit > warn_len, warn_len, limit)
     warn_text <- map(warnings[1:limit], \(x) paste0(x[["row"]], "..."))
     cli_bullets(set_names(warn_text, "*"))
-    if(warn_len > limit) {
+    if (warn_len > limit) {
       cli_inform(c("i" = "{warn_len - limit} more record{?s}"))
     }
   }
+  out
+}
+
+# Using a function so that it can be mocked in testing
+warn_tokens <- function() {
+  4096
 }
 
 #' @export
@@ -87,8 +96,6 @@ m_backend_submit.mall_simulate_llm <- function(backend,
     out <- x
   } else if (args$model == "prompt") {
     out <- prompt
-  } else if (args$model == "text") {
-    out <- args$text
   }
   res <- NULL
   if (m_cache_use()) {
