@@ -27,7 +27,7 @@ skip_if_no_ollama <- function() {
       seed = 100,
       .silent = TRUE,
       .force = TRUE,
-      .cache = .mall_test$cache_ollama 
+      .cache = .mall_test$cache_ollama
     )
   }
 }
