@@ -11,7 +11,8 @@ test_that("Ollama code is covered", {
 
 test_that("Ollama code is covered", {
   local_mocked_bindings(
-    warn_tokens = function() 10
+    warn_tokens = function() 10,
+    chat = function(...) "positive"
   )
   llm_use("ollama", "llama3.2", .silent = TRUE, .force = TRUE)
   expect_snapshot(
