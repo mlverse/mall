@@ -17,7 +17,7 @@ RoxygenNote: 7.3.2
 Imports: 
     cli,
     dplyr,
-    elmer (>= 0.0.0.9000),
+    elmer,
     fs,
     glue,
     jsonlite,
@@ -31,5 +31,5 @@ URL: https://mlverse.github.io/mall/
 Depends: 
     R (>= 2.10)
 LazyData: true
-Remotes:  
-    tidyverse/elmer
+
+

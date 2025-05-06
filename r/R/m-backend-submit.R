@@ -60,7 +60,8 @@ m_backend_submit.mall_elmer <- function(backend, x, prompt, preview = FALSE) {
     x,
     \(x) {
       .args <- c(
-        glue(prompt[[1]]$content, x = x)
+        glue(prompt[[1]]$content, x = x),
+        echo = "none"
       )
       res <- NULL
       if (preview) {

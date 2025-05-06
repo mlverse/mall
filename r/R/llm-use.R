@@ -68,7 +68,7 @@ llm_use <- function(
     not_init <- FALSE
     elmer_obj <- backend
     backend <- "elmer"
-    model <- "chat"
+    model <- elmer_obj$get_model()
   }
   if (is.null(backend) && !is.null(m_defaults_backend())) {
     if (m_defaults_backend() == "elmer") {
