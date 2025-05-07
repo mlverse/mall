@@ -84,12 +84,15 @@ class MallFrame:
         reviews.llm.use(_cache = "")
         ```
         """
-        if backend != "":
-            self._use.update(dict(backend=backend))
-        if model != "":
-            self._use.update(dict(model=model))
-        self._use.update(dict(_cache=_cache))
-        self._use.update(dict(kwargs))
+        if isinstance(backend, str):
+            if backend != "":
+                self._use.update(dict(backend=backend))
+                if model != "":
+                    self._use.update(dict(model=model))
+            self._use.update(dict(_cache=_cache))
+            self._use.update(dict(kwargs))     
+        else: 
+            self._use = backend       
         return self._use
 
     def sentiment(
