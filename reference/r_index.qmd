@@ -1,6 +1,4 @@
----
-toc: false
----
+
 <img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right" />
 
 
