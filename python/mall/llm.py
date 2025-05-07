@@ -42,7 +42,7 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
 def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type=None):
 
     backend = use.get("backend")
-    model=use.get("model")
+    model = use.get("model")
     call = dict(
         backend=backend,
         model=model,
@@ -50,7 +50,8 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
         options=use.get("options"),
     )
 
-    if preview: print(call)
+    if preview:
+        print(call)
 
     cache = ""
     if use.get("_cache") != "":
@@ -67,11 +68,11 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
             )
             out = resp["message"]["content"]
         if backend == "test":
-            if model=="echo":
+            if model == "echo":
                 out = x
-            if model=="content":
+            if model == "content":
                 out = msg[0]["content"]
-                return(out)
+                return out
     else:
         out = cache
 

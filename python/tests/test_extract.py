@@ -4,7 +4,8 @@ import polars as pl
 import shutil
 import os
 
-if os._exists("_test_cache"): shutil.rmtree("_test_cache", ignore_errors=True)
+if os._exists("_test_cache"):
+    shutil.rmtree("_test_cache", ignore_errors=True)
 
 
 def test_extract_list():
@@ -36,10 +37,9 @@ def test_extract_one():
         == "You are a helpful text extraction engine. Extract the a being referred to on the text. I expect 1 item exactly. No capitalization. No explanations.     The answer is based on the following text:\n{}"
     )
 
+
 def test_extract_expand():
     df = pl.DataFrame(dict(x="x | y"))
     df.llm.use("test", "echo", _cache="_test_cache")
-    x = df.llm.extract("x", ["a", "b"], expand_cols = True)
-    assert (
-        x["a"][0] == "x "
-        )
+    x = df.llm.extract("x", ["a", "b"], expand_cols=True)
+    assert x["a"][0] == "x "

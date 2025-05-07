@@ -4,7 +4,8 @@ import polars as pl
 import shutil
 import os
 
-if os._exists("_test_cache"): shutil.rmtree("_test_cache", ignore_errors=True)
+if os._exists("_test_cache"):
+    shutil.rmtree("_test_cache", ignore_errors=True)
 
 
 def test_classify():
