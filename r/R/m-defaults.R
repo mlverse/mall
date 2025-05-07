@@ -61,7 +61,7 @@ m_defaults_args <- function(x = m_defaults_get()) {
 print.mall_session <- function(x, ...) {
   cli_h3("{col_cyan('mall')} session object")
   args <- x[["args"]]
-  args[["elmer_obj"]] <- NULL 
+  args[["ellmer_obj"]] <- NULL 
   cli_inform(glue("{col_green('Backend:')} {x$name}"))
   args <- imap(args, \(x, y) glue("{col_yellow({paste0(y, ':')})}{x}"))
   label_argument <- "{col_green('LLM session:')}"

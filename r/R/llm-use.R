@@ -49,7 +49,7 @@ llm_use <- function(
     .silent = FALSE,
     .cache = NULL,
     .force = FALSE) {
-  elmer_obj <- NULL
+  ellmer_obj <- NULL
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(m_defaults_get(), "list")
@@ -66,14 +66,14 @@ llm_use <- function(
       )
     }
     not_init <- FALSE
-    elmer_obj <- backend
-    backend <- "elmer"
-    model <- elmer_obj$get_model()
+    ellmer_obj <- backend
+    backend <- "ellmer"
+    model <- ellmer_obj$get_model()
   }
   if (is.null(backend) && !is.null(m_defaults_backend())) {
-    if (m_defaults_backend() == "elmer") {
+    if (m_defaults_backend() == "ellmer") {
       args <- m_defaults_args()
-      elmer_obj <- args[["elmer_obj"]]
+      ellmer_obj <- args[["ellmer_obj"]]
       not_init <- FALSE
     }
   }
@@ -114,7 +114,7 @@ llm_use <- function(
     backend = backend,
     model = model,
     .cache = cache,
-    elmer_obj = elmer_obj,
+    ellmer_obj = ellmer_obj,
     ...
   )
   if (!.silent || not_init) {
