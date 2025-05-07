@@ -35,7 +35,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
           map(i, \(j) {
             out <- glue(j, x = x)
             ln <- length(unlist(strsplit(out, " ")))
-            if (ln > warn_tokens()) {
+            if (ln > m_ollama_tokens()) {
               warnings <<- c(
                 warnings,
                 list(list(row = substr(x, 1, 20), len = ln))
@@ -65,7 +65,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
   if (!is.null(warnings)) {
     warn_len <- length(warnings)
     cli_alert_warning(c(
-      "{warn_len} record{?s} may be over {warn_tokens()} tokens\n",
+      "{warn_len} record{?s} may be over {m_ollama_tokens()} tokens\n",
       "Ollama may have truncated what was sent to the model \n",
       "(https://github.com/ollama/ollama/issues/7043)"
     ))
@@ -81,7 +81,7 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
 }
 
 # Using a function so that it can be mocked in testing
-warn_tokens <- function() {
+m_ollama_tokens <- function() {
   4096
 }
 
@@ -112,8 +112,7 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
       }
       if (is.null(res)) {
         args <- m_defaults_args()
-        arg_chat <- args$ellmer_obj$chat
-        res <- exec("arg_chat", !!! .args)
+        res <- exec("m_ellmer_chat", !!! .args)
         m_cache_record(.args, res, hash_args)
       }
       res
@@ -121,6 +120,10 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
   )
 }
 
+# Using a function so that it can be mocked in testing
+m_ellmer_chat <- function() {
+  args$ellmer_obj$chat
+}
 
 # ------------------------------ Simulate --------------------------------------
 
