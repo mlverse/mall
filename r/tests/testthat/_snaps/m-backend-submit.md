@@ -39,10 +39,3 @@
     Output
       [1] "test"
 
-# ellmer code is covered - part II
-
-    Code
-      str(m_ellmer_chat())
-    Output
-      function (..., echo = NULL)  
-

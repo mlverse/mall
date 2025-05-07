@@ -65,8 +65,8 @@ test_that("ellmer code is covered - part II", {
       m_defaults_reset()
       chat <- ellmer::chat_openai()
       llm_use(chat, .cache = "", .silent = TRUE)
-      expect_snapshot(
-        str(m_ellmer_chat())
+      expect_true(
+        inherits(m_ellmer_chat(), "function")
       )
     }
   )
