@@ -122,6 +122,7 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
 
 # Using a function so that it can be mocked in testing
 m_ellmer_chat <- function() {
+  args <- m_defaults_args()
   args$ellmer_obj$chat
 }
 
