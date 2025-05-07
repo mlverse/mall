@@ -17,7 +17,7 @@ RoxygenNote: 7.3.2
 Imports: 
     cli,
     dplyr,
-    elmer,
+    ellmer,
     fs,
     glue,
     jsonlite,
@@ -25,7 +25,8 @@ Imports:
     rlang
 Suggests: 
     dbplyr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    withr
 Config/testthat/edition: 3
 URL: https://mlverse.github.io/mall/
 Depends: 

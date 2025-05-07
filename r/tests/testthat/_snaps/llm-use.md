@@ -1,3 +1,13 @@
+# Init code is covered
+
+    Code
+      llm_use(.cache = "")
+    Message
+      
+      -- mall session object 
+      Backend: Ollama
+      LLM session: model:model1
+
 # Stops cache
 
     Code

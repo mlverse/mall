@@ -21,7 +21,7 @@ test_that("Init code is covered", {
     menu = function(...) 1
   )
   m_defaults_reset()
-  expect_message(llm_use())
+  expect_snapshot(llm_use(.cache = ""))
 })
 
 test_that("Stops cache", {
@@ -49,7 +49,7 @@ test_that("Ensures empty llm_use works with Chat", {
     {
       m_defaults_reset()
       chat <- ellmer::chat_openai()
-      llm_use(chat, .cache = "")
+      llm_use(chat, .cache = "", .silent = TRUE)
       expect_snapshot(
         llm_use()
       )
