@@ -65,9 +65,8 @@ test_that("ellmer code is covered - part II", {
       m_defaults_reset()
       chat <- ellmer::chat_openai()
       llm_use(chat, .cache = "", .silent = TRUE)
-      expect_true(
-        inherits(m_ellmer_chat(), "function")
-      )
+      m_defaults_set(ellmer_obj = list(chat = function(...) NULL))
+      expect_null(m_ellmer_chat("test"))
     }
   )
 })
