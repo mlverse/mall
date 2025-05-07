@@ -49,11 +49,33 @@ llm_use <- function(
     .silent = FALSE,
     .cache = NULL,
     .force = FALSE) {
+  ellmer_obj <- NULL
   models <- list()
   supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(m_defaults_get(), "list")
   if (supplied == 2) {
     not_init <- FALSE
+  }
+  if (inherits(backend, "Chat")) {
+    if (!is.null(model)) {
+      cli_abort(
+        c(
+          "Elmer objects already have the 'model' selected.",
+          "Please try again leaving `model` NULL"
+        )
+      )
+    }
+    not_init <- FALSE
+    ellmer_obj <- backend
+    backend <- "ellmer"
+    model <- ellmer_obj$get_model()
+  }
+  if (is.null(backend) && !is.null(m_defaults_backend())) {
+    if (m_defaults_backend() == "ellmer") {
+      args <- m_defaults_args()
+      ellmer_obj <- args[["ellmer_obj"]]
+      not_init <- FALSE
+    }
   }
   if (not_init) {
     if (is.null(backend)) {
@@ -92,6 +114,7 @@ llm_use <- function(
     backend = backend,
     model = model,
     .cache = cache,
+    ellmer_obj = ellmer_obj,
     ...
   )
   if (!.silent || not_init) {
