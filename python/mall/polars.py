@@ -1,3 +1,4 @@
+from chatlas import Chat
 import polars as pl
 
 from mall.prompt import (
@@ -84,6 +85,11 @@ class MallFrame:
         reviews.llm.use(_cache = "")
         ```
         """
+        if isinstance(backend, Chat):
+            self._use.update(dict(backend="chatlas"))
+            self._use.update(dict(chat=backend))
+            backend = ""
+            model = ""
         if backend != "":
             self._use.update(dict(backend=backend))
         if model != "":
