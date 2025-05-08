@@ -18,7 +18,8 @@ dependencies = [
     "pytest-cov>=5.0.0",
     "pytest-html>=4.1.1",
     "pytest-metadata>=3.1.1",
-    "chatlas>=0.7.0"
+    "chatlas>=0.7.0",
+    "openai>=1.77.0"
 ]
 classifiers = [
     "Intended Audience :: End Users/Desktop",
