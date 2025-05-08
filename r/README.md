@@ -7,7 +7,10 @@
 coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mlverse/mall?branch=main)
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<a href="https://cran.r-project.org/package=mall" data-original-href="https://cran.r-project.org/package=mall"><img src="https://www.r-pkg.org/badges/version/mall" class="img-fluid" alt="CRAN status"></a>
 <!-- badges: end -->
+
+
 
 <img src="man/figures/logo.png" style="float:right" />
 
