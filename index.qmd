@@ -21,17 +21,20 @@ mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 ```
 
 
+```{python}
+#| include: false
+
+import mall
+```
 <img src="site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
 <!-- badges: start -->
-
-[![R check](https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml)
-[![Python tests](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml)
-[![R package coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mlverse/mall?branch=main)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![PyPi](https://img.shields.io/pypi/v/mlverse-mall)](https://pypi.org/project/mlverse-mall/)
+[![Python tests](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml) |
+<a href="https://cran.r-project.org/package=mall" data-original-href="https://cran.r-project.org/package=mall"><img src="https://www.r-pkg.org/badges/version/mall" class="img-fluid" alt="CRAN status"></a>
+[![R check](https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/R-CMD-check.yaml) |
+[![Package coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mlverse/mall?branch=main)
 <!-- badges: end -->
-
-
 
 Run multiple LLM predictions against a data frame. The predictions are processed 
 row-wise over a specified column. It works using a pre-determined one-shot prompt,
@@ -121,7 +124,7 @@ pip install mlverse-mall
 From GitHub:
 
 ```python
-pip install "mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
+pip install "mlverse-mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
 ```
 :::
 

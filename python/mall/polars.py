@@ -45,9 +45,10 @@ class MallFrame:
 
         Parameters
         ------
-        backend : str
-            The name of the backend to use. At the beginning of the session
-            it defaults to "ollama". If passing `""`, it will remain unchanged
+        backend : 
+            The name of the backend to use, or a `chatlas` chat object. 
+            At the beginning of the session it defaults to "ollama". 
+            If passing `""`, it will remain unchanged
         model : str
             The name of the model tha the backend should use. At the beginning
             of the session it defaults to "llama3.2". If passing `""`, it will
