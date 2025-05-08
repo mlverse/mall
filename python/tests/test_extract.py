@@ -4,8 +4,6 @@ import polars as pl
 import shutil
 import os
 
-if os._exists("_test_cache"): shutil.rmtree("_test_cache", ignore_errors=True)
-
 
 def test_extract_list():
     df = pl.DataFrame(dict(x="x"))
@@ -15,6 +13,7 @@ def test_extract_list():
         x["extract"][0]
         == "You are a helpful text extraction engine. Extract the a, b being referred to on the text. I expect 2 items exactly. No capitalization. No explanations.  Return the response exclusively in a pipe separated list, and no headers.    The answer is based on the following text:\n{}"
     )
+    shutil.rmtree("_test_cache", ignore_errors=True)
 
 
 def test_extract_dict():
@@ -25,6 +24,7 @@ def test_extract_dict():
         x["extract"][0]
         == "You are a helpful text extraction engine. Extract the one, two being referred to on the text. I expect 2 items exactly. No capitalization. No explanations.  Return the response exclusively in a pipe separated list, and no headers.    The answer is based on the following text:\n{}"
     )
+    shutil.rmtree("_test_cache", ignore_errors=True)
 
 
 def test_extract_one():
@@ -35,11 +35,12 @@ def test_extract_one():
         x["extract"][0]
         == "You are a helpful text extraction engine. Extract the a being referred to on the text. I expect 1 item exactly. No capitalization. No explanations.     The answer is based on the following text:\n{}"
     )
+    shutil.rmtree("_test_cache", ignore_errors=True)
+
 
 def test_extract_expand():
     df = pl.DataFrame(dict(x="x | y"))
     df.llm.use("test", "echo", _cache="_test_cache")
-    x = df.llm.extract("x", ["a", "b"], expand_cols = True)
-    assert (
-        x["a"][0] == "x "
-        )
+    x = df.llm.extract("x", ["a", "b"], expand_cols=True)
+    assert x["a"][0] == "x "
+    shutil.rmtree("_test_cache", ignore_errors=True)

@@ -4,8 +4,6 @@ import polars as pl
 import shutil
 import os
 
-if os._exists("_test_cache"): shutil.rmtree("_test_cache", ignore_errors=True)
-
 
 def test_sentiment_simple():
     data = mall.MallData
@@ -13,6 +11,7 @@ def test_sentiment_simple():
     reviews.llm.use("test", "echo", _cache="_test_cache")
     x = reviews.llm.sentiment("review")
     assert pull(x, "sentiment") == [None, None, None]
+    shutil.rmtree("_test_cache", ignore_errors=True)
 
 
 def sim_sentiment():
@@ -41,6 +40,7 @@ def test_sentiment_prompt():
         x["sentiment"][0]
         == "You are a helpful sentiment engine. Return only one of the following answers: positive, negative, neutral . No capitalization. No explanations.  The answer is based on the following text:\n{}"
     )
+    shutil.rmtree("_test_cache", ignore_errors=True)
 
 
 def pull(df, col):

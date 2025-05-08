@@ -8,7 +8,9 @@ ollama_is_present <- function() {
   if (.mall_test$ollama_checked) {
     ollama_present <- .mall_test$ollama_present
   } else {
-    con <- ollamar::test_connection()
+    suppressMessages(
+      con <- ollamar::test_connection()
+    )
     ollama_present <- con$status_code == 200
     .mall_test$ollama_present <- ollama_present
     .mall_test$ollama_checked <- TRUE
@@ -27,7 +29,7 @@ skip_if_no_ollama <- function() {
       seed = 100,
       .silent = TRUE,
       .force = TRUE,
-      .cache = .mall_test$cache_ollama 
+      .cache = .mall_test$cache_ollama
     )
   }
 }

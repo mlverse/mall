@@ -15,6 +15,8 @@ m_backend_submit <- function(backend, x, prompt, preview = FALSE) {
   UseMethod("m_backend_submit")
 }
 
+# -------------------------------- Ollama --------------------------------------
+
 #' @export
 m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
   if (preview) {
@@ -25,12 +27,26 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
   } else {
     map_here <- map
   }
-  map_here(
+  warnings <- NULL
+  out <- map_here(
     x,
     \(x) {
       .args <- c(
-        messages = list(map(prompt, \(i) map(i, \(j) glue(j, x = x)))),
-        # output = "text",
+        messages = list(
+          map(prompt, \(i)
+          map(i, \(j) {
+            out <- glue(j, x = x)
+            ln <- length(unlist(strsplit(out, " ")))
+            if (ln > m_ollama_tokens()) {
+              warnings <<- c(
+                warnings,
+                list(list(row = substr(x, 1, 20), len = ln))
+              )
+            }
+            out
+          }))
+        ),
+        output = "text",
         m_defaults_args(backend)
       )
       res <- NULL
@@ -48,7 +64,71 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       res
     }
   )
+  if (!is.null(warnings)) {
+    warn_len <- length(warnings)
+    cli_alert_warning(c(
+      "{warn_len} record{?s} may be over {m_ollama_tokens()} tokens\n",
+      "Ollama may have truncated what was sent to the model \n",
+      "(https://github.com/ollama/ollama/issues/7043)"
+    ))
+    limit <- 10
+    limit <- ifelse(limit > warn_len, warn_len, limit)
+    warn_text <- map(warnings[1:limit], \(x) paste0(x[["row"]], "..."))
+    cli_bullets(set_names(warn_text, "*"))
+    if (warn_len > limit) {
+      cli_inform(c("i" = "{warn_len - limit} more record{?s}"))
+    }
+  }
+  out
 }
+
+# Using a function so that it can be mocked in testing
+m_ollama_tokens <- function() {
+  4096
+}
+
+# -------------------------------- ellmer --------------------------------------
+
+#' @export
+m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
+  if (preview) {
+    x <- head(x, 1)
+    map_here <- map
+  } else {
+    map_here <- map_chr
+  }
+  map_here(
+    x,
+    \(x) {
+      .args <- c(
+        glue(prompt[[1]]$content, x = x),
+        echo = "none"
+      )
+      res <- NULL
+      if (preview) {
+        res <- expr(x$chat(!!!.args))
+      }
+      if (m_cache_use() && is.null(res)) {
+        hash_args <- hash(.args)
+        res <- m_cache_check(hash_args)
+      }
+      if (is.null(res)) {
+        args <- m_defaults_args()
+        res <- exec("m_ellmer_chat", !!! .args)
+        m_cache_record(.args, res, hash_args)
+      }
+      res
+    }
+  )
+}
+
+# Using a function so that it can be mocked in testing
+m_ellmer_chat <- function(...) {
+  args <- m_defaults_args()
+  args$ellmer_obj$chat(...)
+}
+
+# ------------------------------ Simulate --------------------------------------
 
 #' @export
 m_backend_submit.mall_simulate_llm <- function(backend,
@@ -63,8 +143,6 @@ m_backend_submit.mall_simulate_llm <- function(backend,
     out <- x
   } else if (args$model == "prompt") {
     out <- prompt
-  } else if (args$model == "text") {
-    out <- args$text
   }
   res <- NULL
   if (m_cache_use()) {

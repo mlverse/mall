@@ -1,7 +1,9 @@
 # mall (dev)
 
-* Adds new LLM Simulate mode for testing. With "text", you can pass a custom
-return message by using the `text` argument.
+* Adds integration with `ellmer` `Chat` objects
+
+* Returns a warning when there are over 4,096 tokens in one or many records
+sent to Ollama (#43)
 
 # mall 0.1.0
 

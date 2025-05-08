@@ -27,7 +27,6 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
                 x=x,
                 msg=msg,
                 use=use,
-                preview=False,
                 valid_resps=valid_resps,
                 convert=convert,
                 data_type=data_type,
@@ -39,18 +38,16 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
     return df
 
 
-def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type=None):
+def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
 
     backend = use.get("backend")
-    model=use.get("model")
+    model = use.get("model")
     call = dict(
         backend=backend,
         model=model,
         messages=build_msg(x, msg),
         options=use.get("options"),
     )
-
-    if preview: print(call)
 
     cache = ""
     if use.get("_cache") != "":
@@ -59,6 +56,10 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
         cache = cache_check(hash_call, use)
 
     if cache == "":
+        if backend == "chatlas":
+            chat = use.get("chat")
+            ch = chat.chat(msg[0].get("content") + x, echo="none")
+            out = ch.get_content()
         if backend == "ollama":
             resp = ollama.chat(
                 model=use.get("model"),
@@ -67,11 +68,11 @@ def llm_call(x, msg, use, preview=False, valid_resps="", convert=None, data_type
             )
             out = resp["message"]["content"]
         if backend == "test":
-            if model=="echo":
+            if model == "echo":
                 out = x
-            if model=="content":
+            if model == "content":
                 out = msg[0]["content"]
-                return(out)
+                return out
     else:
         out = cache
 
