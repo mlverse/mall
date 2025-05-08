@@ -241,12 +241,12 @@ interact with the LLM.
 
 #### Parameters
 
-| Name       | Type   | Description                                                                                                                                            | Default         |
-|------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| `backend`  | str    | The name of the backend to use. At the beginning of the session it defaults to "ollama". If passing `""`, it will remain unchanged                     | `''`            |
-| `model`    | str    | The name of the model tha the backend should use. At the beginning of the session it defaults to "llama3.2". If passing `""`, it will remain unchanged | `''`            |
-| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                          | `'_mall_cache'` |
-| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                         | `{}`            |
+| Name       | Type   | Description                                                                                                                                                      | Default         |
+|------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| `backend`  |        | The name of the backend to use, or a `chatlas` chat object.  At the beginning of the session it defaults to "ollama".  If passing `""`, it will remain unchanged | `''`            |
+| `model`    | str    | The name of the model tha the backend should use. At the beginning of the session it defaults to "llama3.2". If passing `""`, it will remain unchanged           | `''`            |
+| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                                    | `'_mall_cache'` |
+| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                                   | `{}`            |
 
 #### Examples
 

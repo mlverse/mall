@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: main
 
-name: R package checks
+name: R checks
 
 permissions: read-all
 
