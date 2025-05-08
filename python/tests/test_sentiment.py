@@ -4,6 +4,7 @@ import polars as pl
 import shutil
 import os
 
+
 def test_sentiment_simple():
     data = mall.MallData
     reviews = data.reviews
@@ -40,6 +41,7 @@ def test_sentiment_prompt():
         == "You are a helpful sentiment engine. Return only one of the following answers: positive, negative, neutral . No capitalization. No explanations.  The answer is based on the following text:\n{}"
     )
     shutil.rmtree("_test_cache", ignore_errors=True)
+
 
 def pull(df, col):
     out = []

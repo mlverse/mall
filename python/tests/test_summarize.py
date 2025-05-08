@@ -4,6 +4,7 @@ import polars as pl
 import shutil
 import os
 
+
 def test_summarize_prompt():
     df = pl.DataFrame(dict(x="x"))
     df.llm.use("test", "content", _cache="_test_cache")
