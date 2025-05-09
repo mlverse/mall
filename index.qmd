@@ -17,7 +17,6 @@ library(dbplyr)
 library(tictoc)
 library(DBI)
 source("site/knitr-print.R")
-mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache")
 ```
 
 
@@ -53,14 +52,14 @@ Currently, the included prompts perform the following:
 
 This package is inspired by the SQL AI functions now offered by vendors such as
 [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html) 
-and Snowflake.  `mall` uses [Ollama](https://ollama.com/) to  interact with LLMs 
-installed  locally. 
+and Snowflake.  `mall` is able to interact with locally installed and remote LLMs.
 
-<img src="site/images/dplyr.png" style="float:left;margin-right:33px;margin-top:20px;" width="100" />
+<img src="site/images/dplyr.png" style="float:left;margin-right:33px;margin-top:32px;" width="100" />
 
-For **R**, that interaction takes place via the 
-[`ollamar`](https://hauselin.github.io/ollama-r/) package. The functions are 
-designed to easily work with piped commands, such as `dplyr`. 
+In **R**, local interaction takes place via the 
+[`ollamar`](https://hauselin.github.io/ollama-r/) package, remote LLMs interaction
+is done via [`ellmer`](https://ellmer.tidyverse.org/).  The functions inside `mall`
+ are designed to easily work with piped commands, such as `dplyr`. 
 
 ```r
 reviews |>
@@ -69,9 +68,10 @@ reviews |>
 
 <img src="site/images/polars.png" style="float:left;margin-right:10px;" width="120" />
 
-For **Python**, `mall` is a library extension to [Polars](https://pola.rs/). To
-interact with Ollama, it uses the official
-[Python library](https://github.com/ollama/ollama-python).
+In **Python**, `mall` is a library extension to [Polars](https://pola.rs/).
+It uses the official [Python library](https://github.com/ollama/ollama-python)
+to interact with Ollama, and [`chatlas`](https://posit-dev.github.io/chatlas/) 
+to interact with remote LLMs.
 
 ```python
 reviews.llm.sentiment("review")
@@ -95,19 +95,20 @@ corporate network.
 
 ## Get started
 
-- Install `mall` 
+### 1. Install `mall` 
 
-  
+Install the package to get started: 
+
 ::: {.panel-tabset group="language"}
 ## R
 
-From CRAN:
+Official version from CRAN:
 
 ```r
 install.packages("mall")
 ```
 
-From GitHub:
+Development version from GitHub:
 
 ```r
 pak::pak("mlverse/mall/r")
@@ -115,18 +116,23 @@ pak::pak("mlverse/mall/r")
 
 ## Python
 
-From PyPi:
+Official version from PyPi:
 
 ```python
 pip install mlverse-mall
 ```
 
-From GitHub:
+Development version from GitHub:
 
 ```python
 pip install "mlverse-mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
 ```
 :::
+
+### 2. Setup LLM integration 
+
+::: {.panel-tabset group="backends"}
+## Local LLM via Ollama
 
 - [Download Ollama from the official website](https://ollama.com/download)
 
@@ -158,15 +164,67 @@ Llama 3.2 to test. To get that model you can run:
   ollama.pull('llama3.2')
   ```
 :::
+
+## Remote LLMs
+
+::: {.panel-tabset group="language"}
+## R
+
+`mall` uses the `ellmer` package as the integration point to the LLM. This
+package supports multiple providers such as OpenAI, Anthropic, Google Gemini,
+etc. 
+
+- Install `ellmer`
+  ```r
+  install.packages("ellmer")
+  ```
+
+- Refer to `ellmer`'s documentation  to find out how to setup the 
+connections with your selected provider: 
+ [https://ellmer.tidyverse.org/reference/index.html#chatbots](https://ellmer.tidyverse.org/reference/index.html#chatbots)
   
-#### With Databricks (R only)
+- Let `mall` know which `ellmer` object to use during the R session. To do 
+this, call `llm_use()`. Here is an example of using OpenAI:
+  ```{r}
+  library(mall)
+  library(ellmer)
+  chat <- chat_openai()
+  llm_use(chat)
+  ```
 
-If you pass a table connected to **Databricks** via `odbc`, `mall` will 
-automatically use Databricks' LLM instead of Ollama. *You won't need Ollama 
-installed if you are using Databricks only.*
+## Python
 
-`mall` will call the appropriate SQL AI function. For more information see our 
-[Databricks article.](https://mlverse.github.io/mall/articles/databricks.html) 
+`mall` uses the `chatlas` package as the integration point to the LLM. This
+package supports multiple providers such as OpenAI, Anthropic, Google Gemini,
+etc.
+
+- Install the `chatlas` library
+  ```python
+  pip install chatlas
+  ```
+
+- Refer to `chatlas`'s documentation  to find out how to setup the 
+connections with your selected provider: 
+ [https://posit-dev.github.io/chatlas/reference/#chat-model-providers](https://posit-dev.github.io/chatlas/reference/#chat-model-providers)
+
+- Let `mall` know which `chatlas` object to use during the Python session. To do 
+this, call `llm_use()`. Here is an example of using OpenAI:
+  ```python
+  import mall
+  from chatlas import ChatOpenAI
+  
+  chat = ChatOpenAI()
+  
+  data = mall.MallData
+  reviews = data.reviews
+  
+  reviews.llm.use(chat)
+  ```
+
+:::
+
+:::
+
 
 ## LLM functions
 
@@ -176,6 +234,11 @@ We will start with loading a very small data set contained in `mall`. It has
 ::: {.panel-tabset group="language"}
 ## R
 
+```{r}
+#| include: false
+
+mall::llm_use("ollama", "llama3.2", seed = 100, .cache = "_readme_cache", .force = TRUE)
+```
 ```{r}
 library(mall)
 data("reviews")

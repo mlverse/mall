@@ -14,8 +14,9 @@ llm_use(
 )
 }
 \arguments{
-\item{backend}{The name of an supported back-end provider. Currently only
-'ollama' is supported.}
+\item{backend}{"ollama" or an \code{ellmer} \code{Chat} object. If using "ollama",
+\code{mall} will use is out-of-the-box integration with that back-end. Defaults
+to "ollama".}
 
 \item{model}{The name of model supported by the back-end provider}
 
@@ -63,5 +64,11 @@ llm_use(.cache = "")
 
 # Use .silent to avoid the print out
 llm_use(.silent = TRUE)
+
+# Use an `ellmer` object
+library(ellmer)
+chat <- chat_openai(model = "gpt-4o")
+llm_use(chat)
+
 }
 }

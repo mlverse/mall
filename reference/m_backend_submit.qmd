@@ -15,15 +15,15 @@ source("../site/knitr-print.R")
 ## m_backend_prompt
 
 ## Description
- Functions to integrate different back-ends 
+Functions to integrate different back-ends
 
 
 ## Usage
 ```r
- 
-m_backend_prompt(backend, additional) 
- 
-m_backend_submit(backend, x, prompt, preview = FALSE) 
+
+m_backend_prompt(backend, additional)
+
+m_backend_submit(backend, x, prompt, preview = FALSE)
 ```
 
 ## Arguments
@@ -38,7 +38,7 @@ m_backend_submit(backend, x, prompt, preview = FALSE)
 
 
 ## Value
- `m_backend_submit` does not return an object. `m_backend_prompt` returns a list of functions that contain the base prompts. 
+`m_backend_submit` does not return an object. `m_backend_prompt` returns a list of functions that contain the base prompts.
 
 
 

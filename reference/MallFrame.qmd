@@ -241,12 +241,12 @@ interact with the LLM.
 
 #### Parameters
 
-| Name       | Type   | Description                                                                                                                                                      | Default         |
-|------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
-| `backend`  |        | The name of the backend to use, or a `chatlas` chat object.  At the beginning of the session it defaults to "ollama".  If passing `""`, it will remain unchanged | `''`            |
-| `model`    | str    | The name of the model tha the backend should use. At the beginning of the session it defaults to "llama3.2". If passing `""`, it will remain unchanged           | `''`            |
-| `_cache`   | str    | The path of where to save the cached results. Passing `""` disables the cache                                                                                    | `'_mall_cache'` |
-| `**kwargs` |        | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                                   | `{}`            |
+| Name       | Type        | Description                                                                                                                                                      | Default         |
+|------------|-------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| `backend`  | str \| Chat | The name of the backend to use, or a `chatlas` chat object.  At the beginning of the session it defaults to "ollama".  If passing `""`, it will remain unchanged | `''`            |
+| `model`    | str         | The name of the model tha the backend should use. At the beginning of the session it defaults to "llama3.2". If passing `""`, it will remain unchanged           | `''`            |
+| `_cache`   | str         | The path of where to save the cached results. Passing `""` disables the cache                                                                                    | `'_mall_cache'` |
+| `**kwargs` |             | Arguments to pass to the downstream Python call. In this case, the `chat` function in `ollama`                                                                   | `{}`            |
 
 #### Examples
 
@@ -271,6 +271,13 @@ reviews.llm.use(_cache = "_my_cache")
 ```{python}
 # Leave _cache empty to turn off this functionality
 reviews.llm.use(_cache = "")
+```
+
+```{python}
+# Use a `chatlas` object 
+from chatlas import ChatOpenAI
+chat = ChatOpenAI()
+reviews.llm.use(chat)
 ```
 
 ### verify { #mall.MallFrame.verify }

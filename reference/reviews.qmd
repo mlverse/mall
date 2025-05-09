@@ -15,15 +15,15 @@ source("../site/knitr-print.R")
 ## reviews
 
 ## Description
- Mini reviews data set 
+Mini reviews data set
 
 ## Format
- A data frame that contains 3 records. The records are of fictitious product reviews. 
+A data frame that contains 3 records. The records are of fictitious product reviews.
 
 ## Usage
 ```r
- 
-reviews 
+
+reviews
 ```
 
 
@@ -33,11 +33,12 @@ reviews
 
 ## Examples
 ```{r}
- 
-library(mall) 
-data(reviews) 
-reviews 
- 
+
+library(mall)
+data(reviews)
+reviews
+
+
 ```
 
 
