@@ -45,7 +45,7 @@ class MallFrame:
 
         Parameters
         ------
-        backend : 
+        backend : str | Chat
             The name of the backend to use, or a `chatlas` chat object. 
             At the beginning of the session it defaults to "ollama". 
             If passing `""`, it will remain unchanged
@@ -84,6 +84,13 @@ class MallFrame:
         ```{python}
         # Leave _cache empty to turn off this functionality
         reviews.llm.use(_cache = "")
+        ```
+
+        ```{python}
+        # Use a `chatlas` object 
+        from chatlas import ChatOpenAI
+        chat = ChatOpenAI()
+        reviews.llm.use(chat)
         ```
         """
         if isinstance(backend, Chat):
