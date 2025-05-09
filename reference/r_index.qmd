@@ -1,57 +1,53 @@
-
+---
+toc: false
+---
 <img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right" />
-
-
 
 ### LLM
 
-
-[llm_classify()](llm_classify.html) [llm_vec_classify()](llm_classify.html)
+[llm_classify()](llm_classify.qmd) [llm_vec_classify()](llm_classify.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categorize data as one of options given
 
-[llm_custom()](llm_custom.html) [llm_vec_custom()](llm_custom.html)
+[llm_custom()](llm_custom.qmd) [llm_vec_custom()](llm_custom.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send a custom prompt to the LLM
 
-[llm_extract()](llm_extract.html) [llm_vec_extract()](llm_extract.html)
+[llm_extract()](llm_extract.qmd) [llm_vec_extract()](llm_extract.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extract entities from text
 
-[llm_sentiment()](llm_sentiment.html) [llm_vec_sentiment()](llm_sentiment.html)
+[llm_sentiment()](llm_sentiment.qmd) [llm_vec_sentiment()](llm_sentiment.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sentiment analysis
 
-[llm_summarize()](llm_summarize.html) [llm_vec_summarize()](llm_summarize.html)
+[llm_summarize()](llm_summarize.qmd) [llm_vec_summarize()](llm_summarize.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summarize text
 
-[llm_translate()](llm_translate.html) [llm_vec_translate()](llm_translate.html)
+[llm_translate()](llm_translate.qmd) [llm_vec_translate()](llm_translate.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translates text to a specific language
 
-[llm_verify()](llm_verify.html) [llm_vec_verify()](llm_verify.html)
+[llm_verify()](llm_verify.qmd) [llm_vec_verify()](llm_verify.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify if a statement about the text is true or not
 
-[llm_use()](llm_use.html)
+[llm_use()](llm_use.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use
 
-
-
 ### Data
 
-
-[reviews](reviews.html)
+[reviews()](reviews.qmd)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mini reviews data set

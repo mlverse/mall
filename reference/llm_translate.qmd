@@ -15,21 +15,21 @@ source("../site/knitr-print.R")
 ## llm_translate
 
 ## Description
- Use a Large Language Model (LLM) to translate a text to a specific language 
+Use a Large Language Model (LLM) to translate a text to a specific language
 
 
 ## Usage
 ```r
- 
-llm_translate( 
-  .data, 
-  col, 
-  language, 
-  pred_name = ".translation", 
-  additional_prompt = "" 
-) 
- 
-llm_vec_translate(x, language, additional_prompt = "", preview = FALSE) 
+
+llm_translate(
+  .data,
+  col,
+  language,
+  pred_name = ".translation",
+  additional_prompt = ""
+)
+
+llm_vec_translate(x, language, additional_prompt = "", preview = FALSE)
 ```
 
 ## Arguments
@@ -46,22 +46,23 @@ llm_vec_translate(x, language, additional_prompt = "", preview = FALSE)
 
 
 ## Value
- `llm_translate` returns a `data.frame` or `tbl` object. `llm_vec_translate` returns a vector that is the same length as `x`. 
+`llm_translate` returns a `data.frame` or `tbl` object. `llm_vec_translate` returns a vector that is the same length as `x`.
 
 
 ## Examples
 ```{r}
- 
- 
-library(mall) 
- 
-data("reviews") 
- 
-llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE) 
- 
-# Pass the desired language to translate to 
-llm_translate(reviews, review, "spanish") 
- 
+
+
+library(mall)
+
+data("reviews")
+
+llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
+
+# Pass the desired language to translate to
+llm_translate(reviews, review, "spanish")
+
+
 ```
 
 

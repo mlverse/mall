@@ -15,26 +15,26 @@ source("../site/knitr-print.R")
 ## llm_sentiment
 
 ## Description
- Use a Large Language Model (LLM) to perform sentiment analysis from the provided text 
+Use a Large Language Model (LLM) to perform sentiment analysis from the provided text
 
 
 ## Usage
 ```r
- 
-llm_sentiment( 
-  .data, 
-  col, 
-  options = c("positive", "negative", "neutral"), 
-  pred_name = ".sentiment", 
-  additional_prompt = "" 
-) 
- 
-llm_vec_sentiment( 
-  x, 
-  options = c("positive", "negative", "neutral"), 
-  additional_prompt = "", 
-  preview = FALSE 
-) 
+
+llm_sentiment(
+  .data,
+  col,
+  options = c("positive", "negative", "neutral"),
+  pred_name = ".sentiment",
+  additional_prompt = ""
+)
+
+llm_vec_sentiment(
+  x,
+  options = c("positive", "negative", "neutral"),
+  additional_prompt = "",
+  preview = FALSE
+)
 ```
 
 ## Arguments
@@ -51,36 +51,37 @@ llm_vec_sentiment(
 
 
 ## Value
- `llm_sentiment` returns a `data.frame` or `tbl` object. `llm_vec_sentiment` returns a vector that is the same length as `x`. 
+`llm_sentiment` returns a `data.frame` or `tbl` object. `llm_vec_sentiment` returns a vector that is the same length as `x`.
 
 
 ## Examples
 ```{r}
- 
- 
-library(mall) 
- 
-data("reviews") 
- 
-llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE) 
- 
-llm_sentiment(reviews, review) 
- 
-# Use 'pred_name' to customize the new column's name 
-llm_sentiment(reviews, review, pred_name = "review_sentiment") 
- 
-# Pass custom sentiment options 
-llm_sentiment(reviews, review, c("positive", "negative")) 
- 
-# Specify values to return per sentiment 
-llm_sentiment(reviews, review, c("positive" ~ 1, "negative" ~ 0)) 
- 
-# For character vectors, instead of a data frame, use this function 
-llm_vec_sentiment(c("I am happy", "I am sad")) 
- 
-# To preview the first call that will be made to the downstream R function 
-llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE) 
- 
+
+
+library(mall)
+
+data("reviews")
+
+llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
+
+llm_sentiment(reviews, review)
+
+# Use 'pred_name' to customize the new column's name
+llm_sentiment(reviews, review, pred_name = "review_sentiment")
+
+# Pass custom sentiment options
+llm_sentiment(reviews, review, c("positive", "negative"))
+
+# Specify values to return per sentiment
+llm_sentiment(reviews, review, c("positive" ~ 1, "negative" ~ 0))
+
+# For character vectors, instead of a data frame, use this function
+llm_vec_sentiment(c("I am happy", "I am sad"))
+
+# To preview the first call that will be made to the downstream R function
+llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE)
+
+
 ```
 
 

@@ -15,21 +15,21 @@ source("../site/knitr-print.R")
 ## llm_classify
 
 ## Description
- Use a Large Language Model (LLM) to classify the provided text as one of the options provided via the `labels` argument. 
+Use a Large Language Model (LLM) to classify the provided text as one of the options provided via the `labels` argument.
 
 
 ## Usage
 ```r
- 
-llm_classify( 
-  .data, 
-  col, 
-  labels, 
-  pred_name = ".classify", 
-  additional_prompt = "" 
-) 
- 
-llm_vec_classify(x, labels, additional_prompt = "", preview = FALSE) 
+
+llm_classify(
+  .data,
+  col,
+  labels,
+  pred_name = ".classify",
+  additional_prompt = ""
+)
+
+llm_vec_classify(x, labels, additional_prompt = "", preview = FALSE)
 ```
 
 ## Arguments
@@ -46,45 +46,46 @@ llm_vec_classify(x, labels, additional_prompt = "", preview = FALSE)
 
 
 ## Value
- `llm_classify` returns a `data.frame` or `tbl` object. `llm_vec_classify` returns a vector that is the same length as `x`. 
+`llm_classify` returns a `data.frame` or `tbl` object. `llm_vec_classify` returns a vector that is the same length as `x`.
 
 
 ## Examples
 ```{r}
- 
- 
-library(mall) 
- 
-data("reviews") 
- 
-llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE) 
- 
-llm_classify(reviews, review, c("appliance", "computer")) 
- 
-# Use 'pred_name' to customize the new column's name 
-llm_classify( 
-  reviews, 
-  review, 
-  c("appliance", "computer"), 
-  pred_name = "prod_type" 
-) 
- 
-# Pass custom values for each classification 
-llm_classify(reviews, review, c("appliance" ~ 1, "computer" ~ 2)) 
- 
-# For character vectors, instead of a data frame, use this function 
-llm_vec_classify( 
-  c("this is important!", "just whenever"), 
-  c("urgent", "not urgent") 
-) 
- 
-# To preview the first call that will be made to the downstream R function 
-llm_vec_classify( 
-  c("this is important!", "just whenever"), 
-  c("urgent", "not urgent"), 
-  preview = TRUE 
-) 
- 
+
+
+library(mall)
+
+data("reviews")
+
+llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
+
+llm_classify(reviews, review, c("appliance", "computer"))
+
+# Use 'pred_name' to customize the new column's name
+llm_classify(
+  reviews,
+  review,
+  c("appliance", "computer"),
+  pred_name = "prod_type"
+)
+
+# Pass custom values for each classification
+llm_classify(reviews, review, c("appliance" ~ 1, "computer" ~ 2))
+
+# For character vectors, instead of a data frame, use this function
+llm_vec_classify(
+  c("this is important!", "just whenever"),
+  c("urgent", "not urgent")
+)
+
+# To preview the first call that will be made to the downstream R function
+llm_vec_classify(
+  c("this is important!", "just whenever"),
+  c("urgent", "not urgent"),
+  preview = TRUE
+)
+
+
 ```
 
 
