@@ -52,6 +52,7 @@
 llm_use <- function(
     backend = NULL,
     model = NULL,
+    output = "text",
     ...,
     .silent = FALSE,
     .cache = NULL,
@@ -120,6 +121,7 @@ llm_use <- function(
   m_defaults_set(
     backend = backend,
     model = model,
+    output = output,
     .cache = cache,
     ellmer_obj = ellmer_obj,
     ...
