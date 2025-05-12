@@ -60,6 +60,7 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
             chat = use.get("chat")
             ch = chat.chat(msg[0].get("content") + x, echo="none")
             out = ch.get_content()
+            chat.set_turns(list())
         if backend == "ollama":
             resp = ollama.chat(
                 model=use.get("model"),

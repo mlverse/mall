@@ -42,7 +42,7 @@ test_that("ellmer code is covered", {
       backend = ellmer_session,
       x = test_txt,
       prompt = list(list(content = "test"))
-      ),
+    ),
     test_txt
   )
   expect_snapshot(
@@ -54,9 +54,25 @@ test_that("ellmer code is covered", {
     )
   )
   expect_snapshot(
-   m_ellmer_chat()
+    m_ellmer_chat()
   )
 })
+
+temp_ellmer_obj <- function() {
+  list(
+    clone = function() {
+      list(
+        set_turns = function(...) {
+          list(
+            chat = function(x) {
+              NULL
+            }
+          )
+        }
+      )
+    }
+  )
+}
 
 test_that("ellmer code is covered - part II", {
   withr::with_envvar(
@@ -65,9 +81,8 @@ test_that("ellmer code is covered - part II", {
       m_defaults_reset()
       chat <- ellmer::chat_openai()
       llm_use(chat, .cache = "", .silent = TRUE)
-      m_defaults_set(ellmer_obj = list(chat = function(...) NULL))
+      m_defaults_set(ellmer_obj = temp_ellmer_obj())
       expect_null(m_ellmer_chat("test"))
     }
   )
 })
-

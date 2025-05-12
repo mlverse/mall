@@ -111,8 +111,7 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
         res <- m_cache_check(hash_args)
       }
       if (is.null(res)) {
-        args <- m_defaults_args()
-        res <- exec("m_ellmer_chat", !!! .args)
+        res <- exec("m_ellmer_chat", !!!.args)
         m_cache_record(.args, res, hash_args)
       }
       res
@@ -122,8 +121,10 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
 
 # Using a function so that it can be mocked in testing
 m_ellmer_chat <- function(...) {
-  args <- m_defaults_args()
-  args$ellmer_obj$chat(...)
+  defaults <- m_defaults_args()
+  ellmer_obj <- defaults[["ellmer_obj"]]
+  temp_ellmer <- ellmer_obj$clone()$set_turns(list())
+  temp_ellmer$chat(...)
 }
 
 # ------------------------------ Simulate --------------------------------------

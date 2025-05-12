@@ -2,7 +2,7 @@
 #' @description
 #' Allows us to specify the back-end provider, model to use during the current
 #' R session
-#' @param backend "ollama" or an `ellmer` `Chat` object. If using "ollama", 
+#' @param backend "ollama" or an `ellmer` `Chat` object. If using "ollama",
 #' `mall` will use is out-of-the-box integration with that back-end. Defaults
 #' to "ollama".
 #' @param .silent Avoids console output
@@ -39,12 +39,11 @@
 #'
 #' # Use .silent to avoid the print out
 #' llm_use(.silent = TRUE)
-#' 
+#'
 #' # Use an `ellmer` object
 #' library(ellmer)
 #' chat <- chat_openai(model = "gpt-4o")
 #' llm_use(chat)
-#' 
 #' }
 #' @returns A `mall_session` object
 #'
