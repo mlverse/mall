@@ -69,5 +69,3 @@ test_that("Chat error message", {
     }
   )
 })
-
-

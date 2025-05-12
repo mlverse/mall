@@ -95,9 +95,6 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
   } else {
     map_here <- map_chr
   }
-  # Clones the current ellmer object, and uses the clone to
-  # run the predictions. That way the history is not
-  temp_chat <- backend[["args"]][["ellmer_obj"]]$clone()
   map_here(
     x,
     \(x) {
@@ -126,9 +123,8 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
 m_ellmer_chat <- function(...) {
   defaults <- m_defaults_args()
   ellmer_obj <- defaults[["ellmer_obj"]]
-  temp_ellmer <- ellmer_obj$clone()
+  temp_ellmer <- ellmer_obj$clone()$set_turns(list())
   temp_ellmer$chat(...)
-  rm(temp_ellmer)
 }
 
 # ------------------------------ Simulate --------------------------------------
