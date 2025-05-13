@@ -57,10 +57,12 @@ llm_use <- function(
     .force = FALSE) {
   ellmer_obj <- NULL
   models <- list()
-  supplied <- sum(!is.null(backend), !is.null(model))
   not_init <- inherits(m_defaults_get(), "list")
-  if (supplied == 2) {
+  if (!is.null(backend) && !is.null(model)) {
     not_init <- FALSE
+  }
+  if(is.null(backend) && is.null(m_defaults_backend())) {
+    backend <- getOption(".mall_chat")
   }
   if (inherits(backend, "Chat")) {
     if (!is.null(model)) {
