@@ -96,9 +96,7 @@ The development version of `mall` lets you **use external LLMs such as
 package to integrate with the external LLM, and the 
 [`chatlas`](https://posit-dev.github.io/chatlas/) package to integrate in Python.
 
-## Get started
-
-### 1. Install `mall`
+## Install `mall` {#get-started}
 
 Install the package to get started:
 
@@ -132,11 +130,11 @@ pip install "mlverse-mall @ git+https://git@github.com/mlverse/mall.git#subdirec
 ```
 :::
 
-### 2. Setup LLM integration
+## Setup the LLM
 
 Choose one of the two following options to setup LLM connectivity:
 
-#### a. Local LLM, via Ollama {#local-llms}
+### Local LLMs, via Ollama {#local-llms}
 
 -   [Download Ollama from the official website](https://ollama.com/download)
 
@@ -172,7 +170,7 @@ using Llama 3.2 to test. To get that model you can run:
     ```
 :::
 
-#### b. Remote LLMs {#remote-llms}
+### Remote LLMs {#remote-llms}
 
 ::: {.panel-tabset group="language"}
 ## R
@@ -473,6 +471,8 @@ For more information and examples visit this function's [Python reference page](
 
 ## Model selection and settings
 
+#### Local LLMs via Ollama {#settings-local}
+
 You can set the model and its options to use when calling the LLM. In this case,
 we refer to options as model specific things that can be set, such as seed or 
 temperature.
@@ -507,7 +507,38 @@ reviews.llm.use("ollama", "llama3.2", options = dict(seed = 100))
 ```
 :::
 
-#### Results caching
+#### Remote LLMs
+
+The provider and model selection will be based on the chat object you create. 
+Any model related setting, such as temperature, seed and others, should be
+set at the time of the object creation as well.
+
+::: {.panel-tabset group="language"}
+## R
+
+```{r}
+#| eval: false
+library(mall)
+library(ellmer)
+chat <- chat_openai(model = "gpt-4o", seed = 100)
+llm_use(chat)
+```
+
+## Python
+
+```{python}
+#| eval: false
+import mall
+from chatlas import ChatOpenAI
+chat = ChatOpenAI(model = "gpt-4o",  seed= 100)
+data = mall.MallData
+reviews = data.reviews
+reviews.llm.use(chat)
+```
+:::
+
+
+## Results caching
 
 By default `mall` caches the requests and corresponding results from a given 
 LLM run. Each response is saved as individual JSON files. By default, the folder
