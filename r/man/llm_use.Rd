@@ -69,6 +69,5 @@ llm_use(.silent = TRUE)
 library(ellmer)
 chat <- chat_openai(model = "gpt-4o")
 llm_use(chat)
-
 }
 }
