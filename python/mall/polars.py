@@ -1,3 +1,4 @@
+from ollama import Client
 from chatlas import Chat
 import polars as pl
 
@@ -45,9 +46,10 @@ class MallFrame:
 
         Parameters
         ------
-        backend : str | Chat
-            The name of the backend to use, or a `chatlas` chat object. 
-            At the beginning of the session it defaults to "ollama". 
+        backend : str | Chat | Client
+            The name of the backend to use, or an Ollama Client object,
+            or a `chatlas` Chat object.
+            At the beginning of the session it defaults to "ollama".
             If passing `""`, it will remain unchanged
         model : str
             The name of the model tha the backend should use. At the beginning
@@ -87,7 +89,7 @@ class MallFrame:
         ```
 
         ```{python}
-        # Use a `chatlas` object 
+        # Use a `chatlas` object
         from chatlas import ChatOpenAI
         chat = ChatOpenAI()
         reviews.llm.use(chat)
@@ -98,6 +100,10 @@ class MallFrame:
             self._use.update(dict(chat=backend))
             backend = ""
             model = ""
+        if isinstance(backend, Client):
+            self._use.update(dict(backend="ollama-client"))
+            self._use.update(dict(client=backend))
+            backend = ""
         if backend != "":
             self._use.update(dict(backend=backend))
         if model != "":

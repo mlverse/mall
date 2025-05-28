@@ -54,15 +54,19 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
 
         hash_call = build_hash(call)
         cache = cache_check(hash_call, use)
-
     if cache == "":
         if backend == "chatlas":
             chat = use.get("chat")
             ch = chat.chat(msg[0].get("content") + x, echo="none")
             out = ch.get_content()
             chat.set_turns(list())
-        if backend == "ollama":
-            resp = ollama.chat(
+        if backend == "ollama" or backend == "ollama-client":
+            if backend == "ollama":
+                chat_fun = ollama.chat
+            else:
+                client = use.get("client")
+                chat_fun = client.chat
+            resp = chat_fun(
                 model=use.get("model"),
                 messages=build_msg(x, msg),
                 options=use.get("options"),

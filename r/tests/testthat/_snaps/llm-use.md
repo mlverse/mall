@@ -26,7 +26,7 @@
       
       -- mall session object 
       Backend: ellmer
-      LLM session: model:gpt-4o
+      LLM session: model:gpt-4.1
 
 # Ensures empty llm_use works with Chat
 
@@ -36,5 +36,5 @@
       
       -- mall session object 
       Backend: ellmer
-      LLM session: model:gpt-4o
+      LLM session: model:gpt-4.1
 

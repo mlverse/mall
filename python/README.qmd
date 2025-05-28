@@ -7,56 +7,64 @@ execute:
 <img src="https://mlverse.github.io/mall/site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
 
 <!-- badges: start -->
-[![Python tests](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml)
-[![Code coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mlverse/mall?branch=main)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+
+[![PyPi](https://img.shields.io/pypi/v/mlverse-mall)](https://pypi.org/project/mlverse-mall/) [![Python tests](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml/badge.svg)](https://github.com/mlverse/mall/actions/workflows/python-tests.yaml) \| [![Package coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https://app.codecov.io/gh/mlverse/mall?branch=main)
+
 <!-- badges: end -->
 
 
+Use Large Language Models (LLM) to run Natural Language Processing (NLP) 
+operations against your data. It takes advantage of the LLMs general language
+training in order to get the predictions, thus removing the need to train a new
+NLP model. `mall` is available for R and Python.
 
-Run multiple LLM predictions against a data frame. The predictions are processed 
-row-wise over a specified column. It works using a pre-determined one-shot prompt,
-along with the current row's content. `mall` has been implemented for both R
-and Python. The prompt that is use will depend of the type of analysis needed. 
+It works by running multiple LLM predictions against your data. The predictions
+are processed row-wise over a specified column. It relies on the "one-shot" 
+prompt technique to instruct the LLM on a particular NLP operation to perform. 
+The package includes prompts to perform the following specific NLP operations:
 
-Currently, the included prompts perform the following: 
+-   [Sentiment analysis](#sentiment)
+-   [Text summarizing](#summarize)
+-   [Classify text](#classify)
+-   [Extract one, or several](#extract), specific pieces information from the text
+-   [Translate text](#translate)
+-   [Verify that something is true](#verify) about the text (binary)
 
-- [Sentiment analysis](#sentiment)
-- [Text summarizing](#summarize)
-- [Classify text](#classify)
-- [Extract one, or several](#extract), specific pieces information from the text
-- [Translate text](#translate)
-- [Verify that something it true](#verify) about the text (binary)
-- [Custom prompt](#custom-prompt)
+For other NLP operations, `mall` offers the ability for you to [write your own prompt](#custom-prompt).
 
-This package is inspired by the SQL AI functions now offered by vendors such as
-[Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html) 
-and Snowflake.  `mall` uses [Ollama](https://ollama.com/) to  interact with LLMs 
-installed  locally. 
-
-For **Python**, `mall` is a library extension to [Polars](https://pola.rs/). To
+`mall` is a library extension to [Polars](https://pola.rs/). To
 interact with Ollama, it uses the official
 [Python library](https://github.com/ollama/ollama-python).
 
 ```python
 reviews.llm.sentiment("review")
 ```
-
 ## Motivation
 
-We want to new find ways to help data scientists use LLMs in their daily work. 
-Unlike the familiar interfaces, such as chatting and code completion, this interface
-runs your text data directly against the LLM.  
+We want to new find new ways to help data scientists use LLMs in their daily work.
+Unlike the familiar interfaces, such as chatting and code completion, this 
+interface runs your text data directly against the LLM. This package is inspired
+by the SQL AI functions now offered by vendors such as [Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html) 
+and Snowflake. 
 
-The LLM's flexibility, allows for it to adapt to the subject of your data, and 
-provide surprisingly accurate predictions. This saves the data scientist the
-need to write and tune an NLP model. 
+The LLM's flexibility, allows for it to adapt to the subject of your data, and
+provide surprisingly accurate predictions. This saves the data scientist the 
+need to write and tune an NLP model.
 
 In recent times, the capabilities of LLMs that can run locally in your computer 
-have increased dramatically. This means that these sort of analysis can run
-in your machine with good accuracy. Additionally, it makes it possible to take
-advantage of LLM's at your institution, since the data will not leave the
-corporate network. 
+have increased dramatically.  This means that these sort of analysis can run in 
+your machine with good accuracy. It also makes it possible to take 
+advantage of LLMs at your institution, since the data will not leave the 
+corporate network. Additionally, LLM management and integration platforms, such
+as [Ollama](https://ollama.com/), are now very easy to setup and use. `mall`
+uses Ollama as to interact with local LLMs.
+
+The development version of `mall` lets you **use external LLMs such as
+[OpenAI](https://openai.com/), [Gemini](https://gemini.google.com/) and
+[Anthropic](https://www.anthropic.com/)**. In R, `mall` uses the
+[`ellmer`](https://ellmer.tidyverse.org/index.html)
+package to integrate with the external LLM, and the 
+[`chatlas`](https://posit-dev.github.io/chatlas/) package to integrate in Python.
 
 ## Get started
 
