@@ -21,7 +21,7 @@ m_backend_prompt.mall_llama3.2 <- function(backend, additional = "") {
         role = "user",
         content = glue(paste(
           "You are a helpful text extraction engine.",
-          "Extract the {col_labels} being referred to on the text.",
+          "Extract the {col_labels} being referred to in the text.",
           "I expect {no_labels} item{plural} exactly.",
           "No capitalization. No explanations.",
           "{text_multi}",
@@ -81,7 +81,7 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
           role = "user",
           content = glue(paste(
             "You are a helpful summarization engine.",
-            "Your answer will contain no no capitalization and no explanations.",
+            "Your answer will contain no capitalization and no explanations.",
             "Return no more than {max_words} words.",
             "{additional}",
             "The answer is the summary of the following text:\n{{x}}"
@@ -122,7 +122,7 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
           role = "user",
           content = glue(paste(
             "You are a helpful text extraction engine.",
-            "Extract the {col_labels} being referred to on the text.",
+            "Extract the {col_labels} being referred to in the text.",
             "I expect {no_labels} item{plural} exactly.",
             "No capitalization. No explanations.",
             "{text_multi}",
@@ -152,7 +152,7 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
           role = "user",
           content = glue(paste(
             "You are a helpful text analysis engine.",
-            "Determine this is true ",
+            "Determine if this is true ",
             "'{what}'.",
             "No capitalization. No explanations.",
             "{additional}",
