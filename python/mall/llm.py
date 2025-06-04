@@ -6,7 +6,7 @@ import ollama
 import json
 import os
 
-def use_llm(backend="", model="", _cache="_mall_cache", **kwargs):
+def llm_use(backend="", model="", _cache="_mall_cache", **kwargs):
     out = dict()
     if isinstance(backend, Chat):
         out.update(dict(backend="chatlas"))
@@ -25,7 +25,7 @@ def use_llm(backend="", model="", _cache="_mall_cache", **kwargs):
     out.update(dict(kwargs))
     return out
 
-def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
+def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
     if valid_resps == "":
         valid_resps = []
     valid_resps = valid_output(valid_resps)
