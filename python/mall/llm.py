@@ -1,9 +1,29 @@
+from ollama import Client
+from chatlas import Chat
 import polars as pl
+import hashlib
 import ollama
 import json
-import hashlib
 import os
 
+def use_llm(backend="", model="", _cache="_mall_cache", **kwargs):
+    out = dict()
+    if isinstance(backend, Chat):
+        out.update(dict(backend="chatlas"))
+        out.update(dict(chat=backend))
+        backend = ""
+        model = ""
+    if isinstance(backend, Client):
+        out.update(dict(backend="ollama-client"))
+        out.update(dict(client=backend))
+        backend = ""
+    if backend != "":
+        out.update(dict(backend=backend))
+    if model != "":
+        out.update(dict(model=model))
+    out.update(dict(_cache=_cache))
+    out.update(dict(kwargs))
+    return out
 
 def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
     if valid_resps == "":

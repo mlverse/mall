@@ -11,7 +11,10 @@ from mall.prompt import (
     custom,
     verify,
 )
-from mall.llm import map_call
+from mall.llm import (
+    use_llm,
+    map_call    
+    )
 
 
 @pl.api.register_dataframe_namespace("llm")
@@ -95,21 +98,12 @@ class MallFrame:
         reviews.llm.use(chat)
         ```
         """
-        if isinstance(backend, Chat):
-            self._use.update(dict(backend="chatlas"))
-            self._use.update(dict(chat=backend))
-            backend = ""
-            model = ""
-        if isinstance(backend, Client):
-            self._use.update(dict(backend="ollama-client"))
-            self._use.update(dict(client=backend))
-            backend = ""
-        if backend != "":
-            self._use.update(dict(backend=backend))
-        if model != "":
-            self._use.update(dict(model=model))
-        self._use.update(dict(_cache=_cache))
-        self._use.update(dict(kwargs))
+        self._use = use_llm(
+            backend=backend, 
+            model=model, 
+            _cache=_cache, 
+            **kwargs
+            )
         return self._use
 
     def sentiment(
