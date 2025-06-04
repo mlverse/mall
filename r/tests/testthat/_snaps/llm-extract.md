@@ -8,7 +8,7 @@
       [1] "user"
       
       [[1]]$content
-      You are a helpful text extraction engine. Extract the product being referred to on the text. I expect 1 item exactly. No capitalization. No explanations.   The answer is based on the following text:
+      You are a helpful text extraction engine. Extract the product being referred to in the text. I expect 1 item exactly. No capitalization. No explanations.   The answer is based on the following text:
       {x}
       
       
