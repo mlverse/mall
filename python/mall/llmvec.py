@@ -10,7 +10,6 @@ from mall.prompt import (
 
 from mall.llm import llm_use, llm_loop
 
-
 class LlmVec:
     def __init__(self, backend="", model="", _cache="_mall_cache", **kwargs):
         self._use = llm_use(backend=backend, model=model, _cache=_cache, **kwargs)
@@ -30,4 +29,19 @@ class LlmVec:
             x=x,
             msg=summarize(max_words, additional=additional),
             use=self._use,
+        )
+
+    def translate(self, x, language="", additional="") -> list:
+        return llm_loop(
+            x=x,
+            msg=translate(language, additional=additional),
+            use=self._use,
+        )
+
+    def classify(self, x, labels="", additional="") -> list:
+        return llm_loop(
+            x=x,
+            msg=classify(labels, additional=additional),
+            use=self._use, 
+            valid_resps=labels
         )
