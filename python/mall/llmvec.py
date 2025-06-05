@@ -18,10 +18,16 @@ class LlmVec:
     def sentiment(
         self, x, options=["positive", "negative", "neutral"], additional=""
     ) -> list:
-        out = llm_loop(
+        return llm_loop(
             x=x,
             msg=sentiment(options, additional=additional),
             use=self._use,
             valid_resps=options,
         )
-        return out
+
+    def summarize(self, x, max_words=10, additional="") -> list:
+        return llm_loop(
+            x=x,
+            msg=summarize(max_words, additional=additional),
+            use=self._use,
+        )
