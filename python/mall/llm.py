@@ -61,6 +61,8 @@ def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
 
 
 def llm_loop(x, msg, use, valid_resps="", convert=None):
+    if isinstance(x, list) == False:
+        raise TypeError("`x` is not a list object")
     out = list()
     for row in x:
         out.append(
