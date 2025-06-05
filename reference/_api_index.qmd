@@ -1,9 +1,17 @@
 # Function reference {.doc .doc-index}
 
-## mall
+## Polars
 
 
 
 | | |
 | --- | --- |
 | [MallFrame](MallFrame.qmd#mall.MallFrame) | Extension to Polars that add ability to use |
+
+## Vectors
+
+
+
+| | |
+| --- | --- |
+| [LlmVec](LlmVec.qmd#mall.LlmVec) | Class that adds ability to use an LLM to run batch predictions |

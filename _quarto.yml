@@ -59,10 +59,15 @@ quartodoc:
   out_index: _api_index.qmd
   dynamic: true
   sections:
-    - title: mall
+    - title: Polars
       desc: ''
       contents:
       - name: MallFrame
+    - title: Vectors
+      desc: ''
+      contents:
+      - name: LlmVec
+
 
 pkgsite: 
     dir: r

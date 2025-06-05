@@ -75,7 +75,7 @@ class LlmVec:
         ------
 
         ```{python}
-        llm.summarize('This has been the best TV I've ever used. Great screen, and sound.', max_words = 5)
+        llm.summarize(['This has been the best TV Ive ever used. Great screen, and sound.'], max_words = 5)
         ```
         """        
         return llm_loop(
@@ -103,7 +103,7 @@ class LlmVec:
         ------
 
         ```{python}
-        llm.summarize('This has been the best TV I've ever used. Great screen, and sound.', language = 'spanish')
+        llm.translate(['This has been the best TV Ive ever used. Great screen, and sound.'], language = 'spanish')
         ```
 
         """        
@@ -133,7 +133,7 @@ class LlmVec:
         ------
 
         ```{python}
-        llm.classify(["this is important!", "there is no rush"], ["urgent", "not urgent"])
+        llm.classify(['this is important!', 'there is no rush'], ['urgent', 'not urgent'])
         ```
         """        
         return llm_loop(
@@ -162,7 +162,7 @@ class LlmVec:
         ------
 
         ```{python}
-        llm.extract(["bob smith, 123 3rd street"], labels=["name", "address"])
+        llm.extract(['bob smith, 123 3rd street'], labels=['name', 'address'])
         ```
         """        
         return llm_loop(x=x, msg=extract(labels, additional=additional), use=self._use)
