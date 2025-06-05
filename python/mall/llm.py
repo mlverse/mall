@@ -6,6 +6,7 @@ import ollama
 import json
 import os
 
+
 def llm_use(backend="", model="", _cache="_mall_cache", **kwargs):
     out = dict()
     if isinstance(backend, Chat):
@@ -24,6 +25,7 @@ def llm_use(backend="", model="", _cache="_mall_cache", **kwargs):
     out.update(dict(_cache=_cache))
     out.update(dict(kwargs))
     return out
+
 
 def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
     if valid_resps == "":
@@ -56,6 +58,15 @@ def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
         .alias(pred_name)
     )
     return df
+
+
+def llm_loop(x, msg, use, valid_resps="", convert=None):
+    out = list()
+    for row in x:
+        out.append(
+            llm_call(x=row, msg=msg, use=use, valid_resps=valid_resps, convert=convert)
+        )
+    return out
 
 
 def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):

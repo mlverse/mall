@@ -11,10 +11,7 @@ from mall.prompt import (
     custom,
     verify,
 )
-from mall.llm import (
-    llm_use,
-    llm_map    
-    )
+from mall.llm import llm_use, llm_map
 
 
 @pl.api.register_dataframe_namespace("llm")
@@ -98,12 +95,7 @@ class MallFrame:
         reviews.llm.use(chat)
         ```
         """
-        self._use = llm_use(
-            backend=backend, 
-            model=model, 
-            _cache=_cache, 
-            **kwargs
-            )
+        self._use = llm_use(backend=backend, model=model, _cache=_cache, **kwargs)
         return self._use
 
     def sentiment(
