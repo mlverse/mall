@@ -10,6 +10,7 @@ from mall.prompt import (
 
 from mall.llm import llm_use, llm_loop
 
+
 class LlmVec:
     def __init__(self, backend="", model="", _cache="_mall_cache", **kwargs):
         self._use = llm_use(backend=backend, model=model, _cache=_cache, **kwargs)
@@ -42,6 +43,21 @@ class LlmVec:
         return llm_loop(
             x=x,
             msg=classify(labels, additional=additional),
-            use=self._use, 
-            valid_resps=labels
+            use=self._use,
+            valid_resps=labels,
+        )
+
+    def extract(self, x, labels="", additional="") -> list:
+        return llm_loop(x=x, msg=extract(labels, additional=additional), use=self._use)
+
+    def custom(self, x, prompt="", valid_resps="") -> list:
+        return llm_loop(x=x, msg=custom(prompt), use=self._use, valid_resps=labels)
+
+    def verify(self, x, what="", yes_no=[1, 0], additional="") -> list:
+        return llm_loop(
+            x=x,
+            msg=verify(what, additional=additional),
+            use=self._use,
+            valid_resps=yes_no,
+            convert=dict(yes=yes_no[0], no=yes_no[1]),
         )
