@@ -14,4 +14,4 @@
 
 | | |
 | --- | --- |
-| [LlmVec](LlmVec.qmd#mall.LlmVec) | Class that adds ability to use an LLM to run batch predictions |
+| [LLMVec](LLMVec.qmd#mall.LLMVec) | Class that adds ability to use an LLM to run batch predictions |

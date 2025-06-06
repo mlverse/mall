@@ -81,7 +81,7 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
         messages=build_msg(x, msg),
         options=use.get("options"),
     )
-
+    out = ""
     cache = ""
     if use.get("_cache") != "":
 

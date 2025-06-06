@@ -11,16 +11,16 @@ from mall.prompt import (
 from mall.llm import llm_use, llm_loop
 
 
-class LlmVec:
+class LLMVec:
     """Class that adds ability to use an LLM to run batch predictions
 
     ```{python}
     from chatlas import ChatOllama
-    from mall import LlmVec
+    from mall import LLMVec
 
     chat = ChatOllama(model = "llama3.2")
     
-    llm = LlmVec(chat)    
+    llm = LLMVec(chat)    
     ```
     """
     def __init__(self, backend="", model="", _cache="_mall_cache", **kwargs):

@@ -66,7 +66,7 @@ quartodoc:
     - title: Vectors
       desc: ''
       contents:
-      - name: LlmVec
+      - name: LLMVec
 
 
 pkgsite: 
