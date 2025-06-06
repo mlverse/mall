@@ -5,6 +5,11 @@
 Class that adds ability to use an LLM to run batch predictions
 
 ```{python}
+#| include: false
+import mall
+```
+
+```{python}
 from chatlas import ChatOllama
 from mall import LlmVec
 

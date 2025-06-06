@@ -8,7 +8,7 @@
 
 <img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right" />
 
-[MallFrame](MallFrame.qmd#mall.MallFrame) 
+### MallFrame
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to Polars that add ability to use 
 an LLM to run batch predictions over a data frame
@@ -23,6 +23,23 @@ an LLM to run batch predictions over a data frame
 | [translate](MallFrame.qmd#mall.MallFrame.translate) | Translate text into another language. |
 | [use](MallFrame.qmd#mall.MallFrame.use) | Define the model, backend, and other options to use to |
 | [verify](MallFrame.qmd#mall.MallFrame.verify) | Check to see if something is true about the text. |
+
+<br/><br/>
+
+### LlmVec
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class that adds ability to use an LLM 
+to run batch predictions
+
+| Name | Description |
+| --- | --- |
+| [classify](LlmVec.qmd#mall.LlmVec.classify) | Classify text into specific categories. |
+| [custom](LlmVec.qmd#mall.LlmVec.custom) | Provide the full prompt that the LLM will process. |
+| [extract](LlmVec.qmd#mall.LlmVec.extract) | Pull a specific label from the text. |
+| [sentiment](LlmVec.qmd#mall.LlmVec.sentiment) | Use an LLM to run a sentiment analysis |
+| [summarize](LlmVec.qmd#mall.LlmVec.summarize) | Summarize the text down to a specific number of words. |
+| [translate](LlmVec.qmd#mall.LlmVec.translate) | Translate text into another language. |
+| [verify](LlmVec.qmd#mall.LlmVec.verify) | Check to see if something is true about the text. |
 
 :::
   
