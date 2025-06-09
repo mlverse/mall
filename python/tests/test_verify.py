@@ -26,3 +26,10 @@ def pull(df, col):
     for i in df.select(col).to_dicts():
         out.append(i.get(col))
     return out
+
+def test_verify_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.verify(["a"], "this is the verify test", ["a", "b"])
+    assert x == ['a']
+
