@@ -25,3 +25,9 @@ def test_summarize_max():
         == "You are a helpful summarization engine. Your answer will contain no no capitalization and no explanations. Return no more than 5 words.   The answer is the summary of the following text:\n{}"
     )
     shutil.rmtree("_test_cache", ignore_errors=True)
+
+def test_summarize_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.summarize(["a"])
+    assert x == ['a']

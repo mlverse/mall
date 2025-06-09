@@ -48,3 +48,9 @@ def pull(df, col):
     for i in df.select(col).to_dicts():
         out.append(i.get(col))
     return out
+
+def test_sentiment_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.sentiment(["a"], ["a"])
+    assert x == ['a']

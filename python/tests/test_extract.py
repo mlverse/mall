@@ -44,3 +44,9 @@ def test_extract_expand():
     x = df.llm.extract("x", ["a", "b"], expand_cols=True)
     assert x["a"][0] == "x "
     shutil.rmtree("_test_cache", ignore_errors=True)
+
+def test_extract_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.extract(["a"], ["a"])
+    assert x == ['a']

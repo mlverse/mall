@@ -11,3 +11,9 @@ def test_custom_prompt():
     x = df.llm.custom("x", "hello")
     assert x["custom"][0] == "hello: \n{}"
     shutil.rmtree("_test_cache", ignore_errors=True)
+
+def test_custom_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.custom(["a"], "hello")
+    assert x == ['a']

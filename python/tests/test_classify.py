@@ -26,3 +26,9 @@ def pull(df, col):
     for i in df.select(col).to_dicts():
         out.append(i.get(col))
     return out
+
+def test_classify_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.classify(["a"], ["a", "b"])
+    assert x == ['a']
