@@ -14,3 +14,9 @@ def test_translate_prompt():
         == "You are a helpful translation engine. You will return only the translation text, no explanations. The target language to translate to is: spanish.   The answer is the translation of the following text:\n{}"
     )
     shutil.rmtree("_test_cache", ignore_errors=True)
+
+def test_translate_vec():
+    from mall import LLMVec
+    llm = LLMVec("test", "echo")
+    x = llm.translate(["a"], "spanish")
+    assert x == ['a']
