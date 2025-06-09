@@ -14,3 +14,11 @@ def test_ollama(monkeypatch):
     df.llm.use("ollama", "llama3.2", _cache="")
     x = df.llm.summarize("x")
     assert x["summary"][0] == "test"
+
+def test_ollama_client():
+    from ollama import Client
+    client = Client()
+    df = pl.DataFrame(dict(x="x"))
+    df.llm.use(client, _cache="")
+    use = df.llm._use
+    assert use.get("backend") == "ollama-client"
