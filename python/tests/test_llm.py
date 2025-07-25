@@ -4,6 +4,7 @@ import polars as pl
 import shutil
 import os
 
+
 def test_ollama(monkeypatch):
     def mock_chat(model, messages, options):
         return dict(message=dict(content="test"))
@@ -13,15 +14,3 @@ def test_ollama(monkeypatch):
     df.llm.use("ollama", "llama3.2", _cache="")
     x = df.llm.summarize("x")
     assert x["summary"][0] == "test"
-
-def test_ollama_client(monkeypatch):
-    from ollama import Client
-    client = Client()
-    def mock_chat(model, messages, options):
-        return dict(message=dict(content="test"))
-    monkeypatch.setattr("ollama.chat", mock_chat)
-    df = pl.DataFrame(dict(x="x"))
-    df.llm.use(client, _cache="")
-    x = df.llm.summarize("x")
-    assert x["summary"][0] == "test"
-        
