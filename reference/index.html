@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,14 +37,14 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0a9e2e8c93f85fd46be6fa193c1ee877.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-7d6fd7f1e79af9c9b90bfefbddea04a0.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../site_libs/bootstrap/bootstrap-0a9e2e8c93f85fd46be6fa193c1ee877.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-1e1c5eb910423ed4208708576c076a5d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-5e0fdcd07538ff982c44f52f277e6bc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-1e1c5eb910423ed4208708576c076a5d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -341,7 +341,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p><img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right"></p>
-<p><a href="../reference/MallFrame.html#mall.MallFrame">MallFrame</a></p>
+<section id="mallframe" class="level3">
+<h3 class="anchored" data-anchor-id="mallframe">MallFrame</h3>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to Polars that add ability to use an LLM to run batch predictions over a data frame</p>
 <table class="caption-top table">
 <thead>
@@ -385,6 +386,50 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<p><br><br></p>
+</section>
+<section id="llmvec" class="level3">
+<h3 class="anchored" data-anchor-id="llmvec">LLMVec</h3>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class that adds ability to use an LLM to run batch predictions</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="LLMVec.qmd#mall.LLMVec.classify">classify</a></td>
+<td>Classify text into specific categories.</td>
+</tr>
+<tr class="even">
+<td><a href="LLMVec.qmd#mall.LLMVec.custom">custom</a></td>
+<td>Provide the full prompt that the LLM will process.</td>
+</tr>
+<tr class="odd">
+<td><a href="LLMVec.qmd#mall.LLMVec.extract">extract</a></td>
+<td>Pull a specific label from the text.</td>
+</tr>
+<tr class="even">
+<td><a href="LLMVec.qmd#mall.LLMVec.sentiment">sentiment</a></td>
+<td>Use an LLM to run a sentiment analysis</td>
+</tr>
+<tr class="odd">
+<td><a href="LLMVec.qmd#mall.LLMVec.summarize">summarize</a></td>
+<td>Summarize the text down to a specific number of words.</td>
+</tr>
+<tr class="even">
+<td><a href="LLMVec.qmd#mall.LLMVec.translate">translate</a></td>
+<td>Translate text into another language.</td>
+</tr>
+<tr class="odd">
+<td><a href="LLMVec.qmd#mall.LLMVec.verify">verify</a></td>
+<td>Check to see if something is true about the text.</td>
+</tr>
+</tbody>
+</table>
+</section>
 </div>
 </div>
 </div>
