@@ -91,9 +91,17 @@ m_ollama_tokens <- function() {
 m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
   if (preview) {
     x <- head(x, 1)
-    map_here <- map
+    return(res)
   } else {
-    map_here <- map_chr
+    #map_here <- map_chr
+    defaults <- m_defaults_args()
+    ellmer_obj <- defaults[["ellmer_obj"]]
+    prompt <- prompt[[1]][["content"]]
+    prompt <- gsub("\\{", "\\{\\{", prompt)
+    prompt <- gsub("\\}", "\\}\\}", prompt)
+    prompts <- ellmer::interpolate(prompt, x = x)
+    res <- ellmer::parallel_chat_text(ellmer_obj, prompts)
+    return(res)
   }
   map_here(
     x,
