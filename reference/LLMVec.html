@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>index – mall</title>
+<title>llmvec – mall</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -77,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../site/styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -279,7 +314,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="../reference/index.html" aria-current="page"> 
+    <a class="nav-link" href="../reference/index.html"> 
 <span class="menu-text">Reference</span></a>
   </li>  
 </ul>
@@ -301,49 +336,59 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#methods" id="toc-methods" class="nav-link active" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#mall.LLMVec.classify" id="toc-mall.LLMVec.classify" class="nav-link" data-scroll-target="#mall.LLMVec.classify">classify</a></li>
+  <li><a href="#mall.LLMVec.custom" id="toc-mall.LLMVec.custom" class="nav-link" data-scroll-target="#mall.LLMVec.custom">custom</a></li>
+  <li><a href="#mall.LLMVec.extract" id="toc-mall.LLMVec.extract" class="nav-link" data-scroll-target="#mall.LLMVec.extract">extract</a></li>
+  <li><a href="#mall.LLMVec.sentiment" id="toc-mall.LLMVec.sentiment" class="nav-link" data-scroll-target="#mall.LLMVec.sentiment">sentiment</a></li>
+  <li><a href="#mall.LLMVec.summarize" id="toc-mall.LLMVec.summarize" class="nav-link" data-scroll-target="#mall.LLMVec.summarize">summarize</a></li>
+  <li><a href="#mall.LLMVec.translate" id="toc-mall.LLMVec.translate" class="nav-link" data-scroll-target="#mall.LLMVec.translate">translate</a></li>
+  <li><a href="#mall.LLMVec.verify" id="toc-mall.LLMVec.verify" class="nav-link" data-scroll-target="#mall.LLMVec.verify">verify</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
 
-
-
-
-<div class="tabset-margin-container"></div><div class="panel-tabset" data-group="language">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Python</a></li></ul>
-<div class="tab-content" data-group="language">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p><img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right"></p>
-<section id="llm" class="level3">
-<h3 class="anchored" data-anchor-id="llm">LLM</h3>
-<p><a href="../reference/llm_classify.html">llm_classify()</a> <a href="../reference/llm_classify.html">llm_vec_classify()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categorize data as one of options given</p>
-<p><a href="../reference/llm_custom.html">llm_custom()</a> <a href="../reference/llm_custom.html">llm_vec_custom()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Send a custom prompt to the LLM</p>
-<p><a href="../reference/llm_extract.html">llm_extract()</a> <a href="../reference/llm_extract.html">llm_vec_extract()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extract entities from text</p>
-<p><a href="../reference/llm_sentiment.html">llm_sentiment()</a> <a href="../reference/llm_sentiment.html">llm_vec_sentiment()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sentiment analysis</p>
-<p><a href="../reference/llm_summarize.html">llm_summarize()</a> <a href="../reference/llm_summarize.html">llm_vec_summarize()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Summarize text</p>
-<p><a href="../reference/llm_translate.html">llm_translate()</a> <a href="../reference/llm_translate.html">llm_vec_translate()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Translates text to a specific language</p>
-<p><a href="../reference/llm_verify.html">llm_verify()</a> <a href="../reference/llm_verify.html">llm_vec_verify()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verify if a statement about the text is true or not</p>
-<p><a href="../reference/llm_use.html">llm_use()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specify the model to use</p>
-</section>
-<section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data">Data</h3>
-<p><a href="../reference/reviews.html">reviews()</a></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mini reviews data set</p>
-</section>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">LLMVec</h1>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p><img src="../site/images/favicon/apple-touch-icon-76x76.png" style="float:right"></p>
-<section id="mallframe" class="level3">
-<h3 class="anchored" data-anchor-id="mallframe">MallFrame</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension to Polars that add ability to use an LLM to run batch predictions over a data frame</p>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>LLMVec(backend<span class="op">=</span><span class="st">''</span>, model<span class="op">=</span><span class="st">''</span>, _cache<span class="op">=</span><span class="st">'_mall_cache'</span>, <span class="op">**</span>kwargs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Class that adds ability to use an LLM to run batch predictions</p>
+<div id="10cc4851" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> chatlas <span class="im">import</span> ChatOllama</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mall <span class="im">import</span> LLMVec</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>chat <span class="op">=</span> ChatOllama(model <span class="op">=</span> <span class="st">"llama3.2"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>llm <span class="op">=</span> LLMVec(chat)    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -353,88 +398,391 @@ ul.task-list li input[type="checkbox"] {
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.classify">classify</a></td>
+<td><a href="#mall.LLMVec.classify">classify</a></td>
 <td>Classify text into specific categories.</td>
 </tr>
 <tr class="even">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.custom">custom</a></td>
+<td><a href="#mall.LLMVec.custom">custom</a></td>
 <td>Provide the full prompt that the LLM will process.</td>
 </tr>
 <tr class="odd">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.extract">extract</a></td>
+<td><a href="#mall.LLMVec.extract">extract</a></td>
 <td>Pull a specific label from the text.</td>
 </tr>
 <tr class="even">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.sentiment">sentiment</a></td>
+<td><a href="#mall.LLMVec.sentiment">sentiment</a></td>
 <td>Use an LLM to run a sentiment analysis</td>
 </tr>
 <tr class="odd">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.summarize">summarize</a></td>
+<td><a href="#mall.LLMVec.summarize">summarize</a></td>
 <td>Summarize the text down to a specific number of words.</td>
 </tr>
 <tr class="even">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.translate">translate</a></td>
+<td><a href="#mall.LLMVec.translate">translate</a></td>
 <td>Translate text into another language.</td>
 </tr>
 <tr class="odd">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.use">use</a></td>
-<td>Define the model, backend, and other options to use to</td>
-</tr>
-<tr class="even">
-<td><a href="../reference/MallFrame.html#mall.MallFrame.verify">verify</a></td>
+<td><a href="#mall.LLMVec.verify">verify</a></td>
 <td>Check to see if something is true about the text.</td>
 </tr>
 </tbody>
 </table>
-<p><br><br></p>
-</section>
-<section id="llmvec" class="level3">
-<h3 class="anchored" data-anchor-id="llmvec">LLMVec</h3>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class that adds ability to use an LLM to run batch predictions</p>
+<section id="mall.LLMVec.classify" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.classify">classify</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>LLMVec.classify(x, labels<span class="op">=</span><span class="st">''</span>, additional<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Classify text into specific categories.</p>
+<section id="parameters" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters">Parameters</h4>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 5%">
+<col style="width: 79%">
+<col style="width: 7%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Name</th>
+<th>Type</th>
 <th>Description</th>
+<th>Default</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.classify">classify</a></td>
-<td>Classify text into specific categories.</td>
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
 </tr>
 <tr class="even">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.custom">custom</a></td>
-<td>Provide the full prompt that the LLM will process.</td>
+<td>labels</td>
+<td>list</td>
+<td>A list or a DICT object that defines the categories to classify the text as. It will return one of the provided labels.</td>
+<td><code>''</code></td>
 </tr>
 <tr class="odd">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.extract">extract</a></td>
-<td>Pull a specific label from the text.</td>
-</tr>
-<tr class="even">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.sentiment">sentiment</a></td>
-<td>Use an LLM to run a sentiment analysis</td>
-</tr>
-<tr class="odd">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.summarize">summarize</a></td>
-<td>Summarize the text down to a specific number of words.</td>
-</tr>
-<tr class="even">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.translate">translate</a></td>
-<td>Translate text into another language.</td>
-</tr>
-<tr class="odd">
-<td><a href="../reference/LLMVec.html#mall.LLMVec.verify">verify</a></td>
-<td>Check to see if something is true about the text.</td>
+<td>additional</td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
 </tr>
 </tbody>
 </table>
 </section>
+<section id="examples" class="level4 doc-section doc-section-examples">
+<h4 class="doc-section doc-section-examples anchored" data-anchor-id="examples">Examples</h4>
+<div id="4ba7e38f" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>llm.classify([<span class="st">'this is important!'</span>, <span class="st">'there is no rush'</span>], [<span class="st">'urgent'</span>, <span class="st">'not urgent'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>['urgent', None]</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="mall.LLMVec.custom" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.custom">custom</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>LLMVec.custom(x, prompt<span class="op">=</span><span class="st">''</span>, valid_resps<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Provide the full prompt that the LLM will process.</p>
+<section id="parameters-1" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-1">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 65%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>prompt</td>
+<td>str</td>
+<td>The prompt to send to the LLM along with the <code>col</code></td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="mall.LLMVec.extract" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.extract">extract</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>LLMVec.extract(x, labels<span class="op">=</span><span class="st">''</span>, additional<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pull a specific label from the text.</p>
+<section id="parameters-2" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-2">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 7%">
+<col style="width: 71%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>labels</td>
+<td>list</td>
+<td>A list or a DICT object that defines tells the LLM what to look for and return</td>
+<td><code>''</code></td>
+</tr>
+<tr class="odd">
+<td>additional</td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples-1" class="level4 doc-section doc-section-examples">
+<h4 class="doc-section doc-section-examples anchored" data-anchor-id="examples-1">Examples</h4>
+<div id="20409930" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>llm.extract([<span class="st">'bob smith, 123 3rd street'</span>], labels<span class="op">=</span>[<span class="st">'name'</span>, <span class="st">'address'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>['| bob smith | 123 3rd street |']</code></pre>
 </div>
+</div>
+</section>
+</section>
+<section id="mall.LLMVec.sentiment" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.sentiment">sentiment</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>LLMVec.sentiment(x, options<span class="op">=</span>[<span class="st">'positive'</span>, <span class="st">'negative'</span>, <span class="st">'neutral'</span>], additional<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Use an LLM to run a sentiment analysis</p>
+<section id="parameters-3" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-3">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 10%">
+<col style="width: 49%">
+<col style="width: 30%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>options</td>
+<td>list or dict</td>
+<td>A list of the sentiment options to use, or a named DICT object</td>
+<td><code>['positive', 'negative', 'neutral']</code></td>
+</tr>
+<tr class="odd">
+<td>additional</td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples-2" class="level4 doc-section doc-section-examples">
+<h4 class="doc-section doc-section-examples anchored" data-anchor-id="examples-2">Examples</h4>
+<div id="5e8c79bf" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>llm.sentiment([<span class="st">'I am happy'</span>, <span class="st">'I am sad'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>['positive', 'negative']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="mall.LLMVec.summarize" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.summarize">summarize</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>LLMVec.summarize(x, max_words<span class="op">=</span><span class="dv">10</span>, additional<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Summarize the text down to a specific number of words.</p>
+<section id="parameters-4" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-4">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 9%">
+<col style="width: 61%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>max_words</td>
+<td>int</td>
+<td>Maximum number of words to use for the summary</td>
+<td><code>10</code></td>
+</tr>
+<tr class="odd">
+<td>additional</td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples-3" class="level4 doc-section doc-section-examples">
+<h4 class="doc-section doc-section-examples anchored" data-anchor-id="examples-3">Examples</h4>
+<div id="8193f782" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>llm.summarize([<span class="st">'This has been the best TV Ive ever used. Great screen, and sound.'</span>], max_words <span class="op">=</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>['this tv has exceeded expectations']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="mall.LLMVec.translate" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.translate">translate</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>LLMVec.translate(x, language<span class="op">=</span><span class="st">''</span>, additional<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Translate text into another language.</p>
+<section id="parameters-5" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-5">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 8%">
+<col style="width: 65%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>language</td>
+<td>str</td>
+<td>The target language to translate to. For example ‘French’.</td>
+<td><code>''</code></td>
+</tr>
+<tr class="odd">
+<td>additional</td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="examples-4" class="level4 doc-section doc-section-examples">
+<h4 class="doc-section doc-section-examples anchored" data-anchor-id="examples-4">Examples</h4>
+<div id="d10ccd11" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>llm.translate([<span class="st">'This has been the best TV Ive ever used. Great screen, and sound.'</span>], language <span class="op">=</span> <span class="st">'spanish'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>['Esto ha sido la mejor televisión que he tenido, gran pantalla y sonido.']</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="mall.LLMVec.verify" class="level3">
+<h3 class="anchored" data-anchor-id="mall.LLMVec.verify">verify</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>LLMVec.verify(x, what<span class="op">=</span><span class="st">''</span>, yes_no<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">0</span>], additional<span class="op">=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Check to see if something is true about the text.</p>
+<section id="parameters-6" class="level4 doc-section doc-section-parameters">
+<h4 class="doc-section doc-section-parameters anchored" data-anchor-id="parameters-6">Parameters</h4>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 3%">
+<col style="width: 84%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>list</td>
+<td>A list of texts</td>
+<td><em>required</em></td>
+</tr>
+<tr class="even">
+<td>what</td>
+<td>str</td>
+<td>The statement or question that needs to be verified against the provided text</td>
+<td><code>''</code></td>
+</tr>
+<tr class="odd">
+<td>yes_no</td>
+<td>list</td>
+<td>A positional list of size 2, which contains the values to return if true and false. The first position will be used as the ‘true’ value, and the second as the ‘false’ value</td>
+<td><code>[1, 0]</code></td>
+</tr>
+<tr class="even">
+<td>additional</td>
+<td>str</td>
+<td>Inserts this text into the prompt sent to the LLM</td>
+<td><code>''</code></td>
+</tr>
+</tbody>
+</table>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
