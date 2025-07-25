@@ -39,7 +39,11 @@ m_vec_prompt <- function(x,
     preview = preview
   )
   if (preview) {
-    return(resp[[1]])
+    if(length(resp) == 1) {
+      return(resp[[1]])
+    } else {
+      return(resp)
+    }
   }
 
   # Checks for invalid output and marks them as NA

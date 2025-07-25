@@ -25,17 +25,13 @@
 # ellmer code is covered
 
     Code
-      m_backend_submit(backend = ellmer_session, x = "test", prompt = list(list(
-        content = "test")), preview = TRUE)
+      m_backend_submit(backend = ellmer_session, x = "this is x", prompt = list(list(
+        content = "this is the prompt")), preview = TRUE)
     Output
       [[1]]
-      x$chat("test", echo = "none")
+      ellmer_obj$set_system_prompt("this is the prompt")
       
-
----
-
-    Code
-      m_ellmer_chat()
-    Output
-      [1] "test"
+      [[2]]
+      ellmer_obj$chat(as.list("this is x"))
+      
 

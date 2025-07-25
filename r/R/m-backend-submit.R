@@ -89,34 +89,20 @@ m_ollama_tokens <- function() {
 
 #' @export
 m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
-  if (preview) {
-    x <- head(x, 1)
-    map_here <- map
-  } else {
-    map_here <- map_chr
-  }
-  map_here(
-    x,
-    \(x) {
-      .args <- c(
-        glue(prompt[[1]]$content, x = x),
-        echo = "none"
+  system_prompt <- prompt[[1]][["content"]]
+  system_prompt <- glue(system_prompt, x = "")
+  if(preview) {
+    return(
+      exprs(
+        ellmer_obj$set_system_prompt(!!system_prompt), 
+        ellmer_obj$chat(as.list(!!head(x,1)))
       )
-      res <- NULL
-      if (preview) {
-        res <- expr(x$chat(!!!.args))
-      }
-      if (m_cache_use() && is.null(res)) {
-        hash_args <- hash(.args)
-        res <- m_cache_check(hash_args)
-      }
-      if (is.null(res)) {
-        res <- exec("m_ellmer_chat", !!!.args)
-        m_cache_record(.args, res, hash_args)
-      }
-      res
-    }
-  )
+    )
+  }
+  ellmer_obj <- backend[["args"]][["ellmer_obj"]]
+  temp_ellmer <- ellmer_obj$clone()$set_turns(list())
+  temp_ellmer$set_system_prompt(system_prompt)
+  parallel_chat_text(temp_ellmer, as.list(x))
 }
 
 # Using a function so that it can be mocked in testing
@@ -127,9 +113,6 @@ m_ellmer_chat <- function(...) {
   temp_ellmer$chat(...)
 }
 
-dummy_func <- function(x, y) {
-  parallel_chat_text(x, y)
-}
 
 # ------------------------------ Simulate --------------------------------------
 
