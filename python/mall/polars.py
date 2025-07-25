@@ -11,7 +11,7 @@ from mall.prompt import (
     custom,
     verify,
 )
-from mall.llm import map_call
+from mall.llm import llm_use, llm_map
 
 
 @pl.api.register_dataframe_namespace("llm")
@@ -95,21 +95,7 @@ class MallFrame:
         reviews.llm.use(chat)
         ```
         """
-        if isinstance(backend, Chat):
-            self._use.update(dict(backend="chatlas"))
-            self._use.update(dict(chat=backend))
-            backend = ""
-            model = ""
-        if isinstance(backend, Client):
-            self._use.update(dict(backend="ollama-client"))
-            self._use.update(dict(client=backend))
-            backend = ""
-        if backend != "":
-            self._use.update(dict(backend=backend))
-        if model != "":
-            self._use.update(dict(model=model))
-        self._use.update(dict(_cache=_cache))
-        self._use.update(dict(kwargs))
+        self._use = llm_use(backend=backend, model=model, _cache=_cache, **kwargs)
         return self._use
 
     def sentiment(
@@ -161,7 +147,7 @@ class MallFrame:
         ```
 
         """
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=sentiment(options, additional=additional),
@@ -208,7 +194,7 @@ class MallFrame:
         reviews.llm.summarize("review", 5, pred_name = "review_summary")
         ```
         """
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=summarize(max_words, additional=additional),
@@ -254,7 +240,7 @@ class MallFrame:
         ```
 
         """
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=translate(language, additional=additional),
@@ -306,7 +292,7 @@ class MallFrame:
         reviews.llm.classify("review", {"appliance" : "1", "computer" : "2"})
         ```
         """
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=classify(labels, additional=additional),
@@ -390,7 +376,7 @@ class MallFrame:
             for label in labels:
                 lab_names.append(label)
                 lab_vals.append(labels[label])
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=extract(lab_vals, additional=additional),
@@ -442,7 +428,7 @@ class MallFrame:
         reviews.llm.custom("review", prompt = my_prompt)
         ```
         """
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=custom(prompt),
@@ -495,7 +481,7 @@ class MallFrame:
         reviews.llm.verify("review", "is the customer happy", ["y", "n"])
         ```
         """
-        df = map_call(
+        df = llm_map(
             df=self._df,
             col=col,
             msg=verify(what, additional=additional),

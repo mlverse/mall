@@ -16,6 +16,8 @@ library(dbplyr)
 library(tictoc)
 library(DBI)
 source("site/knitr-print.R")
+
+reticulate::use_virtualenv("python/.venv")
 ```
 
 ```{python}
@@ -276,11 +278,6 @@ reviews = data.reviews
 reviews 
 ```
 :::
-
-```{python}
-#| include: false
-reviews.llm.use(options = dict(seed = 100), _cache = "_readme_cache")
-```
 
 ### Sentiment {#sentiment}
 
@@ -597,12 +594,16 @@ encouraging results. But you, as an user, will still need to keep in mind that
 the predictions will not be infallible, so always check the output. At this time,
 I think the best use for this method, is for a quick analysis.
 
-## Vector functions (R only)
+## Vector functions
+
+::: {.panel-tabset group="language"}
+## R
 
 `mall` includes functions that expect a vector, instead of a table, to run the
 predictions. This should make it easier to test things, such as custom prompts
 or results of specific text. Each `llm_` function has a corresponding `llm_vec_`
 function:
+
 
 ```{r}
 llm_vec_sentiment("I am happy")
@@ -611,3 +612,35 @@ llm_vec_sentiment("I am happy")
 ```{r}
 llm_vec_translate("Este es el mejor dia!", "english")
 ```
+
+## Python 
+
+`mall` is also able to process vectors contained in a `list` object. This allows
+us to avoid having to convert a list of texts without having to first convert
+them into a single column data frame. To use, initialize a new `LLMVec` class
+object with either an Ollama model, or a `chatlas` `Chat` object, and then
+access the same NLP functions as the Polars extension.
+
+```{python}
+# Initialize a Chat object
+from chatlas import ChatOllama
+chat = ChatOllama(model = "llama3.2")
+
+# Pass it to a new LLMVec
+from mall import LLMVec
+llm = LLMVec(chat)    
+```
+
+Access the functions via the new LLMVec object, and pass the text to be processed.
+
+```{python}
+llm.sentiment(["I am happy", "I am sad"])
+```
+
+```{python}
+llm.translate(["Este es el mejor dia!"], "english")
+```
+
+
+:::
+

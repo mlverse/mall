@@ -127,6 +127,10 @@ m_ellmer_chat <- function(...) {
   temp_ellmer$chat(...)
 }
 
+dummy_func <- function(x, y) {
+  parallel_chat_text(x, y)
+}
+
 # ------------------------------ Simulate --------------------------------------
 
 #' @export

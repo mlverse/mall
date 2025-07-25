@@ -1,11 +1,33 @@
+from ollama import Client
+from chatlas import Chat
 import polars as pl
+import hashlib
 import ollama
 import json
-import hashlib
 import os
 
 
-def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
+def llm_use(backend="", model="", _cache="_mall_cache", **kwargs):
+    out = dict()
+    if isinstance(backend, Chat):
+        out.update(dict(backend="chatlas"))
+        out.update(dict(chat=backend))
+        backend = ""
+        model = ""
+    if isinstance(backend, Client):
+        out.update(dict(backend="ollama-client"))
+        out.update(dict(client=backend))
+        backend = ""
+    if backend != "":
+        out.update(dict(backend=backend))
+    if model != "":
+        out.update(dict(model=model))
+    out.update(dict(_cache=_cache))
+    out.update(dict(kwargs))
+    return out
+
+
+def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
     if valid_resps == "":
         valid_resps = []
     valid_resps = valid_output(valid_resps)
@@ -38,6 +60,17 @@ def map_call(df, col, msg, pred_name, use, valid_resps="", convert=None):
     return df
 
 
+def llm_loop(x, msg, use, valid_resps="", convert=None):
+    if isinstance(x, list) == False:
+        raise TypeError("`x` is not a list object")
+    out = list()
+    for row in x:
+        out.append(
+            llm_call(x=row, msg=msg, use=use, valid_resps=valid_resps, convert=convert)
+        )
+    return out
+
+
 def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
 
     backend = use.get("backend")
@@ -48,7 +81,7 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
         messages=build_msg(x, msg),
         options=use.get("options"),
     )
-
+    out = ""
     cache = ""
     if use.get("_cache") != "":
 
