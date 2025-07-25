@@ -641,6 +641,6 @@ llm.sentiment(["I am happy", "I am sad"])
 llm.translate(["Este es el mejor dia!"], "english")
 ```
 
-
+For more information visit the reference page: [LLMVec](reference/LLMVec.qmd)
 :::
 
