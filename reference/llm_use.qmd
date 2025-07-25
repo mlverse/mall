@@ -79,7 +79,6 @@ chat <- chat_openai(model = "gpt-4o")
 llm_use(chat)
 
 
-
 ```
 
 
