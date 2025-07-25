@@ -17,7 +17,7 @@ RoxygenNote: 7.3.2
 Imports: 
     cli,
     dplyr,
-    ellmer (>=0.3.0),
+    ellmer (>= 0.3.0),
     fs,
     glue,
     jsonlite,
