@@ -1,8 +1,8 @@
 #' @importFrom ollamar chat test_connection list_models
 #' @importFrom dplyr mutate tibble bind_cols pull sql
-#' @importFrom utils menu head
 #' @importFrom jsonlite fromJSON read_json write_json
-#' @import ellmer
+#' @importFrom ellmer parallel_chat_text
+#' @importFrom utils menu head
 #' @import rlang
 #' @import glue
 #' @import cli

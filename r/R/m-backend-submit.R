@@ -32,17 +32,17 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       .args <- c(
         messages = list(
           map(prompt, \(i)
-              map(i, \(j) {
-                out <- glue(j, x = x)
-                ln <- length(unlist(strsplit(out, " ")))
-                if (ln > m_ollama_tokens()) {
-                  warnings <<- c(
-                    warnings,
-                    list(list(row = substr(x, 1, 20), len = ln))
-                  )
-                }
-                out
-              }))
+          map(i, \(j) {
+            out <- glue(j, x = x)
+            ln <- length(unlist(strsplit(out, " ")))
+            if (ln > m_ollama_tokens()) {
+              warnings <<- c(
+                warnings,
+                list(list(row = substr(x, 1, 20), len = ln))
+              )
+            }
+            out
+          }))
         ),
         output = "text",
         m_defaults_args(backend)
@@ -125,6 +125,10 @@ m_ellmer_chat <- function(...) {
   ellmer_obj <- defaults[["ellmer_obj"]]
   temp_ellmer <- ellmer_obj$clone()$set_turns(list())
   temp_ellmer$chat(...)
+}
+
+dummy_func <- function(x, y) {
+  parallel_chat_text(x, y)
 }
 
 # ------------------------------ Simulate --------------------------------------
