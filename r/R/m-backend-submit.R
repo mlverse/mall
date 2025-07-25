@@ -32,17 +32,17 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       .args <- c(
         messages = list(
           map(prompt, \(i)
-          map(i, \(j) {
-            out <- glue(j, x = x)
-            ln <- length(unlist(strsplit(out, " ")))
-            if (ln > m_ollama_tokens()) {
-              warnings <<- c(
-                warnings,
-                list(list(row = substr(x, 1, 20), len = ln))
-              )
-            }
-            out
-          }))
+              map(i, \(j) {
+                out <- glue(j, x = x)
+                ln <- length(unlist(strsplit(out, " ")))
+                if (ln > m_ollama_tokens()) {
+                  warnings <<- c(
+                    warnings,
+                    list(list(row = substr(x, 1, 20), len = ln))
+                  )
+                }
+                out
+              }))
         ),
         output = "text",
         m_defaults_args(backend)
@@ -91,17 +91,9 @@ m_ollama_tokens <- function() {
 m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
   if (preview) {
     x <- head(x, 1)
-    return(res)
+    map_here <- map
   } else {
-    #map_here <- map_chr
-    defaults <- m_defaults_args()
-    ellmer_obj <- defaults[["ellmer_obj"]]
-    prompt <- prompt[[1]][["content"]]
-    prompt <- gsub("\\{", "\\{\\{", prompt)
-    prompt <- gsub("\\}", "\\}\\}", prompt)
-    prompts <- ellmer::interpolate(prompt, x = x)
-    res <- ellmer::parallel_chat_text(ellmer_obj, prompts)
-    return(res)
+    map_here <- map_chr
   }
   map_here(
     x,
