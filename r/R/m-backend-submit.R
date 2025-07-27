@@ -107,6 +107,7 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
     null_cache <- map_lgl(from_cache, is.null)
     x <- x[null_cache]
   }
+  from_llm <- NULL
   if (length(x) > 0) {
     temp_ellmer <- ellmer_obj$clone()$set_turns(list())
     temp_ellmer$set_system_prompt(system_prompt)
