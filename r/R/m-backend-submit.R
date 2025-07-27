@@ -91,18 +91,41 @@ m_ollama_tokens <- function() {
 m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
   system_prompt <- prompt[[1]][["content"]]
   system_prompt <- glue(system_prompt, x = "")
-  if(preview) {
+  if (preview) {
     return(
       exprs(
-        ellmer_obj$set_system_prompt(!!system_prompt), 
-        ellmer_obj$chat(as.list(!!head(x,1)))
+        ellmer_obj$set_system_prompt(!!system_prompt),
+        ellmer_obj$chat(as.list(!!head(x, 1)))
       )
     )
   }
   ellmer_obj <- backend[["args"]][["ellmer_obj"]]
-  temp_ellmer <- ellmer_obj$clone()$set_turns(list())
-  temp_ellmer$set_system_prompt(system_prompt)
-  parallel_chat_text(temp_ellmer, as.list(x))
+
+  if (m_cache_use()) {
+    hashed_x <- map(x, function(x) hash(c(ellmer_obj, system_prompt, x)))
+    from_cache <- map(hashed_x, m_cache_check)
+    null_cache <- map_lgl(from_cache, is.null)
+    x <- x[null_cache]
+  }
+  if (length(x) > 0) {
+    temp_ellmer <- ellmer_obj$clone()$set_turns(list())
+    temp_ellmer$set_system_prompt(system_prompt)
+    from_llm <- parallel_chat_text(temp_ellmer, as.list(x))
+  }
+  if (m_cache_use()) {
+    walk(
+      seq_along(from_llm),
+      function(y) {
+        m_cache_record(list(system_prompt, x[y]), from_llm[y], hashed_x[y])
+      }
+    )
+    res <- rep("", times = length(null_cache))
+    res[null_cache] <- from_llm
+    res[!null_cache] <- from_cache[!null_cache]
+    res
+  } else {
+    from_llm
+  }
 }
 
 # Using a function so that it can be mocked in testing
