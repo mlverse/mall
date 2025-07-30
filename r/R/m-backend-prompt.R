@@ -5,9 +5,19 @@ m_backend_prompt <- function(backend, additional) {
 }
 
 #' @export
+m_backend_prompt.mall_ollama <- function(backend, additional = "") {
+  next_method <- NextMethod()
+  additional <- glue(paste0(
+    additional,
+    ". The answer is based on the following text:\n{{x}}"
+  ))
+  next_method
+}
+
+#' @export
 m_backend_prompt.mall_llama3.2 <- function(backend, additional = "") {
-  base_method <- NextMethod()
-  base_method$extract <- function(labels) {
+  next_method <- NextMethod()
+  next_method$extract <- function(labels) {
     no_labels <- length(labels)
     col_labels <- paste0(labels, collapse = ", ")
     plural <- ifelse(no_labels > 1, "s", "")
@@ -16,41 +26,29 @@ m_backend_prompt.mall_llama3.2 <- function(backend, additional = "") {
       "Return the response exclusively in a pipe separated list, and no headers. ",
       ""
     )
-    list(
-      list(
-        role = "user",
-        content = glue(paste(
-          "You are a helpful text extraction engine.",
-          "Extract the {col_labels} being referred to in the text.",
-          "I expect {no_labels} item{plural} exactly.",
-          "No capitalization. No explanations.",
-          "{text_multi}",
-          "{additional}",
-          "The answer is based on the following text:\n{{x}}"
-        ))
-      )
-    )
+    glue(paste(
+      "You are a helpful text extraction engine.",
+      "Extract the {col_labels} being referred to in the text.",
+      "I expect {no_labels} item{plural} exactly.",
+      "No capitalization. No explanations.",
+      "{text_multi}",
+      "{additional}"
+    ))
   }
-  base_method$classify <- function(labels) {
+  next_method$classify <- function(labels) {
     labels <- process_labels(
       x = labels,
       if_character = "Determine if the text refers to one of the following: {x}",
       if_formula = "If it classifies as {f_lhs(x)} then return {f_rhs(x)}"
     )
-    list(
-      list(
-        role = "user",
-        content = glue(paste(
-          "You are a helpful classification engine.",
-          "{labels}.",
-          "No capitalization. No explanations.",
-          "{additional}",
-          "The answer is based on the following text:\n{{x}}"
-        ))
-      )
-    )
+    glue(paste(
+      "You are a helpful classification engine.",
+      "{labels}.",
+      "No capitalization. No explanations.",
+      "{additional}"
+    ))
   }
-  base_method
+  next_method
 }
 
 #' @export
@@ -62,32 +60,20 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         if_character = "Return only one of the following answers: {x}",
         if_formula = "- If the text is {f_lhs(x)}, return {f_rhs(x)}"
       )
-      list(
-        list(
-          role = "user",
-          content = glue(paste(
-            "You are a helpful sentiment engine.",
-            "{options}.",
-            "No capitalization. No explanations.",
-            "{additional}",
-            "The answer is based on the following text:\n{{x}}"
-          ))
-        )
-      )
+      glue(paste(
+        "You are a helpful sentiment engine.",
+        "{options}.",
+        "No capitalization. No explanations.",
+        "{additional}"
+      ))
     },
     summarize = function(max_words) {
-      list(
-        list(
-          role = "user",
-          content = glue(paste(
-            "You are a helpful summarization engine.",
-            "Your answer will contain no capitalization and no explanations.",
-            "Return no more than {max_words} words.",
-            "{additional}",
-            "The answer is the summary of the following text:\n{{x}}"
-          ))
-        )
-      )
+      glue(paste(
+        "You are a helpful summarization engine.",
+        "Your answer will contain no capitalization and no explanations.",
+        "Return no more than {max_words} words.",
+        "{additional}"
+      ))
     },
     classify = function(labels) {
       labels <- process_labels(
@@ -95,18 +81,12 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         if_character = "Determine if the text refers to one of the following: {x}",
         if_formula = "- For {f_lhs(x)}, return {f_rhs(x)}"
       )
-      list(
-        list(
-          role = "user",
-          content = glue(paste(
-            "You are a helpful classification engine.",
-            "{labels}.",
-            "No capitalization. No explanations.",
-            "{additional}",
-            "The answer is based on the following text:\n{{x}}"
-          ))
-        )
-      )
+      glue(paste(
+        "You are a helpful classification engine.",
+        "{labels}.",
+        "No capitalization. No explanations.",
+        "{additional}"
+      ))
     },
     extract = function(labels) {
       no_labels <- length(labels)
@@ -117,49 +97,31 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         "Return the response in a simple list, pipe separated, and no headers. ",
         ""
       )
-      list(
-        list(
-          role = "user",
-          content = glue(paste(
-            "You are a helpful text extraction engine.",
-            "Extract the {col_labels} being referred to in the text.",
-            "I expect {no_labels} item{plural} exactly.",
-            "No capitalization. No explanations.",
-            "{text_multi}",
-            "{additional}",
-            "The answer is based on the following text:\n{{x}}"
-          ))
-        )
-      )
+      glue(paste(
+        "You are a helpful text extraction engine.",
+        "Extract the {col_labels} being referred to in the text.",
+        "I expect {no_labels} item{plural} exactly.",
+        "No capitalization. No explanations.",
+        "{text_multi}",
+        "{additional}"
+      ))
     },
     translate = function(language) {
-      list(
-        list(
-          role = "user",
-          content = glue(paste(
-            "You are a helpful translation engine.",
-            "You will return only the translation text, no explanations.",
-            "The target language to translate to is: {language}.",
-            "{additional}",
-            "The answer is the summary of the following text:\n{{x}}"
-          ))
-        )
-      )
+      glue(paste(
+        "You are a helpful translation engine.",
+        "You will return only the translation text, no explanations.",
+        "The target language to translate to is: {language}.",
+        "{additional}"
+      ))
     },
     verify = function(what, labels) {
-      list(
-        list(
-          role = "user",
-          content = glue(paste(
-            "You are a helpful text analysis engine.",
-            "Determine if this is true ",
-            "'{what}'.",
-            "No capitalization. No explanations.",
-            "{additional}",
-            "The answer is based on the following text:\n{{x}}"
-          ))
-        )
-      )
+      glue(paste(
+        "You are a helpful text analysis engine.",
+        "Determine if this is true ",
+        "'{what}'.",
+        "No capitalization. No explanations.",
+        "{additional}"
+      ))
     }
   )
 }

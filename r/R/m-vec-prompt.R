@@ -23,7 +23,8 @@ m_vec_prompt <- function(x,
   if (!inherits(prompt, "list")) {
     p_split <- strsplit(prompt, "\\{\\{x\\}\\}")[[1]]
     if (length(p_split) == 1 && p_split == prompt) {
-      content <- glue("{prompt}\n{{x}}")
+      #content <- glue("{prompt}\n{{x}}")
+      content <- prompt
     } else {
       content <- prompt
     }

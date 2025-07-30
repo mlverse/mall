@@ -13,9 +13,9 @@ m_defaults_set <- function(...) {
     sub_model <- NULL
   }
   obj_class <- clean_names(c(
+    defaults[["backend"]],
     model,
     sub_model,
-    defaults[["backend"]],
     "session"
   ))
   .env_llm$defaults <- defaults
