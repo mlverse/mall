@@ -89,8 +89,11 @@ m_ollama_tokens <- function() {
 
 #' @export
 m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
+  # Treats prompt as a system prompt
   system_prompt <- prompt[[1]][["content"]]
   system_prompt <- glue(system_prompt, x = "")
+  # Returns two expressions if on preview: setting the system prompt and the
+  # first chat call
   if (preview) {
     return(
       exprs(
@@ -100,7 +103,6 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
     )
   }
   ellmer_obj <- backend[["args"]][["ellmer_obj"]]
-
   if (m_cache_use()) {
     hashed_x <- map(x, function(x) hash(c(ellmer_obj, system_prompt, x)))
     from_cache <- map(hashed_x, m_cache_check)

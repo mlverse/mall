@@ -31,15 +31,17 @@ test_that("No cache is saved if turned off", {
 
 test_that("ellmer code is covered", {
   local_mocked_bindings(
-    parallel_chat_text = function(x, y) return(as.character(y))
+    parallel_chat_text = function(x, y) {
+      return(as.character(y))
+    }
   )
   llm_use(
-    backend = "simulate_llm", 
-    model =  "echo", 
-    .silent = TRUE, 
-    .force = TRUE, 
+    backend = "simulate_llm",
+    model = "echo",
+    .silent = TRUE,
+    .force = TRUE,
     .cache = .mall_test$cache
-    )
+  )
   ellmer_session <- .env_llm$session
   class(ellmer_session) <- c("mall_ellmer")
   ellmer_session$args[["ellmer_obj"]] <- temp_ellmer_obj()
@@ -50,7 +52,7 @@ test_that("ellmer code is covered", {
       x = test_txt,
       prompt = list(list(content = "test"))
     ),
-    test_txt
+    as.list(test_txt)
   )
   expect_snapshot(
     m_backend_submit(
