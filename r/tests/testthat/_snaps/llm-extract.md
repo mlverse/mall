@@ -3,15 +3,7 @@
     Code
       llm_vec_extract("toaster", labels = "product")
     Output
-      [[1]]
-      [[1]]$role
-      [1] "user"
-      
-      [[1]]$content
-      You are a helpful text extraction engine. Extract the product being referred to in the text. I expect 1 item exactly. No capitalization. No explanations.   The answer is based on the following text:
-      {x}
-      
-      
+      You are a helpful text extraction engine. Extract the product being referred to in the text. I expect 1 item exactly. No capitalization. No explanations.  
 
 # Extract on Ollama works
 

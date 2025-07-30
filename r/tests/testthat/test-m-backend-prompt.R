@@ -9,7 +9,7 @@ test_that("Prompt handles list()", {
   test_text <- "Custom:{prompt}\n{{x}}"
   expect_equal(
     llm_vec_custom(x = "new test", prompt = test_text),
-    list(list(role = "user", content = test_text))
+    test_text
   )
 })
 
@@ -22,6 +22,6 @@ test_that("Prompt handles list()", {
   y <- m_backend_prompt(backend)
   y_extract <- y$extract(labels = c("a", "b"))
   y_classify <- y$classify(labels = c("a" ~ 1, "b" ~ 2))
-  expect_false(x_extract[[1]]$content == y_extract[[1]]$content)
-  expect_false(x_classify[[1]]$content == y_classify[[1]]$content)
+  expect_false(x_extract == y_extract)
+  expect_false(x_classify == y_classify)
 })

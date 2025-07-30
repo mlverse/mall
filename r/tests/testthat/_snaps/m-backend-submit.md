@@ -29,7 +29,7 @@
         content = "this is the prompt")), preview = TRUE)
     Output
       [[1]]
-      ellmer_obj$set_system_prompt("this is the prompt")
+      ellmer_obj$set_system_prompt(list(list(content = "this is the prompt")))
       
       [[2]]
       ellmer_obj$chat(as.list("this is x"))
