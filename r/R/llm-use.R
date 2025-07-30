@@ -61,7 +61,7 @@ llm_use <- function(
   if (!is.null(backend) && !is.null(model)) {
     not_init <- FALSE
   }
-  if(is.null(backend) && is.null(m_defaults_backend())) {
+  if (is.null(backend) && is.null(m_defaults_backend())) {
     backend <- getOption(".mall_chat")
   }
   if (inherits(backend, "Chat")) {
