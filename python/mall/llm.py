@@ -87,7 +87,6 @@ def llm_init_use(use, msg):
 
 
 def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
-
     backend = use.get("backend")
     model = use.get("model")
     call = dict(
@@ -99,7 +98,6 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
     out = ""
     cache = ""
     if use.get("_cache") != "":
-
         hash_call = build_hash(call)
         cache = cache_check(hash_call, use)
     if cache == "":

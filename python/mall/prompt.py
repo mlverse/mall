@@ -1,72 +1,54 @@
-def sentiment(options, additional=""):
+def sentiment(options, additional="", use=[]):
     new_options = process_labels(
         options,
         "Return only one of the following answers: {values} ",
         "- If the text is {key}, return {value} ",
     )
-    msg = [
-        {
-            "role": "user",
-            "content": "You are a helpful sentiment engine. "
-            + f"{new_options}. "
-            + "No capitalization. No explanations. "
-            + f"{additional} "
-            + "The answer is based on the following text:\n{}",
-        }
-    ]
-    return msg
+    x = (
+        "You are a helpful sentiment engine."
+        f" {new_options}. "
+        " No capitalization. No explanations."
+        f" {additional}"
+    )
+    return prompt_complete(x, use)
 
 
-def summarize(max_words, additional=""):
-    msg = [
-        {
-            "role": "user",
-            "content": "You are a helpful summarization engine. "
-            + "Your answer will contain no no capitalization and no explanations. "
-            + f"Return no more than "
-            + str(max_words)
-            + " words. "
-            + f" {additional} "
-            + "The answer is the summary of the following text:\n{}",
-        }
-    ]
-    return msg
+def summarize(max_words, additional="", use=[]):
+    x = (
+        "You are a helpful summarization engine. "
+        "Your answer will contain no capitalization and no explanations. "
+        f"Return no more than {max_words} words. "
+        f"{additional}"
+    )
+    return prompt_complete(x, use)
 
 
-def translate(language, additional=""):
-    msg = [
-        {
-            "role": "user",
-            "content": "You are a helpful translation engine. "
-            + "You will return only the translation text, no explanations. "
-            + f"The target language to translate to is: {language}. "
-            + f" {additional} "
-            + "The answer is the translation of the following text:\n{}",
-        }
-    ]
-    return msg
+def translate(language, additional="", use=[]):
+    x = (
+        "You are a helpful translation engine. "
+        "You will return only the translation text, no explanations. "
+        f"The target language to translate to is: {language}. "
+        f"{additional}"
+    )
+    return prompt_complete(x, use)
 
 
-def classify(labels, additional=""):
-    new_labels = process_labels(
+def classify(labels, additional="", use=[]):
+    labels = process_labels(
         labels,
         "Determine if the text refers to one of the following:{values} ",
         "- If the text is {key}, return {value} ",
     )
-    msg = [
-        {
-            "role": "user",
-            "content": "You are a helpful classification engine. "
-            + f"{new_labels}. "
-            + "No capitalization. No explanations. "
-            + f"{additional} "
-            + "The answer is based on the following text:\n{}",
-        }
-    ]
-    return msg
+    x = (
+        "You are a helpful classification engine. "
+        f"{labels}. "
+        "No capitalization. No explanations. "
+        f"{additional}"
+    )
+    return prompt_complete(x, use)
 
 
-def extract(labels, additional=""):
+def extract(labels, additional="", use=[]):
     col_labels = ""
     if isinstance(labels, list):
         no_labels = len(labels)
@@ -84,39 +66,30 @@ def extract(labels, additional=""):
         text_multi = ""
         col_labels = labels
 
-    msg = [
-        {
-            "role": "user",
-            "content": "You are a helpful text extraction engine. "
-            + f"Extract the {col_labels} being referred to on the text. "
-            + f"I expect {no_labels} item{plural} exactly. "
-            + "No capitalization. No explanations. "
-            + f" {text_multi} "
-            + f" {additional} "
-            + "The answer is based on the following text:\n{}",
-        }
-    ]
-    return msg
+    x = (
+        "You are a helpful text extraction engine. "
+        f"Extract the {col_labels} being referred to in the text. "
+        f"I expect {no_labels} item{plural} exactly. "
+        "No capitalization. No explanations. "
+        f"{text_multi}"
+        f"{additional}"
+    )
+    return prompt_complete(x, use)
 
 
-def verify(what, additional=""):
-    msg = [
-        {
-            "role": "user",
-            "content": "You are a helpful text analysis engine. "
-            + "Determine this is true "
-            + f"'{what}'."
-            + "No capitalization. No explanations. "
-            + f"{additional} "
-            + "The answer is based on the following text:\n{}",
-        }
-    ]
-    return msg
+def verify(what, additional="", use=[]):
+    x = (
+        "You are a helpful text analysis engine."
+        "Determine if this is true "
+        f"'{what}'."
+        "No capitalization. No explanations."
+        f"{additional}"
+    )
+    return prompt_complete(x, use)
 
 
 def custom(prompt):
-    msg = [{"role": "user", "content": f"{prompt}" + ": \n{}"}]
-    return msg
+    return prompt
 
 
 def process_labels(x, if_list="", if_dict=""):
@@ -135,3 +108,16 @@ def process_labels(x, if_list="", if_dict=""):
             new = new.replace("{value}", str(x.get(i)))
             out += " " + new
     return out
+
+
+def prompt_complete(x, use):
+    backend = use.get("backend")
+    if backend == "chatlas":
+        x = (
+            x
+            + "The answer will be based on each individual prompt."
+            + " Treat each prompt as unique when deciding the answer."
+        )
+    else:
+        x = x + "The answer is based on the following text"
+    return x
