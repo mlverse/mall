@@ -231,9 +231,9 @@ reviews.llm.custom("review", prompt = my_prompt)
 
 | review | custom |
 |----|----|
-| "This has been the best TV I've ever used. Great screen, and sound." | "yes" |
-| "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "no" |
-| "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "no" |
+| "This has been the best TV I've ever used. Great screen, and sound." | "Yes" |
+| "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "No" |
+| "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "No" |
 
 ## Results caching
 

@@ -90,7 +90,7 @@ def verify(what, additional="", use=[]):
 
 
 def custom(x, use):
-    return prompt_complete(x, use)
+    return prompt_complete(x + ". ", use)
 
 
 def process_labels(x, if_list="", if_dict=""):
