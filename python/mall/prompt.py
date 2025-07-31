@@ -82,6 +82,7 @@ def verify(what, additional="", use=[]):
         "You are a helpful text analysis engine."
         "Determine if this is true "
         f"'{what}'."
+        "There are only two acceptable answers, 'yes' and 'no'. "
         "No capitalization. No explanations."
         f"{additional}"
     )

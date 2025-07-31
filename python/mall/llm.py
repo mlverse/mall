@@ -136,7 +136,7 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
                 out = convert.get(label)
 
     if data_type == int:
-        out = data_type(out)
+        out = int(out)
 
     if out not in valid_resps and len(valid_resps) > 0:
         out = None
@@ -155,7 +155,7 @@ def valid_output(x):
 
 
 def build_msg(x, msg):
-    return {'role': 'user', 'content': msg + str(x)}
+    return {"role": "user", "content": msg + str(x)}
 
 
 def build_hash(x):
