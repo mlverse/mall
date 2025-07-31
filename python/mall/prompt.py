@@ -119,5 +119,5 @@ def prompt_complete(x, use):
             + " Treat each prompt as unique when deciding the answer."
         )
     else:
-        x = x + "The answer is based on the following text"
+        x = x + "The answer is based on the following text:\n{}"
     return x

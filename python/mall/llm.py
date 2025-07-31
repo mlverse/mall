@@ -81,7 +81,7 @@ def llm_init_use(use, msg):
     if backend == "chatlas":
         chat = use.get("chat")
         chat.set_turns(list())
-        chat.system_prompt = msg[0].get("content")
+        chat.system_prompt = msg
         use.update(chat=chat)
     return use
 
@@ -121,7 +121,7 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
             if model == "echo":
                 out = x
             if model == "content":
-                out = msg[0]["content"]
+                out = msg
                 return out
     else:
         out = cache
@@ -155,10 +155,7 @@ def valid_output(x):
 
 
 def build_msg(x, msg):
-    out = []
-    for msgs in msg:
-        out.append({"role": msgs["role"], "content": msgs["content"].format(x)})
-    return out
+    return {'role': 'user', 'content': msg + str(x)}
 
 
 def build_hash(x):

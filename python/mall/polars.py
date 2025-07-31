@@ -150,7 +150,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=sentiment(options, additional=additional),
+            msg=sentiment(options, additional=additional, use=self._use),
             pred_name=pred_name,
             use=self._use,
             valid_resps=options,
@@ -197,7 +197,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=summarize(max_words, additional=additional),
+            msg=summarize(max_words, additional=additional, use=self._use),
             pred_name=pred_name,
             use=self._use,
         )
@@ -243,7 +243,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=translate(language, additional=additional),
+            msg=translate(language, additional=additional, use=self._use),
             pred_name=pred_name,
             use=self._use,
         )
@@ -295,7 +295,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=classify(labels, additional=additional),
+            msg=classify(labels, additional=additional, use=self._use),
             pred_name=pred_name,
             use=self._use,
             valid_resps=labels,
@@ -379,7 +379,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=extract(lab_vals, additional=additional),
+            msg=extract(lab_vals, additional=additional, use=self._use),
             pred_name=pred_name,
             use=self._use,
         )
@@ -484,7 +484,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=verify(what, additional=additional),
+            msg=verify(what, additional=additional, use=self._use),
             pred_name=pred_name,
             use=self._use,
             valid_resps=yes_no,
