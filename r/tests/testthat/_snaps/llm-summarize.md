@@ -25,8 +25,8 @@
       1                 This has been the best TV I've ever used. Great screen, and sound.
       2          I regret buying this laptop. It is too slow and the keyboard is too noisy
       3 Not sure how to feel about my new washing machine. Great color, but hard to figure
-                              .summary
-      1    great tv with good features
-      2  laptop purchase was a mistake
-      3 having mixed feelings about it
+                            .summary
+      1 this tv is excellent quality
+      2  i regret my laptop purchase
+      3  confused about the purchase
 

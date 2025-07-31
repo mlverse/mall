@@ -19,6 +19,9 @@ m_backend_submit <- function(backend, x, prompt, preview = FALSE) {
 
 #' @export
 m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
+  prompt <- list(
+    list(role = "user", content = prompt)
+  )
   if (preview) {
     x <- head(x, 1)
     map_here <- map
@@ -89,22 +92,17 @@ m_ollama_tokens <- function() {
 
 #' @export
 m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
-  # Treats prompt as a system prompt
-  system_prompt <- prompt[[1]][["content"]]
-  system_prompt <- glue(system_prompt, x = "")
-  # Returns two expressions if on preview: setting the system prompt and the
-  # first chat call
   if (preview) {
     return(
       exprs(
-        ellmer_obj$set_system_prompt(!!system_prompt),
+        ellmer_obj$set_system_prompt(!!prompt),
         ellmer_obj$chat(as.list(!!head(x, 1)))
       )
     )
   }
   ellmer_obj <- backend[["args"]][["ellmer_obj"]]
   if (m_cache_use()) {
-    hashed_x <- map(x, function(x) hash(c(ellmer_obj, system_prompt, x)))
+    hashed_x <- map(x, function(x) hash(c(ellmer_obj, prompt, x)))
     from_cache <- map(hashed_x, m_cache_check)
     null_cache <- map_lgl(from_cache, is.null)
     x <- x[null_cache]
@@ -112,14 +110,14 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
   from_llm <- NULL
   if (length(x) > 0) {
     temp_ellmer <- ellmer_obj$clone()$set_turns(list())
-    temp_ellmer$set_system_prompt(system_prompt)
+    temp_ellmer$set_system_prompt(prompt)
     from_llm <- parallel_chat_text(temp_ellmer, as.list(x))
   }
   if (m_cache_use()) {
     walk(
       seq_along(from_llm),
       function(y) {
-        m_cache_record(list(system_prompt, x[y]), from_llm[y], hashed_x[y])
+        m_cache_record(list(prompt, x[y]), from_llm[y], hashed_x[y])
       }
     )
     res <- rep("", times = length(null_cache))
@@ -127,8 +125,9 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
     res[!null_cache] <- from_cache[!null_cache]
     res
   } else {
-    from_llm
+    res <- from_llm
   }
+  map_chr(res, ~.x)
 }
 
 # Using a function so that it can be mocked in testing

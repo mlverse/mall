@@ -38,7 +38,7 @@ def test_sentiment_prompt():
     x = df.llm.sentiment("x")
     assert (
         x["sentiment"][0]
-        == "You are a helpful sentiment engine. Return only one of the following answers: positive, negative, neutral . No capitalization. No explanations.  The answer is based on the following text:\n{}"
+        == "You are a helpful sentiment engine. Return only one of the following answers: positive, negative, neutral .  No capitalization. No explanations. The answer is based on the following text:\n{}"
     )
     shutil.rmtree("_test_cache", ignore_errors=True)
 

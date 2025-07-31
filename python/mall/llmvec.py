@@ -19,10 +19,11 @@ class LLMVec:
     from mall import LLMVec
 
     chat = ChatOllama(model = "llama3.2")
-    
-    llm = LLMVec(chat)    
+
+    llm = LLMVec(chat)
     ```
     """
+
     def __init__(self, backend="", model="", _cache="_mall_cache", **kwargs):
         self._use = llm_use(backend=backend, model=model, _cache=_cache, **kwargs)
 
@@ -49,10 +50,10 @@ class LLMVec:
         ```{python}
         llm.sentiment(['I am happy', 'I am sad'])
         ```
-        """    
+        """
         return llm_loop(
             x=x,
-            msg=sentiment(options, additional=additional),
+            msg=sentiment(options, additional=additional, use=self._use),
             use=self._use,
             valid_resps=options,
         )
@@ -77,10 +78,10 @@ class LLMVec:
         ```{python}
         llm.summarize(['This has been the best TV Ive ever used. Great screen, and sound.'], max_words = 5)
         ```
-        """        
+        """
         return llm_loop(
             x=x,
-            msg=summarize(max_words, additional=additional),
+            msg=summarize(max_words, additional=additional, use=self._use),
             use=self._use,
         )
 
@@ -106,10 +107,10 @@ class LLMVec:
         llm.translate(['This has been the best TV Ive ever used. Great screen, and sound.'], language = 'spanish')
         ```
 
-        """        
+        """
         return llm_loop(
             x=x,
-            msg=translate(language, additional=additional),
+            msg=translate(language, additional=additional, use=self._use),
             use=self._use,
         )
 
@@ -135,10 +136,10 @@ class LLMVec:
         ```{python}
         llm.classify(['this is important!', 'there is no rush'], ['urgent', 'not urgent'])
         ```
-        """        
+        """
         return llm_loop(
             x=x,
-            msg=classify(labels, additional=additional),
+            msg=classify(labels, additional=additional, use=self._use),
             use=self._use,
             valid_resps=labels,
         )
@@ -164,8 +165,12 @@ class LLMVec:
         ```{python}
         llm.extract(['bob smith, 123 3rd street'], labels=['name', 'address'])
         ```
-        """        
-        return llm_loop(x=x, msg=extract(labels, additional=additional), use=self._use)
+        """
+        return llm_loop(
+            x=x,
+            msg=extract(labels, additional=additional, use=self._use),
+            use=self._use,
+        )
 
     def custom(self, x, prompt="", valid_resps="") -> list:
         """Provide the full prompt that the LLM will process.
@@ -178,7 +183,7 @@ class LLMVec:
         prompt : str
             The prompt to send to the LLM along with the `col`
 
-        """        
+        """
         return llm_loop(x=x, msg=custom(prompt), use=self._use, valid_resps=valid_resps)
 
     def verify(self, x, what="", yes_no=[1, 0], additional="") -> list:
@@ -201,10 +206,10 @@ class LLMVec:
         additional : str
             Inserts this text into the prompt sent to the LLM
 
-        """        
+        """
         return llm_loop(
             x=x,
-            msg=verify(what, additional=additional),
+            msg=verify(what, additional=additional, use=self._use),
             use=self._use,
             valid_resps=yes_no,
             convert=dict(yes=yes_no[0], no=yes_no[1]),

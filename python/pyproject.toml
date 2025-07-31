@@ -3,7 +3,7 @@ packages = ["mall"]
 
 [project]
 name = "mlverse-mall"
-version = "0.1.0.9003"
+version = "0.1.0.9004"
 description = "Run multiple 'Large Language Model' predictions against a table. The predictions run row-wise over a specified column."
 readme = "README.md"
 authors = [

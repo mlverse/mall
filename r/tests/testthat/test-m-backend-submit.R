@@ -52,7 +52,7 @@ test_that("ellmer code is covered", {
       x = test_txt,
       prompt = list(list(content = "test"))
     ),
-    as.list(test_txt)
+    test_txt
   )
   expect_snapshot(
     m_backend_submit(

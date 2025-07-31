@@ -18,19 +18,6 @@ m_vec_prompt <- function(x,
     fn <- defaults[[prompt_label]]
     prompt <- fn(...)
   }
-  # If the prompt is a character, it will convert it to
-  # a list so it can be processed
-  if (!inherits(prompt, "list")) {
-    p_split <- strsplit(prompt, "\\{\\{x\\}\\}")[[1]]
-    if (length(p_split) == 1 && p_split == prompt) {
-      content <- glue("{prompt}\n{{x}}")
-    } else {
-      content <- prompt
-    }
-    prompt <- list(
-      list(role = "user", content = content)
-    )
-  }
   # Submits final prompt to the LLM
   resp <- m_backend_submit(
     backend = backend,

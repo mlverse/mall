@@ -3,6 +3,7 @@ from chatlas import Chat
 import polars as pl
 import hashlib
 import ollama
+import copy
 import json
 import os
 
@@ -10,8 +11,9 @@ import os
 def llm_use(backend="", model="", _cache="_mall_cache", **kwargs):
     out = dict()
     if isinstance(backend, Chat):
+        chat_copy = copy.deepcopy(backend)
         out.update(dict(backend="chatlas"))
-        out.update(dict(chat=backend))
+        out.update(dict(chat=chat_copy))
         backend = ""
         model = ""
     if isinstance(backend, Client):
@@ -42,6 +44,8 @@ def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
         pl_type = pl.Int8
         data_type = int
 
+    use = llm_init_use(use, msg)
+
     df = df.with_columns(
         pl.col(col)
         .map_elements(
@@ -61,9 +65,10 @@ def llm_map(df, col, msg, pred_name, use, valid_resps="", convert=None):
 
 
 def llm_loop(x, msg, use, valid_resps="", convert=None):
-    if isinstance(x, list) == False:
+    if not isinstance(x, list):
         raise TypeError("`x` is not a list object")
     out = list()
+    use = llm_init_use(use, msg)
     for row in x:
         out.append(
             llm_call(x=row, msg=msg, use=use, valid_resps=valid_resps, convert=convert)
@@ -71,8 +76,17 @@ def llm_loop(x, msg, use, valid_resps="", convert=None):
     return out
 
 
-def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
+def llm_init_use(use, msg):
+    backend = use.get("backend")
+    if backend == "chatlas":
+        chat = use.get("chat")
+        chat.set_turns(list())
+        chat.system_prompt = msg
+        use.update(chat=chat)
+    return use
 
+
+def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
     backend = use.get("backend")
     model = use.get("model")
     call = dict(
@@ -84,15 +98,13 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
     out = ""
     cache = ""
     if use.get("_cache") != "":
-
         hash_call = build_hash(call)
         cache = cache_check(hash_call, use)
     if cache == "":
         if backend == "chatlas":
             chat = use.get("chat")
-            ch = chat.chat(msg[0].get("content") + x, echo="none")
+            ch = chat.chat(x, echo="none")
             out = ch.get_content()
-            chat.set_turns(list())
         if backend == "ollama" or backend == "ollama-client":
             if backend == "ollama":
                 chat_fun = ollama.chat
@@ -109,7 +121,7 @@ def llm_call(x, msg, use, valid_resps="", convert=None, data_type=None):
             if model == "echo":
                 out = x
             if model == "content":
-                out = msg[0]["content"]
+                out = msg
                 return out
     else:
         out = cache
@@ -143,10 +155,7 @@ def valid_output(x):
 
 
 def build_msg(x, msg):
-    out = []
-    for msgs in msg:
-        out.append({"role": msgs["role"], "content": msgs["content"].format(x)})
-    return out
+    return {'role': 'user', 'content': msg + str(x)}
 
 
 def build_hash(x):
