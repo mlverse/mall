@@ -11,7 +11,7 @@ def test_translate_prompt():
     x = df.llm.translate("x", language="spanish")
     assert (
         x["translation"][0]
-        == "You are a helpful translation engine. You will return only the translation text, no explanations. The target language to translate to is: spanish.   The answer is the translation of the following text:\n{}"
+        == "You are a helpful translation engine. You will return only the translation text, no explanations. The target language to translate to is: spanish. The answer is based on the following text:\n{}"
     )
     shutil.rmtree("_test_cache", ignore_errors=True)
 
