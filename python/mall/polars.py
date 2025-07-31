@@ -431,7 +431,7 @@ class MallFrame:
         df = llm_map(
             df=self._df,
             col=col,
-            msg=custom(prompt),
+            msg=custom(prompt, use=self._use),
             pred_name=pred_name,
             use=self._use,
             valid_resps=valid_resps,
