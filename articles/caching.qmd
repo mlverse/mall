@@ -9,8 +9,8 @@ execute:
 #| include: false
 library(fs)
 library(jsonlite)
-dir_delete("_mall_cache")
-dir_delete("_performance_cache")
+if(dir_exists("_mall_cache")) dir_delete("_mall_cache")
+if(dir_exists("_performance_cache")) dir_delete("_performance_cache")
 source("../site/knitr-print.R")
 ```
 
@@ -52,7 +52,7 @@ We will initialize the LLM session specifying a seed
 ```{r}
 library(mall)
 
-llm_use("ollama", "llama3.1", seed = 100)
+llm_use("ollama", "llama3.2", seed = 100, .cache = "_mall_cache")
 ```
 
 Using the `tictoc` package, we will measure how long it takes to make a simple
@@ -80,7 +80,7 @@ combining the values in the request (`$request`).
 
 ```{r}
 jsonlite::read_json(
-  "_mall_cache/08/086214f2638f60496fd0468d7de37c59.json",
+  "_mall_cache/78/7863b5af515b487e8ea7ba8f4d9330bb.json",
   simplifyVector = TRUE,
   flatten = TRUE
 )
