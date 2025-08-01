@@ -306,10 +306,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#resubmission" id="toc-resubmission" class="nav-link active" data-scroll-target="#resubmission">Resubmission</a>
-  <ul class="collapse">
-  <li><a href="#original-submission-text" id="toc-original-submission-text" class="nav-link" data-scroll-target="#original-submission-text">Original submission text:</a></li>
-  </ul></li>
+  <li><a href="#submission" id="toc-submission" class="nav-link active" data-scroll-target="#submission">Submission</a></li>
   <li><a href="#r-cmd-check-environments" id="toc-r-cmd-check-environments" class="nav-link" data-scroll-target="#r-cmd-check-environments">R CMD check environments</a></li>
   <li><a href="#r-cmd-check-results" id="toc-r-cmd-check-results" class="nav-link" data-scroll-target="#r-cmd-check-results">R CMD check results</a></li>
   </ul>
@@ -322,30 +319,22 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="resubmission" class="level2">
-<h2 class="anchored" data-anchor-id="resubmission">Resubmission</h2>
-<p>Thank you for the feedback and instructions, I have made the following changes:</p>
+<section id="submission" class="level2">
+<h2 class="anchored" data-anchor-id="submission">Submission</h2>
 <ul>
-<li><p>Updated the Title field to title case</p></li>
-<li><p>Changed all to </p></li>
-<li><p>Changed default location in llm_use() to use a temp folder</p></li>
-<li><p>Changed the tests to use a temp folder location</p></li>
+<li><p>Adds integration with <code>ellmer</code> <code>Chat</code> objects</p></li>
+<li><p>Returns a warning when there are over 4,096 tokens in one or many records sent to Ollama</p></li>
 </ul>
-<section id="original-submission-text" class="level3">
-<h3 class="anchored" data-anchor-id="original-submission-text">Original submission text:</h3>
-<p>This is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.</p>
-<p>The README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/.</p>
-</section>
 </section>
 <section id="r-cmd-check-environments" class="level2">
 <h2 class="anchored" data-anchor-id="r-cmd-check-environments">R CMD check environments</h2>
 <ul>
-<li><p>Mac OS M3 (aarch64-apple-darwin23), R 4.4.1 (Local)</p></li>
-<li><p>Mac OS x86_64-apple-darwin20.0 (64-bit), R 4.4.1 (GH Actions)</p></li>
-<li><p>Windows x86_64-w64-mingw32 (64-bit), R 4.4.1 (GH Actions)</p></li>
-<li><p>Linux x86_64-pc-linux-gnu (64-bit), R 4.4.1 (GH Actions)</p></li>
-<li><p>Linux x86_64-pc-linux-gnu (64-bit), R 4.5.0 (dev) (GH Actions)</p></li>
-<li><p>Linux x86_64-pc-linux-gnu (64-bit), R 4.3.3 (old release) (GH Actions)</p></li>
+<li><p>Mac OS M3 (aarch64-apple-darwin23), R 4.5.0 (Local)</p></li>
+<li><p>macOS Sonoma 14.7.6 (64-bit), R 4.5.1 (GH Actions)</p></li>
+<li><p>Windows Server 2022 x64 (64-bit), R 4.5.1 (GH Actions)</p></li>
+<li><p>Ubuntu 24.04.2 LTS, R 4.5.1 (GH Actions)</p></li>
+<li><p>Ubuntu 24.04.2 LTS (dev) (GH Actions)</p></li>
+<li><p>Ubuntu 24.04.2 LTS, R 4.4.3 (old release) (GH Actions)</p></li>
 </ul>
 </section>
 <section id="r-cmd-check-results" class="level2">

@@ -2,9 +2,9 @@
   {
     "objectID": "r/NEWS.html",
     "href": "r/NEWS.html",
-    "title": "mall (dev)",
+    "title": "mall 0.2.0",
     "section": "",
-    "text": "mall (dev)\n\nAdds integration with ellmer Chat objects\nReturns a warning when there are over 4,096 tokens in one or many records sent to Ollama (#43)\n\n\n\nmall 0.1.0\n\nInitial CRAN submission."
+    "text": "mall 0.2.0\n\nAdds integration with ellmer Chat objects\nReturns a warning when there are over 4,096 tokens in one or many records sent to Ollama (#43)\n\n\n\nmall 0.1.0\n\nInitial CRAN submission."
   },
   {
     "objectID": "r/LICENSE.html",
@@ -703,21 +703,21 @@
     "href": "r/cran-comments.html",
     "title": "mall",
     "section": "",
-    "text": "Thank you for the feedback and instructions, I have made the following changes:\n\nUpdated the Title field to title case\nChanged all to \nChanged default location in llm_use() to use a temp folder\nChanged the tests to use a temp folder location\n\n\n\nThis is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.\nThe README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/."
+    "text": "Adds integration with ellmer Chat objects\nReturns a warning when there are over 4,096 tokens in one or many records sent to Ollama"
   },
   {
-    "objectID": "r/cran-comments.html#resubmission",
-    "href": "r/cran-comments.html#resubmission",
+    "objectID": "r/cran-comments.html#submission",
+    "href": "r/cran-comments.html#submission",
     "title": "mall",
     "section": "",
-    "text": "Thank you for the feedback and instructions, I have made the following changes:\n\nUpdated the Title field to title case\nChanged all to \nChanged default location in llm_use() to use a temp folder\nChanged the tests to use a temp folder location\n\n\n\nThis is a new package submission. Run multiple ‘Large Language Model’ predictions against a table. The predictions run row-wise over a specified column. It works using a one-shot prompt, along with the current row’s content. The prompt that is used will depend of the type of analysis needed.\nThe README file is very short because all the information about how to use it is this website: https://mlverse.github.io/mall/."
+    "text": "Adds integration with ellmer Chat objects\nReturns a warning when there are over 4,096 tokens in one or many records sent to Ollama"
   },
   {
     "objectID": "r/cran-comments.html#r-cmd-check-environments",
     "href": "r/cran-comments.html#r-cmd-check-environments",
     "title": "mall",
     "section": "R CMD check environments",
-    "text": "R CMD check environments\n\nMac OS M3 (aarch64-apple-darwin23), R 4.4.1 (Local)\nMac OS x86_64-apple-darwin20.0 (64-bit), R 4.4.1 (GH Actions)\nWindows x86_64-w64-mingw32 (64-bit), R 4.4.1 (GH Actions)\nLinux x86_64-pc-linux-gnu (64-bit), R 4.4.1 (GH Actions)\nLinux x86_64-pc-linux-gnu (64-bit), R 4.5.0 (dev) (GH Actions)\nLinux x86_64-pc-linux-gnu (64-bit), R 4.3.3 (old release) (GH Actions)"
+    "text": "R CMD check environments\n\nMac OS M3 (aarch64-apple-darwin23), R 4.5.0 (Local)\nmacOS Sonoma 14.7.6 (64-bit), R 4.5.1 (GH Actions)\nWindows Server 2022 x64 (64-bit), R 4.5.1 (GH Actions)\nUbuntu 24.04.2 LTS, R 4.5.1 (GH Actions)\nUbuntu 24.04.2 LTS (dev) (GH Actions)\nUbuntu 24.04.2 LTS, R 4.4.3 (old release) (GH Actions)"
   },
   {
     "objectID": "r/cran-comments.html#r-cmd-check-results",
