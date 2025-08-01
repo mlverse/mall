@@ -54,16 +54,42 @@ test_that("ellmer code is covered", {
     ),
     test_txt
   )
+})
+
+test_that("ellmer code is covered with cache turned off", {
+  local_mocked_bindings(
+    parallel_chat_text = function(x, y) {
+      return(as.character(y))
+    }
+  )
+  llm_use(
+    backend = "simulate_llm",
+    model = "echo",
+    .silent = TRUE,
+    .force = TRUE,
+    .cache = ""
+  )
+  ellmer_session <- .env_llm$session
+  class(ellmer_session) <- c("mall_ellmer")
+  ellmer_session$args[["ellmer_obj"]] <- temp_ellmer_obj()
+  test_txt <- rep("test", times = 15)
+  expect_equal(
+    m_backend_submit(
+      backend = ellmer_session,
+      x = test_txt,
+      prompt = list(list(content = "test"))
+    ),
+    test_txt
+  )
   expect_snapshot(
     m_backend_submit(
       backend = ellmer_session,
-      x = "this is x",
-      prompt = list(list(content = "this is the prompt")),
+      x = test_txt,
+      prompt = list(list(content = "test")),
       preview = TRUE
     )
   )
 })
-
 
 test_that("ellmer code is covered - part II", {
   withr::with_envvar(

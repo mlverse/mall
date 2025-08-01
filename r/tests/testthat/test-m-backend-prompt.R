@@ -25,3 +25,17 @@ test_that("Prompt handles list()", {
   expect_false(x_extract == y_extract)
   expect_false(x_classify == y_classify)
 })
+
+test_that("Ellmer method works", {
+  llm_use(
+    backend = "simulate_llm",
+    model = "echo",
+    .silent = TRUE,
+    .force = TRUE,
+    .cache = ""
+  )
+  ellmer_session <- .env_llm$session
+  class(ellmer_session) <- c("mall_ellmer", "mall_session")
+  ellmer_funcs <- m_backend_prompt(ellmer_session, "")
+  expect_snapshot(ellmer_funcs$sentiment("positive"))
+})

@@ -54,13 +54,15 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
       if (preview) {
         res <- expr(ollamar::chat(!!!.args))
       }
-      if (m_cache_use() && is.null(res)) {
+      if (m_cache_use(backend) && is.null(res)) {
         hash_args <- hash(.args)
         res <- m_cache_check(hash_args)
       }
       if (is.null(res)) {
         res <- exec("chat", !!!.args)
-        m_cache_record(.args, res, hash_args)
+        if (m_cache_use(backend)) {
+          m_cache_record(.args, res, hash_args)
+        }
       }
       res
     }
@@ -101,7 +103,7 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
     )
   }
   ellmer_obj <- backend[["args"]][["ellmer_obj"]]
-  if (m_cache_use()) {
+  if (m_cache_use(backend)) {
     hashed_x <- map(x, function(x) hash(c(ellmer_obj, prompt, x)))
     from_cache <- map(hashed_x, m_cache_check)
     null_cache <- map_lgl(from_cache, is.null)
@@ -113,7 +115,7 @@ m_backend_submit.mall_ellmer <- function(backend, x, prompt, preview = FALSE) {
     temp_ellmer$set_system_prompt(prompt)
     from_llm <- parallel_chat_text(temp_ellmer, as.list(x))
   }
-  if (m_cache_use()) {
+  if (m_cache_use(backend)) {
     walk(
       seq_along(from_llm),
       function(y) {
@@ -156,13 +158,15 @@ m_backend_submit.mall_simulate_llm <- function(backend,
     out <- prompt
   }
   res <- NULL
-  if (m_cache_use()) {
+  if (m_cache_use(backend)) {
     hash_args <- hash(.args)
     res <- m_cache_check(hash_args)
   }
   if (is.null(res)) {
     .args$backend <- NULL
-    m_cache_record(.args, out, hash_args)
+    if (m_cache_use(backend)) {
+      m_cache_record(.args, out, hash_args)
+    }
   }
   out
 }
