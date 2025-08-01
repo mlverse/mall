@@ -155,7 +155,7 @@ def valid_output(x):
 
 
 def build_msg(x, msg):
-    return {"role": "user", "content": msg + str(x)}
+    return [{"role": "user", "content": msg + str(x)}]
 
 
 def build_hash(x):
