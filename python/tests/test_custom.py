@@ -9,7 +9,7 @@ def test_custom_prompt():
     df = pl.DataFrame(dict(x="x"))
     df.llm.use("test", "content", _cache="_test_cache")
     x = df.llm.custom("x", "hello")
-    assert x["custom"][0] == "hello"
+    assert x["custom"][0] == "hello. The answer is based on the following text:\n{}"
     shutil.rmtree("_test_cache", ignore_errors=True)
 
 def test_custom_vec():

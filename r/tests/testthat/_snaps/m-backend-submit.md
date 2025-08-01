@@ -22,16 +22,16 @@
        [7] "positive" "positive" "positive" "positive" "positive" "positive"
       [13] "positive" "positive" "positive"
 
-# ellmer code is covered
+# ellmer code is covered with cache turned off
 
     Code
-      m_backend_submit(backend = ellmer_session, x = "this is x", prompt = list(list(
-        content = "this is the prompt")), preview = TRUE)
+      m_backend_submit(backend = ellmer_session, x = test_txt, prompt = list(list(
+        content = "test")), preview = TRUE)
     Output
       [[1]]
-      ellmer_obj$set_system_prompt(list(list(content = "this is the prompt")))
+      ellmer_obj$set_system_prompt(list(list(content = "test")))
       
       [[2]]
-      ellmer_obj$chat(as.list("this is x"))
+      ellmer_obj$chat(as.list("test"))
       
 

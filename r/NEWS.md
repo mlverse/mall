@@ -1,4 +1,4 @@
-# mall (dev)
+# mall 0.2.0
 
 * Adds integration with `ellmer` `Chat` objects
 

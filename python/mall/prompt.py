@@ -82,14 +82,15 @@ def verify(what, additional="", use=[]):
         "You are a helpful text analysis engine."
         "Determine if this is true "
         f"'{what}'."
+        "There are only two acceptable answers, 'yes' and 'no'. "
         "No capitalization. No explanations."
         f"{additional}"
     )
     return prompt_complete(x, use)
 
 
-def custom(prompt):
-    return prompt
+def custom(x, use):
+    return prompt_complete(x + ". ", use)
 
 
 def process_labels(x, if_list="", if_dict=""):

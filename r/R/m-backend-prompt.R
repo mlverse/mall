@@ -130,6 +130,7 @@ m_backend_prompt.mall_session <- function(backend, additional = "") {
         "You are a helpful text analysis engine.",
         "Determine if this is true ",
         "'{what}'.",
+        "There are only two acceptable answers, 'yes' and 'no'.",
         "No capitalization. No explanations.",
         "{additional}"
       ))

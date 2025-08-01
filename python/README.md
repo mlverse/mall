@@ -1,6 +1,6 @@
 
 
-<img src="https://mlverse.github.io/mall/site/images/favicon/apple-touch-icon-180x180.png" style="float:right" />
+<img src="https://mlverse.github.io/mall/site/images/favicon/apple-touch-icon-180x180.png" style="float:right"/>
 
 <!-- badges: start -->
 
@@ -15,89 +15,45 @@ coverage](https://codecov.io/gh/mlverse/mall/branch/main/graph/badge.svg)](https
 Use Large Language Models (LLM) to run Natural Language Processing (NLP)
 operations against your data. It takes advantage of the LLMs general
 language training in order to get the predictions, thus removing the
-need to train a new NLP model. `mall` is available for R and Python.
+need to train a new traditional NLP model. `mall` is available for R and
+Python.
 
 It works by running multiple LLM predictions against your data. The
-predictions are processed row-wise over a specified column. It relies on
-the “one-shot” prompt technique to instruct the LLM on a particular NLP
-operation to perform. The package includes prompts to perform the
-following specific NLP operations:
+predictions are processed row-wise over a specified column. The package
+includes prompts to perform the following specific NLP operations:
 
-- [Sentiment analysis](#sentiment)
-- [Text summarizing](#summarize)
-- [Classify text](#classify)
-- [Extract one, or several](#extract), specific pieces information from
-  the text
-- [Translate text](#translate)
-- [Verify that something is true](#verify) about the text (binary)
+- Sentiment analysis
+- Text summarizing
+- Classify text
+- Extract one, or several, specific pieces information from the text
+- Translate text
+- Verify that something is true about the text (binary)
 
-For other NLP operations, `mall` offers the ability for you to [write
-your own prompt](#custom-prompt).
+For other NLP operations, `mall` offers the ability for you to write
+your own prompt.
 
-`mall` is a library extension to [Polars](https://pola.rs/). To interact
-with Ollama, it uses the official [Python
-library](https://github.com/ollama/ollama-python).
-
-``` python
-reviews.llm.sentiment("review")
-```
-
-## Motivation
-
-We want to new find new ways to help data scientists use LLMs in their
-daily work. Unlike the familiar interfaces, such as chatting and code
-completion, this interface runs your text data directly against the LLM.
-This package is inspired by the SQL AI functions now offered by vendors
-such as
-[Databricks](https://docs.databricks.com/en/large-language-models/ai-functions.html)
-and Snowflake.
-
-The LLM’s flexibility, allows for it to adapt to the subject of your
-data, and provide surprisingly accurate predictions. This saves the data
-scientist the need to write and tune an NLP model.
-
-In recent times, the capabilities of LLMs that can run locally in your
-computer have increased dramatically. This means that these sort of
-analysis can run in your machine with good accuracy. It also makes it
-possible to take advantage of LLMs at your institution, since the data
-will not leave the corporate network. Additionally, LLM management and
-integration platforms, such as [Ollama](https://ollama.com/), are now
-very easy to setup and use. `mall` uses Ollama as to interact with local
-LLMs.
-
-The development version of `mall` lets you **use external LLMs such as
+`mall` lets you **use local and external LLMs such as
 [OpenAI](https://openai.com/), [Gemini](https://gemini.google.com/) and
-[Anthropic](https://www.anthropic.com/)**. In R, `mall` uses the
-[`ellmer`](https://ellmer.tidyverse.org/index.html) package to integrate
-with the external LLM, and the
+[Anthropic](https://www.anthropic.com/)**. It uses
 [`chatlas`](https://posit-dev.github.io/chatlas/) package to integrate
-in Python.
+to perform the integration. It is a library extension to
+[Polars](https://pola.rs/). To interact with Ollama, it uses the
+official [Python library](https://github.com/ollama/ollama-python).
 
 ## Get started
 
-- Install `mall` from Github
+Install `mall`:
 
-``` python
-pip install "mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
-```
-
-- [Download Ollama from the official
-  website](https://ollama.com/download)
-
-- Install and start Ollama in your computer
-
-- Install the official Ollama library
+- From PyPi:
 
   ``` python
-  pip install ollama
+  pip install mlverse-mall
   ```
 
-- Download an LLM model. For example, I have been developing this
-  package using Llama 3.2 to test. To get that model you can run:
+- Install `mall` from Github
 
   ``` python
-  import ollama
-  ollama.pull('llama3.2')
+  pip install "mall @ git+https://git@github.com/mlverse/mall.git#subdirectory=python"
   ```
 
 ## LLM functions
@@ -107,22 +63,41 @@ has 3 product reviews that we will use as the source of our examples.
 
 ``` python
 import mall 
-data = mall.MallData
-reviews = data.reviews
-
+reviews = mall.MallData.reviews
 reviews 
 ```
-
-    /Users/edgar/Projects/mall/python/.venv/lib/python3.12/site-packages/pydantic/_internal/_fields.py:132: UserWarning: Field "model_format" in ContentToolResult has conflict with protected namespace "model_".
-
-    You may be able to resolve this warning by setting `model_config['protected_namespaces'] = ()`.
-      warnings.warn(
 
 | review |
 |----|
 | "This has been the best TV I've ever used. Great screen, and sound." |
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" |
+
+Because `mall` is loaded, the `reviews` Polars data frame contain a
+class named `llm`. This is the class that enables access to all of the
+NLP functions.
+
+### Setup
+
+The connection to the LLM is created via a `Chat` object from `chatlas`.
+For this article, an Ollama chat connection is created:
+
+``` python
+from chatlas import ChatOllama
+chat = ChatOllama(model = "llama3.2", seed = 100)
+```
+
+Now, `reviews` is “told” to use the `chat` object by calling
+`.llm.use()`. In this case, the `_cache` path is set in order to re-run
+render this article faster as edits are made to the prose:
+
+``` python
+reviews.llm.use(chat, _cache = "_readme_cache")
+```
+
+    {'backend': 'chatlas',
+     'chat': <Chat Ollama/llama3.2 turns=0 tokens=0/0>,
+     '_cache': '_readme_cache'}
 
 <p>
 
@@ -154,9 +129,9 @@ reviews.llm.summarize("review", 5)
 
 | review | summary |
 |----|----|
-| "This has been the best TV I've ever used. Great screen, and sound." | "great tv with good features" |
-| "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "laptop purchase was a mistake" |
-| "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "feeling uncertain about new purchase" |
+| "This has been the best TV I've ever used. Great screen, and sound." | "exceptional tv for its price" |
+| "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "not a good laptop purchase" |
+| "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "some assembly required included" |
 
 ### Classify
 
@@ -233,9 +208,9 @@ reviews.llm.translate("review", "spanish")
 
 | review | translation |
 |----|----|
-| "This has been the best TV I've ever used. Great screen, and sound." | "Esta ha sido la mejor televisión que he utilizado hasta ahora. Gran pantalla y sonido." |
-| "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "Me arrepiento de comprar este portátil. Es demasiado lento y la tecla es demasiado ruidosa." |
-| "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "No estoy seguro de cómo sentirme con mi nueva lavadora. Un color maravilloso, pero muy difícil de en… |
+| "This has been the best TV I've ever used. Great screen, and sound." | "Este ha sido la mejor televisión que he utilizado. Una pantalla excelente y buena calidad de sonido." |
+| "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "Me arrepiento de haber comprado este portátil. Es demasiado lento y la tecla tiene un ruido excesivo… |
+| "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "No estoy seguro de cómo sentirme sobre mi nueva lavadora. Una buena cromática, pero difícil de compr… |
 
 ### Custom prompt
 
@@ -245,9 +220,10 @@ it against each text entry:
 ``` python
 my_prompt = (
     "Answer a question."
-    "Return only the answer, no explanation"
-    "Acceptable answers are 'yes', 'no'"
-    "Answer this about the following text, is this a happy customer?:"
+    "Return only the answer, no explanation."
+    "Only 'yes' and 'no' are the acceptable answers."
+    "If unsure about the answer, return 'no'."
+    "Answer this about the following text: 'is this a happy customer?':"
 )
 
 reviews.llm.custom("review", prompt = my_prompt)
@@ -259,21 +235,7 @@ reviews.llm.custom("review", prompt = my_prompt)
 | "I regret buying this laptop. It is too slow and the keyboard is too noisy" | "No" |
 | "Not sure how to feel about my new washing machine. Great color, but hard to figure" | "No" |
 
-## Model selection and settings
-
-You can set the model and its options to use when calling the LLM. In
-this case, we refer to options as model specific things that can be set,
-such as seed or temperature.
-
-The model and options to be used will be defined at the Polars data
-frame object level. If not passed, the default model will be
-**llama3.2**.
-
-``` python
-reviews.llm.use("ollama", "llama3.2", options = dict(seed = 100))
-```
-
-#### Results caching
+## Results caching
 
 By default `mall` caches the requests and corresponding results from a
 given LLM run. Each response is saved as individual JSON files. By
@@ -290,6 +252,39 @@ To turn off:
 ``` python
 reviews.llm.use(_cache = "")
 ```
+
+## Vectors
+
+`mall` also includes a class to work with character vectors. This is a
+separate module from that of the Polars extension, but offers the same
+functionality. To start, import the `LLMVec` class from `mall`, and then
+assign it to a new variable. The function call works just like
+`<df>.llm.use()`, this is where the cache can be specified.
+
+``` python
+from mall import LLMVec
+llm_ollama = LLMVec(chat, _cache="_readme_cache")
+```
+
+To use, call the same NLP functions used data frames. For example
+sentiment:
+
+``` python
+llm_ollama.sentiment(["I am happy", "I am sad"])
+```
+
+    ['positive', 'negative']
+
+The functions will also return a character vector. As mentioned before,
+all of the same functions are accessible via this class:
+
+- Classify
+- Custom
+- Extract
+- Sentiment
+- Summarize
+- Translate
+- Verify
 
 ## Key considerations
 

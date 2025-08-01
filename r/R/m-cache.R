@@ -1,7 +1,4 @@
 m_cache_record <- function(.args, .response, hash_args) {
-  if (!m_cache_use()) {
-    return(invisible())
-  }
   folder_root <- m_defaults_cache()
   try(dir_create(folder_root))
   content <- list(
@@ -33,11 +30,6 @@ m_cache_file <- function(hash_args) {
   path(folder_root, folder_sub, hash_args, ext = "json")
 }
 
-m_cache_use <- function() {
-  folder <- m_defaults_cache() %||% ""
-  out <- FALSE
-  if (folder != "") {
-    out <- TRUE
-  }
-  out
+m_cache_use <- function(backend) {
+  backend$session$cache_folder != ""
 }

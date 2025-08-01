@@ -184,7 +184,7 @@ class LLMVec:
             The prompt to send to the LLM along with the `col`
 
         """
-        return llm_loop(x=x, msg=custom(prompt), use=self._use, valid_resps=valid_resps)
+        return llm_loop(x=x, msg=custom(prompt, use=self._use), use=self._use, valid_resps=valid_resps)
 
     def verify(self, x, what="", yes_no=[1, 0], additional="") -> list:
         """Check to see if something is true about the text.

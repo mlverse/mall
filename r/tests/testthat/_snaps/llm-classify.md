@@ -12,8 +12,10 @@
     Code
       llm_vec_classify("this is a test", c("a", "b"), preview = TRUE)
     Output
+      [[1]]
       ollamar::chat(messages = list(list(role = "user", content = "You are a helpful classification engine. Determine if the text refers to one of the following: a, b. No capitalization. No explanations. The answer is based on the following text:\nthis is a test")), 
           output = "text", model = "llama3.2", seed = 100)
+      
 
 # Classify on Ollama works
 
