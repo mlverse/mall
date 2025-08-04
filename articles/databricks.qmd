@@ -27,6 +27,13 @@ functions:
 We will start by connecting to the Databricks Warehouse
 
 ```{r}
+#| include: false
+
+options("odbc.no_config_override"=FALSE)
+```
+
+
+```{r}
 library(mall)
 library(DBI)
 
