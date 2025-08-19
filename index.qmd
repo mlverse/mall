@@ -91,7 +91,7 @@ corporate network. Additionally, LLM management and integration platforms, such
 as [Ollama](https://ollama.com/), are now very easy to setup and use. `mall`
 uses Ollama as to interact with local LLMs.
 
-The development version of `mall` lets you **use external LLMs such as
+In its latest version, `mall` lets you **use external LLMs such as
 [OpenAI](https://openai.com/), [Gemini](https://gemini.google.com/) and
 [Anthropic](https://www.anthropic.com/)**. In R, `mall` uses the
 [`ellmer`](https://ellmer.tidyverse.org/index.html)
