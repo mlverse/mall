@@ -60,7 +60,9 @@ llm_custom.data.frame <- function(.data,
 llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   m_vec_prompt(
     x = x,
+    prompt_label = "custom", 
     prompt = prompt,
+    custom_prompt = prompt, 
     valid_resps = valid_resps
   )
 }

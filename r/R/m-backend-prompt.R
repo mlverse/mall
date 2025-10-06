@@ -11,6 +11,12 @@ m_backend_prompt.mall_ollama <- function(backend, additional = "") {
     additional,
     "The answer is based on the following text:\n{{x}}"
   ))
+  next_method$custom <- function(custom_prompt) {
+    glue(paste(
+      "{custom_prompt}", 
+      "{additional}"
+    ))
+  } 
   next_method
 }
 
@@ -22,6 +28,12 @@ m_backend_prompt.mall_ellmer <- function(backend, additional = "") {
     "The answer will be based on each individual prompt.",
     "Treat each prompt as unique when deciding the answer."
   ))
+  next_method$custom <- function(custom_prompt) {
+    glue(paste(
+      "{custom_prompt}", 
+      "{additional}"
+    ))
+  }   
   next_method
 }
 
