@@ -1,3 +1,7 @@
+# mall (dev)
+
+* Fix for missing content when using custom prompt with Ollama directly (#62)
+
 # mall 0.2.0
 
 * Adds integration with `ellmer` `Chat` objects
