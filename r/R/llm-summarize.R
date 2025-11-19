@@ -2,6 +2,8 @@
 #'
 #' @description
 #' Use a Large Language Model (LLM) to summarize text
+#' 
+#' `llm_summarize()` and `llm_summarise()` are synonyms.
 #'
 #' @inheritParams llm_classify
 #' @param max_words The maximum number of words that the LLM should use in the
@@ -43,6 +45,10 @@ llm_summarize <- function(.data,
                           additional_prompt = "") {
   UseMethod("llm_summarize")
 }
+
+#' @rdname llm_summarize
+#' @export
+llm_summarise <- llm_summarize
 
 #' @export
 llm_summarize.data.frame <- function(.data,
