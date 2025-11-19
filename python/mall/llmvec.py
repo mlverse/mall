@@ -85,6 +85,8 @@ class LLMVec:
             use=self._use,
         )
 
+    summarise = summarize
+
     def translate(self, x, language="", additional="") -> list:
         """Translate text into another language.
 
