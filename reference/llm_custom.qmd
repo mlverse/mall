@@ -20,10 +20,9 @@ Use a Large Language Model (LLM) to process the provided text using the instruct
 
 ## Usage
 ```r
-
 llm_custom(.data, col, prompt = "", pred_name = ".pred", valid_resps = "")
 
-llm_vec_custom(x, prompt = "", valid_resps = NULL)
+llm_vec_custom(x, prompt = "", valid_resps = NULL, preview = FALSE)
 ```
 
 ## Arguments
@@ -35,6 +34,7 @@ llm_vec_custom(x, prompt = "", valid_resps = NULL)
 | pred_name | A character vector with the name of the new column where the prediction will be placed |
 | valid_resps | If the response from the LLM is not open, but deterministic, provide the options in a vector. This function will set to `NA` any response not in the options |
 | x | A vector that contains the text to be analyzed |
+| preview | It returns the R call that would have been used to run the prediction. It only returns the first record in `x`. Defaults to `FALSE` Applies to vector function only. |
 
 
 
@@ -61,6 +61,12 @@ my_prompt <- paste(
 
 reviews |>
   llm_custom(review, my_prompt)
+
+# For character vectors, instead of a data frame, use this function
+llm_vec_custom(reviews$review, my_prompt)
+
+# To preview the first call that will be made to the downstream R function
+llm_vec_custom(reviews$review, my_prompt, preview = TRUE)
 
 
 ```

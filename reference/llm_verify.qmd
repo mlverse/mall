@@ -20,7 +20,6 @@ Use a Large Language Model (LLM) to see if something is true or not based the pr
 
 ## Usage
 ```r
-
 llm_verify(
   .data,
   col,

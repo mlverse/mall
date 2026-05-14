@@ -20,7 +20,6 @@ Use a Large Language Model (LLM) to summarize text
 
 ## Usage
 ```r
-
 llm_summarize(
   .data,
   col,

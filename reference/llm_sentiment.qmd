@@ -20,7 +20,6 @@ Use a Large Language Model (LLM) to perform sentiment analysis from the provided
 
 ## Usage
 ```r
-
 llm_sentiment(
   .data,
   col,

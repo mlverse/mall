@@ -20,7 +20,6 @@ Allows us to specify the back-end provider, model to use during the current R se
 
 ## Usage
 ```r
-
 llm_use(
   backend = NULL,
   model = NULL,
