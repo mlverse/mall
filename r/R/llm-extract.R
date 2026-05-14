@@ -92,6 +92,9 @@ llm_extract.data.frame <- function(.data,
     } else {
       var_names <- resp_names
     }
+    if (length(pred_name) == length(labels)) {
+      var_names <- pred_name
+    }
     var_names <- clean_names(var_names)
     for (i in seq_along(resp)) {
       vals <- as.character(resp[[i]])

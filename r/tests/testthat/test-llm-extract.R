@@ -33,6 +33,17 @@ test_that("Extract data frame works", {
     ),
     data.frame(x = "test1|test2", y = "test1", z = "test2")
   )
+
+  expect_equal(
+    llm_extract(
+      .data = data.frame(x = "test1|test2"),
+      col = x,
+      labels = c("product1", "product2"),
+      expand_cols = TRUE,
+      pred_name = c("item", "vibe")
+    ),
+    data.frame(x = "test1|test2", item = "test1", vibe = "test2")
+  )
 })
 
 test_that("Extract on Ollama works", {
