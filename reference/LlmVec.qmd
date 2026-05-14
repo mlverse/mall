@@ -12,7 +12,7 @@ from mall import LLMVec
 
 chat = ChatOllama(model = "llama3.2")
 
-llm = LLMVec(chat)
+llm = LLMVec(chat)    
 ```
 
 ## Methods
