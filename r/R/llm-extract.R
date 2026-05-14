@@ -53,22 +53,26 @@
 #' @returns `llm_extract` returns a `data.frame` or `tbl` object.
 #' `llm_vec_extract` returns a vector that is the same length as `x`.
 #' @export
-llm_extract <- function(.data,
-                        col,
-                        labels,
-                        expand_cols = FALSE,
-                        additional_prompt = "",
-                        pred_name = ".extract") {
+llm_extract <- function(
+  .data,
+  col,
+  labels,
+  expand_cols = FALSE,
+  additional_prompt = "",
+  pred_name = ".extract"
+) {
   UseMethod("llm_extract")
 }
 
 #' @export
-llm_extract.data.frame <- function(.data,
-                                   col,
-                                   labels = c(),
-                                   expand_cols = FALSE,
-                                   additional_prompt = "",
-                                   pred_name = ".extract") {
+llm_extract.data.frame <- function(
+  .data,
+  col,
+  labels = c(),
+  expand_cols = FALSE,
+  additional_prompt = "",
+  pred_name = ".extract"
+) {
   if (expand_cols && length(labels) > 1) {
     text <- pull(.data, {{ col }})
     resp <- llm_vec_extract(
@@ -78,11 +82,13 @@ llm_extract.data.frame <- function(.data,
     )
     resp <- map(
       resp,
-      \(x) ({
-        x <- strsplit(x, "\\|")[[1]]
-        names(x) <- clean_names(labels)
-        x
-      })
+      \(x) {
+        ({
+          x <- strsplit(x, "\\|")[[1]]
+          names(x) <- clean_names(labels)
+          x
+        })
+      }
     )
     resp <- transpose(resp)
     var_names <- names(labels)
@@ -116,10 +122,12 @@ llm_extract.data.frame <- function(.data,
 
 #' @rdname llm_extract
 #' @export
-llm_vec_extract <- function(x,
-                            labels = c(),
-                            additional_prompt = "",
-                            preview = FALSE) {
+llm_vec_extract <- function(
+  x,
+  labels = c(),
+  additional_prompt = "",
+  preview = FALSE
+) {
   m_vec_prompt(
     x = x,
     prompt_label = "extract",

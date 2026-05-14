@@ -13,10 +13,10 @@ m_backend_prompt.mall_ollama <- function(backend, additional = "") {
   ))
   next_method$custom <- function(custom_prompt) {
     glue(paste(
-      "{custom_prompt}", 
+      "{custom_prompt}",
       "{additional}"
     ))
-  } 
+  }
   next_method
 }
 
@@ -30,10 +30,10 @@ m_backend_prompt.mall_ellmer <- function(backend, additional = "") {
   ))
   next_method$custom <- function(custom_prompt) {
     glue(paste(
-      "{custom_prompt}", 
+      "{custom_prompt}",
       "{additional}"
     ))
-  }   
+  }
   next_method
 }
 

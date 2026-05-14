@@ -31,20 +31,23 @@
 #' `llm_vec_custom` returns a vector that is the same length as `x`.
 #' @export
 llm_custom <- function(
-    .data,
-    col,
-    prompt = "",
-    pred_name = ".pred",
-    valid_resps = "") {
+  .data,
+  col,
+  prompt = "",
+  pred_name = ".pred",
+  valid_resps = ""
+) {
   UseMethod("llm_custom")
 }
 
 #' @export
-llm_custom.data.frame <- function(.data,
-                                  col,
-                                  prompt = "",
-                                  pred_name = ".pred",
-                                  valid_resps = NULL) {
+llm_custom.data.frame <- function(
+  .data,
+  col,
+  prompt = "",
+  pred_name = ".pred",
+  valid_resps = NULL
+) {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_custom(
@@ -60,9 +63,9 @@ llm_custom.data.frame <- function(.data,
 llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
   m_vec_prompt(
     x = x,
-    prompt_label = "custom", 
+    prompt_label = "custom",
     prompt = prompt,
-    custom_prompt = prompt, 
+    custom_prompt = prompt,
     valid_resps = valid_resps
   )
 }

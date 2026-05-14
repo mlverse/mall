@@ -1,11 +1,13 @@
-m_vec_prompt <- function(x,
-                         prompt_label = "",
-                         additional_prompt = "",
-                         valid_resps = NULL,
-                         prompt = NULL,
-                         convert = NULL,
-                         preview = FALSE,
-                         ...) {
+m_vec_prompt <- function(
+  x,
+  prompt_label = "",
+  additional_prompt = "",
+  valid_resps = NULL,
+  prompt = NULL,
+  convert = NULL,
+  preview = FALSE,
+  ...
+) {
   # Initializes session LLM
   backend <- llm_use(.silent = TRUE, .force = FALSE)
 
@@ -15,10 +17,10 @@ m_vec_prompt <- function(x,
     additional = additional_prompt
   )
   fn <- defaults[[prompt_label]]
-  if(!is.null(fn)) {
-    prompt <- fn(...)  
+  if (!is.null(fn)) {
+    prompt <- fn(...)
   }
-  
+
   # Submits final prompt to the LLM
   resp <- m_backend_submit(
     backend = backend,
