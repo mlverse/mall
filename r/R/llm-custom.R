@@ -26,6 +26,12 @@
 #'
 #' reviews |>
 #'   llm_custom(review, my_prompt)
+#'
+#' # For character vectors, instead of a data frame, use this function
+#' llm_vec_custom(reviews$review, my_prompt)
+#'
+#' # To preview the first call that will be made to the downstream R function
+#' llm_vec_custom(reviews$review, my_prompt, preview = TRUE)
 #' }
 #' @returns `llm_custom` returns a `data.frame` or `tbl` object.
 #' `llm_vec_custom` returns a vector that is the same length as `x`.
@@ -60,12 +66,13 @@ llm_custom.data.frame <- function(
 
 #' @rdname llm_custom
 #' @export
-llm_vec_custom <- function(x, prompt = "", valid_resps = NULL) {
+llm_vec_custom <- function(x, prompt = "", valid_resps = NULL, preview = FALSE) {
   m_vec_prompt(
     x = x,
     prompt_label = "custom",
     prompt = prompt,
     custom_prompt = prompt,
-    valid_resps = valid_resps
+    valid_resps = valid_resps,
+    preview = preview
   )
 }

@@ -9,7 +9,7 @@ m_backend_prompt.mall_ollama <- function(backend, additional = "") {
   next_method <- NextMethod()
   additional <- glue(paste(
     additional,
-    "The answer is based on the following text:\n{{x}}"
+    "The answer is based on the following text: {{x}}"
   ))
   next_method$custom <- function(custom_prompt) {
     glue(paste(

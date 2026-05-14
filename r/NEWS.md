@@ -1,5 +1,7 @@
 # mall (dev)
 
+* Adds `preview` arugment to llm_vec_custom()
+
 * Fixes `llm_extract()` ignoring multiple names when `pred_name` is passed (#66)
 
 * Fix for missing content when using custom prompt with Ollama directly (#62)
