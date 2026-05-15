@@ -38,4 +38,5 @@ test_that("Ellmer method works", {
   class(ellmer_session) <- c("mall_ellmer", "mall_session")
   ellmer_funcs <- m_backend_prompt(ellmer_session, "")
   expect_snapshot(ellmer_funcs$sentiment("positive"))
+  expect_snapshot(ellmer_funcs$custom("Translate to Spanish:"))
 })
