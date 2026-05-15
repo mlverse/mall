@@ -7,7 +7,7 @@
 \usage{
 llm_custom(.data, col, prompt = "", pred_name = ".pred", valid_resps = "")
 
-llm_vec_custom(x, prompt = "", valid_resps = NULL)
+llm_vec_custom(x, prompt = "", valid_resps = NULL, preview = FALSE)
 }
 \arguments{
 \item{.data}{A \code{data.frame} or \code{tbl} object that contains the text to be
@@ -25,6 +25,10 @@ deterministic, provide the options in a vector. This function will set to
 \code{NA} any response not in the options}
 
 \item{x}{A vector that contains the text to be analyzed}
+
+\item{preview}{It returns the R call that would have been used to run the
+prediction. It only returns the first record in \code{x}. Defaults to \code{FALSE}
+Applies to vector function only.}
 }
 \value{
 \code{llm_custom} returns a \code{data.frame} or \code{tbl} object.
@@ -51,5 +55,11 @@ my_prompt <- paste(
 
 reviews |>
   llm_custom(review, my_prompt)
+
+# For character vectors, instead of a data frame, use this function
+llm_vec_custom(reviews$review, my_prompt)
+
+# To preview the first call that will be made to the downstream R function
+llm_vec_custom(reviews$review, my_prompt, preview = TRUE)
 }
 }

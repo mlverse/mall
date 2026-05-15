@@ -35,22 +35,26 @@
 #' }
 #'
 #' @export
-llm_verify <- function(.data,
-                       col,
-                       what,
-                       yes_no = factor(c(1, 0)),
-                       pred_name = ".verify",
-                       additional_prompt = "") {
+llm_verify <- function(
+  .data,
+  col,
+  what,
+  yes_no = factor(c(1, 0)),
+  pred_name = ".verify",
+  additional_prompt = ""
+) {
   UseMethod("llm_verify")
 }
 
 #' @export
-llm_verify.data.frame <- function(.data,
-                                  col,
-                                  what,
-                                  yes_no = factor(c(1, 0)),
-                                  pred_name = ".verify",
-                                  additional_prompt = "") {
+llm_verify.data.frame <- function(
+  .data,
+  col,
+  what,
+  yes_no = factor(c(1, 0)),
+  pred_name = ".verify",
+  additional_prompt = ""
+) {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_verify(
@@ -64,11 +68,13 @@ llm_verify.data.frame <- function(.data,
 
 #' @rdname llm_verify
 #' @export
-llm_vec_verify <- function(x,
-                           what,
-                           yes_no = factor(c(1, 0)),
-                           additional_prompt = "",
-                           preview = FALSE) {
+llm_vec_verify <- function(
+  x,
+  what,
+  yes_no = factor(c(1, 0)),
+  additional_prompt = "",
+  preview = FALSE
+) {
   m_vec_prompt(
     x = x,
     prompt_label = "verify",

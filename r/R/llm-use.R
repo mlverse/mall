@@ -49,12 +49,13 @@
 #'
 #' @export
 llm_use <- function(
-    backend = NULL,
-    model = NULL,
-    ...,
-    .silent = FALSE,
-    .cache = NULL,
-    .force = FALSE) {
+  backend = NULL,
+  model = NULL,
+  ...,
+  .silent = FALSE,
+  .cache = NULL,
+  .force = FALSE
+) {
   ellmer_obj <- NULL
   models <- list()
   not_init <- inherits(m_defaults_get(), "list")

@@ -20,7 +20,6 @@ Use a Large Language Model (LLM) to translate a text to a specific language
 
 ## Usage
 ```r
-
 llm_translate(
   .data,
   col,

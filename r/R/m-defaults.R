@@ -22,7 +22,9 @@ m_defaults_set <- function(...) {
   .env_llm$session <- structure(
     list(
       name = defaults[["backend"]],
-      args = defaults[names(defaults) != "backend" & names(defaults) != ".cache"],
+      args = defaults[
+        names(defaults) != "backend" & names(defaults) != ".cache"
+      ],
       session = list(
         cache_folder = defaults[[".cache"]]
       )

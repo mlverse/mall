@@ -34,18 +34,19 @@ m_backend_submit.mall_ollama <- function(backend, x, prompt, preview = FALSE) {
     \(x) {
       .args <- c(
         messages = list(
-          map(prompt, \(i)
-          map(i, \(j) {
-            out <- glue(j, x = x)
-            ln <- length(unlist(strsplit(out, " ")))
-            if (ln > m_ollama_tokens()) {
-              warnings <<- c(
-                warnings,
-                list(list(row = substr(x, 1, 20), len = ln))
-              )
-            }
-            out
-          }))
+          map(prompt, \(i) {
+            map(i, \(j) {
+              out <- glue(j, x = x)
+              ln <- length(unlist(strsplit(out, " ")))
+              if (ln > m_ollama_tokens()) {
+                warnings <<- c(
+                  warnings,
+                  list(list(row = substr(x, 1, 20), len = ln))
+                )
+              }
+              out
+            })
+          })
         ),
         output = "text",
         m_defaults_args(backend)
@@ -144,10 +145,12 @@ m_ellmer_chat <- function(...) {
 # ------------------------------ Simulate --------------------------------------
 
 #' @export
-m_backend_submit.mall_simulate_llm <- function(backend,
-                                               x,
-                                               prompt,
-                                               preview = FALSE) {
+m_backend_submit.mall_simulate_llm <- function(
+  backend,
+  x,
+  prompt,
+  preview = FALSE
+) {
   .args <- as.list(environment())
   args <- m_defaults_args(backend)
   if (args$model == "pipe") {

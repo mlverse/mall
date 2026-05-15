@@ -12,7 +12,7 @@
     Code
       llm_vec_sentiment(vec_reviews)
     Output
-      [1] "positive" "negative" "neutral" 
+      [1] "positive" "negative" "negative"
 
 ---
 
@@ -41,7 +41,7 @@
         .sentiment
       1   positive
       2   negative
-      3    neutral
+      3   negative
 
 ---
 
@@ -55,5 +55,5 @@
              new
       1 positive
       2 negative
-      3  neutral
+      3 negative
 

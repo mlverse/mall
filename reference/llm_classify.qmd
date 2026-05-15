@@ -20,7 +20,6 @@ Use a Large Language Model (LLM) to classify the provided text as one of the opt
 
 ## Usage
 ```r
-
 llm_classify(
   .data,
   col,

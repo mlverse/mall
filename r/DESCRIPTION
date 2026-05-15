@@ -1,7 +1,7 @@
 Package: mall
 Title: Run Multiple Large Language Model Predictions Against a Table, or 
     Vectors
-Version: 0.2.0.9000
+Version: 0.2.0.9001
 Authors@R: c(
   person("Edgar", "Ruiz", , "edgar@posit.co", role = c("aut", "cre")),
   person(given = "Posit Software, PBC", role = c("cph", "fnd"))
@@ -13,7 +13,6 @@ Description: Run multiple 'Large Language Model' predictions against a table. Th
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
 Imports: 
     cli,
     dplyr,
@@ -32,5 +31,4 @@ URL: https://mlverse.github.io/mall/
 Depends: 
     R (>= 4.1)
 LazyData: true
-
-
+Config/roxygen2/version: 8.0.0

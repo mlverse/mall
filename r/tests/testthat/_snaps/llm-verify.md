@@ -4,7 +4,7 @@
       llm_vec_verify("this is a test", "a test", preview = TRUE)
     Output
       [[1]]
-      ollamar::chat(messages = list(list(role = "user", content = "You are a helpful text analysis engine. Determine if this is true  'a test'. There are only two acceptable answers, 'yes' and 'no'. No capitalization. No explanations. The answer is based on the following text:\nthis is a test")), 
+      ollamar::chat(messages = list(list(role = "user", content = "You are a helpful text analysis engine. Determine if this is true  'a test'. There are only two acceptable answers, 'yes' and 'no'. No capitalization. No explanations.  The answer is based on the following text: this is a test")), 
           output = "text", model = "llama3.2", seed = 100)
       
 

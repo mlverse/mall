@@ -20,7 +20,6 @@ Use a Large Language Model (LLM) to extract specific entity, or entities, from t
 
 ## Usage
 ```r
-
 llm_extract(
   .data,
   col,

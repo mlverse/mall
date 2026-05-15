@@ -36,20 +36,24 @@
 #' llm_vec_sentiment(c("I am happy", "I am sad"), preview = TRUE)
 #' }
 #' @export
-llm_sentiment <- function(.data,
-                          col,
-                          options = c("positive", "negative", "neutral"),
-                          pred_name = ".sentiment",
-                          additional_prompt = "") {
+llm_sentiment <- function(
+  .data,
+  col,
+  options = c("positive", "negative", "neutral"),
+  pred_name = ".sentiment",
+  additional_prompt = ""
+) {
   UseMethod("llm_sentiment")
 }
 
 #' @export
-llm_sentiment.data.frame <- function(.data,
-                                     col,
-                                     options = c("positive", "negative", "neutral"),
-                                     pred_name = ".sentiment",
-                                     additional_prompt = "") {
+llm_sentiment.data.frame <- function(
+  .data,
+  col,
+  options = c("positive", "negative", "neutral"),
+  pred_name = ".sentiment",
+  additional_prompt = ""
+) {
   mutate(
     .data = .data,
     !!pred_name := llm_vec_sentiment(
@@ -61,11 +65,13 @@ llm_sentiment.data.frame <- function(.data,
 }
 
 #' @export
-`llm_sentiment.tbl_Spark SQL` <- function(.data,
-                                          col,
-                                          options = NULL,
-                                          pred_name = ".sentiment",
-                                          additional_prompt = NULL) {
+`llm_sentiment.tbl_Spark SQL` <- function(
+  .data,
+  col,
+  options = NULL,
+  pred_name = ".sentiment",
+  additional_prompt = NULL
+) {
   mutate(
     .data = .data,
     !!pred_name := ai_analyze_sentiment({{ col }})
@@ -76,10 +82,12 @@ globalVariables("ai_analyze_sentiment")
 
 #' @rdname llm_sentiment
 #' @export
-llm_vec_sentiment <- function(x,
-                              options = c("positive", "negative", "neutral"),
-                              additional_prompt = "",
-                              preview = FALSE) {
+llm_vec_sentiment <- function(
+  x,
+  options = c("positive", "negative", "neutral"),
+  additional_prompt = "",
+  preview = FALSE
+) {
   m_vec_prompt(
     x = x,
     prompt_label = "sentiment",

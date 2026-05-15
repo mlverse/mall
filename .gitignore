@@ -38,3 +38,11 @@ python/README_files
 python/README.html
 mall.Rproj
 .coverage
+
+**/*.quarto_ipynb
+.venv-site/
+**/__pycache__/
+**/uv.lock
+uv.lock
+.claude/settings.local.json
+python/uv.lock
