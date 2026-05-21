@@ -50,8 +50,6 @@ llm_vec_classify(x, labels, additional_prompt = "", preview = FALSE)
 
 ## Examples
 ```{r}
-
-
 library(mall)
 
 data("reviews")
@@ -83,8 +81,6 @@ llm_vec_classify(
   c("urgent", "not urgent"),
   preview = TRUE
 )
-
-
 ```
 
 

@@ -52,8 +52,6 @@ llm_vec_extract(x, labels = c(), additional_prompt = "", preview = FALSE)
 
 ## Examples
 ```{r}
-
-
 library(mall)
 
 data("reviews")
@@ -90,8 +88,6 @@ llm_vec_extract(
   c("name", "address"),
   preview = TRUE
 )
-
-
 ```
 
 

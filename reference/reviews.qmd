@@ -32,12 +32,9 @@ reviews
 
 ## Examples
 ```{r}
-
 library(mall)
 data(reviews)
 reviews
-
-
 ```
 
 

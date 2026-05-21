@@ -95,7 +95,7 @@ class MallFrame:
         reviews.llm.use(chat)
         ```
         """
-        self._use = llm_use(backend=backend, model=model, _cache=_cache, **kwargs)
+        self._use = {**self._use, **llm_use(backend=backend, model=model, _cache=_cache, **kwargs)}
         return self._use
 
     def sentiment(
