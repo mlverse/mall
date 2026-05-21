@@ -12,4 +12,4 @@ The script will:
 4. Clear all caches (`_mall_cache`, `_readme_cache`, `reference/_mall_cache`) and freeze directories
 5. Regenerate R and Python reference files
 6. Render the full site
-7. Clean up `.venv-site` and launch `quarto preview`
+7. Clean up `.venv-site`

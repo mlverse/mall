@@ -40,5 +40,4 @@ quarto render
 echo ">>> Cleaning up .venv-site..."
 rm -rf .venv-site
 
-echo ">>> Done! Starting preview..."
-quarto preview
+echo ">>> Done!"

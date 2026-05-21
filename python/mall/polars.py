@@ -473,6 +473,11 @@ class MallFrame:
         ------
 
         ```{python}
+        #| include: false
+        reviews.llm.use("ollama", "llama3.2", _cache="_mall_cache", options=dict(seed=100))
+        ```
+
+        ```{python}
         reviews.llm.verify("review", "is the customer happy")
         ```
 
