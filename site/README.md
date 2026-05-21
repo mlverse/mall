@@ -1,18 +1,15 @@
 To re-create the reference files, and capture the possibly new output from
-the resulting Quarto files, use the following steps: 
+the resulting Quarto files, run the following script from the project root:
 
 ```bash
-uv venv .venv-site
-UV_PROJECT_ENVIRONMENT=$PWD/.venv-site uv sync --project python/
-uv pip install jupyter quartodoc "griffe<1.0" --python .venv-site/bin/python3
-R CMD INSTALL R/
-rm -rf _freeze/reference
-rm -rf _freeze/index
-R -e 'pkgsite::write_reference()'
-.venv-site/bin/quartodoc build --verbose
-export OPENAI_API_KEY="na"
-export QUARTO_PYTHON=.venv-site/bin/python3
-quarto render
-rm -rf .venv-site
-quarto preview
+bash site/render.sh
 ```
+
+The script will:
+1. Create a temporary `.venv-site` Python environment with all rendering dependencies
+2. Install the R package
+3. Set up `python/.venv` (used by reticulate in `index.qmd`) and install numpy
+4. Clear all caches (`_mall_cache`, `_readme_cache`, `reference/_mall_cache`) and freeze directories
+5. Regenerate R and Python reference files
+6. Render the full site
+7. Clean up `.venv-site` and launch `quarto preview`
