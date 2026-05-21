@@ -50,8 +50,6 @@ llm_vec_translate(x, language, additional_prompt = "", preview = FALSE)
 
 ## Examples
 ```{r}
-
-
 library(mall)
 
 data("reviews")
@@ -60,8 +58,6 @@ llm_use("ollama", "llama3.2", seed = 100, .silent = TRUE)
 
 # Pass the desired language to translate to
 llm_translate(reviews, review, "spanish")
-
-
 ```
 
 

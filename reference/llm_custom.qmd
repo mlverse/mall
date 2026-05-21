@@ -44,8 +44,6 @@ llm_vec_custom(x, prompt = "", valid_resps = NULL, preview = FALSE)
 
 ## Examples
 ```{r}
-
-
 library(mall)
 
 data("reviews")
@@ -67,8 +65,6 @@ llm_vec_custom(reviews$review, my_prompt)
 
 # To preview the first call that will be made to the downstream R function
 llm_vec_custom(reviews$review, my_prompt, preview = TRUE)
-
-
 ```
 
 
