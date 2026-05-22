@@ -2,10 +2,19 @@
 % Please edit documentation in R/llm-summarize.R
 \name{llm_summarize}
 \alias{llm_summarize}
+\alias{llm_summarise}
 \alias{llm_vec_summarize}
 \title{Summarize text}
 \usage{
 llm_summarize(
+  .data,
+  col,
+  max_words = 10,
+  pred_name = ".summary",
+  additional_prompt = ""
+)
+
+llm_summarise(
   .data,
   col,
   max_words = 10,
@@ -41,6 +50,8 @@ Applies to vector function only.}
 }
 \description{
 Use a Large Language Model (LLM) to summarize text
+
+\code{llm_summarize()} and \code{llm_summarise()} are synonyms.
 }
 \examples{
 \donttest{

@@ -203,6 +203,8 @@ class MallFrame:
         )
         return df
 
+    summarise = summarize
+
     def translate(
         self,
         col,
